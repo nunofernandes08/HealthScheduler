@@ -9,15 +9,16 @@
         android:roundIcon="@mipmap/ic_logo"
         android:supportsRtl="true"
         android:theme="@style/Theme.HealthScheduler">
-        <activity android:name=".Login"/>
-        <activity android:name=".MainActivity" />
-        <activity android:name=".Splash">
+        <activity android:name=".Register">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".Login" />
+        <activity android:name=".MainActivity" />
+        <activity android:name=".Splash" />
     </application>
 
 </manifest>
