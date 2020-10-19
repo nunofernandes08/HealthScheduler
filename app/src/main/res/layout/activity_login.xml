@@ -83,7 +83,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textViewPassword_Login" />
 
     <Button
-        android:id="@+id/buttonLogin"
+        android:id="@+id/buttonLogin_Login"
         android:layout_width="222dp"
         android:layout_height="56dp"
         android:background="@drawable/btlogin_login"
@@ -98,7 +98,7 @@
         app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword_Login" />
 
     <ImageView
-        android:id="@+id/imageView3"
+        android:id="@+id/imageViewUserOtherMethods_Login"
         android:layout_width="338dp"
         android:layout_height="100dp"
         android:layout_marginTop="5dp"
@@ -111,7 +111,7 @@
         app:srcCompat="@drawable/othermethods" />
 
     <Button
-        android:id="@+id/btinfo"
+        android:id="@+id/btinfo_Login"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:background="@drawable/btinfo"
@@ -121,7 +121,7 @@
         app:layout_constraintEnd_toEndOf="parent" />
 
     <ImageView
-        android:id="@+id/imageViewTextAlready"
+        android:id="@+id/imageViewTextAlready_Login"
         android:layout_width="121dp"
         android:layout_height="108dp"
         android:layout_marginStart="16dp"
