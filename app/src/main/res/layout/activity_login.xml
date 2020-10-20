@@ -115,6 +115,6 @@
         android:layout_marginTop="46dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/txtfrase" />
+        app:srcCompat="@drawable/txtfraselogin" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
