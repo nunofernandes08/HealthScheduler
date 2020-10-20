@@ -4,22 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/splashfade"
     tools:context=".Register">
 
     <ImageView
-        android:id="@+id/backgroundRegister"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/splashfade" />
-
-    <ImageView
-        android:id="@+id/logoregister"
+        android:id="@+id/logoRegister"
         android:layout_width="200dp"
         android:layout_height="200dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -33,9 +22,9 @@
         android:layout_width="338dp"
         android:layout_height="313dp"
         android:layout_marginTop="10dp"
-        app:layout_constraintEnd_toEndOf="@+id/backgroundRegister"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/logoregister"
+        app:layout_constraintTop_toBottomOf="@+id/logoRegister"
         app:srcCompat="@drawable/rectangleregister" />
 
     <TextView
@@ -112,18 +101,17 @@
         app:layout_constraintTop_toBottomOf="@+id/editTextPasswordRegister" />
 
     <ImageView
-        android:id="@+id/imageView6"
+        android:id="@+id/imageViewOtherMethodsRegister"
         android:layout_width="375dp"
         android:layout_height="100dp"
         android:layout_marginTop="20dp"
-        app:layout_constraintEnd_toEndOf="@+id/backgroundRegister"
-        app:layout_constraintHorizontal_bias="0.506"
-        app:layout_constraintStart_toStartOf="@+id/backgroundRegister"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/formularioRegister"
         app:srcCompat="@drawable/useothermethods" />
 
     <ImageView
-        android:id="@+id/imageView8"
+        android:id="@+id/imageViewHereYourFirstSetp"
         android:layout_width="121dp"
         android:layout_height="108dp"
         android:layout_marginStart="16dp"

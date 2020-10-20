@@ -23,9 +23,9 @@ class Login : AppCompatActivity() {
         auth = Firebase.auth
         val currentUser = auth.currentUser
 
-        val loginButton = findViewById<Button>(R.id.buttonLogin_Login)
-        val editTextEmail = findViewById<EditText>(R.id.editTextTextEmail_Login)
-        val editTextPassword = findViewById<EditText>(R.id.editTextTextPassword_Login)
+        val loginButton = findViewById<Button>(R.id.buttonLoginLogin)
+        val editTextEmail = findViewById<EditText>(R.id.editTextTextEmailLogin)
+        val editTextPassword = findViewById<EditText>(R.id.editTextTextPasswordLogin)
 
         loginButton.setOnClickListener {
             auth.signInWithEmailAndPassword(editTextEmail.text.toString(), editTextPassword.text.toString())
