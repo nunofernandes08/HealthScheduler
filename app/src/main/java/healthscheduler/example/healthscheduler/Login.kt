@@ -34,7 +34,7 @@ class Login : AppCompatActivity() {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d("", "signInWithEmail:success")
 
-                            val intent = Intent(this, MainActivity::class.java)
+                            val intent = Intent(this, Home::class.java)
                             startActivity(intent)
 
                         } else {
@@ -46,8 +46,10 @@ class Login : AppCompatActivity() {
                     }
         }
 
-        window.decorView.apply {
+
+        //Esconder a barra de cima e as setas que estao em baixo
+        /*window.decorView.apply {
             systemUiVisibility = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or View.SYSTEM_UI_FLAG_FULLSCREEN
-        }
+        }*/
     }
 }

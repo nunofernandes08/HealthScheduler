@@ -91,7 +91,7 @@
         android:layout_width="222dp"
         android:layout_height="56dp"
         android:background="@drawable/btlogin_login"
-        android:text="Register"
+        android:text="Registar"
         android:textSize="24sp"
         android:fontFamily="@font/roboto"
         android:textColor="#ffffff"
@@ -99,16 +99,6 @@
         app:layout_constraintEnd_toEndOf="@+id/formularioRegister"
         app:layout_constraintStart_toStartOf="@+id/formularioRegister"
         app:layout_constraintTop_toBottomOf="@+id/editTextPasswordRegister" />
-
-    <ImageView
-        android:id="@+id/imageViewOtherMethodsRegister"
-        android:layout_width="375dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/formularioRegister"
-        app:srcCompat="@drawable/useothermethods" />
 
     <ImageView
         android:id="@+id/imageViewHereYourFirstSetp"

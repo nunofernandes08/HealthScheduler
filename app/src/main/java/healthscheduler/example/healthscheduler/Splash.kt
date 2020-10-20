@@ -3,6 +3,7 @@ package healthscheduler.example.healthscheduler
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import android.view.View
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -23,12 +24,15 @@ class Splash : AppCompatActivity() {
         auth = Firebase.auth
         val currentUser = auth.currentUser
 
-        currentUser?.let {
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-        }?:run{
-            val intent = Intent(this, Login::class.java)
-            startActivity(intent)
-        }
+
+       Handler().postDelayed({
+            currentUser?.let {
+                val intent = Intent(this, Home::class.java)
+                startActivity(intent)
+            }?:run{
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
+            }
+        },1000)
     }
 }

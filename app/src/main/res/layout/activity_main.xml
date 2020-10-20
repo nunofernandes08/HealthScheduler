@@ -6,24 +6,84 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/txtView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/btlogout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Button"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <ImageView
+        android:id="@+id/imageViewLogoMain"
+        android:layout_width="170dp"
+        android:layout_height="170dp"
+        android:layout_marginTop="40dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtView" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logo" />
+
+    <ImageView
+        android:id="@+id/imageViewHealthSchedulerMain"
+        android:layout_width="309dp"
+        android:layout_height="78dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewLogoMain"
+        app:srcCompat="@drawable/textviewhealthschedulermain" />
+
+    <Button
+        android:id="@+id/buttonContinueWithEmailMain"
+        android:layout_width="297dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="60dp"
+        android:background="@drawable/buttonloginwithemail"
+        android:fontFamily="@font/roboto"
+        android:gravity="center"
+        android:text="Continuar com Email"
+        android:textSize="17sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewHealthSchedulerMain" />
+
+    <ImageView
+        android:id="@+id/imageViewUseOtherMethodsMain"
+        android:layout_width="282dp"
+        android:layout_height="23dp"
+        android:layout_marginTop="60dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonContinueWithEmailMain"
+        app:srcCompat="@drawable/imgaviewuseothermethods" />
+
+    <ImageView
+        android:id="@+id/imageViewFacebokkMain"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="130dp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewUseOtherMethodsMain"
+        app:layout_constraintVertical_bias="0.129"
+        app:srcCompat="@drawable/facebook" />
+
+    <ImageView
+        android:id="@+id/imageViewGoogleMain"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="130dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewUseOtherMethodsMain"
+        app:layout_constraintVertical_bias="0.129"
+        app:srcCompat="@drawable/google" />
+
+    <ImageView
+        android:id="@+id/imageViewRegistarMain"
+        android:layout_width="240dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="36dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewFacebokkMain"
+        app:srcCompat="@drawable/txtresgistarmain" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

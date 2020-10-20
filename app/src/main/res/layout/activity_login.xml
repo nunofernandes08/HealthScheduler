@@ -87,7 +87,7 @@
         android:layout_width="222dp"
         android:layout_height="56dp"
         android:background="@drawable/btlogin_login"
-        android:text="Login"
+        android:text="Entrar"
         android:textSize="24sp"
         android:fontFamily="@font/roboto"
         android:textColor="#36BFB8"
@@ -96,19 +96,6 @@
         app:layout_constraintEnd_toEndOf="@+id/imageViewFormularioLogin"
         app:layout_constraintStart_toStartOf="@+id/imageViewFormularioLogin"
         app:layout_constraintTop_toBottomOf="@+id/editTextTextPasswordLogin" />
-
-    <ImageView
-        android:id="@+id/imageViewUserOtherMethodsLogin"
-        android:layout_width="338dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="5dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.506"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageViewFormularioLogin"
-        app:layout_constraintVertical_bias="0.339"
-        app:srcCompat="@drawable/othermethods" />
 
     <Button
         android:id="@+id/btinfoLogin"
