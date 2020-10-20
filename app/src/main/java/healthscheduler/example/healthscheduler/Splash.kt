@@ -33,12 +33,5 @@ class Splash : AppCompatActivity() {
                 startActivity(intent)
             }
         },1000)
-        currentUser?.let {
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-        }?:run{
-            val intent = Intent(this, Login::class.java)
-            startActivity(intent)
-        }
     }
 }
