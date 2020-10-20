@@ -47,4 +47,6 @@ dependencies {
     //Fireabse
     implementation platform('com.google.firebase:firebase-bom:25.12.0')
     implementation 'com.google.firebase:firebase-auth-ktx:19.4.0'
+    implementation 'com.google.firebase:firebase-database-ktx:19.5.0'
+
 }
