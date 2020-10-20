@@ -1,4 +1,4 @@
-package nunofernandes.example.healthscheduler
+package healthscheduler.example.healthscheduler
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

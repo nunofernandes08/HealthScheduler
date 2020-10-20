@@ -1,4 +1,4 @@
-package nunofernandes.example.healthscheduler
+package healthscheduler.example.healthscheduler
 
 import org.junit.Test
 

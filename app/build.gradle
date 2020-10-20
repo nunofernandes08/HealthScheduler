@@ -9,7 +9,7 @@ android {
     buildToolsVersion "30.0.1"
 
     defaultConfig {
-        applicationId "nunofernandes.example.healthscheduler"
+        applicationId "healthscheduler.example.healthscheduler"
         minSdkVersion 19
         targetSdkVersion 30
         versionCode 1

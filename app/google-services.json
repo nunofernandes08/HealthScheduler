@@ -8,6 +8,35 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:1081449165079:android:e9a62350a9036ade0c0752",
+        "android_client_info": {
+          "package_name": "healthscheduler.example.healthscheduler"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1081449165079-5092j8ip5m010lv7f2t9vo77n8540oc9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAwAcSHOww_oGoN6zcj3oRP5ObFGXdV3T0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1081449165079-5092j8ip5m010lv7f2t9vo77n8540oc9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:1081449165079:android:157df940d57768770c0752",
         "android_client_info": {
           "package_name": "nunofernandes.example.healthscheduler"

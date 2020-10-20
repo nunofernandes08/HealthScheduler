@@ -1,4 +1,4 @@
-package nunofernandes.example.healthscheduler
+package healthscheduler.example.healthscheduler
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity

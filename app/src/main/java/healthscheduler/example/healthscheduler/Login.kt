@@ -1,4 +1,4 @@
-package nunofernandes.example.healthscheduler
+package healthscheduler.example.healthscheduler
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -49,7 +49,5 @@ class Login : AppCompatActivity() {
         window.decorView.apply {
             systemUiVisibility = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or View.SYSTEM_UI_FLAG_FULLSCREEN
         }
-
-
     }
 }
