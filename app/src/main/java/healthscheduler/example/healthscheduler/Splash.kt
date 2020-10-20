@@ -4,7 +4,6 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
-import android.os.Looper
 import android.view.View
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -24,6 +23,7 @@ class Splash : AppCompatActivity() {
 
         auth = Firebase.auth
         val currentUser = auth.currentUser
+
 
        Handler().postDelayed({
             currentUser?.let {
