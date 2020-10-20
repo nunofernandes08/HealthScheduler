@@ -117,4 +117,48 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/txtfraselogin" />
 
+    <ImageView
+        android:id="@+id/imageViewDividerLeft"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="40dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewFormularioLogin"
+        app:srcCompat="@drawable/linhaverde" />
+
+    <TextView
+        android:id="@+id/textViewUseOtherMethods"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="Outros metodos login"
+        android:textColor="#21736F"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/imageViewDividerRight"
+        app:layout_constraintStart_toEndOf="@+id/imageViewDividerLeft"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewFormularioLogin" />
+
+    <ImageView
+        android:id="@+id/imageViewDividerRight"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="36dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewFormularioLogin"
+        app:srcCompat="@drawable/linhaverde" />
+
+    <ImageView
+        android:id="@+id/imageViewGoogleLogin"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="24dp"
+        android:clickable="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewUseOtherMethods"
+        app:srcCompat="@drawable/google" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
