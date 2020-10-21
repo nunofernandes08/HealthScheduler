@@ -28,10 +28,15 @@ class Splash : AppCompatActivity() {
             currentUser?.let {
                 val intent = Intent(this, Home::class.java)
                 startActivity(intent)
+                finish()
             }?:run{
                 val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
+                finish()
             }
         },2000)
     }
+
+    // A função "finish()" encerra a Splash Activity. Ou seja, se formos voltando as páginas da app
+    // a SplashScreen não aparece de novo.
 }
