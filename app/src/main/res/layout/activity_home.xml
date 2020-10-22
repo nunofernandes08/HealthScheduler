@@ -10,16 +10,16 @@
         android:id="@+id/buttonLogoutHome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="108dp"
         android:text="SAIR"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageViewFadeHome" />
 
     <ImageView
         android:id="@+id/imageViewFadeHome"
         android:layout_width="421dp"
-        android:layout_height="174dp"
+        android:layout_height="172dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -29,7 +29,7 @@
         android:id="@+id/imageViewRetanguloHome"
         android:layout_width="336dp"
         android:layout_height="214dp"
-        android:layout_marginTop="112dp"
+        android:layout_marginTop="96dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
@@ -73,15 +73,14 @@
         app:layout_constraintTop_toTopOf="@+id/imageViewRetanguloHome" />
 
     <TextView
-        android:id="@+id/textViewNomeFavorito1"
+        android:id="@+id/textViewNomeFavorito1Home"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="70dp"
         android:fontFamily="@font/roboto"
         android:text="Nuno"
         android:textColor="#21736F"
         android:textSize="15sp"
-        app:layout_constraintEnd_toEndOf="@+id/imageViewRetanguloHome"
-        app:layout_constraintHorizontal_bias="0.236"
         app:layout_constraintStart_toStartOf="@+id/imageViewRetanguloHome"
         app:layout_constraintTop_toBottomOf="@+id/imageViewFotoFavorito1Home" />
 
@@ -89,13 +88,25 @@
         android:id="@+id/textViewNomeFavorito2Home"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="48dp"
+        android:layout_marginStart="50dp"
         android:fontFamily="@font/roboto"
         android:text="Nuno"
         android:textColor="#21736F"
         android:textSize="15sp"
-        app:layout_constraintStart_toEndOf="@+id/textViewNomeFavorito1"
-        app:layout_constraintTop_toBottomOf="@+id/imageViewFotoFavorito1Home" />
+        app:layout_constraintStart_toEndOf="@+id/textViewNomeFavorito1Home"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewFotoFavorito2Home" />
+
+    <TextView
+        android:id="@+id/textViewNomeFavorito3Home"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:fontFamily="@font/roboto"
+        android:text="Nuno"
+        android:textColor="#21736F"
+        android:textSize="15sp"
+        app:layout_constraintStart_toEndOf="@+id/textViewNomeFavorito2Home"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewFotoFavorito3Home" />
 
     <TextView
         android:id="@+id/textViewNumeroUtilizadorHome"
@@ -126,7 +137,7 @@
         android:layout_width="54dp"
         android:layout_height="54dp"
         android:layout_marginStart="60dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="12dp"
         app:layout_constraintStart_toStartOf="@+id/imageViewRetanguloHome"
         app:layout_constraintTop_toBottomOf="@+id/imageViewFotoPerfilHome"
         app:srcCompat="@drawable/imageviewfotofavorito1" />
@@ -138,20 +149,40 @@
         android:layout_marginStart="30dp"
         android:layout_marginTop="12dp"
         android:layout_marginEnd="30dp"
-        app:layout_constraintEnd_toStartOf="@+id/imageViewFotoFavorito2Home2"
+        app:layout_constraintEnd_toStartOf="@+id/imageViewFotoFavorito3Home"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/imageViewFotoFavorito1Home"
         app:layout_constraintTop_toBottomOf="@+id/imageViewFotoPerfilHome"
         app:srcCompat="@drawable/imageviewfotofavorito1" />
 
     <ImageView
-        android:id="@+id/imageViewFotoFavorito2Home2"
+        android:id="@+id/imageViewFotoFavorito3Home"
         android:layout_width="54dp"
         android:layout_height="54dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="12dp"
         android:layout_marginEnd="60dp"
         app:layout_constraintEnd_toEndOf="@+id/imageViewRetanguloHome"
         app:layout_constraintTop_toBottomOf="@+id/imageViewFotoPerfilHome"
         app:srcCompat="@drawable/imageviewfotofavorito1" />
+
+    <ImageView
+        android:id="@+id/imageViewNavigationHome"
+        android:layout_width="416dp"
+        android:layout_height="100dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.6"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/navigationbar" />
+
+    <ImageView
+        android:id="@+id/buttonSOSHome"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/imageViewNavigationHome"
+        app:layout_constraintTop_toTopOf="@+id/imageViewNavigationHome"
+        app:srcCompat="@drawable/buttonsos" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
