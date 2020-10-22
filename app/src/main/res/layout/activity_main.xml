@@ -109,11 +109,13 @@
     <com.facebook.login.widget.LoginButton
         android:id="@+id/buttonLoginFacebook"
         android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_height="60dp"
         android:layout_gravity="center_horizontal"
+        android:layout_marginStart="100dp"
         android:layout_marginTop="48dp"
-        app:layout_constraintEnd_toStartOf="@+id/imageViewGoogleMain"
-        app:layout_constraintStart_toEndOf="@+id/imageViewFacebookMain"
+        android:alpha="0"
+        android:visibility="visible"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewUseOtherMethods"
         app:srcCompat="@drawable/facebook" />
 

@@ -7,8 +7,12 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.facebook.*
-import com.facebook.appevents.AppEventsLogger
+import com.facebook.AccessToken
+import com.facebook.CallbackManager
+import com.facebook.FacebookCallback
+import com.facebook.FacebookException
+import com.facebook.FacebookSdk
+import com.facebook.login.LoginManager
 import com.facebook.login.LoginResult
 import com.facebook.login.widget.LoginButton
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -21,6 +25,8 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import java.util.*
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -79,7 +85,7 @@ class MainActivity : AppCompatActivity() {
 
         FBloginButton!!.setReadPermissions("email", "public_profile")
         FBloginButton!!.registerCallback(callbackManager, object :
-            FacebookCallback<LoginResult> {
+                FacebookCallback<LoginResult> {
             override fun onSuccess(loginResult: LoginResult) {
                 Log.d(TAG, "facebook:onSuccess:$loginResult")
                 handleFacebookAccessToken(loginResult.accessToken)
@@ -94,10 +100,12 @@ class MainActivity : AppCompatActivity() {
                 Log.d(TAG, "facebook:onError", error)
             }
         })
+
+        val accessToken = AccessToken.getCurrentAccessToken()
+        val isLoggedIn = accessToken != null && !accessToken.isExpired
     }
 
     //facebook
-
     public override fun onStart() {
         super.onStart()
         val currentUser = mAuth.currentUser
@@ -118,21 +126,21 @@ class MainActivity : AppCompatActivity() {
                     val user = mAuth.currentUser
                     updateUI(user)
                 } else {
-                    // If sign in fails, display a message to the user.
                     Log.w(TAG, "signInWithCredential:failure", task.exception)
                     Toast.makeText(baseContext, "Falha ao entrar na conta facebook!",
-                        Toast.LENGTH_SHORT).show()
+                            Toast.LENGTH_SHORT).show()
                 }
             }
     }
 
     private fun updateUI(user: FirebaseUser?) {
         if(user != null){
+            LoginManager.getInstance().logInWithReadPermissions(this, listOf("public_profile"));
             val intent = Intent(this, Home::class.java)
             startActivity(intent)
         }else {
             Toast.makeText(baseContext, "Faça o login para continuar!",
-                Toast.LENGTH_SHORT).show()
+                    Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -175,7 +183,7 @@ class MainActivity : AppCompatActivity() {
                     Log.w("", "loginFailed! Info = ", task.exception)
 
                     Toast.makeText(baseContext, "Falha ao entrar na conta.",
-                        Toast.LENGTH_SHORT).show()
+                            Toast.LENGTH_SHORT).show()
                 }
             }
     }
