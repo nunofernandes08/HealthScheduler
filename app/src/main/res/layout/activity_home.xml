@@ -165,4 +165,58 @@
         app:layout_constraintTop_toBottomOf="@+id/imageViewFotoPerfilHome"
         app:srcCompat="@drawable/imageviewfotofavorito1" />
 
+    <ImageView
+        android:id="@+id/imageViewNotificacaoHome"
+        android:layout_width="336dp"
+        android:layout_height="175dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewRetanguloHome"
+        app:srcCompat="@drawable/fundonotificacao" />
+
+    <ImageView
+        android:id="@+id/buttonScheduleHome"
+        android:layout_width="114dp"
+        android:layout_height="114dp"
+        android:layout_marginStart="43dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewNotificacaoHome"
+        app:srcCompat="@drawable/buttonschedulehome" />
+
+    <ImageView
+        android:id="@+id/buttonChatHome"
+        android:layout_width="114dp"
+        android:layout_height="114dp"
+        android:layout_marginEnd="43dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewNotificacaoHome"
+        app:srcCompat="@drawable/buttonchathome" />
+
+    <TextView
+        android:id="@+id/textViewScheduleHome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="70dp"
+        android:fontFamily="@font/roboto"
+        android:text="Schedule"
+        android:textColor="#21736F"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/buttonScheduleHome"
+        app:layout_constraintStart_toStartOf="@+id/buttonScheduleHome"
+        app:layout_constraintTop_toTopOf="@+id/buttonScheduleHome" />
+
+    <TextView
+        android:id="@+id/textViewChatHome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="70dp"
+        android:fontFamily="@font/roboto"
+        android:text="Chat"
+        android:textColor="#21736F"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/buttonChatHome"
+        app:layout_constraintStart_toStartOf="@+id/buttonChatHome"
+        app:layout_constraintTop_toTopOf="@+id/buttonChatHome" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
