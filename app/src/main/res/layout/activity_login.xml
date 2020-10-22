@@ -56,15 +56,17 @@
         android:id="@+id/editTextTextEmailLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="33dp"
         android:backgroundTint="#FFFFFF"
         android:ems="13"
+        android:fontFamily="@font/roboto"
         android:inputType="textPersonName"
         android:textColor="#FFFFFF"
         android:textColorHighlight="#FFFFFF"
         android:textColorHint="#FFFFFF"
         android:textColorLink="#FFFFFF"
-        android:fontFamily="@font/roboto"
         app:layout_constraintEnd_toEndOf="@+id/imageViewFormularioLogin"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/imageViewFormularioLogin"
         app:layout_constraintTop_toBottomOf="@+id/textViewEmailLogin" />
 
@@ -72,15 +74,17 @@
         android:id="@+id/editTextTextPasswordLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="33dp"
         android:backgroundTint="#FFFFFF"
         android:ems="13"
+        android:fontFamily="@font/roboto"
         android:inputType="textPassword"
         android:textColor="#FFFFFF"
         android:textColorHighlight="#FFFFFF"
         android:textColorHint="#FFFFFF"
         android:textColorLink="#FFFFFF"
-        android:fontFamily="@font/roboto"
         app:layout_constraintEnd_toEndOf="@+id/imageViewFormularioLogin"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/imageViewFormularioLogin"
         app:layout_constraintTop_toBottomOf="@+id/textViewPasswordLogin" />
 
@@ -109,59 +113,18 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <ImageView
-        android:id="@+id/imageViewTextAlreadyLogin"
-        android:layout_width="121dp"
-        android:layout_height="108dp"
+    <TextView
+        android:id="@+id/textViewJaTemContaLogin"
+        android:layout_width="140dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="46dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/txtfraselogin" />
-
-    <ImageView
-        android:id="@+id/imageViewDividerLeft"
-        android:layout_width="50dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="36dp"
-        android:layout_marginTop="40dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageViewFormularioLogin"
-        app:srcCompat="@drawable/linhaverde" />
-
-    <TextView
-        android:id="@+id/textViewUseOtherMethods"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="Outros metodos login"
+        android:text="Ja tem alguma conta?"
         android:textColor="#21736F"
-        android:textSize="18sp"
+        android:textSize="32sp"
         android:fontFamily="@font/roboto"
-        app:layout_constraintEnd_toStartOf="@+id/imageViewDividerRight"
-        app:layout_constraintStart_toEndOf="@+id/imageViewDividerLeft"
-        app:layout_constraintTop_toBottomOf="@+id/imageViewFormularioLogin" />
-
-    <ImageView
-        android:id="@+id/imageViewDividerRight"
-        android:layout_width="50dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="36dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageViewFormularioLogin"
-        app:srcCompat="@drawable/linhaverde" />
-
-    <ImageView
-        android:id="@+id/imageViewGoogleLogin"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="24dp"
-        android:clickable="true"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewUseOtherMethods"
-        app:srcCompat="@drawable/google" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

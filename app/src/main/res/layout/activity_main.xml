@@ -41,39 +41,58 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageViewHealthSchedulerMain" />
 
+
     <ImageView
-        android:id="@+id/imageViewUseOtherMethodsMain"
-        android:layout_width="282dp"
-        android:layout_height="23dp"
-        android:layout_marginTop="60dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
+        android:id="@+id/imageViewDividerLeft"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="105dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonContinueWithEmailMain"
-        app:srcCompat="@drawable/imgaviewuseothermethods" />
+        app:srcCompat="@drawable/linhaverde" />
+
+    <TextView
+        android:id="@+id/textViewUseOtherMethods"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="95dp"
+        android:fontFamily="@font/roboto"
+        android:text="Outros metodos login"
+        android:textColor="#21736F"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/imageViewDividerRight"
+        app:layout_constraintStart_toEndOf="@+id/imageViewDividerLeft"
+        app:layout_constraintTop_toBottomOf="@+id/buttonContinueWithEmailMain" />
+
+    <ImageView
+        android:id="@+id/imageViewDividerRight"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="105dp"
+        android:layout_marginEnd="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonContinueWithEmailMain"
+        app:srcCompat="@drawable/linhaverde" />
 
     <ImageView
         android:id="@+id/imageViewFacebookMain"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_marginStart="130dp"
-        android:layout_marginTop="4dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="48dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageViewUseOtherMethodsMain"
-        app:layout_constraintVertical_bias="0.129"
+        app:layout_constraintTop_toBottomOf="@+id/textViewUseOtherMethods"
         app:srcCompat="@drawable/facebook" />
 
     <ImageView
         android:id="@+id/imageViewGoogleMain"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="130dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="100dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageViewUseOtherMethodsMain"
-        app:layout_constraintVertical_bias="0.129"
+        app:layout_constraintTop_toBottomOf="@+id/textViewUseOtherMethods"
         app:srcCompat="@drawable/google" />
 
     <ImageView

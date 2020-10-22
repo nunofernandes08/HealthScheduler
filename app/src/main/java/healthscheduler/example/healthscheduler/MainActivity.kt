@@ -68,15 +68,15 @@ class MainActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if (requestCode == Login.REQUEST_CODE_SIGN_IN) {
+        if (requestCode == REQUEST_CODE_SIGN_IN) {
             val task = GoogleSignIn.getSignedInAccountFromIntent(data)
             try {
                 val account = task.getResult(ApiException::class.java)!!
-                Log.d(Login.TAG, "firebaseAuthWithGoogle:" + account.id)
+                Log.d("", "firebaseAuthWithGoogle:" + account.id)
                 firebaseAuthWithGoogle(account.idToken!!)
 
             } catch (e: ApiException) {
-                Log.w(Login.TAG, "Google sign in failed", e)
+                Log.w("", "Google sign in failed", e)
             }
         }
     }
@@ -86,17 +86,16 @@ class MainActivity : AppCompatActivity() {
         auth.signInWithCredential(credential)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-                    Log.d(Login.TAG, "loginSuccess!")
+                    Log.d("", "loginSuccess!")
                     val user = auth.currentUser
                     val intent = Intent(this, Home::class.java)
                     startActivity(intent)
                 } else {
-                    Log.w(Login.TAG, "loginFailed! Info = ", task.exception)
+                    Log.w("", "loginFailed! Info = ", task.exception)
 
                     Toast.makeText(baseContext, "Falha ao entrar na conta.",
                         Toast.LENGTH_SHORT).show()
                 }
-
             }
     }
 }
