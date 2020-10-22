@@ -165,24 +165,4 @@
         app:layout_constraintTop_toBottomOf="@+id/imageViewFotoPerfilHome"
         app:srcCompat="@drawable/imageviewfotofavorito1" />
 
-    <ImageView
-        android:id="@+id/imageViewNavigationHome"
-        android:layout_width="416dp"
-        android:layout_height="100dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.6"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/navigationbar" />
-
-    <ImageView
-        android:id="@+id/buttonSOSHome"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="15dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/imageViewNavigationHome"
-        app:layout_constraintTop_toTopOf="@+id/imageViewNavigationHome"
-        app:srcCompat="@drawable/buttonsos" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>
