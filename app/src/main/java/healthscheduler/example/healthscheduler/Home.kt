@@ -11,7 +11,7 @@ class Home : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
-        val buttonLogout = findViewById<Button>(R.id.buttonLogout)
+        val buttonLogout = findViewById<Button>(R.id.buttonLogoutHome)
 
 
         //Logout

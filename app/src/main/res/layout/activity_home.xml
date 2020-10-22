@@ -7,10 +7,151 @@
     tools:context=".Home">
 
     <Button
-        android:id="@+id/buttonLogout"
+        android:id="@+id/buttonLogoutHome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="108dp"
         android:text="SAIR"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageViewFadeHome"
+        android:layout_width="421dp"
+        android:layout_height="174dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/fadehome" />
+
+    <ImageView
+        android:id="@+id/imageViewRetanguloHome"
+        android:layout_width="336dp"
+        android:layout_height="214dp"
+        android:layout_marginTop="112dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageViewFadeHome"
+        app:srcCompat="@drawable/fundobrancoperfil" />
+
+    <TextView
+        android:id="@+id/textViewHomeHome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/roboto"
+        android:text="Home"
+        android:textColor="@color/white"
+        android:textSize="30sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageViewFotoPerfilHome"
+        android:layout_width="82dp"
+        android:layout_height="82dp"
+        android:layout_marginStart="21dp"
+        android:layout_marginTop="21dp"
+        app:layout_constraintStart_toStartOf="@+id/imageViewRetanguloHome"
+        app:layout_constraintTop_toTopOf="@+id/imageViewRetanguloHome"
+        app:srcCompat="@drawable/imageviewfotoperfilhome" />
+
+    <TextView
+        android:id="@+id/textViewNomeUtilizadorHome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="27dp"
+        android:fontFamily="@font/roboto"
+        android:text="Nome utilizador"
+        android:textColor="#21736F"
+        android:textSize="20sp"
+        app:layout_constraintStart_toEndOf="@+id/imageViewFotoPerfilHome"
+        app:layout_constraintTop_toTopOf="@+id/imageViewRetanguloHome" />
+
+    <TextView
+        android:id="@+id/textViewNomeFavorito1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto"
+        android:text="Nuno"
+        android:textColor="#21736F"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="@+id/imageViewRetanguloHome"
+        app:layout_constraintHorizontal_bias="0.236"
+        app:layout_constraintStart_toStartOf="@+id/imageViewRetanguloHome"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewFotoFavorito1Home" />
+
+    <TextView
+        android:id="@+id/textViewNomeFavorito2Home"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="48dp"
+        android:fontFamily="@font/roboto"
+        android:text="Nuno"
+        android:textColor="#21736F"
+        android:textSize="15sp"
+        app:layout_constraintStart_toEndOf="@+id/textViewNomeFavorito1"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewFotoFavorito1Home" />
+
+    <TextView
+        android:id="@+id/textViewNumeroUtilizadorHome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:fontFamily="@font/roboto"
+        android:text="915029102"
+        android:textColor="#21736F"
+        android:textSize="14sp"
+        app:layout_constraintStart_toEndOf="@+id/imageViewFotoPerfilHome"
+        app:layout_constraintTop_toBottomOf="@+id/textViewNomeUtilizadorHome" />
+
+    <TextView
+        android:id="@+id/textViewMoradaUtilizadorHome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:fontFamily="@font/roboto"
+        android:text="Travessa dos laborins"
+        android:textColor="#21736F"
+        android:textSize="14sp"
+        app:layout_constraintStart_toEndOf="@+id/imageViewFotoPerfilHome"
+        app:layout_constraintTop_toBottomOf="@+id/textViewNumeroUtilizadorHome" />
+
+    <ImageView
+        android:id="@+id/imageViewFotoFavorito1Home"
+        android:layout_width="54dp"
+        android:layout_height="54dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="15dp"
+        app:layout_constraintStart_toStartOf="@+id/imageViewRetanguloHome"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewFotoPerfilHome"
+        app:srcCompat="@drawable/imageviewfotofavorito1" />
+
+    <ImageView
+        android:id="@+id/imageViewFotoFavorito2Home"
+        android:layout_width="54dp"
+        android:layout_height="54dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="30dp"
+        app:layout_constraintEnd_toStartOf="@+id/imageViewFotoFavorito2Home2"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/imageViewFotoFavorito1Home"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewFotoPerfilHome"
+        app:srcCompat="@drawable/imageviewfotofavorito1" />
+
+    <ImageView
+        android:id="@+id/imageViewFotoFavorito2Home2"
+        android:layout_width="54dp"
+        android:layout_height="54dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="60dp"
+        app:layout_constraintEnd_toEndOf="@+id/imageViewRetanguloHome"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewFotoPerfilHome"
+        app:srcCompat="@drawable/imageviewfotofavorito1" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

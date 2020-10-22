@@ -63,6 +63,7 @@
         android:textColorHighlight="#FFFFFF"
         android:textColorHint="#FFFFFF"
         android:textColorLink="#FFFFFF"
+        android:fontFamily="@font/roboto"
         app:layout_constraintEnd_toEndOf="@+id/imageViewFormularioLogin"
         app:layout_constraintStart_toStartOf="@+id/imageViewFormularioLogin"
         app:layout_constraintTop_toBottomOf="@+id/textViewEmailLogin" />
@@ -78,6 +79,7 @@
         android:textColorHighlight="#FFFFFF"
         android:textColorHint="#FFFFFF"
         android:textColorLink="#FFFFFF"
+        android:fontFamily="@font/roboto"
         app:layout_constraintEnd_toEndOf="@+id/imageViewFormularioLogin"
         app:layout_constraintStart_toStartOf="@+id/imageViewFormularioLogin"
         app:layout_constraintTop_toBottomOf="@+id/textViewPasswordLogin" />
@@ -135,6 +137,7 @@
         android:text="Outros metodos login"
         android:textColor="#21736F"
         android:textSize="18sp"
+        android:fontFamily="@font/roboto"
         app:layout_constraintEnd_toStartOf="@+id/imageViewDividerRight"
         app:layout_constraintStart_toEndOf="@+id/imageViewDividerLeft"
         app:layout_constraintTop_toBottomOf="@+id/imageViewFormularioLogin" />
