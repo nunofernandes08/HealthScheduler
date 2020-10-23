@@ -61,6 +61,6 @@ class Splash : AppCompatActivity() {
     as páginas da app a SplashScreen não aparece de novo.
 
 --> Comentei o "Handler().postDelayed()" - linha 29 ~ 39 - para testar a Coroutine - linha 41 ~53 -.
-    no meu tlmv, a aplicação não crashou.
+    no meu tlmv, a aplicação não crashou e a verificação está sendo feita com sucesso.
 
 */

@@ -14,7 +14,7 @@ import com.google.firebase.ktx.Firebase
 class Register : AppCompatActivity() {
 
     companion object {
-        val TAG = "RegisterActivity"
+        const val TAG = "RegisterActivity"
     }
 
     private lateinit var auth: FirebaseAuth
@@ -26,26 +26,32 @@ class Register : AppCompatActivity() {
         auth = Firebase.auth
 
         val buttonRegister = findViewById<Button>(R.id.buttonRegister)
+
+        buttonRegister.setOnClickListener {
+            registerUser()
+        }
+    }
+
+    private fun registerUser() {
         val editTextEmail = findViewById<TextView>(R.id.editTextEmailRegister)
         val editTextPassword = findViewById<TextView>(R.id.editTextPasswordRegister)
 
-        buttonRegister.setOnClickListener {
-            auth.createUserWithEmailAndPassword(
-                    editTextEmail.text.toString(),
-                    editTextPassword.text.toString()
-            ).addOnCompleteListener(this) { task ->
-                if (task.isSuccessful) {
-                    Log.d(TAG, "registerSuccess! Email = + '$editTextEmail'")
-                    val user = auth.currentUser
-                    val intent = Intent(this, Login::class.java)
-                    startActivity(intent)
-                } else {
-                    Log.w(TAG, "registerFailed! Info = ", task.exception)
-                    Toast.makeText(baseContext, "Falha no registo!.",
-                            Toast.LENGTH_SHORT).show()
+        val email = editTextEmail.text.toString()
+        val password = editTextPassword.text.toString()
+
+        auth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this) { task ->
+                    if (task.isSuccessful) {
+                        Log.d(TAG, "registerSuccess! Email = + '$editTextEmail'")
+                        val user = auth.currentUser
+                        val intent = Intent(this, Login::class.java)
+                        startActivity(intent)
+                    } else {
+                        Log.w(TAG, "registerFailed! Info = ", task.exception)
+                        Toast.makeText(baseContext, "Falha no registo!.",
+                                Toast.LENGTH_SHORT).show()
+                    }
                 }
-            }
-        }
     }
 }
 
