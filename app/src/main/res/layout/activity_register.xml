@@ -18,7 +18,7 @@
         app:srcCompat="@drawable/logoregister" />
 
     <ImageView
-        android:id="@+id/formularioRegister"
+        android:id="@+id/formRegister"
         android:layout_width="338dp"
         android:layout_height="313dp"
         android:layout_marginTop="10dp"
@@ -37,8 +37,8 @@
         android:textColor="#36BFB8"
         android:textSize="24sp"
         android:text="Email"
-        app:layout_constraintStart_toStartOf="@+id/formularioRegister"
-        app:layout_constraintTop_toTopOf="@+id/formularioRegister" />
+        app:layout_constraintStart_toStartOf="@+id/formRegister"
+        app:layout_constraintTop_toTopOf="@+id/formRegister" />
 
     <EditText
         android:id="@+id/editTextEmailRegister"
@@ -53,9 +53,9 @@
         android:textColorLink="#36BFB8"
         android:backgroundTint="#36BFB8"
         android:fontFamily="@font/roboto"
-        app:layout_constraintEnd_toEndOf="@+id/formularioRegister"
+        app:layout_constraintEnd_toEndOf="@+id/formRegister"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/formularioRegister"
+        app:layout_constraintStart_toStartOf="@+id/formRegister"
         app:layout_constraintTop_toBottomOf="@+id/textViewEmailRegister" />
 
     <TextView
@@ -68,7 +68,7 @@
         android:textColor="#36BFB8"
         android:textSize="24sp"
         android:text="Password"
-        app:layout_constraintStart_toStartOf="@+id/formularioRegister"
+        app:layout_constraintStart_toStartOf="@+id/formRegister"
         app:layout_constraintTop_toBottomOf="@+id/editTextEmailRegister" />
 
     <EditText
@@ -84,9 +84,9 @@
         android:textColorHighlight="#36BFB8"
         android:textColorHint="#36BFB8"
         android:textColorLink="#36BFB8"
-        app:layout_constraintEnd_toEndOf="@+id/formularioRegister"
+        app:layout_constraintEnd_toEndOf="@+id/formRegister"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/formularioRegister"
+        app:layout_constraintStart_toStartOf="@+id/formRegister"
         app:layout_constraintTop_toBottomOf="@+id/textViewPasswordRegister" />
 
     <Button
@@ -98,9 +98,9 @@
         android:textSize="24sp"
         android:fontFamily="@font/roboto"
         android:textColor="#ffffff"
-        app:layout_constraintBottom_toBottomOf="@+id/formularioRegister"
-        app:layout_constraintEnd_toEndOf="@+id/formularioRegister"
-        app:layout_constraintStart_toStartOf="@+id/formularioRegister"
+        app:layout_constraintBottom_toBottomOf="@+id/formRegister"
+        app:layout_constraintEnd_toEndOf="@+id/formRegister"
+        app:layout_constraintStart_toStartOf="@+id/formRegister"
         app:layout_constraintTop_toBottomOf="@+id/editTextPasswordRegister" />
 
 
