@@ -27,14 +27,14 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import java.util.*
 
-
 class MainActivity : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
-    private var mGoogleSignInClient : GoogleSignInClient? = null
+    private var mGoogleSignInClient: GoogleSignInClient? = null
+
     //facebook
-    private var FBloginButton : LoginButton? = null
-    private lateinit var mAuth : FirebaseAuth
+    private var FBloginButton: LoginButton? = null
+    private lateinit var mAuth: FirebaseAuth
     val callbackManager: CallbackManager = CallbackManager.Factory.create()
 
     companion object {
@@ -67,9 +67,9 @@ class MainActivity : AppCompatActivity() {
         //google
 
         val options = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken(getString(R.string.default_web_client_id))
-            .requestEmail()
-            .build()
+                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestEmail()
+                .build()
 
         mGoogleSignInClient = GoogleSignIn.getClient(this, options)
 
@@ -80,7 +80,7 @@ class MainActivity : AppCompatActivity() {
         //facebook
         FacebookSdk.sdkInitialize(this);
         mAuth = FirebaseAuth.getInstance();
-        
+
         FBloginButton = findViewById(R.id.buttonLoginFacebook)
 
         FBloginButton!!.setReadPermissions("email", "public_profile")
@@ -109,7 +109,7 @@ class MainActivity : AppCompatActivity() {
     public override fun onStart() {
         super.onStart()
         val currentUser = mAuth.currentUser
-        if(currentUser != null){
+        if (currentUser != null) {
             updateUI(currentUser)
         }
 
@@ -120,25 +120,25 @@ class MainActivity : AppCompatActivity() {
 
         val credential = FacebookAuthProvider.getCredential(token.token)
         mAuth.signInWithCredential(credential)
-            .addOnCompleteListener(this) { task ->
-                if (task.isSuccessful) {
-                    Log.d(TAG, "signInWithCredential:success")
-                    val user = mAuth.currentUser
-                    updateUI(user)
-                } else {
-                    Log.w(TAG, "signInWithCredential:failure", task.exception)
-                    Toast.makeText(baseContext, "Falha ao entrar na conta facebook!",
-                            Toast.LENGTH_SHORT).show()
+                .addOnCompleteListener(this) { task ->
+                    if (task.isSuccessful) {
+                        Log.d(TAG, "signInWithCredential:success")
+                        val user = mAuth.currentUser
+                        updateUI(user)
+                    } else {
+                        Log.w(TAG, "signInWithCredential:failure", task.exception)
+                        Toast.makeText(baseContext, "Falha ao entrar na conta facebook!",
+                                Toast.LENGTH_SHORT).show()
+                    }
                 }
-            }
     }
 
     private fun updateUI(user: FirebaseUser?) {
-        if(user != null){
+        if (user != null) {
             LoginManager.getInstance().logInWithReadPermissions(this, listOf("public_profile"));
             val intent = Intent(this, Home::class.java)
             startActivity(intent)
-        }else {
+        } else {
             Toast.makeText(baseContext, "Faça o login para continuar!",
                     Toast.LENGTH_SHORT).show()
         }
@@ -173,18 +173,22 @@ class MainActivity : AppCompatActivity() {
     private fun firebaseAuthWithGoogle(idToken: String) {
         val credential = GoogleAuthProvider.getCredential(idToken, null)
         auth.signInWithCredential(credential)
-            .addOnCompleteListener(this) { task ->
-                if (task.isSuccessful) {
-                    Log.d("", "loginSuccess!")
-                    val user = auth.currentUser
-                    val intent = Intent(this, Home::class.java)
-                    startActivity(intent)
-                } else {
-                    Log.w("", "loginFailed! Info = ", task.exception)
+                .addOnCompleteListener(this) { task ->
+                    if (task.isSuccessful) {
+                        Log.d("", "loginSuccess!")
+                        val user = auth.currentUser
+                        val intent = Intent(this, Home::class.java)
+                        startActivity(intent)
+                    } else {
+                        Log.w("", "loginFailed! Info = ", task.exception)
 
-                    Toast.makeText(baseContext, "Falha ao entrar na conta.",
-                            Toast.LENGTH_SHORT).show()
+                        Toast.makeText(baseContext, "Falha ao entrar na conta.",
+                                Toast.LENGTH_SHORT).show()
+                    }
                 }
-            }
     }
 }
+
+/* << --------------------------------------- COMENTÁRIOS --------------------------------------- >>
+
+*/

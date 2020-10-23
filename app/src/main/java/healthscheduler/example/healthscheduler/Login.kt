@@ -26,7 +26,7 @@ class Login : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
 
-    private var mGoogleSignInClient : GoogleSignInClient? = null
+    private var mGoogleSignInClient: GoogleSignInClient? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,9 +54,15 @@ class Login : AppCompatActivity() {
                         }
                     }
         }
-        //Esconder a barra de cima e as setas que estao em baixo
-        /*window.decorView.apply {
-            systemUiVisibility = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or View.SYSTEM_UI_FLAG_FULLSCREEN
-        }*/
     }
 }
+
+/* << --------------------------------------- COMENTÁRIOS --------------------------------------- >>
+
+--> Esconder a barra de cima e as setas que estão em baixo
+
+        window.decorView.apply {
+            systemUiVisibility = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or View.SYSTEM_UI_FLAG_FULLSCREEN
+        }
+
+*/

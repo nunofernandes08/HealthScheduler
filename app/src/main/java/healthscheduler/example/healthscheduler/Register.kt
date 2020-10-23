@@ -29,10 +29,10 @@ class Register : AppCompatActivity() {
         val editTextEmail = findViewById<TextView>(R.id.editTextEmailRegister)
         val editTextPassword = findViewById<TextView>(R.id.editTextPasswordRegister)
 
-        buttonRegister.setOnClickListener{
+        buttonRegister.setOnClickListener {
             auth.createUserWithEmailAndPassword(
-                editTextEmail.text.toString(),
-                editTextPassword.text.toString()
+                    editTextEmail.text.toString(),
+                    editTextPassword.text.toString()
             ).addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     Log.d(TAG, "registerSuccess! Email = + '$editTextEmail'")
@@ -42,10 +42,13 @@ class Register : AppCompatActivity() {
                 } else {
                     Log.w(TAG, "registerFailed! Info = ", task.exception)
                     Toast.makeText(baseContext, "Falha no registo!.",
-                        Toast.LENGTH_SHORT).show()
+                            Toast.LENGTH_SHORT).show()
                 }
-
             }
         }
     }
 }
+
+/* << --------------------------------------- COMENTÁRIOS --------------------------------------- >>
+
+*/

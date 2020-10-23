@@ -8,10 +8,12 @@ import android.view.View
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.*
 
 class Splash : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
+    private val activityScope = CoroutineScope(Dispatchers.Main)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,19 +26,41 @@ class Splash : AppCompatActivity() {
         auth = Firebase.auth
         val currentUser = auth.currentUser
 
-       Handler().postDelayed({
+        /*Handler().postDelayed({
+             currentUser?.let {
+                 val intent = Intent(this, Home::class.java)
+                 startActivity(intent)
+                 finish()
+             }?:run{
+                 val intent = Intent(this, MainActivity::class.java)
+                 startActivity(intent)
+                 finish()
+             }
+         },2000) */
+
+        activityScope.launch {
+            delay(2000)
+
             currentUser?.let {
-                val intent = Intent(this, Home::class.java)
+                val intent = Intent(this@Splash, Home::class.java)
                 startActivity(intent)
                 finish()
-            }?:run{
-                val intent = Intent(this, MainActivity::class.java)
+            } ?: run {
+                val intent = Intent(this@Splash, MainActivity::class.java)
                 startActivity(intent)
                 finish()
             }
-        },2000)
+        }
     }
 
-    // A função "finish()" encerra a Splash Activity. Ou seja, se formos voltando as páginas da app
-    // a SplashScreen não aparece de novo.
 }
+
+/* << --------------------------------------- COMENTÁRIOS --------------------------------------- >>
+
+--> A função "finish()" - nas linhas 47 e 51 - encerra a Splash Activity. Ou seja, se formos voltando
+    as páginas da app a SplashScreen não aparece de novo.
+
+--> Comentei o "Handler().postDelayed()" - linha 29 ~ 39 - para testar a Coroutine - linha 41 ~53 -.
+    no meu tlmv, a aplicação não crashou.
+
+*/
