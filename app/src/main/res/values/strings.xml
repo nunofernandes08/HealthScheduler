@@ -6,5 +6,9 @@
     <string name="title_activity_splash">FullscreenActivity</string>
     <string name="facebook_app_id">646156029431861</string>
     <string name="fb_login_protocol_scheme">fb646156029431861</string>
+    <string name="email_login">Email</string>
+    <string name="password_login">Palavra-passe</string>
+    <string name="entrar">Entrar</string>
+    <string name="register">Registar</string>
 
 </resources>

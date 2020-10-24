@@ -14,17 +14,22 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/logo_login" />
+        app:srcCompat="@drawable/logo_login"
+        tools:ignore="ContentDescription"/>
 
     <ImageView
         android:id="@+id/imageViewFormLogin"
         android:layout_width="338dp"
         android:layout_height="313dp"
         android:layout_marginTop="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageViewLogin"
-        app:srcCompat="@drawable/retangulo_formulario" />
+        app:layout_constraintVertical_bias="0.125"
+        app:srcCompat="@drawable/retangulo_formulario"
+        tools:ignore="ContentDescription" />
 
     <TextView
         android:id="@+id/textViewEmailLogin"
@@ -33,7 +38,7 @@
         android:layout_marginStart="33dp"
         android:layout_marginTop="28dp"
         android:fontFamily="@font/roboto"
-        android:text="Email"
+        android:text="@string/email_login"
         android:textColor="#FFFFFF"
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="@+id/imageViewFormLogin"
@@ -46,7 +51,7 @@
         android:layout_marginStart="33dp"
         android:layout_marginTop="12dp"
         android:fontFamily="@font/roboto"
-        android:text="Password"
+        android:text="@string/password_login"
         android:textColor="#FFFFFF"
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="@+id/imageViewFormLogin"
@@ -60,10 +65,13 @@
         android:backgroundTint="#FFFFFF"
         android:ems="13"
         android:fontFamily="@font/roboto"
-        android:inputType="textPersonName"
+        android:hint="@string/email_login"
+        android:importantForAutofill="no"
+        android:inputType="textEmailAddress"
+        android:labelFor="@id/textViewEmailLogin"
         android:textColor="#FFFFFF"
         android:textColorHighlight="#FFFFFF"
-        android:textColorHint="#FFFFFF"
+        android:textColorHint="#36BFB8"
         android:textColorLink="#FFFFFF"
         app:layout_constraintEnd_toEndOf="@+id/imageViewFormLogin"
         app:layout_constraintHorizontal_bias="0.0"
@@ -72,28 +80,30 @@
 
     <EditText
         android:id="@+id/editTextPasswordLogin"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="33dp"
         android:backgroundTint="#FFFFFF"
         android:ems="13"
         android:fontFamily="@font/roboto"
+        android:hint="@string/password_login"
+        android:importantForAutofill="no"
         android:inputType="textPassword"
         android:textColor="#FFFFFF"
         android:textColorHighlight="#FFFFFF"
-        android:textColorHint="#FFFFFF"
+        android:textColorHint="#36BFB8"
         android:textColorLink="#FFFFFF"
         app:layout_constraintEnd_toEndOf="@+id/imageViewFormLogin"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/imageViewFormLogin"
-        app:layout_constraintTop_toBottomOf="@+id/textViewPasswordLogin" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewPasswordLogin"
+        android:layout_width="wrap_content" />
 
     <Button
         android:id="@+id/buttonLogin"
         android:layout_width="222dp"
         android:layout_height="56dp"
         android:background="@drawable/btlogin_login"
-        android:text="Entrar"
+        android:text="@string/entrar"
         android:textSize="24sp"
         android:fontFamily="@font/roboto"
         android:textColor="#36BFB8"
@@ -104,7 +114,7 @@
         app:layout_constraintTop_toBottomOf="@+id/editTextPasswordLogin" />
 
     <Button
-        android:id="@+id/btinfoLogin"
+        android:id="@+id/buttonInfoLogin"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:background="@drawable/btinfo"
@@ -119,10 +129,12 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="46dp"
+        android:layout_marginEnd="16dp"
+        android:fontFamily="@font/roboto"
         android:text="Ja tem alguma conta?"
         android:textColor="#21736F"
         android:textSize="32sp"
-        android:fontFamily="@font/roboto"
+        app:layout_constraintEnd_toStartOf="@+id/imageViewLogin"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
