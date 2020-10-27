@@ -15,6 +15,7 @@
         android:roundIcon="@mipmap/ic_logo"
         android:supportsRtl="true"
         android:theme="@style/Theme.HealthScheduler">
+        <activity android:name=".Schedule"></activity>
         <activity android:name=".Home" />
         <activity android:name=".Splash">
             <intent-filter>
