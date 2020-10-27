@@ -4,32 +4,17 @@ import java.util.*
 import kotlin.collections.HashMap
 
 class ScheduleItem {
-    var nomemedico    : String?   = null
-    var tipodeconsulta : String?   = null
+    var doctorname      :String?    = null
+    var local           :String?    = null
+    var typeofconsult   :String?    = null
 
     constructor(
-        nomemedico: String?,
-        description: String?
+        doctorname      :String?,
+        local           :String?,
+        typeofconsult   :String?
     ) {
-        this.nomemedico       = nomemedico
-        this.tipodeconsulta    = tipodeconsulta
-    }
-
-    fun toHasMap() : HashMap<String, Any?>{
-        val hasMap = HashMap<String, Any?>()
-        hasMap["nomemedico"] = nomemedico
-        hasMap["tipodeconsulta"] = tipodeconsulta
-
-        return hasMap
-    }
-
-    companion object{
-        fun formHash(hashMap:  HashMap<String, Any?>) : ScheduleItem{
-            val item = ScheduleItem(
-                hashMap["nomemedico"].toString(),
-                hashMap["tipodeconsulta"].toString()
-            )
-            return item
-        }
+        this.doctorname         = doctorname
+        this.local              = local
+        this.typeofconsult      = typeofconsult
     }
 }

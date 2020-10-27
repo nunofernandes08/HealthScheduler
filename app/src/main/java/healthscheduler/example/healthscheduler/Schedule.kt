@@ -13,6 +13,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
+import org.w3c.dom.Text
 import java.io.ByteArrayInputStream
 import java.util.ArrayList
 
@@ -46,8 +47,9 @@ class Schedule : AppCompatActivity() {
                 //O Log.d é só para aparecer no logcat
                 Log.d("exist", "${document.id} => ${document.data}")
                 listschedule.add(ScheduleItem(
-                    document.data.getValue("nomemedico").toString(),
-                    document.data.getValue("tipodeconsulta").toString()))
+                    document.data.getValue("doctorname").toString(),
+                    document.data.getValue("local").toString(),
+                    document.data.getValue("typeofconsult").toString()))
             }
             scheduleadapter?.notifyDataSetChanged()
         }
@@ -57,9 +59,13 @@ class Schedule : AppCompatActivity() {
         override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
             val rowView = layoutInflater.inflate(R.layout.row_schedule, parent, false)
 
-            val textViewDoctorNameSchedule = findViewById<TextView>(R.id.textViewDoctorNameSchedule)
+            val textViewDoctorNameSchedule      = rowView.findViewById<TextView>(R.id.textViewDoctorNameSchedule)
+            val textViewLocationSchedule            = rowView.findViewById<TextView>(R.id.textViewLocationSchedule)
+            val textViewTypeOfConsultSchedule   = rowView.findViewById<TextView>(R.id.textViewTypeOfConsultSchedule)
 
-            textViewDoctorNameSchedule.text = listschedule[position].nomemedico
+            textViewDoctorNameSchedule.text     = listschedule[position].doctorname
+            textViewLocationSchedule.text       = listschedule[position].local
+            textViewTypeOfConsultSchedule.text  = listschedule[position].typeofconsult
 
             return rowView
         }
