@@ -44,6 +44,7 @@ class Login : AppCompatActivity() {
                     if (task.isSuccessful) {
                         Log.d("", "loginSuccess!")
                         val intent = Intent(this, Home::class.java)
+                        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
                         startActivity(intent)
                     } else {
                         Log.w("", "loginFailed! Info = ", task.exception)

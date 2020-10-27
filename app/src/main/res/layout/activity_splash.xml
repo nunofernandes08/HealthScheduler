@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/splashfade"
-    tools:context=".Splash">
+    tools:context=".Splash"
+    tools:viewBindingIgnore="true">
 
     <ImageView
         android:id="@+id/imageViewLogo_Splash"
