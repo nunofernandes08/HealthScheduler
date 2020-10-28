@@ -19,10 +19,10 @@ import java.util.ArrayList
 
 class Schedule : AppCompatActivity() {
 
-    var listschedule: MutableList<ScheduleItem> = ArrayList()
-    var scheduleadapter: Schedule.ScheduleAdapter? = null
+    var listSchedule: MutableList<ScheduleItem> = ArrayList()
+    var scheduleAdapter: Schedule.ScheduleAdapter? = null
 
-    val db = FirebaseFirestore.getInstance()
+    private val db = FirebaseFirestore.getInstance()
 
     private lateinit var auth: FirebaseAuth
 
@@ -36,22 +36,22 @@ class Schedule : AppCompatActivity() {
         auth = Firebase.auth
         val currentUser = auth.currentUser
 
-        scheduleadapter = ScheduleAdapter()
-        listViewSchedule.adapter = scheduleadapter
+        scheduleAdapter = ScheduleAdapter()
+        listViewSchedule.adapter = scheduleAdapter
 
-        listschedule.clear()
+        listSchedule.clear()
 
         db.collection("consultas").addSnapshotListener { snapshot, error ->
-            listschedule.clear()
+            listSchedule.clear()
             for (document in snapshot!!) {
                 //O Log.d é só para aparecer no logcat
                 Log.d("exist", "${document.id} => ${document.data}")
-                listschedule.add(ScheduleItem(
-                    document.data.getValue("doctorname").toString(),
-                    document.data.getValue("local").toString(),
-                    document.data.getValue("typeofconsult").toString()))
+                listSchedule.add(ScheduleItem(
+                        document.data.getValue("doctorName").toString(),
+                        document.data.getValue("local").toString(),
+                        document.data.getValue("typeOfConsult").toString()))
             }
-            scheduleadapter?.notifyDataSetChanged()
+            scheduleAdapter?.notifyDataSetChanged()
         }
     }
 
@@ -59,19 +59,19 @@ class Schedule : AppCompatActivity() {
         override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
             val rowView = layoutInflater.inflate(R.layout.row_schedule, parent, false)
 
-            val textViewDoctorNameSchedule      = rowView.findViewById<TextView>(R.id.textViewDoctorNameSchedule)
-            val textViewLocationSchedule            = rowView.findViewById<TextView>(R.id.textViewLocationSchedule)
-            val textViewTypeOfConsultSchedule   = rowView.findViewById<TextView>(R.id.textViewTypeOfConsultSchedule)
+            val textViewDoctorNameSchedule = rowView.findViewById<TextView>(R.id.textViewDoctorNameSchedule)
+            val textViewLocationSchedule = rowView.findViewById<TextView>(R.id.textViewLocationSchedule)
+            val textViewTypeOfConsultSchedule = rowView.findViewById<TextView>(R.id.textViewTypeOfConsultSchedule)
 
-            textViewDoctorNameSchedule.text     = listschedule[position].doctorname
-            textViewLocationSchedule.text       = listschedule[position].local
-            textViewTypeOfConsultSchedule.text  = listschedule[position].typeofconsult
+            textViewDoctorNameSchedule.text = listSchedule[position].doctorName
+            textViewLocationSchedule.text = listSchedule[position].local
+            textViewTypeOfConsultSchedule.text = listSchedule[position].typeOfConsult
 
             return rowView
         }
 
         override fun getItem(position: Int): Any {
-            return listschedule[position]
+            return listSchedule[position]
         }
 
         override fun getItemId(position: Int): Long {
@@ -79,7 +79,7 @@ class Schedule : AppCompatActivity() {
         }
 
         override fun getCount(): Int {
-            return listschedule.size
+            return listSchedule.size
         }
     }
 }
