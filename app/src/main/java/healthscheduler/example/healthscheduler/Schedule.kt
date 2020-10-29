@@ -47,6 +47,7 @@ class Schedule : AppCompatActivity() {
                 //O Log.d é só para aparecer no logcat
                 Log.d("exist", "${document.id} => ${document.data}")
                 listSchedule.add(ScheduleItem(
+                        document.data.getValue("date").toString(),
                         document.data.getValue("doctorName").toString(),
                         document.data.getValue("hour").toString(),
                         document.data.getValue("local").toString(),
@@ -64,9 +65,11 @@ class Schedule : AppCompatActivity() {
             val textViewLocationSchedule = rowView.findViewById<TextView>(R.id.textViewLocationSchedule)
             val textViewTypeOfConsultSchedule = rowView.findViewById<TextView>(R.id.textViewTypeOfConsultSchedule)
             val textViewHourSchedule = rowView.findViewById<TextView>(R.id.textViewHourSchedule)
+            val textViewDateSchedule = rowView.findViewById<TextView>(R.id.textViewDateSchedule)
 
+            textViewDateSchedule.text = listSchedule[position].date
             textViewDoctorNameSchedule.text = listSchedule[position].doctorName
-            //textViewHourSchedule.text = listSchedule[position].hour
+            textViewHourSchedule.text = listSchedule[position].hour
             textViewLocationSchedule.text = listSchedule[position].local
             textViewTypeOfConsultSchedule.text = listSchedule[position].typeOfConsult
 
