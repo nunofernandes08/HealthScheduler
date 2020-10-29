@@ -1,10 +1,7 @@
 package healthscheduler.example.healthscheduler
 
-import android.content.Context
-import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.AttributeSet
 import android.util.Log
 import android.view.View
 import android.view.ViewGroup
@@ -13,8 +10,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
-import org.w3c.dom.Text
-import java.io.ByteArrayInputStream
+import healthscheduler.example.healthscheduler.models.ScheduleItem
 import java.util.ArrayList
 
 class Schedule : AppCompatActivity() {

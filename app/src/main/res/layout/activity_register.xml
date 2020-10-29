@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/splashfade"
-    tools:context=".Register">
+    tools:context=".Login.Register">
 
     <ImageView
         android:id="@+id/logoRegister"
@@ -21,7 +21,7 @@
     <ImageView
         android:id="@+id/formRegister"
         android:layout_width="338dp"
-        android:layout_height="313dp"
+        android:layout_height="400dp"
         android:layout_marginTop="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -29,7 +29,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/logoRegister"
         app:layout_constraintVertical_bias="0.225"
-        app:srcCompat="@drawable/rectangleregister"
+        app:srcCompat="@drawable/rectangleregistertwo"
         tools:ignore="ContentDescription" />
 
     <TextView
@@ -37,23 +37,22 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="33dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="25dp"
         android:fontFamily="@font/roboto"
-        android:text="@string/email_login"
+        android:text="Email ou Telemovel"
         android:textColor="#36BFB8"
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="@+id/formRegister"
         app:layout_constraintTop_toTopOf="@+id/formRegister" />
 
     <EditText
-        android:id="@+id/editTextEmailRegister"
+        android:id="@+id/editTextEmailOrPhoneRegister"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="33dp"
         android:backgroundTint="#36BFB8"
         android:ems="13"
         android:fontFamily="@font/roboto"
-        android:hint="@string/email_login"
         android:importantForAutofill="no"
         android:inputType="textEmailAddress"
         android:textColor="#36BFB8"
@@ -70,13 +69,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="33dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="25dp"
         android:fontFamily="@font/roboto"
         android:text="@string/password_login"
         android:textColor="#36BFB8"
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="@+id/formRegister"
-        app:layout_constraintTop_toBottomOf="@+id/editTextEmailRegister" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextEmailOrPhoneRegister" />
 
     <EditText
         android:id="@+id/editTextPasswordRegister"
@@ -86,7 +85,6 @@
         android:backgroundTint="#36BFB8"
         android:ems="13"
         android:fontFamily="@font/roboto"
-        android:hint="@string/password_login"
         android:importantForAutofill="no"
         android:inputType="textPassword"
         android:textColor="#36BFB8"
@@ -98,20 +96,20 @@
         app:layout_constraintStart_toStartOf="@+id/formRegister"
         app:layout_constraintTop_toBottomOf="@+id/textViewPasswordRegister" />
 
+
     <Button
-        android:id="@+id/buttonRegister"
+        android:id="@+id/buttonContinueRegister"
         android:layout_width="222dp"
         android:layout_height="56dp"
+        android:layout_marginBottom="25dp"
         android:background="@drawable/btlogin_login"
-        android:text="@string/register"
-        android:textSize="24sp"
         android:fontFamily="@font/roboto"
+        android:text="CONTINUAR"
         android:textColor="#ffffff"
+        android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="@+id/formRegister"
         app:layout_constraintEnd_toEndOf="@+id/formRegister"
-        app:layout_constraintStart_toStartOf="@+id/formRegister"
-        app:layout_constraintTop_toBottomOf="@+id/editTextPasswordRegister" />
-
+        app:layout_constraintStart_toStartOf="@+id/formRegister" />
 
     <TextView
         android:id="@+id/textViewJaTemContaLogin"
@@ -127,6 +125,38 @@
         app:layout_constraintEnd_toStartOf="@+id/logoRegister"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewConfirmPasswordRegister"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="33dp"
+        android:layout_marginTop="25dp"
+        android:fontFamily="@font/roboto"
+        android:text="Confirmar Palavra-passe"
+        android:textColor="#36BFB8"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="@+id/formRegister"
+        app:layout_constraintTop_toBottomOf="@+id/editTextPasswordRegister" />
+
+    <EditText
+        android:id="@+id/editTextConfirmPasswordRegister"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="33dp"
+        android:backgroundTint="#36BFB8"
+        android:ems="13"
+        android:fontFamily="@font/roboto"
+        android:importantForAutofill="no"
+        android:inputType="textPassword"
+        android:textColor="#36BFB8"
+        android:textColorHighlight="#36BFB8"
+        android:textColorHint="#FFFFFF"
+        android:textColorLink="#36BFB8"
+        app:layout_constraintEnd_toEndOf="@+id/formRegister"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/formRegister"
+        app:layout_constraintTop_toBottomOf="@+id/textViewConfirmPasswordRegister" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

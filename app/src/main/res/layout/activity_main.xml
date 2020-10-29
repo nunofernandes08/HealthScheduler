@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:clickable="true"
-    tools:context=".MainActivity">
+    tools:context=".Login.MainActivity">
 
     <ImageView
         android:id="@+id/imageViewLogoMain"
@@ -35,7 +35,7 @@
         android:background="@drawable/buttonloginwithemail"
         android:fontFamily="@font/roboto"
         android:gravity="center"
-        android:text="Continuar com Email"
+        android:text="ENTRAR NA CONTA"
         android:textSize="17sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -47,9 +47,10 @@
         android:layout_width="50dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="105dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewUseOtherMethods"
+        app:layout_constraintEnd_toStartOf="@+id/textViewUseOtherMethods"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonContinueWithEmailMain"
+        app:layout_constraintTop_toTopOf="@+id/textViewUseOtherMethods"
         app:srcCompat="@drawable/linhaverde" />
 
     <TextView
@@ -69,10 +70,11 @@
         android:id="@+id/imageViewDividerRight"
         android:layout_width="50dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="105dp"
         android:layout_marginEnd="32dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewUseOtherMethods"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonContinueWithEmailMain"
+        app:layout_constraintStart_toEndOf="@+id/textViewUseOtherMethods"
+        app:layout_constraintTop_toTopOf="@+id/textViewUseOtherMethods"
         app:srcCompat="@drawable/linhaverde" />
 
     <ImageView
@@ -80,6 +82,8 @@
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginTop="32dp"
+        android:layout_marginBottom="38dp"
+        app:layout_constraintBottom_toTopOf="@+id/imageViewRegistarMain"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewUseOtherMethods"
@@ -89,11 +93,13 @@
         android:id="@+id/imageViewRegistarMain"
         android:layout_width="240dp"
         android:layout_height="35dp"
+        android:layout_marginTop="16dp"
         android:layout_marginBottom="32dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewGoogleMain"
         app:srcCompat="@drawable/txtresgistarmain" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

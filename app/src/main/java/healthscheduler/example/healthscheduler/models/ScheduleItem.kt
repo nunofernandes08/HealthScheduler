@@ -1,6 +1,5 @@
-package healthscheduler.example.healthscheduler
+package healthscheduler.example.healthscheduler.models
 
-import java.util.*
 import kotlin.collections.HashMap
 
 class ScheduleItem {

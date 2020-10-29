@@ -11,18 +11,19 @@
         android:roundIcon="@mipmap/ic_logo"
         android:supportsRtl="true"
         android:theme="@style/Theme.HealthScheduler">
-        <activity android:name=".Schedule"></activity>
+        <activity android:name=".Login.RegisterContinue"></activity>
+        <activity android:name=".Schedule" />
         <activity android:name=".Home" />
-        <activity android:name=".Splash">
+        <activity android:name=".Login.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Login" />
-        <activity android:name=".MainActivity" />
-        <activity android:name=".Register" />
+        <activity android:name=".Login.Login" />
+        <activity android:name=".Login.MainActivity" />
+        <activity android:name=".Login.Register" />
     </application>
 
 </manifest>

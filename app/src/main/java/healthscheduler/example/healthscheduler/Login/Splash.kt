@@ -1,13 +1,14 @@
-package healthscheduler.example.healthscheduler
+package healthscheduler.example.healthscheduler.Login
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Handler
 import android.view.View
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import healthscheduler.example.healthscheduler.Home
+import healthscheduler.example.healthscheduler.R
 import kotlinx.coroutines.*
 
 class Splash : AppCompatActivity() {

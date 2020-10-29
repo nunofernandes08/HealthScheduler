@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/splashfade"
+    tools:context=".Login.RegisterContinue">
+
+    <ImageView
+        android:id="@+id/logoRegisterContinue"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logoregister"
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        android:id="@+id/textViewJaTemContaLoginContinue"
+        android:layout_width="140dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="46dp"
+        android:layout_marginEnd="16dp"
+        android:fontFamily="@font/roboto"
+        android:text="Primeiro passo connosco!"
+        android:textColor="#FFFFFF"
+        android:textSize="32sp"
+        app:layout_constraintEnd_toStartOf="@+id/logoRegister"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/formRegisterContinue"
+        android:layout_width="338dp"
+        android:layout_height="313dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/logoRegisterContinue"
+        app:layout_constraintVertical_bias="0.229"
+        app:srcCompat="@drawable/rectangleregister"
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        android:id="@+id/textViewMoradaRegister"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="28dp"
+        android:fontFamily="@font/roboto"
+        android:text="Morada"
+        android:textColor="#36BFB8"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="@+id/formRegisterContinue"
+        app:layout_constraintTop_toBottomOf="@+id/editTextNomeRegister" />
+
+    <EditText
+        android:id="@+id/editTextMoradaRegister"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:backgroundTint="#36BFB8"
+        android:ems="13"
+        android:fontFamily="@font/roboto"
+        android:importantForAutofill="no"
+        android:inputType="textEmailAddress"
+        android:textColor="#36BFB8"
+        android:textColorHighlight="#36BFB8"
+        android:textColorHint="#FFFFFF"
+        android:textColorLink="#36BFB8"
+        app:layout_constraintStart_toStartOf="@+id/formRegisterContinue"
+        app:layout_constraintTop_toBottomOf="@+id/textViewMoradaRegister" />
+
+    <TextView
+        android:id="@+id/textViewNomeRegister"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="28dp"
+        android:fontFamily="@font/roboto"
+        android:text="Nome Completo"
+        android:textColor="#36BFB8"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="@+id/formRegisterContinue"
+        app:layout_constraintTop_toTopOf="@+id/formRegisterContinue" />
+
+    <EditText
+        android:id="@+id/editTextNomeRegister"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:backgroundTint="#36BFB8"
+        android:ems="13"
+        android:fontFamily="@font/roboto"
+        android:importantForAutofill="no"
+        android:inputType="textEmailAddress"
+        android:textColor="#36BFB8"
+        android:textColorHighlight="#36BFB8"
+        android:textColorHint="#FFFFFF"
+        android:textColorLink="#36BFB8"
+        app:layout_constraintStart_toStartOf="@+id/formRegisterContinue"
+        app:layout_constraintTop_toBottomOf="@+id/textViewNomeRegister" />
+
+    <Button
+        android:id="@+id/buttonContinueRegister"
+        android:layout_width="222dp"
+        android:layout_height="56dp"
+        android:background="@drawable/btlogin_login"
+        android:fontFamily="@font/roboto"
+        android:text="CONTINUAR"
+        android:textColor="#ffffff"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/formRegisterContinue"
+        app:layout_constraintEnd_toEndOf="@+id/formRegisterContinue"
+        app:layout_constraintStart_toStartOf="@+id/formRegisterContinue"
+        app:layout_constraintTop_toBottomOf="@+id/editTextMoradaRegister" />
+</androidx.constraintlayout.widget.ConstraintLayout>

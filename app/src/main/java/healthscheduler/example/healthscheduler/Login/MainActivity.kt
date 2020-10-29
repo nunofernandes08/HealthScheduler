@@ -1,11 +1,8 @@
-package healthscheduler.example.healthscheduler
+package healthscheduler.example.healthscheduler.Login
 
 import android.content.Intent
 import android.os.Bundle
-import android.renderscript.ScriptGroup
 import android.util.Log
-import android.widget.Button
-import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -16,6 +13,8 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import healthscheduler.example.healthscheduler.Home
+import healthscheduler.example.healthscheduler.R
 import healthscheduler.example.healthscheduler.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {

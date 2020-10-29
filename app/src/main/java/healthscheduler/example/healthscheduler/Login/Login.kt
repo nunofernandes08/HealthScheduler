@@ -1,16 +1,16 @@
-package healthscheduler.example.healthscheduler
+package healthscheduler.example.healthscheduler.Login
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.Button
-import android.widget.EditText
 import android.widget.Toast
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import healthscheduler.example.healthscheduler.Home
+import healthscheduler.example.healthscheduler.databinding.ActivityLoginBinding
 
 class Login : AppCompatActivity() {
 
@@ -20,26 +20,22 @@ class Login : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
+        val binding = ActivityLoginBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
 
         auth = Firebase.auth
         val currentUser = auth.currentUser
 
-        val loginButton = findViewById<Button>(R.id.buttonLogin)
-
-        loginButton.setOnClickListener {
-            signInWithEmailAndPassword()
+        binding.buttonLogin.setOnClickListener {
+            signInWithEmailAndPassword(binding)
         }
     }
 
-    private fun signInWithEmailAndPassword() {
-        val editTextEmail = findViewById<EditText>(R.id.editTextEmailLogin)
-        val editTextPassword = findViewById<EditText>(R.id.editTextPasswordLogin)
+    private fun signInWithEmailAndPassword(binding : ActivityLoginBinding) {
 
-        val emailLogin = editTextEmail.text.toString()
-        val passwordLogin = editTextPassword.text.toString()
 
-        auth.signInWithEmailAndPassword(emailLogin, passwordLogin)
+        auth.signInWithEmailAndPassword(binding.editTextEmailLogin.toString(), binding.editTextPasswordLogin.toString())
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
                         Log.d("", "loginSuccess!")
@@ -48,7 +44,7 @@ class Login : AppCompatActivity() {
                         startActivity(intent)
                     } else {
                         Log.w("", "loginFailed! Info = ", task.exception)
-                        Toast.makeText(baseContext, "Authentication failed.",
+                        Toast.makeText(baseContext, "Falha no registo.",
                                 Toast.LENGTH_SHORT).show()
                     }
                 }
