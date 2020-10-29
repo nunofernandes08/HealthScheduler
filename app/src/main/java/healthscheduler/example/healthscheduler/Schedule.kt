@@ -48,6 +48,7 @@ class Schedule : AppCompatActivity() {
                 Log.d("exist", "${document.id} => ${document.data}")
                 listSchedule.add(ScheduleItem(
                         document.data.getValue("doctorName").toString(),
+                        document.data.getValue("hour").toString(),
                         document.data.getValue("local").toString(),
                         document.data.getValue("typeOfConsult").toString()))
             }
@@ -62,8 +63,10 @@ class Schedule : AppCompatActivity() {
             val textViewDoctorNameSchedule = rowView.findViewById<TextView>(R.id.textViewDoctorNameSchedule)
             val textViewLocationSchedule = rowView.findViewById<TextView>(R.id.textViewLocationSchedule)
             val textViewTypeOfConsultSchedule = rowView.findViewById<TextView>(R.id.textViewTypeOfConsultSchedule)
+            val textViewHourSchedule = rowView.findViewById<TextView>(R.id.textViewHourSchedule)
 
             textViewDoctorNameSchedule.text = listSchedule[position].doctorName
+            //textViewHourSchedule.text = listSchedule[position].hour
             textViewLocationSchedule.text = listSchedule[position].local
             textViewTypeOfConsultSchedule.text = listSchedule[position].typeOfConsult
 
