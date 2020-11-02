@@ -55,6 +55,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-database-ktx:19.5.0'
     implementation 'com.google.firebase:firebase-firestore:21.2.1'
     implementation 'com.google.firebase:firebase-firestore-ktx'
+    implementation platform('com.google.firebase:firebase-bom:26.0.0')
 
 
     //Login Google

@@ -1,30 +1,30 @@
 package healthscheduler.example.healthscheduler.models
 
-class utilizadoresItem {
+class UtilizadoresItem {
     var nomeUtilizador : String? = null
-    var numeroTelemovel : Int? = null
+    var numeroTelemovelOuEmail : String? = null
     var moradaUtilizador : String? = null
 
-    constructor(nomeUtilizador : String?, numeroTelemovel : Int?, moradaUtilizador : String?){
+    constructor(nomeUtilizador : String?, numeroTelemovelOuEmail : String?, moradaUtilizador : String?){
         this.nomeUtilizador = nomeUtilizador
-        this.numeroTelemovel = numeroTelemovel
+        this.numeroTelemovelOuEmail = numeroTelemovelOuEmail
         this.moradaUtilizador = moradaUtilizador
     }
 
-    fun toHasMap() : HashMap<String, Any?>{
+    fun toHashMap() : HashMap<String, Any?>{
         val hashMap = HashMap<String, Any?>()
         hashMap["nomeUtilizador"] = nomeUtilizador
-        hashMap["numeroTelemovel"] = numeroTelemovel
+        hashMap["numeroTelemovelOuEmail"] = numeroTelemovelOuEmail
         hashMap["moradaUtilizador"] = moradaUtilizador
 
         return hashMap
     }
 
     companion object{
-        fun formHash(hashMap:  HashMap<String, Any?>) : utilizadoresItem {
-            val item = utilizadoresItem(
+        fun fromHash(hashMap:  HashMap<String, Any?>) : UtilizadoresItem {
+            val item = UtilizadoresItem(
                 hashMap["nomeUtilizador"].toString(),
-                hashMap["numeroTelemovel"].toString().toInt(),
+                hashMap["numeroTelemovelOuEmail"].toString(),
                 hashMap["moradaUtilizador"].toString()
             )
             return item
