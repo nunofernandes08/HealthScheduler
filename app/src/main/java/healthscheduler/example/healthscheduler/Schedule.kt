@@ -37,7 +37,9 @@ class Schedule : AppCompatActivity() {
 
         listSchedule.clear()
 
-        db.collection("consultas").addSnapshotListener { snapshot, error ->
+        db.collection("consultas")
+            .whereEqualTo("userID", currentUser!!.uid)
+            .addSnapshotListener { snapshot, error ->
             listSchedule.clear()
             for (document in snapshot!!) {
                 //O Log.d é só para aparecer no logcat
