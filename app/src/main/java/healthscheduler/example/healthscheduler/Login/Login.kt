@@ -33,18 +33,14 @@ class Login : AppCompatActivity() {
     }
 
     private fun signInWithEmailAndPassword(binding : ActivityLoginBinding) {
-
-
         auth.signInWithEmailAndPassword(binding.editTextEmailLogin.text.toString(), binding.editTextPasswordLogin.text.toString())
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
-                        Log.d("", "loginSuccess!")
                         val intent = Intent(this, Home::class.java)
                         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
                         startActivity(intent)
                     } else {
-                        Log.w("", "loginFailed! Info = ", task.exception)
-                        Toast.makeText(baseContext, "Falha no registo.",
+                        Toast.makeText(this@Login, "Falha ao entrar na conta.",
                                 Toast.LENGTH_SHORT).show()
                     }
                 }
