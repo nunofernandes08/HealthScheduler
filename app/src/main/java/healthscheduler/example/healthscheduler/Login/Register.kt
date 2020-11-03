@@ -24,6 +24,7 @@ class Register : AppCompatActivity() {
     }
 
     private lateinit var auth: FirebaseAuth
+    private lateinit var callbacks: PhoneAuthProvider.OnVerificationStateChangedCallbacks
     private lateinit var resendToken: PhoneAuthProvider.ForceResendingToken
     private var verificationInProgress = false
     private var storedVerificationId: String? = ""
@@ -67,25 +68,15 @@ class Register : AppCompatActivity() {
                         Toast.LENGTH_SHORT
                 ).show()
             }
-        } else if (emailOrPhone.toInt() in 900000001..999999998) {
-            if (password == passwordConfirm) {
-                var callbacks = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
-                    override fun onVerificationCompleted(credential: PhoneAuthCredential) {
-                        signInWithPhoneAuthCredential(credential)
-                    }
-                    override fun onVerificationFailed(e: FirebaseException) {
-                        print(e.localizedMessage)
-                    }
-                    override fun onCodeSent(verificationId: String, token: PhoneAuthProvider.ForceResendingToken) {
-                        storedVerificationId = verificationId
-                        resendToken = token
-                        val intent = Intent(this@Register, CodeVerifyPhone::class.java)
-                        intent.putExtra("codigoVerificacao", storedVerificationId)
-                        intent.putExtra("emailOrPhone", emailOrPhone)
-                        startActivity(intent)
-                    }
-                }
+        } else {
+            Toast.makeText(
+                    this@Register, "Verifique o email ou palavra-passe!",
+                    Toast.LENGTH_SHORT
+            ).show()
+        }
 
+        if (emailOrPhone.toInt() in 900000001..999999998) {
+            if (password == passwordConfirm) {
                 val options = PhoneAuthOptions.newBuilder(auth)
                                               .setPhoneNumber("+351$emailOrPhone")
                                               .setTimeout(60L, TimeUnit.SECONDS)
@@ -93,6 +84,20 @@ class Register : AppCompatActivity() {
                                               .setCallbacks(callbacks)
                                               .build()
                 PhoneAuthProvider.verifyPhoneNumber(options)
+
+                callbacks = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
+                    override fun onVerificationCompleted(credential: PhoneAuthCredential) {
+                        signInWithPhoneAuthCredential(credential)
+                    }
+                    override fun onVerificationFailed(e: FirebaseException) {
+
+                    }
+                    override fun onCodeSent(verificationId: String, token: PhoneAuthProvider.ForceResendingToken) {
+                        storedVerificationId = verificationId
+                        resendToken = token
+                    }
+                }
+
             }
         } else {
             Toast.makeText(this, "Verifique o numero de telemovel ou palavra-passe!",
