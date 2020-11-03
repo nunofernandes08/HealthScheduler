@@ -6,11 +6,7 @@ import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.FirebaseException
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
-import com.google.firebase.auth.PhoneAuthCredential
-import com.google.firebase.auth.PhoneAuthOptions
-import com.google.firebase.auth.PhoneAuthProvider
+import com.google.firebase.auth.*
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import healthscheduler.example.healthscheduler.databinding.ActivityRegisterBinding
@@ -47,10 +43,7 @@ class Register : AppCompatActivity() {
         val emailOrPhone = binding.editTextEmailOrPhoneRegister.text.toString()
         val password = binding.editTextPasswordRegister.text.toString()
         val passwordConfirm = binding.editTextConfirmPasswordRegister.text.toString()
-        if (emailOrPhone.contains("@") && emailOrPhone.contains(".") && (emailOrPhone.contains("com") || emailOrPhone.contains(
-                "pt"
-            ))
-        ) {
+        if (emailOrPhone.contains("@") && emailOrPhone.contains(".") && (emailOrPhone.contains("com") || emailOrPhone.contains("pt"))) {
             if (password == passwordConfirm) {
                 auth.createUserWithEmailAndPassword(emailOrPhone, password)
                     .addOnCompleteListener(this) { task ->
@@ -75,7 +68,7 @@ class Register : AppCompatActivity() {
             if (password == passwordConfirm) {
                 val callbacks = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
                     override fun onVerificationCompleted(credential: PhoneAuthCredential) {
-                        signInWithPhoneAuthCredential(credential)
+                        //signInWithPhoneAuthCredential(credential)
                     }
                     override fun onVerificationFailed(e: FirebaseException) {
                         print(e.localizedMessage)
@@ -83,6 +76,7 @@ class Register : AppCompatActivity() {
                     override fun onCodeSent(verificationId: String, token: PhoneAuthProvider.ForceResendingToken) {
                         storedVerificationId = verificationId
                         resendToken = token
+
                         val intent = Intent(this@Register, CodeVerifyPhone::class.java)
                         intent.putExtra("codigoVerificacao", storedVerificationId)
                         intent.putExtra("emailOrPhone", emailOrPhone)
@@ -90,11 +84,12 @@ class Register : AppCompatActivity() {
                     }
                 }
 
-                val options = PhoneAuthOptions.newBuilder(auth).setPhoneNumber("+351$emailOrPhone")
-                                                               .setTimeout(60L, TimeUnit.SECONDS)
-                                                               .setActivity(this@Register)
-                                                               .setCallbacks(callbacks)
-                                                               .build()
+                val options = PhoneAuthOptions.newBuilder(auth)
+                        .setPhoneNumber("+351$emailOrPhone")
+                        .setTimeout(60L, TimeUnit.SECONDS)
+                        .setActivity(this)
+                        .setCallbacks(callbacks)
+                        .build()
                 PhoneAuthProvider.verifyPhoneNumber(options)
 
             } else {
@@ -103,10 +98,15 @@ class Register : AppCompatActivity() {
                     Toast.LENGTH_SHORT
                 ).show()
             }
+        } else{
+            Toast.makeText(
+                    this, "Verifique o numero de telemovel ou palavra-passe!",
+                    Toast.LENGTH_SHORT
+            ).show()
         }
     }
 
-    private fun signInWithPhoneAuthCredential(credential: PhoneAuthCredential) {
+    /*private fun signInWithPhoneAuthCredential(credential: PhoneAuthCredential) {
         auth.signInWithCredential(credential)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
@@ -121,7 +121,7 @@ class Register : AppCompatActivity() {
                     }
                 }
             }
-    }
+    }*/
 }
 
 

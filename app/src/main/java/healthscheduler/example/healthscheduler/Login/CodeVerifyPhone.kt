@@ -5,6 +5,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
+import com.google.firebase.auth.PhoneAuthCredential
+import com.google.firebase.auth.PhoneAuthProvider
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import healthscheduler.example.healthscheduler.databinding.ActivityCodeVerifyPhoneBinding
@@ -30,7 +33,26 @@ class CodeVerifyPhone : AppCompatActivity() {
         }
 
         binding.buttonVerifyCode.setOnClickListener {
-
+            val credential = PhoneAuthProvider.getCredential(codeVerify.toString(), binding.editTextPhoneCode.text.toString())
+            signInWithPhoneAuthCredential(credential)
         }
+    }
+
+    private fun signInWithPhoneAuthCredential(credential: PhoneAuthCredential) {
+        auth.signInWithCredential(credential)
+            .addOnCompleteListener(this) { task ->
+                if (task.isSuccessful) {
+                    Log.d("", "signInWithCredential:success")
+                    val user = task.result?.user
+                    val intent = Intent(this@CodeVerifyPhone, RegisterContinue::class.java)
+                    intent.putExtra("emailOrPhone", emailOrPhone)
+                    startActivity(intent)
+                } else {
+                    Log.w("", "signInWithCredential:failure", task.exception)
+                    if (task.exception is FirebaseAuthInvalidCredentialsException) {
+
+                    }
+                }
+            }
     }
 }
