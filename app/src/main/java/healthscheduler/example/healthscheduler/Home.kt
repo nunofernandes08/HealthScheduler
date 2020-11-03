@@ -35,28 +35,31 @@ class Home : AppCompatActivity() {
         auth = Firebase.auth
         val currentUser = auth.currentUser
 
-        currentUser!!.uid?.let {
-            db.collection("users").document(it)
-                .addSnapshotListener { querySnapshot, firebaseFirestoreException ->
-                    if (querySnapshot != null) {
-                        listUser = UtilizadoresItem.fromHash(querySnapshot.data as HashMap<String, Any?>)
-                        listUser?.userID = querySnapshot.id
+        //currentUser?.let{
+            currentUser!!.uid?.let {
+                db.collection("users").document(it)
+                        .addSnapshotListener { queryInfoUser, firebaseFirestoreException ->
+                            queryInfoUser?.let {
+                                listUser = UtilizadoresItem.fromHash(queryInfoUser.data as HashMap<String, Any?>)
+                                listUser?.let { user ->
+                                    user.userID = queryInfoUser.id
 
-                        var userName = querySnapshot.get("nomeUtilizador")
-                        var userPhoneOrEmail = querySnapshot.get("numeroTelemovelOuEmail")
-                        var userAdress = querySnapshot.get("moradaUtilizador")
-
-                        binding.textViewUserNameHome.setText(userName.toString())
-                        binding.textViewUserNumberPhoneHome.setText(userPhoneOrEmail.toString())
-                        binding.textViewUserAddressHome.setText(userAdress.toString())
-
-                    }/*else {
-                        binding.textViewUserNameHome.text = "User name"
-                        binding.textViewUserNumberPhoneHome.text = "User email or phone number"
-                        binding.textViewUserAddressHome.text = "User address"
-                    }*/
-                }
-        }
+                                    binding.textViewUserNameHome.setText(user.nomeUtilizador)
+                                    binding.textViewUserNumberPhoneHome.setText(user.numeroTelemovelOuEmail)
+                                    binding.textViewUserAddressHome.setText(user.moradaUtilizador)
+                                }?: run {
+                                    binding.textViewUserNameHome.text = "User name"
+                                    binding.textViewUserNumberPhoneHome.text = "User email or phone number"
+                                    binding.textViewUserAddressHome.text = "User address"
+                                }
+                            }?: run{
+                                binding.textViewUserNameHome.text = "User name"
+                                binding.textViewUserNumberPhoneHome.text = "User email or phone number"
+                                binding.textViewUserAddressHome.text = "User address"
+                            }
+                        }
+            }
+        //}
 
         binding.buttonLogoutHome.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)

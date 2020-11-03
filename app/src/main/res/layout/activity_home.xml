@@ -76,36 +76,36 @@
         android:id="@+id/textViewFavoriteName1Home"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="70dp"
         android:fontFamily="@font/roboto"
-        android:text="Nuno"
+        android:text="Nome util"
         android:textColor="#21736F"
         android:textSize="15sp"
-        app:layout_constraintStart_toStartOf="@+id/imageViewRetanguloHome"
+        app:layout_constraintEnd_toEndOf="@+id/imageViewFavoriteUserPhoto1Home"
+        app:layout_constraintStart_toStartOf="@+id/imageViewFavoriteUserPhoto1Home"
         app:layout_constraintTop_toBottomOf="@+id/imageViewFavoriteUserPhoto1Home" />
 
     <TextView
         android:id="@+id/textViewFavoriteName2Home"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
         android:fontFamily="@font/roboto"
-        android:text="Nuno"
+        android:text="Nome util"
         android:textColor="#21736F"
         android:textSize="15sp"
-        app:layout_constraintStart_toEndOf="@+id/textViewFavoriteName1Home"
+        app:layout_constraintEnd_toEndOf="@+id/imageViewFavoriteUserPhoto2Home"
+        app:layout_constraintStart_toStartOf="@+id/imageViewFavoriteUserPhoto2Home"
         app:layout_constraintTop_toBottomOf="@+id/imageViewFavoriteUserPhoto2Home" />
 
     <TextView
         android:id="@+id/textViewFavoriteName3Home"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
         android:fontFamily="@font/roboto"
-        android:text="Nuno"
+        android:text="Nome util"
         android:textColor="#21736F"
         android:textSize="15sp"
-        app:layout_constraintStart_toEndOf="@+id/textViewFavoriteName2Home"
+        app:layout_constraintEnd_toEndOf="@+id/imageViewFavoriteUserPhoto3Home"
+        app:layout_constraintStart_toStartOf="@+id/imageViewFavoriteUserPhoto3Home"
         app:layout_constraintTop_toBottomOf="@+id/imageViewFavoriteUserPhoto3Home" />
 
     <TextView
@@ -114,7 +114,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
         android:fontFamily="@font/roboto"
-        android:text="915029102"
+        android:text="911111111"
         android:textColor="#21736F"
         android:textSize="14sp"
         app:layout_constraintStart_toEndOf="@+id/imageViewUserPhotoHome"
@@ -126,7 +126,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
         android:fontFamily="@font/roboto"
-        android:text="Travessa dos laborins"
+        android:text="Travessa das taipas"
         android:textColor="#21736F"
         android:textSize="14sp"
         app:layout_constraintStart_toEndOf="@+id/imageViewUserPhotoHome"
@@ -169,9 +169,9 @@
         android:id="@+id/imageViewNotificationHome"
         android:layout_width="336dp"
         android:layout_height="175dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/imageViewRetanguloHome"
         app:layout_constraintHorizontal_bias="0.493"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/imageViewRetanguloHome"
         app:layout_constraintTop_toBottomOf="@+id/imageViewRetanguloHome"
         app:srcCompat="@drawable/fundonotificacao" />
 
@@ -179,8 +179,8 @@
         android:id="@+id/buttonScheduleHome"
         android:layout_width="114dp"
         android:layout_height="114dp"
-        android:layout_marginStart="43dp"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="20dp"
+        app:layout_constraintStart_toStartOf="@+id/imageViewNotificationHome"
         app:layout_constraintTop_toBottomOf="@+id/imageViewNotificationHome"
         app:srcCompat="@drawable/buttonschedulehome" />
 
@@ -188,8 +188,8 @@
         android:id="@+id/buttonChatHome"
         android:layout_width="114dp"
         android:layout_height="114dp"
-        android:layout_marginEnd="43dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintEnd_toEndOf="@+id/imageViewNotificationHome"
         app:layout_constraintTop_toBottomOf="@+id/imageViewNotificationHome"
         app:srcCompat="@drawable/buttonchathome" />
 
