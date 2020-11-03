@@ -24,7 +24,6 @@ class Register : AppCompatActivity() {
     }
 
     private lateinit var auth: FirebaseAuth
-    private lateinit var callbacks: PhoneAuthProvider.OnVerificationStateChangedCallbacks
     private lateinit var resendToken: PhoneAuthProvider.ForceResendingToken
     private var verificationInProgress = false
     private var storedVerificationId: String? = ""
@@ -43,94 +42,89 @@ class Register : AppCompatActivity() {
         }
     }
 
-    private fun registerUser(binding : ActivityRegisterBinding) {
+    private fun registerUser(binding: ActivityRegisterBinding) {
 
         val emailOrPhone = binding.editTextEmailOrPhoneRegister.text.toString()
         val password = binding.editTextPasswordRegister.text.toString()
         val passwordConfirm = binding.editTextConfirmPasswordRegister.text.toString()
-        if (emailOrPhone.contains("@") && emailOrPhone.contains(".") && (emailOrPhone.contains("com") || emailOrPhone.contains("pt"))) {
+        if (emailOrPhone.contains("@") && emailOrPhone.contains(".") && (emailOrPhone.contains("com") || emailOrPhone.contains(
+                "pt"
+            ))
+        ) {
             if (password == passwordConfirm) {
                 auth.createUserWithEmailAndPassword(emailOrPhone, password)
-                        .addOnCompleteListener(this) { task ->
-                            if (task.isSuccessful) {
-                                val user = auth.currentUser
-                                val intent = Intent(this, RegisterContinue::class.java)
-                                intent.putExtra("emailOrPhone", emailOrPhone)
-                                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
-                                startActivity(intent)
-                            } else {
+                    .addOnCompleteListener(this) { task ->
+                        if (task.isSuccessful) {
+                            val user = auth.currentUser
+                            val intent = Intent(this, RegisterContinue::class.java)
+                            intent.putExtra("emailOrPhone", emailOrPhone)
+                            intent.flags =
+                                Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+                            startActivity(intent)
+                        } else {
 
-                            }
                         }
+                    }
             } else {
                 Toast.makeText(
-                        this@Register, "Verifique o email ou palavra-passe!",
-                        Toast.LENGTH_SHORT
-                ).show()
-            }
-        } else {
-            Toast.makeText(
                     this@Register, "Verifique o email ou palavra-passe!",
                     Toast.LENGTH_SHORT
-            ).show()
-        }
-
-        if (emailOrPhone.toInt() in 900000001..999999998) {
+                ).show()
+            }
+        } else if (emailOrPhone.toInt() in 900000001..999999998) {
             if (password == passwordConfirm) {
-                val options = PhoneAuthOptions.newBuilder(auth)
-                                              .setPhoneNumber("+351$emailOrPhone")
-                                              .setTimeout(60L, TimeUnit.SECONDS)
-                                              .setActivity(this)
-                                              .setCallbacks(callbacks)
-                                              .build()
-                PhoneAuthProvider.verifyPhoneNumber(options)
-
-                callbacks = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
+                val callbacks = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
                     override fun onVerificationCompleted(credential: PhoneAuthCredential) {
                         signInWithPhoneAuthCredential(credential)
                     }
                     override fun onVerificationFailed(e: FirebaseException) {
-
+                        print(e.localizedMessage)
                     }
                     override fun onCodeSent(verificationId: String, token: PhoneAuthProvider.ForceResendingToken) {
                         storedVerificationId = verificationId
                         resendToken = token
+                        val intent = Intent(this@Register, CodeVerifyPhone::class.java)
+                        intent.putExtra("codigoVerificacao", storedVerificationId)
+                        intent.putExtra("emailOrPhone", emailOrPhone)
+                        startActivity(intent)
                     }
                 }
 
-            }
-        } else {
-            Toast.makeText(this, "Verifique o numero de telemovel ou palavra-passe!",
-                    Toast.LENGTH_SHORT).show()
-        }
-    }
+                val options = PhoneAuthOptions.newBuilder(auth).setPhoneNumber("+351$emailOrPhone")
+                                                               .setTimeout(60L, TimeUnit.SECONDS)
+                                                               .setActivity(this@Register)
+                                                               .setCallbacks(callbacks)
+                                                               .build()
+                PhoneAuthProvider.verifyPhoneNumber(options)
 
-    private fun verifyPhoneNumberWithCode(verificationId: String?, code: String) {
-        // [START verify_with_code]
-        val credential = PhoneAuthProvider.getCredential(verificationId!!, code)
-        // [END verify_with_code]
-        signInWithPhoneAuthCredential(credential)
+            } else {
+                Toast.makeText(
+                    this, "Verifique o numero de telemovel ou palavra-passe!",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
     }
 
     private fun signInWithPhoneAuthCredential(credential: PhoneAuthCredential) {
         auth.signInWithCredential(credential)
-                .addOnCompleteListener(this) { task ->
-                    if (task.isSuccessful) {
-                        Log.d(TAG, "signInWithCredential:success")
-                        val user = task.result?.user
-                        val intent = Intent(this@Register, RegisterContinue::class.java)
-                        startActivity(intent)
-                    } else {
-                        Log.w(TAG, "signInWithCredential:failure", task.exception)
-                        if (task.exception is FirebaseAuthInvalidCredentialsException) {
+            .addOnCompleteListener(this) { task ->
+                if (task.isSuccessful) {
+                    Log.d(TAG, "signInWithCredential:success")
+                    val user = task.result?.user
+                    val intent = Intent(this@Register, CodeVerifyPhone::class.java)
+                    startActivity(intent)
+                } else {
+                    Log.w(TAG, "signInWithCredential:failure", task.exception)
+                    if (task.exception is FirebaseAuthInvalidCredentialsException) {
 
-                        }
                     }
                 }
+            }
     }
-
-
 }
+
+
 /* << --------------------------------------- COMENTÁRIOS --------------------------------------- >>
 
 */

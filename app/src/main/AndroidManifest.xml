@@ -11,7 +11,7 @@
         android:roundIcon="@mipmap/ic_logo"
         android:supportsRtl="true"
         android:theme="@style/Theme.HealthScheduler">
-        <activity android:name=".Login.CodeVerifyPhone"></activity>
+        <activity android:name=".Login.CodeVerifyPhone"/>
         <activity android:name=".Login.RegisterContinue" />
         <activity android:name=".Schedule" />
         <activity android:name=".Home" />
