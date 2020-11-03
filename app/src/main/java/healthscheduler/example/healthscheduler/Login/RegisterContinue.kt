@@ -30,27 +30,6 @@ class RegisterContinue : AppCompatActivity() {
             emailOrPhone = it.getString("emailOrPhone")
         }
 
-        /*binding.buttonContinueRegister.setOnClickListener {
-            if(binding.editTextMoradaRegister.toString() != null && binding.editTextNomeRegister.toString() != null){
-                val db = FirebaseFirestore.getInstance()
-                val user = UtilizadoresItem(moradaUtilizador, emailOrPhone, nomeUtilizador)
-                db.collection("users").document(currentUser!!.uid)
-                        .set(user.toHashMap())
-                        .addOnSuccessListener {
-                            Log.d("writeBD", "DocumentSnapshot successfully written!")
-                        }
-                        .addOnFailureListener {
-                            e -> Log.w("writeBD", "Error writing document", e)
-                        }
-
-            }else {
-                Toast.makeText(
-                        this@RegisterContinue, "Verifique o seu Nome ou Morada",
-                        Toast.LENGTH_SHORT
-                ).show()
-            }
-        }*/
-
         binding.buttonContinueRegister.setOnClickListener {
             var moradaUtilizador = binding.editTextMoradaRegister.text.toString()
             var nomeUtilizador = binding.editTextNomeRegister.text.toString()
@@ -61,7 +40,7 @@ class RegisterContinue : AppCompatActivity() {
                 ).show()
             }else {
                 val db = FirebaseFirestore.getInstance()
-                val user = UtilizadoresItem(moradaUtilizador, emailOrPhone, nomeUtilizador)
+                val user = UtilizadoresItem(nomeUtilizador, emailOrPhone, moradaUtilizador, currentUser!!.uid)
                 db.collection("users").document(currentUser!!.uid)
                         .set(user.toHashMap())
                         .addOnSuccessListener {

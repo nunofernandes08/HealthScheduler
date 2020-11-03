@@ -35,7 +35,7 @@ class Login : AppCompatActivity() {
     private fun signInWithEmailAndPassword(binding : ActivityLoginBinding) {
 
 
-        auth.signInWithEmailAndPassword(binding.editTextEmailLogin.toString(), binding.editTextPasswordLogin.toString())
+        auth.signInWithEmailAndPassword(binding.editTextEmailLogin.text.toString(), binding.editTextPasswordLogin.text.toString())
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
                         Log.d("", "loginSuccess!")
