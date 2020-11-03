@@ -22,8 +22,8 @@
         android:layout_width="309dp"
         android:layout_height="78dp"
         android:layout_marginTop="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/imageViewLogoMain"
+        app:layout_constraintStart_toStartOf="@+id/imageViewLogoMain"
         app:layout_constraintTop_toBottomOf="@+id/imageViewLogoMain"
         app:srcCompat="@drawable/textviewhealthschedulermain" />
 
@@ -37,8 +37,8 @@
         android:gravity="center"
         android:text="ENTRAR NA CONTA"
         android:textSize="17sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/imageViewHealthSchedulerMain"
+        app:layout_constraintStart_toStartOf="@+id/imageViewHealthSchedulerMain"
         app:layout_constraintTop_toBottomOf="@+id/imageViewHealthSchedulerMain" />
 
 
@@ -46,10 +46,9 @@
         android:id="@+id/imageViewDividerLeft"
         android:layout_width="50dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
         app:layout_constraintBottom_toBottomOf="@+id/textViewUseOtherMethods"
         app:layout_constraintEnd_toStartOf="@+id/textViewUseOtherMethods"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/buttonContinueWithEmailMain"
         app:layout_constraintTop_toTopOf="@+id/textViewUseOtherMethods"
         app:srcCompat="@drawable/linhaverde" />
 
@@ -57,22 +56,21 @@
         android:id="@+id/textViewUseOtherMethods"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="95dp"
+        android:layout_marginTop="70dp"
         android:fontFamily="@font/roboto"
         android:text="Outros metodos login"
         android:textColor="#21736F"
         android:textSize="18sp"
-        app:layout_constraintEnd_toStartOf="@+id/imageViewDividerRight"
-        app:layout_constraintStart_toEndOf="@+id/imageViewDividerLeft"
+        app:layout_constraintEnd_toEndOf="@+id/buttonContinueWithEmailMain"
+        app:layout_constraintStart_toStartOf="@+id/buttonContinueWithEmailMain"
         app:layout_constraintTop_toBottomOf="@+id/buttonContinueWithEmailMain" />
 
     <ImageView
         android:id="@+id/imageViewDividerRight"
         android:layout_width="50dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="32dp"
         app:layout_constraintBottom_toBottomOf="@+id/textViewUseOtherMethods"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/buttonContinueWithEmailMain"
         app:layout_constraintStart_toEndOf="@+id/textViewUseOtherMethods"
         app:layout_constraintTop_toTopOf="@+id/textViewUseOtherMethods"
         app:srcCompat="@drawable/linhaverde" />
@@ -82,10 +80,9 @@
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginTop="32dp"
-        android:layout_marginBottom="38dp"
         app:layout_constraintBottom_toTopOf="@+id/imageViewRegistarMain"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/textViewUseOtherMethods"
+        app:layout_constraintStart_toStartOf="@+id/textViewUseOtherMethods"
         app:layout_constraintTop_toBottomOf="@+id/textViewUseOtherMethods"
         app:srcCompat="@drawable/google" />
 
@@ -96,9 +93,9 @@
         android:layout_marginTop="16dp"
         android:layout_marginBottom="32dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/imageViewGoogleMain"
         app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/imageViewGoogleMain"
         app:layout_constraintTop_toBottomOf="@+id/imageViewGoogleMain"
         app:srcCompat="@drawable/txtresgistarmain" />
 

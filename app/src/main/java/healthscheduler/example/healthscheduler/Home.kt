@@ -46,10 +46,15 @@ class Home : AppCompatActivity() {
                         var userPhoneOrEmail = querySnapshot.get("numeroTelemovelOuEmail")
                         var userAdress = querySnapshot.get("moradaUtilizador")
 
-                        binding.textViewUserNameHome.setText("" + userName)
-                        binding.textViewUserNumberPhoneHome.setText("" + userPhoneOrEmail)
-                        binding.textViewUserAddressHome.setText("" + userAdress)
-                    }
+                        binding.textViewUserNameHome.setText(userName.toString())
+                        binding.textViewUserNumberPhoneHome.setText(userPhoneOrEmail.toString())
+                        binding.textViewUserAddressHome.setText(userAdress.toString())
+
+                    }/*else {
+                        binding.textViewUserNameHome.text = "User name"
+                        binding.textViewUserNumberPhoneHome.text = "User email or phone number"
+                        binding.textViewUserAddressHome.text = "User address"
+                    }*/
                 }
         }
 
