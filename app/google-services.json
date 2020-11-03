@@ -15,11 +15,19 @@
       },
       "oauth_client": [
         {
-          "client_id": "1081449165079-dtqtrbivu7hehg3brmfqugjh9e5b7d4h.apps.googleusercontent.com",
+          "client_id": "1081449165079-cmqr2thh4t3dnghqrgcqp9m7jleinhsm.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "healthscheduler.example.healthscheduler",
-            "certificate_hash": "e0ae33654634629330cadda1d5130c7ce6d60ab4"
+            "certificate_hash": "e23f65e25a566d4ff98088f206b875fecbb633cf"
+          }
+        },
+        {
+          "client_id": "1081449165079-bqgm1f14pbndsincve5fmtinnd9u6402.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "healthscheduler.example.healthscheduler",
+            "certificate_hash": "264deca9a2182bdd622a96be8452ad0db79b568d"
           }
         },
         {

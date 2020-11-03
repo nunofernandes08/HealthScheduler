@@ -42,7 +42,7 @@
         app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/logoRegisterContinue"
-        app:layout_constraintVertical_bias="0.229"
+        app:layout_constraintVertical_bias="0.224"
         app:srcCompat="@drawable/rectangleregister"
         tools:ignore="ContentDescription" />
 
