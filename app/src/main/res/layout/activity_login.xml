@@ -102,6 +102,8 @@
         android:id="@+id/buttonLogin"
         android:layout_width="222dp"
         android:layout_height="56dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="24dp"
         android:background="@drawable/buttonwhite"
         android:fontFamily="@font/roboto"
         android:text="@string/entrar"
@@ -110,10 +112,9 @@
         app:backgroundTint="#F6F6F6"
         app:layout_constraintBottom_toBottomOf="@+id/imageViewFormLogin"
         app:layout_constraintEnd_toEndOf="@+id/imageViewFormLogin"
-        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="@+id/imageViewFormLogin"
-        app:layout_constraintTop_toBottomOf="@+id/textViewRecuperarPasswordLogin"
-        app:layout_constraintVertical_bias="0.463" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewRecoveryPasswordLogin"
+        app:layout_constraintVertical_bias="0.851" />
 
     <Button
         android:id="@+id/buttonInfoLogin"
@@ -141,7 +142,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textViewRecuperarPasswordLogin"
+        android:id="@+id/textViewRecoveryPasswordLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/roboto"

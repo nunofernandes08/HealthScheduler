@@ -1,15 +1,22 @@
 package healthscheduler.example.healthscheduler.Login
 
+import android.app.Dialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
+import android.widget.ImageView
+import android.widget.PopupWindow
 import android.widget.Toast
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import healthscheduler.example.healthscheduler.Home
+import healthscheduler.example.healthscheduler.R
 import healthscheduler.example.healthscheduler.databinding.ActivityLoginBinding
 
 class Login : AppCompatActivity() {
@@ -17,6 +24,8 @@ class Login : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
 
     private var mGoogleSignInClient: GoogleSignInClient? = null
+
+    internal lateinit var myDialog : Dialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,6 +38,14 @@ class Login : AppCompatActivity() {
 
         binding.buttonLogin.setOnClickListener {
             signInWithEmailAndPassword(binding)
+        }
+
+        binding.textViewRecoveryPasswordLogin.setOnClickListener{
+            //val emailAddress = auth.currentUser!!.email.toString()
+            myDialog = Dialog(this)
+                myDialog.setContentView(R.layout.popwindow)
+            myDialog.show()
+
         }
     }
 
