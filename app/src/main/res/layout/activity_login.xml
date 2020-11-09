@@ -19,23 +19,23 @@
 
     <ImageView
         android:id="@+id/imageViewFormLogin"
-        android:layout_width="338dp"
-        android:layout_height="313dp"
+        android:layout_width="330dp"
+        android:layout_height="330dp"
         android:layout_marginTop="10dp"
+        android:background="@drawable/formulariologin"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageViewLogin"
         app:layout_constraintVertical_bias="0.125"
-        app:srcCompat="@drawable/retangulo_formulario"
         tools:ignore="ContentDescription" />
 
     <TextView
         android:id="@+id/textViewEmailLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="33dp"
+        android:layout_marginStart="25dp"
         android:layout_marginTop="28dp"
         android:fontFamily="@font/roboto"
         android:text="Email ou Telemovel"
@@ -48,7 +48,7 @@
         android:id="@+id/textViewPasswordLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="33dp"
+        android:layout_marginStart="25dp"
         android:layout_marginTop="12dp"
         android:fontFamily="@font/roboto"
         android:text="@string/password_login"
@@ -61,7 +61,7 @@
         android:id="@+id/editTextEmailLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="33dp"
+        android:layout_marginStart="25dp"
         android:backgroundTint="#FFFFFF"
         android:ems="13"
         android:fontFamily="@font/roboto"
@@ -80,8 +80,9 @@
 
     <EditText
         android:id="@+id/editTextPasswordLogin"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="33dp"
+        android:layout_marginStart="25dp"
         android:backgroundTint="#FFFFFF"
         android:ems="13"
         android:fontFamily="@font/roboto"
@@ -95,23 +96,24 @@
         app:layout_constraintEnd_toEndOf="@+id/imageViewFormLogin"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/imageViewFormLogin"
-        app:layout_constraintTop_toBottomOf="@+id/textViewPasswordLogin"
-        android:layout_width="wrap_content" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewPasswordLogin" />
 
     <Button
         android:id="@+id/buttonLogin"
         android:layout_width="222dp"
         android:layout_height="56dp"
-        android:background="@drawable/btlogin_login"
-        android:text="@string/entrar"
-        android:textSize="24sp"
+        android:background="@drawable/buttonwhite"
         android:fontFamily="@font/roboto"
+        android:text="@string/entrar"
         android:textColor="#36BFB8"
+        android:textSize="24sp"
         app:backgroundTint="#F6F6F6"
         app:layout_constraintBottom_toBottomOf="@+id/imageViewFormLogin"
         app:layout_constraintEnd_toEndOf="@+id/imageViewFormLogin"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="@+id/imageViewFormLogin"
-        app:layout_constraintTop_toBottomOf="@+id/editTextPasswordLogin" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewRecuperarPasswordLogin"
+        app:layout_constraintVertical_bias="0.463" />
 
     <Button
         android:id="@+id/buttonInfoLogin"
@@ -137,6 +139,21 @@
         app:layout_constraintEnd_toStartOf="@+id/imageViewLogin"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewRecuperarPasswordLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto"
+        android:text="Esqueceu-se da palavra-passe?"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/editTextPasswordLogin"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/editTextPasswordLogin"
+        app:layout_constraintTop_toBottomOf="@+id/editTextPasswordLogin"
+        app:layout_constraintVertical_bias="0.028" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

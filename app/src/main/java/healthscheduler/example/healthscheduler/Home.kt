@@ -35,31 +35,21 @@ class Home : AppCompatActivity() {
         auth = Firebase.auth
         val currentUser = auth.currentUser
 
-        //currentUser?.let{
             currentUser!!.uid?.let {
                 db.collection("users").document(it)
-                        .addSnapshotListener { queryInfoUser, firebaseFirestoreException ->
-                            queryInfoUser?.let {
-                                listUser = UtilizadoresItem.fromHash(queryInfoUser.data as HashMap<String, Any?>)
+                        .addSnapshotListener { querySnapshot, firebaseFirestoreException ->
+                            querySnapshot?.let {
+                                listUser = UtilizadoresItem.fromHash(querySnapshot.data as HashMap<String, Any?>)
                                 listUser?.let { user ->
-                                    user.userID = queryInfoUser.id
+                                    user.userID = querySnapshot.id
 
                                     binding.textViewUserNameHome.setText(user.nomeUtilizador)
                                     binding.textViewUserNumberPhoneHome.setText(user.numeroTelemovelOuEmail)
                                     binding.textViewUserAddressHome.setText(user.moradaUtilizador)
-                                }?: run {
-                                    binding.textViewUserNameHome.text = "User name"
-                                    binding.textViewUserNumberPhoneHome.text = "User email or phone number"
-                                    binding.textViewUserAddressHome.text = "User address"
                                 }
-                            }?: run{
-                                binding.textViewUserNameHome.text = "User name"
-                                binding.textViewUserNumberPhoneHome.text = "User email or phone number"
-                                binding.textViewUserAddressHome.text = "User address"
                             }
                         }
             }
-        //}
 
         binding.buttonLogoutHome.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
