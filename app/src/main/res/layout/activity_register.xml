@@ -158,5 +158,52 @@
         app:layout_constraintStart_toStartOf="@+id/formRegister"
         app:layout_constraintTop_toBottomOf="@+id/textViewConfirmPasswordRegister" />
 
+    <TextView
+        android:id="@+id/textViewCodeSent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="128dp"
+        android:fontFamily="@font/roboto"
+        android:text="Código enviado"
+        android:visibility="invisible"
+        android:textColor="#36BFB8"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="@+id/formRegister"
+        app:layout_constraintTop_toTopOf="@+id/formRegister" />
+
+    <EditText
+        android:id="@+id/editTextCodeSent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:backgroundTint="#36BFB8"
+        android:ems="13"
+        android:fontFamily="@font/roboto"
+        android:importantForAutofill="no"
+        android:inputType="text"
+        android:textColor="#36BFB8"
+        android:visibility="invisible"
+        android:textColorHighlight="#36BFB8"
+        android:textColorHint="#FFFFFF"
+        android:textColorLink="#36BFB8"
+        app:layout_constraintStart_toStartOf="@+id/formRegister"
+        app:layout_constraintTop_toBottomOf="@+id/textViewCodeSent" />
+
+    <Button
+        android:id="@+id/buttonContinueRegisterContinue"
+        android:layout_width="222dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="112dp"
+        android:background="@drawable/btlogin_login"
+        android:fontFamily="@font/roboto"
+        android:text="CONTINUAR"
+        android:visibility="invisible"
+        android:textColor="#ffffff"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="@+id/formRegister"
+        app:layout_constraintStart_toStartOf="@+id/formRegister"
+        app:layout_constraintTop_toBottomOf="@+id/editTextCodeSent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

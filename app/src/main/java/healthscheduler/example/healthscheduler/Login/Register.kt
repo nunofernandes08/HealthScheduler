@@ -3,6 +3,7 @@ package healthscheduler.example.healthscheduler.Login
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.FirebaseException
@@ -68,7 +69,13 @@ class Register : AppCompatActivity() {
             if (password == passwordConfirm) {
                 val callbacks = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
                     override fun onVerificationCompleted(credential: PhoneAuthCredential) {
-                        //signInWithPhoneAuthCredential(credential)
+                        signInWithPhoneAuthCredential(credential)
+                        binding.buttonContinueRegisterContinue.setOnClickListener {
+                            val intent = Intent(this@Register, RegisterContinue::class.java)
+                            intent.putExtra("codigoVerificacao", storedVerificationId)
+                            intent.putExtra("emailOrPhone", emailOrPhone)
+                            startActivity(intent)
+                        }
                     }
                     override fun onVerificationFailed(e: FirebaseException) {
                         print(e.localizedMessage)
@@ -77,10 +84,19 @@ class Register : AppCompatActivity() {
                         storedVerificationId = verificationId
                         resendToken = token
 
-                        val intent = Intent(this@Register, CodeVerifyPhone::class.java)
-                        intent.putExtra("codigoVerificacao", storedVerificationId)
-                        intent.putExtra("emailOrPhone", emailOrPhone)
-                        startActivity(intent)
+                        binding.textViewEmailRegister.visibility = View.GONE
+                        binding.textViewPasswordRegister.visibility = View.GONE
+                        binding.textViewConfirmPasswordRegister.visibility = View.GONE
+
+                        binding.editTextEmailOrPhoneRegister.visibility = View.GONE
+                        binding.editTextPasswordRegister.visibility = View.GONE
+                        binding.editTextConfirmPasswordRegister.visibility = View.GONE
+
+                        binding.buttonContinueRegister.visibility = View.GONE
+
+                        binding.textViewCodeSent.visibility = View.GONE
+                        binding.editTextCodeSent.visibility = View.GONE
+                        binding.buttonContinueRegisterContinue.visibility = View.GONE
                     }
                 }
 
@@ -91,7 +107,6 @@ class Register : AppCompatActivity() {
                         .setCallbacks(callbacks)
                         .build()
                 PhoneAuthProvider.verifyPhoneNumber(options)
-
             } else {
                 Toast.makeText(
                     this, "Verifique o numero de telemovel ou palavra-passe!",
@@ -106,13 +121,13 @@ class Register : AppCompatActivity() {
         }
     }
 
-    /*private fun signInWithPhoneAuthCredential(credential: PhoneAuthCredential) {
+    private fun signInWithPhoneAuthCredential(credential: PhoneAuthCredential) {
         auth.signInWithCredential(credential)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     Log.d(TAG, "signInWithCredential:success")
                     val user = task.result?.user
-                    val intent = Intent(this@Register, CodeVerifyPhone::class.java)
+                    val intent = Intent(this@Register, RegisterContinue::class.java)
                     startActivity(intent)
                 } else {
                     Log.w(TAG, "signInWithCredential:failure", task.exception)
@@ -121,7 +136,7 @@ class Register : AppCompatActivity() {
                     }
                 }
             }
-    }*/
+    }
 }
 
 

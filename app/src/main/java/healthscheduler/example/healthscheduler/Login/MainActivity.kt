@@ -1,5 +1,6 @@
 package healthscheduler.example.healthscheduler.Login
 
+import android.app.PendingIntent.getActivity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -13,9 +14,9 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-import healthscheduler.example.healthscheduler.Home
 import healthscheduler.example.healthscheduler.R
 import healthscheduler.example.healthscheduler.databinding.ActivityMainBinding
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -88,7 +89,8 @@ class MainActivity : AppCompatActivity() {
                     if (task.isSuccessful) {
                         Log.d("", "loginSuccess!")
                         val user = auth.currentUser
-                        val intent = Intent(this, Home::class.java)
+                        val intent = Intent(this, RegisterContinue::class.java)
+                        intent.putExtra("emailOrPhone", user?.email)
                         startActivity(intent)
                     } else {
                         Log.w("", "loginFailed! Info = ", task.exception)
