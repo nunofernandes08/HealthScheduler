@@ -46,7 +46,15 @@ class Home : AppCompatActivity() {
                                     binding.textViewUserNameHome.setText(user.nomeUtilizador)
                                     binding.textViewUserNumberPhoneHome.setText(user.numeroTelemovelOuEmail)
                                     binding.textViewUserAddressHome.setText(user.moradaUtilizador)
+                                }?: run {
+                                    binding.textViewUserNameHome.text = "User name"
+                                    binding.textViewUserNumberPhoneHome.text = "User email or phone number"
+                                    binding.textViewUserAddressHome.text = "User address"
                                 }
+                            }?: run{
+                                binding.textViewUserNameHome.text = "User name"
+                                binding.textViewUserNumberPhoneHome.text = "User email or phone number"
+                                binding.textViewUserAddressHome.text = "User address"
                             }
                         }
             }
