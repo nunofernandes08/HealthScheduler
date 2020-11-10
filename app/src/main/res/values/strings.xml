@@ -10,5 +10,6 @@
     <string name="password_login">Palavra-passe</string>
     <string name="entrar">Entrar</string>
     <string name="register">Registar</string>
+    <string name="enviar">Enviar</string>
 
 </resources>

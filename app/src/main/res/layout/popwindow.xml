@@ -2,15 +2,14 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="350dp"
+    android:layout_width="330dp"
     android:layout_height="275dp"
-    android:padding="5dp"
     android:layout_gravity="center"
-    android:background="#36BFB8">
-
+    android:background="@drawable/formulariologin"
+    android:padding="5dp">
 
     <TextView
-        android:id="@+id/textViewEmailLogin3"
+        android:id="@+id/textViewEmailOuTelemovelPop"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
@@ -24,7 +23,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editTextEmailLogin3"
+        android:id="@+id/editTextRecoveryEmailPop"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -37,25 +36,25 @@
         android:labelFor="@id/textViewEmailLogin"
         android:textColor="#FFFFFF"
         android:textColorHighlight="#FFFFFF"
-        android:textColorHint="#36BFB8"
+        android:textColorHint="#FFFFFF"
         android:textColorLink="#FFFFFF"
-        app:layout_constraintEnd_toEndOf="@+id/textViewEmailLogin3"
+        app:layout_constraintEnd_toEndOf="@+id/textViewEmailOuTelemovelPop"
         app:layout_constraintHorizontal_bias="0.505"
-        app:layout_constraintStart_toStartOf="@+id/textViewEmailLogin3"
-        app:layout_constraintTop_toBottomOf="@+id/textViewEmailLogin3" />
+        app:layout_constraintStart_toStartOf="@+id/textViewEmailOuTelemovelPop"
+        app:layout_constraintTop_toBottomOf="@+id/textViewEmailOuTelemovelPop" />
 
     <Button
-        android:id="@+id/buttonLogin3"
+        android:id="@+id/buttonEnviarPop"
         android:layout_width="222dp"
         android:layout_height="56dp"
         android:layout_marginTop="32dp"
         android:background="@drawable/buttonwhite"
         android:fontFamily="@font/roboto"
-        android:text="@string/entrar"
+        android:text="@string/enviar"
         android:textColor="#36BFB8"
         android:textSize="24sp"
         app:backgroundTint="#F6F6F6"
-        app:layout_constraintEnd_toEndOf="@+id/editTextEmailLogin3"
-        app:layout_constraintStart_toStartOf="@+id/editTextEmailLogin3"
-        app:layout_constraintTop_toBottomOf="@+id/editTextEmailLogin3" />
+        app:layout_constraintEnd_toEndOf="@+id/editTextRecoveryEmailPop"
+        app:layout_constraintStart_toStartOf="@+id/editTextRecoveryEmailPop"
+        app:layout_constraintTop_toBottomOf="@+id/editTextRecoveryEmailPop" />
 </androidx.constraintlayout.widget.ConstraintLayout>

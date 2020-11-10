@@ -2,15 +2,14 @@ package healthscheduler.example.healthscheduler.Login
 
 import android.app.Dialog
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
-import android.view.View
-import android.view.animation.Animation
-import android.view.animation.AnimationUtils
-import android.widget.ImageView
-import android.widget.PopupWindow
+import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -41,11 +40,44 @@ class Login : AppCompatActivity() {
         }
 
         binding.textViewRecoveryPasswordLogin.setOnClickListener{
-            //val emailAddress = auth.currentUser!!.email.toString()
+
             myDialog = Dialog(this)
                 myDialog.setContentView(R.layout.popwindow)
+                myDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT));
+
+                myDialog.findViewById<Button>(R.id.buttonEnviarPop).setOnClickListener {
+                    /* Toast.makeText(this@Login, "Clicou no botao",
+                            Toast.LENGTH_SHORT).show()*/
+
+                    val emailAddress = myDialog.findViewById<TextView>(R.id.editTextRecoveryEmailPop).text.toString()
+
+                    Firebase.auth.sendPasswordResetEmail(emailAddress)
+                            .addOnCompleteListener { task ->
+                                if (task.isSuccessful) {
+                                    Toast.makeText(this@Login, "Email enviado com sucesso",
+                                            Toast.LENGTH_SHORT).show()
+                                    myDialog.dismiss()
+                                }else{
+                                    Toast.makeText(this@Login, "Falha ao enviar o email",
+                                            Toast.LENGTH_SHORT).show()
+                                }
+                            }
+                }
+
             myDialog.show()
 
+            /*val mDialogView = LayoutInflater.from(this).inflate(R.layout.popwindow, null)
+
+            val mBuilder = AlertDialog.Builder(this)
+                    .setView(mDialogView)
+
+            mBuilder.show()
+
+            mDialogView.buttonEnviarPop.setOnClickListener {
+
+               val emailAddress = mDialogView.editTextRecoveryEmailPop.text.toString()
+
+            }*/
         }
     }
 
