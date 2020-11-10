@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="338dp"
+    android:layout_height="313dp"
+    android:layout_gravity="center"
+    android:background="@drawable/formulariologin"
+    android:padding="5dp">
+
+    <TextView
+        android:id="@+id/textViewNomeRegisterContinuePopWindow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="32dp"
+        android:fontFamily="@font/roboto"
+        android:text="Nome Completo"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/editTextNomeRegisterContinuePopWindow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#FFFFFF"
+        android:ems="13"
+        android:fontFamily="@font/roboto"
+        android:hint="@string/email_login"
+        android:importantForAutofill="no"
+        android:inputType="textEmailAddress"
+        android:labelFor="@id/textViewEmailLogin"
+        android:textColor="#FFFFFF"
+        android:textColorHighlight="#8A8A8A"
+        android:textColorHint="#36BFB8"
+        android:textColorLink="#FFFFFF"
+        app:layout_constraintBottom_toTopOf="@+id/textViewMoradaRegisterContinuePopWindow"
+        app:layout_constraintStart_toStartOf="@+id/textViewNomeRegisterContinuePopWindow"
+        app:layout_constraintTop_toBottomOf="@+id/textViewNomeRegisterContinuePopWindow"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/textViewMoradaRegisterContinuePopWindow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="28dp"
+        android:fontFamily="@font/roboto"
+        android:text="Morada"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextNomeRegisterContinuePopWindow" />
+
+    <EditText
+        android:id="@+id/editTextMoradaRegisterContinuePopWindow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#FFFFFF"
+        android:ems="13"
+        android:fontFamily="@font/roboto"
+        android:hint="@string/email_login"
+        android:importantForAutofill="no"
+        android:inputType="textEmailAddress"
+        android:labelFor="@id/textViewEmailLogin"
+        android:textColor="#FFFFFF"
+        android:textColorHighlight="#8A8A8A"
+        android:textColorHint="#36BFB8"
+        android:textColorLink="#FFFFFF"
+        app:layout_constraintStart_toStartOf="@+id/textViewMoradaRegisterContinuePopWindow"
+        app:layout_constraintTop_toBottomOf="@+id/textViewMoradaRegisterContinuePopWindow" />
+
+    <Button
+        android:id="@+id/buttonRegisterContinuePopWindow"
+        android:layout_width="222dp"
+        android:layout_height="56dp"
+        android:background="@drawable/buttonwhite"
+        android:fontFamily="@font/roboto"
+        android:text="@string/register"
+        android:textColor="#36BFB8"
+        android:textSize="24sp"
+        app:backgroundTint="#F6F6F6"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/editTextMoradaRegisterContinuePopWindow"
+        app:layout_constraintHorizontal_bias="0.454"
+        app:layout_constraintStart_toStartOf="@+id/editTextMoradaRegisterContinuePopWindow"
+        app:layout_constraintTop_toBottomOf="@+id/editTextMoradaRegisterContinuePopWindow" />
+</androidx.constraintlayout.widget.ConstraintLayout>

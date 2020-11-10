@@ -41,7 +41,7 @@ class Login : AppCompatActivity() {
         binding.textViewRecoveryPasswordLogin.setOnClickListener{
 
             myDialog = Dialog(this)
-                myDialog.setContentView(R.layout.recoverypasswordpopwindow)
+                myDialog.setContentView(R.layout.popwindow_recoverypassword)
                 myDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT));
 
                 myDialog.findViewById<Button>(R.id.buttonEnviarPop).setOnClickListener {
@@ -67,7 +67,7 @@ class Login : AppCompatActivity() {
 
         binding.buttonInfoLogin.setOnClickListener {
             myDialog = Dialog(this)
-                myDialog.setContentView(R.layout.infopopwindow)
+                myDialog.setContentView(R.layout.popwindow_info)
                 myDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT));
             myDialog.show()
         }

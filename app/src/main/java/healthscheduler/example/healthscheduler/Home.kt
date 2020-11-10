@@ -1,21 +1,18 @@
 package healthscheduler.example.healthscheduler
 
+import android.app.Dialog
 import android.content.Intent
-import android.graphics.BitmapFactory
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.view.View
-import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 import healthscheduler.example.healthscheduler.Login.MainActivity
 import healthscheduler.example.healthscheduler.databinding.ActivityHomeBinding
-import healthscheduler.example.healthscheduler.models.ScheduleItem
 import healthscheduler.example.healthscheduler.models.UtilizadoresItem
-import java.io.ByteArrayInputStream
 import java.util.*
 
 class Home : AppCompatActivity() {
@@ -25,6 +22,8 @@ class Home : AppCompatActivity() {
     val db = FirebaseFirestore.getInstance()
 
     private lateinit var auth: FirebaseAuth
+
+    private lateinit var myDialog : Dialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,14 +46,25 @@ class Home : AppCompatActivity() {
                                 binding.textViewUserNumberPhoneHome.setText(user.numeroTelemovelOuEmail)
                                 binding.textViewUserAddressHome.setText(user.moradaUtilizador)
                             } ?: run {
-                                binding.textViewUserNameHome.text = "Insira o seu nome"
+                                /*binding.textViewUserNameHome.text = "Insira o seu nome"
                                 binding.textViewUserNumberPhoneHome.text = "Insira o seu email ou contacto"
-                                binding.textViewUserAddressHome.text = "Insira a sua morada"
+                                binding.textViewUserAddressHome.text = "Insira a sua morada"*/
+
+                                myDialog = Dialog(this)
+                                    myDialog.setContentView(R.layout.popwindow_register_continue)
+                                    myDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT));
+                                myDialog.show()
                             }
                         } ?:run {
-                            binding.textViewUserNameHome.text = "Insira o seu nome"
+                            /*binding.textViewUserNameHome.text = "Insira o seu nome"
                             binding.textViewUserNumberPhoneHome.text = "Insira o seu email ou contacto"
-                            binding.textViewUserAddressHome.text = "Insira a sua morada"
+
+                            binding.textViewUserAddressHome.text = "Insira a sua morada"*/
+
+                            myDialog = Dialog(this)
+                                myDialog.setContentView(R.layout.popwindow_register_continue)
+                                myDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT));
+                            myDialog.show()
                         }
                     }
         }
