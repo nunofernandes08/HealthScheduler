@@ -39,7 +39,7 @@ class Home : AppCompatActivity() {
         currentUser!!.uid?.let {
             db.collection("users").document(it)
                     .addSnapshotListener { querySnapshot, firebaseFirestoreException ->
-                        querySnapshot?.let {
+                        querySnapshot?.data?.let {
                             listUser = UtilizadoresItem.fromHash(querySnapshot.data as HashMap<String, Any?>)
                             listUser?.let { user ->
                                 user.userID = querySnapshot.id
