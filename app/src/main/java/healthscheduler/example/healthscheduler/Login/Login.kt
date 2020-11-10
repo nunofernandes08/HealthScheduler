@@ -5,7 +5,6 @@ import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
@@ -42,12 +41,10 @@ class Login : AppCompatActivity() {
         binding.textViewRecoveryPasswordLogin.setOnClickListener{
 
             myDialog = Dialog(this)
-                myDialog.setContentView(R.layout.popwindow)
+                myDialog.setContentView(R.layout.recoverypasswordpopwindow)
                 myDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT));
 
                 myDialog.findViewById<Button>(R.id.buttonEnviarPop).setOnClickListener {
-                    /* Toast.makeText(this@Login, "Clicou no botao",
-                            Toast.LENGTH_SHORT).show()*/
 
                     val emailAddress = myDialog.findViewById<TextView>(R.id.editTextRecoveryEmailPop).text.toString()
 
@@ -66,33 +63,39 @@ class Login : AppCompatActivity() {
 
             myDialog.show()
 
-            /*val mDialogView = LayoutInflater.from(this).inflate(R.layout.popwindow, null)
+        }
 
-            val mBuilder = AlertDialog.Builder(this)
-                    .setView(mDialogView)
-
-            mBuilder.show()
-
-            mDialogView.buttonEnviarPop.setOnClickListener {
-
-               val emailAddress = mDialogView.editTextRecoveryEmailPop.text.toString()
-
-            }*/
+        binding.buttonInfoLogin.setOnClickListener {
+            myDialog = Dialog(this)
+                myDialog.setContentView(R.layout.infopopwindow)
+                myDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT));
+            myDialog.show()
         }
     }
 
     private fun signInWithEmailAndPassword(binding : ActivityLoginBinding) {
-        auth.signInWithEmailAndPassword(binding.editTextEmailLogin.text.toString(), binding.editTextPasswordLogin.text.toString())
-                .addOnCompleteListener(this) { task ->
-                    if (task.isSuccessful) {
-                        val intent = Intent(this, Home::class.java)
-                        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
-                        startActivity(intent)
-                    } else {
-                        Toast.makeText(this@Login, "Falha ao entrar na conta.",
-                                Toast.LENGTH_SHORT).show()
+
+        var userEmail = binding.editTextEmailLogin.text.toString()
+        var userPassword = binding.editTextPasswordLogin.text.toString()
+
+        if(userEmail == "" || userPassword == "") {
+            Toast.makeText(
+                    this@Login, "Verifique o seu Email ou Palavra-passe",
+                    Toast.LENGTH_SHORT
+            ).show()
+        }else{
+            auth.signInWithEmailAndPassword(binding.editTextEmailLogin.text.toString(), binding.editTextPasswordLogin.text.toString())
+                    .addOnCompleteListener(this) { task ->
+                        if (task.isSuccessful) {
+                            val intent = Intent(this, Home::class.java)
+                            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+                            startActivity(intent)
+                        } else {
+                            Toast.makeText(this@Login, "Falha ao entrar na conta.",
+                                    Toast.LENGTH_SHORT).show()
+                        }
                     }
-                }
+        }
     }
 }
 

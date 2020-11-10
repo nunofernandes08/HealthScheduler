@@ -40,18 +40,23 @@ class Schedule : AppCompatActivity() {
         db.collection("consultas")
             .whereEqualTo("userID", currentUser!!.uid)
             .addSnapshotListener { snapshot, error ->
-            listSchedule.clear()
-            for (document in snapshot!!) {
-                //O Log.d é só para aparecer no logcat
-                Log.d("exist", "${document.id} => ${document.data}")
-                listSchedule.add(ScheduleItem(
-                        document.data.getValue("date").toString(),
-                        document.data.getValue("doctorName").toString(),
-                        document.data.getValue("hour").toString(),
-                        document.data.getValue("local").toString(),
-                        document.data.getValue("typeOfConsult").toString()))
-            }
-            scheduleAdapter?.notifyDataSetChanged()
+                snapshot?.let {
+                    listSchedule.clear()
+                    for (document in snapshot!!) {
+                        //O Log.d é só para aparecer no logcat
+                        Log.d("exist", "${document.id} => ${document.data}")
+                        listSchedule.add(ScheduleItem(
+                                document.data.getValue("date").toString(),
+                                document.data.getValue("doctorName").toString(),
+                                document.data.getValue("hour").toString(),
+                                document.data.getValue("local").toString(),
+                                document.data.getValue("typeOfConsult").toString()))
+                    }
+                    scheduleAdapter?.notifyDataSetChanged()
+                }?: run{
+                    Toast.makeText(this@Schedule, "De momento não tem consultas",
+                            Toast.LENGTH_SHORT).show()
+                }
         }
     }
 

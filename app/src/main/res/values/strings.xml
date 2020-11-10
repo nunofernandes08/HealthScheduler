@@ -11,5 +11,35 @@
     <string name="entrar">Entrar</string>
     <string name="register">Registar</string>
     <string name="enviar">Enviar</string>
+    <string name="infoapplication">
+
+            <!-- \nA app HealthSchedule pretende ajudar todos os utentes do Hospital X a organizar a sua agenda.
+
+            \nO funcionamento é simples: cada utilizador terá a sua propria agenda onde poderá ver todas as consultas que terá nos proximos dias -->
+        Cláusula 1.ª : Designação
+        \nOs presentes termos e condições gerais são destinados a utilizadores que utilizem em ocasiões regulares o acesso e a utilização da aplicação SpaceSoccer, criado pela empresa denominada SpaceProgrammers e prestado ao utilizador em serviço da empresa SpaceProgrammers.
+        \n\nCláusula 2.ª : Descrição e funções da Aplicação\n
+        \n1. A Aplicação SpaceSoccer consiste em uma aplicação para aplicativos android, esta desenvolvida pela SpaceProgrammers , contem autenticação ou registo necessário de uma conta para a utilização da aplicação e dos serviços oferecidos pelo mesmo.
+        \n2. Os diversos serviços oferecidos pela aplicação SpaceSoccer são a consulta e gestão de torneios dentro ou fora de Portugal.
+        \n3. A autenticação do utilizador e efetuado através de nome de utilizador com password, se o mesmo não tiver os mesmos terá de efetuar registro dentro da aplicação com cadenciais validas.
+        \n\nCláusula 3.ª : Acesso e execução\n
+        \n1. O utilizador pode aceder através da aplicação SpaceSoccer aos serviços que são oferecidos de acordo com o seu nível de permissão, ficando apto a utilizar as funcionalidades que são disponibilizadas ao mesmo depende.
+        \n2. O utilizador para conseguir um diferente nível de acesso do já tido, terá de contactar a SpaceProgrammers para a alteração do mesmo com a respetiva confirmação que pode obter esse respetivo nível de acesso.
+        \n3. Em caso de futuras atualizações do SpaceSoccer, o utilizador será notificado acerca das mesmas, se o utilizador decidir não atualizar irá ter não acesso a novas futuras funcionalidades.
+        \n4. A utilização da SpaceSoccer implica a confirmação pelos utilizadores que aceita todos os presentes Termos e Condições Gerais.
+        \n5. O utilizador é responsável por manter e não transmitir as informações pessoais confidenciais tais como password, email e informações não disponíveis para outros utilizadores e terceiros.
+        \n6. Quaisquer danos ou roubo de informações que possam vir a emergir de eventual transmissão a outros utilizadores e a terceiros das informações pessoais, passwords, etc… são da responsabilidade exclusiva do Utilizador.
+        \n\nCláusula 4.ª : Utilização da aplicação\n
+        \n1. A qualidade de utilização da aplicação SpaceSoccer depende do equipamento Android utilizado para acesso da APP, compete ao utilizador verificar se o dispositivo está em estado adequado para a utilização da aplicação.
+        \n2. O utilizador deverá reportar á SpaceProgrammers de quaisquer anomalias que sejam detetadas relativamente a aplicação SpaceSoccer que possam interferir com a utilização básica da aplicação, também o utilizador deve reportar acerca de quaisquer aplicações fraudulentas feitas por terceiros que tenham com intenções de manipular o código da aplicação ou descobrir informações pessoais de acesso a aplicação tais como passwords.
+        \n3. Se por implementação futura, a SpaceProgrammers reserva-se o direito de colocar publicidade na aplicação SpaceSoccer.
+        \n\nCláusula 5.ª : Responsabilidade do Utilizador\n
+        \n1. A SpaceProgrammers não se responsabilizará de quaisquer danos diretos ou indiretos feitos pelo utilizador na alteração do código base da aplicação.
+        \n2. A utilizador reconhece que o acesso e a utilização à aplicação SpaceSoccer só e possível com recurso a sistemas informáticos e redes de comunicações que podem por ora apresentar erros ou falhas no funcionamento.
+        \n3. A SpaceProgrammers não se responsabiliza nem responderá a quaisquer danos que fora causados ao utilizador, diretamente ou indiretamente, por causa do incumprimento de obrigações tais como a de não partilhar informações pessoais com terceiros.
+        \n\nCláusula 6.ª : Dados pessoais\n
+        \n1.  A entidade SpaceProgrammers é responsável pelo tratamento de dados pessoais recolhidos e gerados pelos utilizadores no uso da aplicação SpaceSoccer , bem como o armazenamento dos mesmos.
+
+    </string>
 
 </resources>

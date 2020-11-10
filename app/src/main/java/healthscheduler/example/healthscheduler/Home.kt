@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -35,29 +36,28 @@ class Home : AppCompatActivity() {
         auth = Firebase.auth
         val currentUser = auth.currentUser
 
-            currentUser!!.uid?.let {
-                db.collection("users").document(it)
-                        .addSnapshotListener { querySnapshot, firebaseFirestoreException ->
-                            querySnapshot?.let {
-                                listUser = UtilizadoresItem.fromHash(querySnapshot.data as HashMap<String, Any?>)
-                                listUser?.let { user ->
-                                    user.userID = querySnapshot.id
-
-                                    binding.textViewUserNameHome.setText(user.nomeUtilizador)
-                                    binding.textViewUserNumberPhoneHome.setText(user.numeroTelemovelOuEmail)
-                                    binding.textViewUserAddressHome.setText(user.moradaUtilizador)
-                                }?: run {
-                                    binding.textViewUserNameHome.text = "User name"
-                                    binding.textViewUserNumberPhoneHome.text = "User email or phone number"
-                                    binding.textViewUserAddressHome.text = "User address"
-                                }
-                            }?: run{
-                                binding.textViewUserNameHome.text = "User name"
-                                binding.textViewUserNumberPhoneHome.text = "User email or phone number"
-                                binding.textViewUserAddressHome.text = "User address"
+        currentUser!!.uid?.let {
+            db.collection("users").document(it)
+                    .addSnapshotListener { querySnapshot, firebaseFirestoreException ->
+                        querySnapshot?.let {
+                            listUser = UtilizadoresItem.fromHash(querySnapshot.data as HashMap<String, Any?>)
+                            listUser?.let { user ->
+                                user.userID = querySnapshot.id
+                                binding.textViewUserNameHome.setText(user.nomeUtilizador)
+                                binding.textViewUserNumberPhoneHome.setText(user.numeroTelemovelOuEmail)
+                                binding.textViewUserAddressHome.setText(user.moradaUtilizador)
+                            } ?: run {
+                                binding.textViewUserNameHome.text = "Insira o seu nome"
+                                binding.textViewUserNumberPhoneHome.text = "Insira o seu email ou contacto"
+                                binding.textViewUserAddressHome.text = "Insira a sua morada"
                             }
+                        } ?:run {
+                            binding.textViewUserNameHome.text = "Insira o seu nome"
+                            binding.textViewUserNumberPhoneHome.text = "Insira o seu email ou contacto"
+                            binding.textViewUserAddressHome.text = "Insira a sua morada"
                         }
-            }
+                    }
+        }
 
         binding.buttonLogoutHome.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
