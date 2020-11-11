@@ -254,7 +254,18 @@
             app:fabCradleMargin="15dp" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
-    <![CDATA[
+
+    <Button
+        android:id="@+id/buttonEditHome"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="35dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/buttonedit_foreground"
+        app:layout_constraintEnd_toEndOf="@+id/imageViewRetanguloHome"
+        app:layout_constraintTop_toTopOf="@+id/imageViewRetanguloHome" /><![CDATA[
+
+
 
 
 
@@ -265,6 +276,7 @@
 
 
     />
+
 
 
 

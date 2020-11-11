@@ -22,8 +22,10 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 import healthscheduler.example.healthscheduler.Login.MainActivity
 import healthscheduler.example.healthscheduler.databinding.ActivityHomeBinding
+import healthscheduler.example.healthscheduler.models.ScheduleItem
 import healthscheduler.example.healthscheduler.models.UtilizadoresItem
 import java.util.*
+import kotlin.collections.HashMap
 
 class Home : AppCompatActivity() {
 
@@ -141,7 +143,30 @@ class Home : AppCompatActivity() {
             val intent = Intent(this, Schedule::class.java)
             startActivity(intent)
         }
+
+        binding.buttonEditHome.setOnClickListener {
+            myDialog = Dialog(this)
+                myDialog.setContentView(R.layout.popwindow_edit)
+                myDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT));
+
+
+            myDialog.findViewById<Button>(R.id.buttonEditarEdit).setOnClickListener {
+                var moradaUtilizador = myDialog.findViewById<EditText>(R.id.editTextUserAddressEdit)
+                val user = UtilizadoresItem("", currentUser.email, moradaUtilizador.text.toString(), "", currentUser.uid)
+                    db.collection("users").document(currentUser.uid)
+                            .set(user.toHashMap())
+                            .addOnSuccessListener {
+                                Log.d("writeBD", "DocumentSnapshot successfully written!")
+                                myDialog.dismiss()
+                            }
+                            .addOnFailureListener {
+                                e -> Log.w("writeBD", "Error writing document", e)
+                            }
+                }
+            myDialog.show()
+        }
     }
+
     private fun getPermissionToPhoneCall() {
         if (ContextCompat.checkSelfPermission(
                         this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
