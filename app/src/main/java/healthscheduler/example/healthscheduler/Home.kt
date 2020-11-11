@@ -1,15 +1,21 @@
 package healthscheduler.example.healthscheduler
 
+import android.Manifest
 import android.app.Dialog
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
-import androidx.appcompat.app.AppCompatActivity
+import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -21,6 +27,8 @@ import java.util.*
 
 class Home : AppCompatActivity() {
 
+    val REQUEST_CODE = 0
+
     var listUser: UtilizadoresItem? = null
 
     val db = FirebaseFirestore.getInstance()
@@ -29,11 +37,15 @@ class Home : AppCompatActivity() {
 
     private lateinit var myDialog : Dialog
 
+    @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding = ActivityHomeBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) { getPermissionToPhoneCall() }
+
 
         // Initialize Firebase Auth
         auth = Firebase.auth
@@ -117,9 +129,42 @@ class Home : AppCompatActivity() {
             startActivity(intent)
         }
 
+
+        binding.floatingActionButton.setOnClickListener {
+            val callIntent = Intent(Intent.ACTION_CALL)
+            callIntent.data = Uri.parse("tel:914644996")
+            startActivity(callIntent)
+
+        }
+
         binding.buttonScheduleHome.setOnClickListener {
             val intent = Intent(this, Schedule::class.java)
             startActivity(intent)
         }
     }
+    private fun getPermissionToPhoneCall() {
+        if (ContextCompat.checkSelfPermission(
+                        this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+                requestPermissions(arrayOf(
+                        Manifest.permission.CALL_PHONE ), REQUEST_CODE)
+            }
+        }
+    }
+
+
+     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
+         if (requestCode == REQUEST_CODE) {
+
+             if (grantResults.size == 1
+                     && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+             } else {
+
+                 Toast.makeText(this, "You must give permissions to use this app. App is exiting.", Toast.LENGTH_SHORT).show()
+                 finishAffinity()
+             }
+         }
+     }
 }
