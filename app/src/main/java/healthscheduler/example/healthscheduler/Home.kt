@@ -6,6 +6,10 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.widget.Button
+import android.widget.EditText
+import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -46,24 +50,61 @@ class Home : AppCompatActivity() {
                                 binding.textViewUserNumberPhoneHome.setText(user.numeroTelemovelOuEmail)
                                 binding.textViewUserAddressHome.setText(user.moradaUtilizador)
                             } ?: run {
-                                /*binding.textViewUserNameHome.text = "Insira o seu nome"
-                                binding.textViewUserNumberPhoneHome.text = "Insira o seu email ou contacto"
-                                binding.textViewUserAddressHome.text = "Insira a sua morada"*/
-
                                 myDialog = Dialog(this)
                                     myDialog.setContentView(R.layout.popwindow_register_continue)
                                     myDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT));
+
+                                    myDialog.findViewById<Button>(R.id.buttonRegisterContinuePopWindow).setOnClickListener {
+                                        var nomeUtilizador = myDialog.findViewById<EditText>(R.id.editTextNomeRegisterContinuePopWindow)
+                                        var moradaUtilizador = myDialog.findViewById<EditText>(R.id.editTextMoradaRegisterContinuePopWindow)
+                                        if(nomeUtilizador.text.toString() == "" || moradaUtilizador.text.toString() == ""){
+                                            Toast.makeText(
+                                                    this@Home, "Verifique o seu Nome ou Morada",
+                                                    Toast.LENGTH_SHORT
+                                            ).show()
+                                        }else {
+                                            val db = FirebaseFirestore.getInstance()
+                                            val user = UtilizadoresItem(nomeUtilizador.text.toString(), currentUser.email, moradaUtilizador.text.toString(), currentUser!!.uid)
+                                            db.collection("users").document(currentUser!!.uid)
+                                                    .set(user.toHashMap())
+                                                    .addOnSuccessListener {
+                                                        Log.d("writeBD", "DocumentSnapshot successfully written!")
+                                                        myDialog.dismiss()
+                                                    }
+                                                    .addOnFailureListener {
+                                                        e -> Log.w("writeBD", "Error writing document", e)
+                                                    }
+                                        }
+                                    }
                                 myDialog.show()
                             }
                         } ?:run {
-                            /*binding.textViewUserNameHome.text = "Insira o seu nome"
-                            binding.textViewUserNumberPhoneHome.text = "Insira o seu email ou contacto"
-
-                            binding.textViewUserAddressHome.text = "Insira a sua morada"*/
-
                             myDialog = Dialog(this)
-                                myDialog.setContentView(R.layout.popwindow_register_continue)
-                                myDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT));
+                            myDialog.setContentView(R.layout.popwindow_register_continue)
+                            myDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT));
+
+                            myDialog.findViewById<Button>(R.id.buttonRegisterContinuePopWindow).setOnClickListener {
+                                var nomeUtilizador = myDialog.findViewById<EditText>(R.id.editTextNomeRegisterContinuePopWindow)
+                                var moradaUtilizador = myDialog.findViewById<EditText>(R.id.editTextMoradaRegisterContinuePopWindow)
+                                if(nomeUtilizador.text.toString() == "" || moradaUtilizador.text.toString() == ""){
+                                    Toast.makeText(
+                                            this@Home, "Verifique o seu Nome ou Morada",
+                                            Toast.LENGTH_SHORT
+                                    ).show()
+                                }else {
+                                    val db = FirebaseFirestore.getInstance()
+                                    val user = UtilizadoresItem(nomeUtilizador.text.toString(), currentUser.email, moradaUtilizador.text.toString(), currentUser!!.uid)
+                                    db.collection("users").document(currentUser!!.uid)
+                                            .set(user.toHashMap())
+                                            .addOnSuccessListener {
+                                                Log.d("writeBD", "DocumentSnapshot successfully written!")
+                                                myDialog.dismiss()
+                                            }
+                                            .addOnFailureListener {
+                                                e -> Log.w("writeBD", "Error writing document", e)
+                                            }
+                                }
+                            }
                             myDialog.show()
                         }
                     }
