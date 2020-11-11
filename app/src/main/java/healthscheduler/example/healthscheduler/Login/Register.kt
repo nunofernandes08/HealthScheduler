@@ -10,6 +10,7 @@ import com.google.firebase.FirebaseException
 import com.google.firebase.auth.*
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import healthscheduler.example.healthscheduler.Home
 import healthscheduler.example.healthscheduler.databinding.ActivityRegisterBinding
 import java.util.concurrent.TimeUnit
 
@@ -56,7 +57,7 @@ class Register : AppCompatActivity() {
                             .addOnCompleteListener(this) { task ->
                                 if (task.isSuccessful) {
                                     val user = auth.currentUser
-                                    val intent = Intent(this, RegisterContinue::class.java)
+                                    val intent = Intent(this, Home::class.java)
                                     intent.putExtra("emailOrPhone", emailOrPhone)
                                     intent.flags =
                                             Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
@@ -77,7 +78,7 @@ class Register : AppCompatActivity() {
                         override fun onVerificationCompleted(credential: PhoneAuthCredential) {
                             signInWithPhoneAuthCredential(credential)
                             binding.buttonContinueRegisterContinue.setOnClickListener {
-                                val intent = Intent(this@Register, RegisterContinue::class.java)
+                                val intent = Intent(this@Register, Home::class.java)
                                 intent.putExtra("codigoVerificacao", storedVerificationId)
                                 intent.putExtra("emailOrPhone", emailOrPhone)
                                 startActivity(intent)
