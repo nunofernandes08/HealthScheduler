@@ -76,7 +76,7 @@ class Home : AppCompatActivity() {
                                             ).show()
                                         }else {
                                             val db = FirebaseFirestore.getInstance()
-                                            val user = UtilizadoresItem(nomeUtilizador.text.toString(), currentUser.email, moradaUtilizador.text.toString(), currentUser!!.uid)
+                                            val user = UtilizadoresItem(nomeUtilizador.text.toString(), currentUser.email, moradaUtilizador.text.toString(), "", currentUser!!.uid)
                                             db.collection("users").document(currentUser!!.uid)
                                                     .set(user.toHashMap())
                                                     .addOnSuccessListener {
@@ -105,7 +105,7 @@ class Home : AppCompatActivity() {
                                     ).show()
                                 }else {
                                     val db = FirebaseFirestore.getInstance()
-                                    val user = UtilizadoresItem(nomeUtilizador.text.toString(), currentUser.email, moradaUtilizador.text.toString(), currentUser!!.uid)
+                                    val user = UtilizadoresItem(nomeUtilizador.text.toString(), currentUser.email, moradaUtilizador.text.toString(), "", currentUser!!.uid)
                                     db.collection("users").document(currentUser!!.uid)
                                             .set(user.toHashMap())
                                             .addOnSuccessListener {

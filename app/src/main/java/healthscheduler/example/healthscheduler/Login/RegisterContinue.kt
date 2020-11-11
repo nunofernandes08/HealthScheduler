@@ -40,7 +40,7 @@ class RegisterContinue : AppCompatActivity() {
                 ).show()
             }else {
                 val db = FirebaseFirestore.getInstance()
-                val user = UtilizadoresItem(nomeUtilizador, emailOrPhone, moradaUtilizador, currentUser!!.uid)
+                val user = UtilizadoresItem(nomeUtilizador, emailOrPhone, moradaUtilizador, "", currentUser!!.uid)
                 db.collection("users").document(currentUser!!.uid)
                         .set(user.toHashMap())
                         .addOnSuccessListener {

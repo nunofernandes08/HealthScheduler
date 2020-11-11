@@ -102,9 +102,9 @@ class Register : AppCompatActivity() {
 
                             binding.buttonContinueRegister.visibility = View.GONE
 
-                            binding.textViewCodeSent.visibility = View.GONE
-                            binding.editTextCodeSent.visibility = View.GONE
-                            binding.buttonContinueRegisterContinue.visibility = View.GONE
+                            binding.textViewCodeSent.visibility = View.VISIBLE
+                            binding.editTextCodeSent.visibility = View.VISIBLE
+                            binding.buttonContinueRegisterContinue.visibility = View.VISIBLE
                         }
                     }
 
