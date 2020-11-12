@@ -4,6 +4,7 @@ import android.Manifest
 import android.app.Dialog
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.net.Uri
@@ -20,10 +21,12 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
 import healthscheduler.example.healthscheduler.Login.MainActivity
 import healthscheduler.example.healthscheduler.databinding.ActivityHomeBinding
 import healthscheduler.example.healthscheduler.models.ScheduleItem
 import healthscheduler.example.healthscheduler.models.UtilizadoresItem
+import java.io.ByteArrayInputStream
 import java.util.*
 import kotlin.collections.HashMap
 
@@ -39,6 +42,10 @@ class Home : AppCompatActivity() {
 
     private lateinit var myDialog : Dialog
 
+    //ImageCloudStorage
+    /*val storageRef = Firebase.storage.reference
+    val imagesRef = storageRef.child("images/${UUID.randomUUID()}.jpg")*/
+
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,7 +54,6 @@ class Home : AppCompatActivity() {
         setContentView(view)
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) { getPermissionToPhoneCall() }
-
 
         // Initialize Firebase Auth
         auth = Firebase.auth
@@ -78,6 +84,7 @@ class Home : AppCompatActivity() {
                                             ).show()
                                         }else {
                                             val db = FirebaseFirestore.getInstance()
+                                            //Colocar "imageRef.name" no imagemPath me baixo
                                             val user = UtilizadoresItem(nomeUtilizador.text.toString(), currentUser.email, moradaUtilizador.text.toString(), "", currentUser!!.uid)
                                             db.collection("users").document(currentUser!!.uid)
                                                     .set(user.toHashMap())
@@ -124,13 +131,24 @@ class Home : AppCompatActivity() {
                     }
         }
 
+        //Codiga para imagem
+        /*val storageRef = Firebase.storage.reference
+        val imagesRef = storageRef.child("images/${listUser?.imagemPath}")
+
+        val ONE_MEGABYTE: Long = 1024 * 1024
+        imagesRef.getBytes(ONE_MEGABYTE).addOnSuccessListener {
+            val bais = ByteArrayInputStream(it)
+            this.imageViewPhoto.setImageBitmap(BitmapFactory.decodeStream(bais))
+        }.addOnFailureListener {
+
+        }*/
+
         binding.buttonLogoutHome.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
             FirebaseAuth.getInstance().signOut()
             startActivity(intent)
         }
-
 
         binding.floatingActionButton.setOnClickListener {
             val callIntent = Intent(Intent.ACTION_CALL)
@@ -149,20 +167,32 @@ class Home : AppCompatActivity() {
                 myDialog.setContentView(R.layout.popwindow_edit)
                 myDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT));
 
-
             myDialog.findViewById<Button>(R.id.buttonEditarEdit).setOnClickListener {
-                var moradaUtilizador = myDialog.findViewById<EditText>(R.id.editTextUserAddressEdit)
-                val user = UtilizadoresItem("", currentUser.email, moradaUtilizador.text.toString(), "", currentUser.uid)
-                    db.collection("users").document(currentUser.uid)
-                            .set(user.toHashMap())
-                            .addOnSuccessListener {
-                                Log.d("writeBD", "DocumentSnapshot successfully written!")
-                                myDialog.dismiss()
+                db.collection("users").document(currentUser.uid)
+                        .addSnapshotListener { querySnapshot, firebaseFirestoreException ->
+                            querySnapshot?.data?.let {
+                                listUser = UtilizadoresItem.fromHash(querySnapshot.data as HashMap<String, Any?>)
+                                listUser?.let { user ->
+                                    var moradaUtilizador = myDialog.findViewById<EditText>(R.id.editTextUserAddressEdit)
+                                    val user = UtilizadoresItem(user.nomeUtilizador.toString(), currentUser.email, moradaUtilizador.text.toString(), "", currentUser.uid)
+                                    db.collection("users").document(currentUser.uid)
+                                            .set(user.toHashMap())
+                                            .addOnSuccessListener {
+                                                Log.d("writeBD", "DocumentSnapshot successfully written!")
+                                                myDialog.dismiss()
+                                            }
+                                            .addOnFailureListener { e ->
+                                                Log.w("writeBD", "Error writing document", e)
+                                            }
+                                }
+                            }?: run{
+                                Toast.makeText(
+                                        this@Home, "Sem dados para atualizar",
+                                        Toast.LENGTH_SHORT
+                                ).show()
                             }
-                            .addOnFailureListener {
-                                e -> Log.w("writeBD", "Error writing document", e)
-                            }
-                }
+                        }
+            }
             myDialog.show()
         }
     }
@@ -177,7 +207,6 @@ class Home : AppCompatActivity() {
             }
         }
     }
-
 
      override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
          if (requestCode == REQUEST_CODE) {
