@@ -6,14 +6,11 @@ import android.app.Dialog
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
-import android.media.Image
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.provider.MediaStore
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
@@ -21,7 +18,6 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.content.ContextCompat
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -32,11 +28,8 @@ import com.google.firebase.storage.ktx.storage
 import com.squareup.picasso.Picasso
 import healthscheduler.example.healthscheduler.Login.MainActivity
 import healthscheduler.example.healthscheduler.databinding.ActivityHomeBinding
-import healthscheduler.example.healthscheduler.models.ScheduleItem
 import healthscheduler.example.healthscheduler.models.UtilizadoresItem
-import java.io.ByteArrayInputStream
 import java.util.*
-import kotlin.collections.HashMap
 
 class Home : AppCompatActivity() {
 
@@ -76,10 +69,18 @@ class Home : AppCompatActivity() {
                         querySnapshot?.data?.let {
                             listUser = UtilizadoresItem.fromHash(querySnapshot.data as HashMap<String, Any?>)
                             listUser?.let { user ->
-                                user.userID = querySnapshot.id
-                                binding.textViewUserNameHome.setText(user.nomeUtilizador)
-                                binding.textViewUserNumberPhoneHome.setText(user.numeroTelemovelOuEmail)
-                                binding.textViewUserAddressHome.setText(user.moradaUtilizador)
+                                if (user.imagemPath == "null"){
+                                    user.userID = querySnapshot.id
+                                    binding.textViewUserNameHome.setText(user.nomeUtilizador)
+                                    binding.textViewUserNumberPhoneHome.setText(user.numeroTelemovelOuEmail)
+                                    binding.textViewUserAddressHome.setText(user.moradaUtilizador)
+                                }else{
+                                    user.userID = querySnapshot.id
+                                    binding.textViewUserNameHome.setText(user.nomeUtilizador)
+                                    binding.textViewUserNumberPhoneHome.setText(user.numeroTelemovelOuEmail)
+                                    binding.textViewUserAddressHome.setText(user.moradaUtilizador)
+                                    Picasso.get().load(user.imagemPath).into(binding.imageViewUserPhotoHome)
+                                }
                             } ?: run {
                                 myDialog = Dialog(this)
                                 myDialog.setContentView(R.layout.popwindow_register_continue)
@@ -96,7 +97,7 @@ class Home : AppCompatActivity() {
                                     } else {
                                         val db = FirebaseFirestore.getInstance()
                                         //Colocar "imageRef.name" no imagemPath me baixo
-                                        val user = UtilizadoresItem(currentUserName, currentUser.email, moradaUtilizador.text.toString(), "", currentUser!!.uid)
+                                        val user = UtilizadoresItem(nomeUtilizador.text.toString(), currentUser.email, moradaUtilizador.text.toString(), null, currentUser!!.uid)
                                         db.collection("users").document(currentUser!!.uid)
                                                 .set(user.toHashMap())
                                                 .addOnSuccessListener {
@@ -125,7 +126,7 @@ class Home : AppCompatActivity() {
                                     ).show()
                                 } else {
                                     val db = FirebaseFirestore.getInstance()
-                                    val user = UtilizadoresItem(currentUserName, currentUser.email, moradaUtilizador.text.toString(), "", currentUser!!.uid)
+                                    val user = UtilizadoresItem(nomeUtilizador.text.toString(), currentUser.email, moradaUtilizador.text.toString(), null, currentUser!!.uid)
                                     db.collection("users").document(currentUser!!.uid)
                                             .set(user.toHashMap())
                                             .addOnSuccessListener {
@@ -189,7 +190,6 @@ class Home : AppCompatActivity() {
             myDialog.show()
         }
     }
-
     //Funcao para ir buscar a informacao do CURRENT USER
     private fun getUser() {
 
@@ -220,15 +220,17 @@ class Home : AppCompatActivity() {
         val filename = UUID.randomUUID().toString()
         val ref = FirebaseStorage.getInstance().getReference("/images/$filename")
 
-        ref.putFile(curFile!!)
-            .addOnSuccessListener {
-                ref.downloadUrl.addOnSuccessListener {
-                    downUrl = it.toString()
+        curFile?.let{
+            ref.putFile(curFile!!)
+                .addOnSuccessListener {
+                    ref.downloadUrl.addOnSuccessListener {
+                        downUrl = it.toString()
+                    }
                 }
-            }
-            .addOnFailureListener {
+                .addOnFailureListener {
 
-            }
+                }
+        }
     }
 
     //Funcao para fazer update do utilizador
@@ -238,8 +240,15 @@ class Home : AppCompatActivity() {
         val currentUser = auth.currentUser
 
         var moradaUtilizador = myDialog.findViewById<EditText>(R.id.editTextUserAddressEdit)
-        val user = UtilizadoresItem(currentUserName, currentUser!!.email, moradaUtilizador.text.toString(), downUrl, currentUser.uid)
-        db.collection("users").document(currentUser.uid)
+
+        if(moradaUtilizador.text.toString() == "") {
+            Toast.makeText(
+                    this@Home, "Verifique a sua Morada",
+                    Toast.LENGTH_SHORT
+            ).show()
+        }else{
+            val user = UtilizadoresItem(currentUserName, currentUser!!.email, moradaUtilizador.text.toString(), downUrl, currentUser.uid)
+            db.collection("users").document(currentUser.uid)
                 .set(user.toHashMap())
                 .addOnSuccessListener {
                     Log.d("writeBD", "DocumentSnapshot successfully written!")
@@ -248,6 +257,7 @@ class Home : AppCompatActivity() {
                 .addOnFailureListener { e ->
                     Log.w("writeBD", "Error writing document", e)
                 }
+        }
     }
 
     //Funcao para buscar permissao para fazer chamada
