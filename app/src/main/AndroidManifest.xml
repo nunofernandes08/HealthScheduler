@@ -3,8 +3,7 @@
     package="healthscheduler.example.healthscheduler">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.CALL_PHONE"/>
-
+    <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <application
         android:allowBackup="true"
@@ -13,7 +12,10 @@
         android:roundIcon="@mipmap/ic_logo"
         android:supportsRtl="true"
         android:theme="@style/Theme.HealthScheduler">
-        <activity android:name=".Login.CodeVerifyPhone"/>
+        <activity android:name=".ChatMessagesActivity"></activity>
+        <activity android:name=".ContactsActivity" />
+        <activity android:name=".LatestMessagesActivity" />
+        <activity android:name=".Login.CodeVerifyPhone" />
         <activity android:name=".Login.RegisterContinue" />
         <activity android:name=".Schedule" />
         <activity android:name=".Home" />

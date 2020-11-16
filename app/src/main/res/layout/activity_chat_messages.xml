@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ChatMessagesActivity">
+
+    <ImageView
+        android:id="@+id/imageViewFadeChatMessages"
+        android:layout_width="0dp"
+        android:layout_height="80dp"
+        android:adjustViewBounds="true"
+        android:cropToPadding="false"
+        android:scaleType="centerCrop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/fadehome" />
+
+    <TextView
+        android:id="@+id/textViewTitleChatMessagesContactName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:fontFamily="@font/roboto"
+        android:text="Contacto Nome"
+        android:textColor="@color/white"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageViewFadeChatMessages"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageViewFadeChatMessages" />
+
+    <ImageView
+        android:id="@+id/imageViewChatMessagesContactPhoto"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:layout_marginEnd="15dp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageViewFadeChatMessages"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageViewFadeChatMessages"
+        app:srcCompat="@drawable/picuser" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewChatLog"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:divider="#00FFFFFF"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toTopOf="@+id/imageViewFadeChatMessages2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewFadeChatMessages" />
+
+    <ImageView
+        android:id="@+id/imageViewFadeChatMessages2"
+        android:layout_width="0dp"
+        android:layout_height="80dp"
+        android:adjustViewBounds="true"
+        android:cropToPadding="false"
+        android:scaleType="centerCrop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:srcCompat="@drawable/fadehome" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageViewFadeChatMessages2" >
+
+        <EditText
+            android:id="@+id/editTextChatMessagesWriteMessage"
+            android:layout_width="250dp"
+            android:layout_height="50dp"
+            android:layout_weight="0"
+            android:layout_gravity="center"
+            android:layout_marginStart="4dp"
+            android:hint="Enter Message"
+            android:inputType="textPersonName"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
+            android:backgroundTint="@color/white"/>
+
+        <ImageButton
+            android:id="@+id/buttonChatMessageSendAudio"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:layout_marginStart="4dp"
+            android:background="@color/transparency"
+            app:srcCompat="@drawable/ic_baseline_keyboard_voice_24" />
+
+        <ImageButton
+            android:id="@+id/buttonChatMessageSendImage"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:layout_marginStart="4dp"
+            android:background="@color/transparency"
+            app:srcCompat="@drawable/ic_baseline_image_24" />
+
+        <ImageButton
+            android:id="@+id/buttonChatMessageSendTextMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="4dp"
+            android:background="@color/transparency"
+            app:srcCompat="@drawable/ic_baseline_send_24" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
