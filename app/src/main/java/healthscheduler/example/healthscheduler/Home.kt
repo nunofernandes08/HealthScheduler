@@ -166,6 +166,12 @@ class Home : AppCompatActivity() {
             startActivity(intent)
         }
 
+        //Botao para ir ao Chat
+        binding.buttonChatHome.setOnClickListener {
+            val intent = Intent(this, LatestMessagesActivity::class.java)
+            startActivity(intent)
+        }
+
         //Botap para editar
         binding.buttonEditHome.setOnClickListener {
             myDialog = Dialog(this)

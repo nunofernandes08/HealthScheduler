@@ -1,15 +1,20 @@
 package healthscheduler.example.healthscheduler
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
 import android.view.LayoutInflater
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.squareup.picasso.Picasso
+import healthscheduler.example.healthscheduler.Login.MainActivity
 import healthscheduler.example.healthscheduler.databinding.ActivityContactsBinding
 import healthscheduler.example.healthscheduler.models.UtilizadoresItem
 
@@ -38,9 +43,15 @@ class ContactsActivity : AppCompatActivity() {
 
         currentUserId = FirebaseAuth.getInstance().uid
 
+        /*se existir currentUser, vai buscar à BD todos os users. Se for bem sucedido, verifica se
+        o id do currentUser é igual ao que tem no documento, se nao for igual,
+        adiciona à recyclerView.*/
+
         currentUserId?.let {
 
             ref.addSnapshotListener { querySnapshot, Exception ->
+
+                users.clear()
 
                 if (querySnapshot != null) {
 
@@ -56,6 +67,11 @@ class ContactsActivity : AppCompatActivity() {
                 }
                 mAdapter?.notifyDataSetChanged()
             }
+        } ?: run {
+
+            val intent = Intent(this, MainActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+            startActivity(intent)
         }
     }
 
@@ -71,8 +87,27 @@ class ContactsActivity : AppCompatActivity() {
 
             holder.v.apply {
 
+                var imageViewUser = findViewById<ImageView>(R.id.imageViewChatContactsContactImage)
+                var textViewUser = findViewById<TextView>(R.id.textViewChatContactsContactName)
+
                 this.isClickable = true
                 this.tag = position
+                textViewUser.text = users[position].nomeUtilizador
+
+                if (users[position].imagemPath != null) {
+
+                    Picasso.get().load(users[position].imagemPath).into(imageViewUser)
+                }
+
+                this.setOnClickListener {
+
+                    //val user = users[position]
+
+                    val intent = Intent(this@ContactsActivity, ChatMessagesActivity::class.java)
+                    intent.putExtra(USER_KEY, users[position].userID.toString())
+                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+                    startActivity(intent)
+                }
             }
         }
 
@@ -80,4 +115,10 @@ class ContactsActivity : AppCompatActivity() {
             return users.size
         }
     }
+
+    companion object {
+
+        val USER_KEY = "USER_KEY"
+    }
 }
+
