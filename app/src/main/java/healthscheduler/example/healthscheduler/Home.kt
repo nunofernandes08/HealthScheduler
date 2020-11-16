@@ -12,10 +12,7 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.Toast
+import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -39,6 +36,7 @@ class Home : AppCompatActivity() {
     val imagesRef =     storageRef.child("images/${UUID.randomUUID()}.jpg")
 
     var currentUserName:    String? = null
+    var currentUserAddress: String? = null
     var downUrl:            String? = null
     var listUser:           UtilizadoresItem? = null
     var bitmap:             Bitmap? = null
@@ -190,6 +188,7 @@ class Home : AppCompatActivity() {
             myDialog.show()
         }
     }
+
     //Funcao para ir buscar a informacao do CURRENT USER
     private fun getUser() {
 
@@ -202,8 +201,9 @@ class Home : AppCompatActivity() {
                         listUser = UtilizadoresItem.fromHash(querySnapshot.data as HashMap<String, Any?>)
                         listUser?.let { user ->
                             var currentUserNamee = user.nomeUtilizador.toString()
-
                             currentUserName = currentUserNamee
+                            var currentUserAddress2 = user.moradaUtilizador.toString()
+                            currentUserAddress = currentUserAddress2
                         }
                     } ?: run {
                         Toast.makeText(
@@ -242,10 +242,16 @@ class Home : AppCompatActivity() {
         var moradaUtilizador = myDialog.findViewById<EditText>(R.id.editTextUserAddressEdit)
 
         if(moradaUtilizador.text.toString() == "") {
-            Toast.makeText(
-                    this@Home, "Verifique a sua Morada",
-                    Toast.LENGTH_SHORT
-            ).show()
+            val user = UtilizadoresItem(currentUserName, currentUser!!.email, currentUserAddress, downUrl, currentUser.uid)
+            db.collection("users").document(currentUser.uid)
+                .set(user.toHashMap())
+                .addOnSuccessListener {
+                    Log.d("writeBD", "DocumentSnapshot successfully written!")
+                    myDialog.dismiss()
+                }
+                .addOnFailureListener { e ->
+                    Log.w("writeBD", "Error writing document", e)
+                }
         }else{
             val user = UtilizadoresItem(currentUserName, currentUser!!.email, moradaUtilizador.text.toString(), downUrl, currentUser.uid)
             db.collection("users").document(currentUser.uid)
