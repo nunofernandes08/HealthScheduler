@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
@@ -16,7 +17,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.squareup.picasso.Picasso
 import healthscheduler.example.healthscheduler.Login.MainActivity
 import healthscheduler.example.healthscheduler.databinding.ActivityContactsBinding
-import healthscheduler.example.healthscheduler.models.UtilizadoresItem
+import healthscheduler.example.healthscheduler.models.UsersItem
 
 class ContactsActivity : AppCompatActivity() {
 
@@ -26,7 +27,7 @@ class ContactsActivity : AppCompatActivity() {
 
     private var mAdapter : RecyclerView.Adapter<*>? = null
     private var mLayoutManager : LinearLayoutManager? = null
-    private var users : MutableList<UtilizadoresItem> = arrayListOf()
+    private var users : MutableList<UsersItem> = arrayListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,13 +40,11 @@ class ContactsActivity : AppCompatActivity() {
         binding.recyclerViewContacts.layoutManager = mLayoutManager
         mAdapter = ContactsAdapter()
         binding.recyclerViewContacts.itemAnimator = DefaultItemAnimator()
+        binding.recyclerViewContacts.setHasFixedSize(true)
+        binding.recyclerViewContacts.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
         binding.recyclerViewContacts.adapter = mAdapter
 
         currentUserId = FirebaseAuth.getInstance().uid
-
-        /*se existir currentUser, vai buscar à BD todos os users. Se for bem sucedido, verifica se
-        o id do currentUser é igual ao que tem no documento, se nao for igual,
-        adiciona à recyclerView.*/
 
         currentUserId?.let {
 
@@ -57,7 +56,7 @@ class ContactsActivity : AppCompatActivity() {
 
                     for (doc in querySnapshot) {
 
-                        val user = UtilizadoresItem.fromHash(doc.data as HashMap<String, Any?>)
+                        val user = UsersItem.fromHash(doc.data as HashMap<String, Any?>)
 
                         if (user.userID != currentUserId) {
 
@@ -92,21 +91,22 @@ class ContactsActivity : AppCompatActivity() {
 
                 this.isClickable = true
                 this.tag = position
-                textViewUser.text = users[position].nomeUtilizador
+                textViewUser.text = users[position].username
 
-                if (users[position].imagemPath != null) {
+                if (users[position].imagePath != null) {
 
-                    Picasso.get().load(users[position].imagemPath).into(imageViewUser)
+                    Picasso.get().load(users[position].imagePath).into(imageViewUser)
                 }
 
                 this.setOnClickListener {
 
-                    //val user = users[position]
+                    val user = users[position]
 
                     val intent = Intent(this@ContactsActivity, ChatMessagesActivity::class.java)
-                    intent.putExtra(USER_KEY, users[position].userID.toString())
-                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+                    intent.putExtra(USER_KEY, user)
+                    //intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
                     startActivity(intent)
+                    finish()
                 }
             }
         }

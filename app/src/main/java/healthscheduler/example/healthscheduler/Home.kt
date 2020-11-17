@@ -25,7 +25,7 @@ import com.google.firebase.storage.ktx.storage
 import com.squareup.picasso.Picasso
 import healthscheduler.example.healthscheduler.Login.MainActivity
 import healthscheduler.example.healthscheduler.databinding.ActivityHomeBinding
-import healthscheduler.example.healthscheduler.models.UtilizadoresItem
+import healthscheduler.example.healthscheduler.models.UsersItem
 import java.util.*
 
 class Home : AppCompatActivity() {
@@ -38,7 +38,7 @@ class Home : AppCompatActivity() {
     var currentUserName:    String? = null
     var currentUserAddress: String? = null
     var downUrl:            String? = null
-    var listUser:           UtilizadoresItem? = null
+    var listUser:           UsersItem? = null
     var bitmap:             Bitmap? = null
     var curFile:            Uri? = null
 
@@ -65,19 +65,19 @@ class Home : AppCompatActivity() {
             db.collection("users").document(it)
                     .addSnapshotListener { querySnapshot, firebaseFirestoreException ->
                         querySnapshot?.data?.let {
-                            listUser = UtilizadoresItem.fromHash(querySnapshot.data as HashMap<String, Any?>)
+                            listUser = UsersItem.fromHash(querySnapshot.data as HashMap<String, Any?>)
                             listUser?.let { user ->
-                                if (user.imagemPath == "null"){
+                                if (user.imagePath == "null"){
                                     user.userID = querySnapshot.id
-                                    binding.textViewUserNameHome.setText(user.nomeUtilizador)
-                                    binding.textViewUserNumberPhoneHome.setText(user.numeroTelemovelOuEmail)
-                                    binding.textViewUserAddressHome.setText(user.moradaUtilizador)
+                                    binding.textViewUserNameHome.text = user.username
+                                    binding.textViewUserNumberPhoneHome.text = user.phoneNumberEmail
+                                    binding.textViewUserAddressHome.text = user.address
                                 }else{
                                     user.userID = querySnapshot.id
-                                    binding.textViewUserNameHome.setText(user.nomeUtilizador)
-                                    binding.textViewUserNumberPhoneHome.setText(user.numeroTelemovelOuEmail)
-                                    binding.textViewUserAddressHome.setText(user.moradaUtilizador)
-                                    Picasso.get().load(user.imagemPath).into(binding.imageViewUserPhotoHome)
+                                    binding.textViewUserNameHome.text = user.username
+                                    binding.textViewUserNumberPhoneHome.text = user.phoneNumberEmail
+                                    binding.textViewUserAddressHome.text = user.address
+                                    Picasso.get().load(user.imagePath).into(binding.imageViewUserPhotoHome)
                                 }
                             } ?: run {
                                 myDialog = Dialog(this)
@@ -85,9 +85,9 @@ class Home : AppCompatActivity() {
                                 myDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT));
 
                                 myDialog.findViewById<Button>(R.id.buttonRegisterContinuePopWindow).setOnClickListener {
-                                    var nomeUtilizador = myDialog.findViewById<EditText>(R.id.editTextNomeRegisterContinuePopWindow)
-                                    var moradaUtilizador = myDialog.findViewById<EditText>(R.id.editTextMoradaRegisterContinuePopWindow)
-                                    if (nomeUtilizador.text.toString() == "" || moradaUtilizador.text.toString() == "") {
+                                    var username = myDialog.findViewById<EditText>(R.id.editTextNomeRegisterContinuePopWindow)
+                                    var address = myDialog.findViewById<EditText>(R.id.editTextMoradaRegisterContinuePopWindow)
+                                    if (username.text.toString() == "" || address.text.toString() == "") {
                                         Toast.makeText(
                                                 this@Home, "Verifique o seu Nome ou Morada",
                                                 Toast.LENGTH_SHORT
@@ -95,7 +95,7 @@ class Home : AppCompatActivity() {
                                     } else {
                                         val db = FirebaseFirestore.getInstance()
                                         //Colocar "imageRef.name" no imagemPath me baixo
-                                        val user = UtilizadoresItem(nomeUtilizador.text.toString(), currentUser.email, moradaUtilizador.text.toString(), null, currentUser!!.uid)
+                                        val user = UsersItem(username.text.toString(), currentUser.email, address.text.toString(), null, currentUser!!.uid)
                                         db.collection("users").document(currentUser!!.uid)
                                                 .set(user.toHashMap())
                                                 .addOnSuccessListener {
@@ -115,16 +115,16 @@ class Home : AppCompatActivity() {
                             myDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT));
 
                             myDialog.findViewById<Button>(R.id.buttonRegisterContinuePopWindow).setOnClickListener {
-                                var nomeUtilizador = myDialog.findViewById<EditText>(R.id.editTextNomeRegisterContinuePopWindow)
-                                var moradaUtilizador = myDialog.findViewById<EditText>(R.id.editTextMoradaRegisterContinuePopWindow)
-                                if (nomeUtilizador.text.toString() == "" || moradaUtilizador.text.toString() == "") {
+                                var username = myDialog.findViewById<EditText>(R.id.editTextNomeRegisterContinuePopWindow)
+                                var address = myDialog.findViewById<EditText>(R.id.editTextMoradaRegisterContinuePopWindow)
+                                if (username.text.toString() == "" || address.text.toString() == "") {
                                     Toast.makeText(
                                             this@Home, "Verifique o seu Nome ou Morada",
                                             Toast.LENGTH_SHORT
                                     ).show()
                                 } else {
                                     val db = FirebaseFirestore.getInstance()
-                                    val user = UtilizadoresItem(nomeUtilizador.text.toString(), currentUser.email, moradaUtilizador.text.toString(), null, currentUser!!.uid)
+                                    val user = UsersItem(username.text.toString(), currentUser.email, address.text.toString(), null, currentUser!!.uid)
                                     db.collection("users").document(currentUser!!.uid)
                                             .set(user.toHashMap())
                                             .addOnSuccessListener {
@@ -204,12 +204,10 @@ class Home : AppCompatActivity() {
         db.collection("users").document(currentUser!!.uid)
                 .addSnapshotListener { querySnapshot, firebaseFirestoreException ->
                     querySnapshot?.data?.let {
-                        listUser = UtilizadoresItem.fromHash(querySnapshot.data as HashMap<String, Any?>)
+                        listUser = UsersItem.fromHash(querySnapshot.data as HashMap<String, Any?>)
                         listUser?.let { user ->
-                            var currentUserNamee = user.nomeUtilizador.toString()
-                            currentUserName = currentUserNamee
-                            var currentUserAddress2 = user.moradaUtilizador.toString()
-                            currentUserAddress = currentUserAddress2
+                            currentUserName = user.username.toString()
+                            currentUserAddress = user.address.toString()
                         }
                     } ?: run {
                         Toast.makeText(
@@ -245,10 +243,10 @@ class Home : AppCompatActivity() {
         auth = Firebase.auth
         val currentUser = auth.currentUser
 
-        var moradaUtilizador = myDialog.findViewById<EditText>(R.id.editTextUserAddressEdit)
+        var address = myDialog.findViewById<EditText>(R.id.editTextUserAddressEdit)
 
-        if(moradaUtilizador.text.toString() == "") {
-            val user = UtilizadoresItem(currentUserName, currentUser!!.email, currentUserAddress, downUrl, currentUser.uid)
+        if(address.text.toString() == "") {
+            val user = UsersItem(currentUserName, currentUser!!.email, currentUserAddress, downUrl, currentUser.uid)
             db.collection("users").document(currentUser.uid)
                 .set(user.toHashMap())
                 .addOnSuccessListener {
@@ -259,7 +257,7 @@ class Home : AppCompatActivity() {
                     Log.w("writeBD", "Error writing document", e)
                 }
         }else{
-            val user = UtilizadoresItem(currentUserName, currentUser!!.email, moradaUtilizador.text.toString(), downUrl, currentUser.uid)
+            val user = UsersItem(currentUserName, currentUser!!.email, address.text.toString(), downUrl, currentUser.uid)
             db.collection("users").document(currentUser.uid)
                 .set(user.toHashMap())
                 .addOnSuccessListener {

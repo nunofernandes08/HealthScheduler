@@ -2,12 +2,14 @@ package healthscheduler.example.healthscheduler
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.google.firebase.firestore.auth.User
+import com.squareup.picasso.Picasso
 import healthscheduler.example.healthscheduler.databinding.ActivityChatMessagesBinding
-import healthscheduler.example.healthscheduler.models.UtilizadoresItem
+import healthscheduler.example.healthscheduler.models.UsersItem
 
 class ChatMessagesActivity : AppCompatActivity() {
 
-    private var toUserId : String? = null
+    private var toUser : UsersItem? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -16,10 +18,8 @@ class ChatMessagesActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
-        val bundle = intent.extras
-        bundle?.let {
-
-            toUserId = it.getString(ContactsActivity.USER_KEY)
-        }
+        toUser = intent.getParcelableExtra<UsersItem>(ContactsActivity.USER_KEY)
+        binding.textViewTitleChatMessagesContactName.text = toUser?.username.toString()
+        Picasso.get().load(toUser?.imagePath).into(binding.imageViewChatMessagesContactPhoto)
     }
 }

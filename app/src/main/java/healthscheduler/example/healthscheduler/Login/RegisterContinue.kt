@@ -5,17 +5,16 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
-import androidx.core.content.ContentProviderCompat.requireContext
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import healthscheduler.example.healthscheduler.Home
 import healthscheduler.example.healthscheduler.databinding.ActivityRegisterContinueBinding
-import healthscheduler.example.healthscheduler.models.UtilizadoresItem
+import healthscheduler.example.healthscheduler.models.UsersItem
 
 class RegisterContinue : AppCompatActivity() {
 
     var emailOrPhone : String? = null
-    var users : UtilizadoresItem? = null
+    var users : UsersItem? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,16 +30,17 @@ class RegisterContinue : AppCompatActivity() {
         }
 
         binding.buttonContinueRegister.setOnClickListener {
-            var moradaUtilizador = binding.editTextMoradaRegister.text.toString()
-            var nomeUtilizador = binding.editTextNomeRegister.text.toString()
-            if(nomeUtilizador == "" || moradaUtilizador == ""){
+            var address = binding.editTextMoradaRegister.text.toString()
+            var username = binding.editTextNomeRegister.text.toString()
+            if(username == "" || address == ""){
                 Toast.makeText(
                         this@RegisterContinue, "Verifique o seu Nome ou Morada",
                         Toast.LENGTH_SHORT
                 ).show()
             }else {
                 val db = FirebaseFirestore.getInstance()
-                val user = UtilizadoresItem(nomeUtilizador, emailOrPhone, moradaUtilizador, "", currentUser!!.uid)
+                val user = UsersItem(username, emailOrPhone, address, "", currentUser!!.uid)
+
                 db.collection("users").document(currentUser!!.uid)
                         .set(user.toHashMap())
                         .addOnSuccessListener {
