@@ -46,7 +46,7 @@ class ContactsActivity : AppCompatActivity() {
         binding.recyclerViewContacts.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
         binding.recyclerViewContacts.adapter = mAdapter
 
-        currentUser?.let {
+        currentUser.let {
 
             referenceUsers.addSnapshotListener { snapshot, error ->
 
@@ -79,8 +79,8 @@ class ContactsActivity : AppCompatActivity() {
 
             holder.v.apply {
 
-                var imageViewUser = findViewById<ImageView>(R.id.imageViewChatContactsContactImage)
-                var textViewUser = findViewById<TextView>(R.id.textViewChatContactsContactName)
+                val imageViewUser = findViewById<ImageView>(R.id.imageViewChatContactsContactImage)
+                val textViewUser = findViewById<TextView>(R.id.textViewChatContactsContactName)
 
                 this.isClickable = true
                 this.tag = position
@@ -97,7 +97,6 @@ class ContactsActivity : AppCompatActivity() {
 
                     val intent = Intent(this@ContactsActivity, ChatMessagesActivity::class.java)
                     intent.putExtra(USER_KEY, user)
-                    //intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
                     startActivity(intent)
                     finish()
                 }

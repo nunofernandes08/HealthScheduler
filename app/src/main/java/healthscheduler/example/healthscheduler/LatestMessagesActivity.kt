@@ -3,6 +3,7 @@ package healthscheduler.example.healthscheduler
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,6 +19,9 @@ import com.squareup.picasso.Picasso
 import healthscheduler.example.healthscheduler.databinding.ActivityLatestMessagesBinding
 import healthscheduler.example.healthscheduler.models.MessageItem
 import healthscheduler.example.healthscheduler.models.UsersItem
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.HashMap
 
 class LatestMessagesActivity : AppCompatActivity() {
 
@@ -30,7 +34,7 @@ class LatestMessagesActivity : AppCompatActivity() {
     private var latestMessages : MutableList<MessageItem> = arrayListOf()
     private var mAdapter : RecyclerView.Adapter<*>? = null
     private var mLayoutManager : LinearLayoutManager? = null
-    private var users : MutableList<MessageItem> = arrayListOf()
+    private var users : MutableList<UsersItem> = arrayListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -89,6 +93,9 @@ class LatestMessagesActivity : AppCompatActivity() {
 
             holder.v.apply {
 
+                var user : UsersItem? = null
+                var toUserId : String? = null
+
                 val textViewChatHomeLatestContactLatestMessage = findViewById<TextView>(R.id.textViewChatHomeLatestContactLatestMessage)
                 val textViewChatHomeLatestContactName = findViewById<TextView>(R.id.textViewChatHomeLatestContactName)
                 val textViewChatHomeLatestContactDate = findViewById<TextView>(R.id.textViewChatHomeLatestContactDate)
@@ -97,14 +104,46 @@ class LatestMessagesActivity : AppCompatActivity() {
                 this.isClickable = true
                 this.tag = position
 
+                if (latestMessages[position].fromId == currentUser.userID) {
 
+                    toUserId = latestMessages[position].toId.toString()
+                }
+                else {
+
+                    toUserId = latestMessages[position].fromId.toString()
+                }
+
+                val ref = FirebaseFirestore.getInstance().collection("users").document(toUserId)
+
+
+                //ver se esta a funcionar snapshotlistener
+                ref.addSnapshotListener { snapshot, error ->
+
+                    if (snapshot?.data != null) {
+
+                        user = UsersItem.fromHash(snapshot.data as HashMap<String, Any?>)
+                    }
+                }
+
+                textViewChatHomeLatestContactLatestMessage.text = latestMessages[position].message
+                textViewChatHomeLatestContactName.text = user?.username
+                val sdf = SimpleDateFormat("dd/MM/yy hh:mm a", Locale.UK)
+                val netDate = Date(latestMessages[position].timeStamp?.times(1000)!!)
+                val date = sdf.format(netDate)
+                textViewChatHomeLatestContactDate.text = date
+                Picasso.get().load(user?.imagePath).into(imageViewChatHomeLatestContactImage)
+
+                this.setOnClickListener {
+
+                    val intent = Intent(this@LatestMessagesActivity, ChatMessagesActivity::class.java)
+                    intent.putExtra(ContactsActivity.USER_KEY, user)
+                    startActivity(intent)
+                }
             }
         }
 
         override fun getItemCount(): Int {
             return latestMessages.size
         }
-
-
     }
 }
