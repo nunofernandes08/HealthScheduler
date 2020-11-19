@@ -21,9 +21,9 @@ import healthscheduler.example.healthscheduler.models.UsersItem
 
 class ContactsActivity : AppCompatActivity() {
 
-    private var currentUserId : String? = null
+    private lateinit var currentUser : UsersItem
     private val db = FirebaseFirestore.getInstance()
-    private var ref = db.collection("users")
+    private var referenceUsers = db.collection("users")
 
     private var mAdapter : RecyclerView.Adapter<*>? = null
     private var mLayoutManager : LinearLayoutManager? = null
@@ -36,6 +36,8 @@ class ContactsActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
+        currentUser = intent.getParcelableExtra<UsersItem>(USER_KEY)!!
+
         mLayoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         binding.recyclerViewContacts.layoutManager = mLayoutManager
         mAdapter = ContactsAdapter()
@@ -44,19 +46,17 @@ class ContactsActivity : AppCompatActivity() {
         binding.recyclerViewContacts.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
         binding.recyclerViewContacts.adapter = mAdapter
 
-        currentUserId = FirebaseAuth.getInstance().uid
+        currentUser?.let {
 
-        currentUserId?.let {
-
-            ref.addSnapshotListener { querySnapshot, Exception ->
+            referenceUsers.addSnapshotListener { snapshot, error ->
 
                 users.clear()
-                if (querySnapshot != null) {
+                if (snapshot != null) {
 
-                    for (doc in querySnapshot) {
+                    for (doc in snapshot) {
 
                         val user = UsersItem.fromHash(doc.data as HashMap<String, Any?>)
-                        if (user.userID != currentUserId) {
+                        if (user.userID != currentUser.userID) {
 
                             users.add(user)
                         }
@@ -64,11 +64,6 @@ class ContactsActivity : AppCompatActivity() {
                 }
                 mAdapter?.notifyDataSetChanged()
             }
-        } ?: run {
-
-            val intent = Intent(this, MainActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
-            startActivity(intent)
         }
     }
 
@@ -91,7 +86,7 @@ class ContactsActivity : AppCompatActivity() {
                 this.tag = position
                 textViewUser.text = users[position].username
 
-                if (users[position].imagePath != null) {
+                if (users[position].imagePath != "") {
 
                     Picasso.get().load(users[position].imagePath).into(imageViewUser)
                 }

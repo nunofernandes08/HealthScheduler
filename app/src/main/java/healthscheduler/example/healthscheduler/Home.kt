@@ -169,6 +169,7 @@ class Home : AppCompatActivity() {
         //Botao para ir ao Chat
         binding.buttonChatHome.setOnClickListener {
             val intent = Intent(this, LatestMessagesActivity::class.java)
+            intent.putExtra(ContactsActivity.USER_KEY, listUser)
             startActivity(intent)
         }
 

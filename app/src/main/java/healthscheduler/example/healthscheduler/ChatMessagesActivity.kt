@@ -42,6 +42,14 @@ class ChatMessagesActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
+        toUser = intent.getParcelableExtra<UsersItem>(ContactsActivity.USER_KEY)
+        binding.textViewTitleChatMessagesContactName.text = toUser?.username.toString()
+
+        if (toUser?.imagePath != "") {
+
+            Picasso.get().load(toUser?.imagePath).into(binding.imageViewChatMessagesContactPhoto)
+        }
+
         mLayoutManager = LinearLayoutManager(
             this, LinearLayoutManager.VERTICAL, false)
         binding.recyclerViewChatLog.layoutManager = mLayoutManager
@@ -49,17 +57,13 @@ class ChatMessagesActivity : AppCompatActivity() {
         binding.recyclerViewChatLog.itemAnimator = DefaultItemAnimator()
         binding.recyclerViewChatLog.adapter = mAdapter
 
-        toUser = intent.getParcelableExtra<UsersItem>(ContactsActivity.USER_KEY)
-        binding.textViewTitleChatMessagesContactName.text = toUser?.username.toString()
-        Picasso.get().load(toUser?.imagePath).into(binding.imageViewChatMessagesContactPhoto)
-
         refCurrentUser
             .document(currentUid.toString())
-            .addSnapshotListener { querySnapshot, Exception ->
+            .addSnapshotListener { snapshot, error ->
 
-            if (querySnapshot != null && querySnapshot.exists()) {
+            if (snapshot != null && snapshot.exists()) {
 
-                currentUser = UsersItem.fromHash(querySnapshot.data as HashMap<String, Any?>)
+                currentUser = UsersItem.fromHash(snapshot.data as HashMap<String, Any?>)
             }
         }
 
@@ -67,19 +71,20 @@ class ChatMessagesActivity : AppCompatActivity() {
             .document(currentUid.toString())
             .collection(toUser?.userID!!)
             .orderBy("timeStamp")
-            .addSnapshotListener { querySnapshot, Exception ->
+            .addSnapshotListener { snapshot, error ->
 
             messagesList.clear()
-            if (querySnapshot != null) {
+            if (snapshot != null) {
 
-                for (doc in querySnapshot) {
+                for (doc in snapshot) {
 
                     message = MessageItem.fromHash(doc.data as HashMap<String, Any?>)
                     messagesList.add(message!!)
                 }
             }
                 mAdapter?.notifyDataSetChanged()
-                binding.recyclerViewChatLog.scrollToPosition((mAdapter as ChatMessagesAdapter).itemCount -1)
+                binding.recyclerViewChatLog.scrollToPosition(
+                        (mAdapter as ChatMessagesAdapter).itemCount -1)
         }
 
         binding.buttonChatMessageSendTextMessage.setOnClickListener {
@@ -94,12 +99,14 @@ class ChatMessagesActivity : AppCompatActivity() {
                 .document(toUser?.userID!!)
                 .collection(currentUser?.userID!!)
 
-            message = MessageItem(text, currentUser?.userID!!, toUser?.userID!!,System.currentTimeMillis() / 1000,"text")
+            message = MessageItem(text, currentUser?.userID!!, toUser?.userID!!,
+                    System.currentTimeMillis() / 1000,"text")
 
             fromReference.add(message!!.toHashMap()).addOnSuccessListener {
 
                 binding.editTextChatMessagesWriteMessage.text.clear()
-                binding.recyclerViewChatLog.scrollToPosition((mAdapter as ChatMessagesAdapter).itemCount -1)
+                binding.recyclerViewChatLog.scrollToPosition(
+                        (mAdapter as ChatMessagesAdapter).itemCount -1)
             }
 
             toReference.add(message!!.toHashMap())
@@ -107,15 +114,15 @@ class ChatMessagesActivity : AppCompatActivity() {
             val fromLatestReference = FirebaseFirestore.getInstance()
                 .collection("latest_messages")
                 .document(currentUser?.userID!!)
-                .collection(toUser?.userID!!)
-                .document("latest_message")
+                .collection("latest_message")
+                .document(toUser?.userID!!)
             fromLatestReference.set(message!!.toHashMap())
 
             val toLatestReference = FirebaseFirestore.getInstance()
                 .collection("latest_messages")
                 .document(toUser?.userID!!)
-                .collection(currentUser?.userID!!)
-                .document("latest_message")
+                .collection("latest_message")
+                .document(currentUser?.userID!!)
             toLatestReference.set(message!!.toHashMap())
         }
     }
@@ -170,10 +177,12 @@ class ChatMessagesActivity : AppCompatActivity() {
             when (viewType) {
 
                 1 -> {
-                    return ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.row_text_message_from, parent, false))
+                    return ViewHolder(LayoutInflater.from(parent.context)
+                            .inflate(R.layout.row_text_message_from, parent, false))
                 }
                 2 -> {
-                    return ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.row_text_message_to, parent, false))
+                    return ViewHolder(LayoutInflater.from(parent.context)
+                            .inflate(R.layout.row_text_message_to, parent, false))
                 }
                 3 -> {
                     //return ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.row_image_message_from, parent, false))
@@ -188,7 +197,8 @@ class ChatMessagesActivity : AppCompatActivity() {
                     //return ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.row_audio_message_to, parent, false))
                 }
             }
-            return ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.row_text_message_from, parent, false))
+            return ViewHolder(LayoutInflater.from(parent.context)
+                    .inflate(R.layout.row_text_message_from, parent, false))
         }
 
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -201,9 +211,12 @@ class ChatMessagesActivity : AppCompatActivity() {
 
                         holder.v.apply {
 
-                            val textViewChatMessageFrom = findViewById<TextView>(R.id.textViewChatMessageFrom)
-                            val imageViewChatMessageContactPhotoFrom = findViewById<ImageView>(R.id.imageViewChatMessageContactPhotoFrom)
-                            val textViewChatMessageTimeStampFrom = findViewById<TextView>(R.id.textViewChatMessageTimeStampFrom)
+                            val textViewChatMessageFrom = findViewById<TextView>(
+                                    R.id.textViewChatMessageFrom)
+                            val imageViewChatMessageContactPhotoFrom = findViewById<ImageView>(
+                                    R.id.imageViewChatMessageContactPhotoFrom)
+                            val textViewChatMessageTimeStampFrom = findViewById<TextView>(
+                                    R.id.textViewChatMessageTimeStampFrom)
 
                             textViewChatMessageFrom.text = messagesList[position].message
 
@@ -212,16 +225,22 @@ class ChatMessagesActivity : AppCompatActivity() {
                             val date = sdf.format(netDate)
                             textViewChatMessageTimeStampFrom.text = date
 
-                            Picasso.get().load(toUser?.imagePath).into(imageViewChatMessageContactPhotoFrom)
+                            if (toUser?.imagePath != "") {
+
+                                Picasso.get().load(toUser?.imagePath).into(imageViewChatMessageContactPhotoFrom)
+                            }
                         }
                     }
                     else {
 
                         holder.v.apply {
 
-                            val textViewChatMessageTo = findViewById<TextView>(R.id.textViewChatMessageTo)
-                            val imageViewChatMessageContactPhotoTo = findViewById<ImageView>(R.id.imageViewChatMessageContactPhotoTo)
-                            val textViewChatMessageTimeStampTo = findViewById<TextView>(R.id.textViewChatMessageTimeStampTo)
+                            val textViewChatMessageTo = findViewById<TextView>(
+                                    R.id.textViewChatMessageTo)
+                            val imageViewChatMessageContactPhotoTo = findViewById<ImageView>(
+                                    R.id.imageViewChatMessageContactPhotoTo)
+                            val textViewChatMessageTimeStampTo = findViewById<TextView>(
+                                    R.id.textViewChatMessageTimeStampTo)
 
                             textViewChatMessageTo.text = messagesList[position].message
 
@@ -230,7 +249,10 @@ class ChatMessagesActivity : AppCompatActivity() {
                             val date = sdf.format(netDate)
                             textViewChatMessageTimeStampTo.text = date
 
-                            Picasso.get().load(currentUser?.imagePath).into(imageViewChatMessageContactPhotoTo)
+                            if (currentUser?.imagePath != "") {
+
+                                Picasso.get().load(currentUser?.imagePath).into(imageViewChatMessageContactPhotoTo)
+                            }
                         }
                     }
                 }
