@@ -5,16 +5,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content" >
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="4dp" >
 
     <ImageView
         android:id="@+id/imageViewChatMessageContactPhotoFrom"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/imageviewfotoperfilhome" />
@@ -23,13 +21,23 @@
         android:id="@+id/textViewChatMessageFrom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
-        android:padding="8dp"
-        android:textSize="15sp"
         android:background="@android:color/darker_gray"
-        android:maxWidth="240dp"
+        android:maxWidth="220dp"
+        android:padding="4dp"
         android:text="This is my message"
+        android:textSize="15sp"
         app:layout_constraintEnd_toStartOf="@+id/imageViewChatMessageContactPhotoFrom"
-        app:layout_constraintTop_toTopOf="@+id/imageViewChatMessageContactPhotoFrom" />
+        app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/textViewChatMessageTimeStampFrom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:text="00/00"
+        android:textSize="11sp"
+        app:layout_constraintEnd_toEndOf="@+id/textViewChatMessageFrom"
+        app:layout_constraintTop_toBottomOf="@+id/textViewChatMessageFrom" />
 </androidx.constraintlayout.widget.ConstraintLayout>

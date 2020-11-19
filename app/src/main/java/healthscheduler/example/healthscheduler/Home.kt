@@ -67,7 +67,7 @@ class Home : AppCompatActivity() {
                         querySnapshot?.data?.let {
                             listUser = UsersItem.fromHash(querySnapshot.data as HashMap<String, Any?>)
                             listUser?.let { user ->
-                                if (user.imagePath == "null"){
+                                if (user.imagePath == ""){
                                     user.userID = querySnapshot.id
                                     binding.textViewUserNameHome.text = user.username
                                     binding.textViewUserNumberPhoneHome.text = user.phoneNumberEmail

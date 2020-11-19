@@ -51,13 +51,11 @@ class ContactsActivity : AppCompatActivity() {
             ref.addSnapshotListener { querySnapshot, Exception ->
 
                 users.clear()
-
                 if (querySnapshot != null) {
 
                     for (doc in querySnapshot) {
 
                         val user = UsersItem.fromHash(doc.data as HashMap<String, Any?>)
-
                         if (user.userID != currentUserId) {
 
                             users.add(user)
