@@ -31,10 +31,11 @@ class LatestMessagesActivity : AppCompatActivity() {
     private var refLatestMessages = db.collection("latest_messages")
 
     private var message : MessageItem? = null
+    private var user : UsersItem? = null
     private var latestMessages : MutableList<MessageItem> = arrayListOf()
+    private var users : MutableList<UsersItem> = arrayListOf()
     private var mAdapter : RecyclerView.Adapter<*>? = null
     private var mLayoutManager : LinearLayoutManager? = null
-    private var users : MutableList<UsersItem> = arrayListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,21 +58,42 @@ class LatestMessagesActivity : AppCompatActivity() {
         binding.recyclerViewLatestMessages.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
         binding.recyclerViewLatestMessages.adapter = mAdapter
 
+        currentUser.let {
+
+            referenceUsers.addSnapshotListener { snapshot, error ->
+
+                users.clear()
+                if (snapshot != null) {
+
+                    for (doc in snapshot) {
+
+                        val user = UsersItem.fromHash(doc.data as HashMap<String, Any?>)
+                        if (user.userID != currentUser.userID) {
+
+                            users.add(user)
+                        }
+                    }
+                }
+                mAdapter?.notifyDataSetChanged()
+            }
+        }
+
         refLatestMessages.document(currentUser.userID.toString())
                 .collection("latest_message")
                 .orderBy("timeStamp", Query.Direction.DESCENDING)
                 .addSnapshotListener { snapshot, error ->
 
-            if (snapshot != null) {
+                    latestMessages.clear()
+                    if (snapshot != null) {
 
-                for (doc in snapshot) {
+                        for (doc in snapshot) {
 
-                    message = MessageItem.fromHash(doc.data as HashMap<String, Any?>)
-                    latestMessages.add(message!!)
-                }
-            }
+                            message = MessageItem.fromHash(doc.data as HashMap<String, Any?>)
+                            latestMessages.add(message!!)
+                        }
+                    }
                     mAdapter?.notifyDataSetChanged()
-        }
+                }
 
         binding.floatingActionButtonSendNewMessage.setOnClickListener {
 
@@ -93,8 +115,8 @@ class LatestMessagesActivity : AppCompatActivity() {
 
             holder.v.apply {
 
-                var user : UsersItem? = null
-                var toUserId : String? = null
+                var toUserId: String?
+                //var userLatest : UsersItem?
 
                 val textViewChatHomeLatestContactLatestMessage = findViewById<TextView>(R.id.textViewChatHomeLatestContactLatestMessage)
                 val textViewChatHomeLatestContactName = findViewById<TextView>(R.id.textViewChatHomeLatestContactName)
@@ -113,17 +135,23 @@ class LatestMessagesActivity : AppCompatActivity() {
                     toUserId = latestMessages[position].fromId.toString()
                 }
 
-                val ref = FirebaseFirestore.getInstance().collection("users").document(toUserId)
+                for (item in users) {
 
+                    if (item.userID == toUserId) {
 
-                //ver se esta a funcionar snapshotlistener
-                ref.addSnapshotListener { snapshot, error ->
+                        user = item
+                    }
+                }
+
+                /*//ver se esta a funcionar snapshotlistener
+                referenceUsers.document(toUserId).addSnapshotListener { snapshot, error ->
 
                     if (snapshot?.data != null) {
 
                         user = UsersItem.fromHash(snapshot.data as HashMap<String, Any?>)
                     }
-                }
+                    users.add(user!!)
+                }*/
 
                 textViewChatHomeLatestContactLatestMessage.text = latestMessages[position].message
                 textViewChatHomeLatestContactName.text = user?.username
@@ -133,12 +161,20 @@ class LatestMessagesActivity : AppCompatActivity() {
                 textViewChatHomeLatestContactDate.text = date
                 Picasso.get().load(user?.imagePath).into(imageViewChatHomeLatestContactImage)
 
-                /*this.setOnClickListener {
+                this.setOnClickListener {
+
+                    for (item in users) {
+
+                        if (item.userID == latestMessages[position].toId || item.userID == latestMessages[position].fromId) {
+
+                            user = item
+                        }
+                    }
 
                     val intent = Intent(this@LatestMessagesActivity, ChatMessagesActivity::class.java)
                     intent.putExtra(ContactsActivity.USER_KEY, user)
                     startActivity(intent)
-                }*/
+                }
             }
         }
 
