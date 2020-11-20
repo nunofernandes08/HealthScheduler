@@ -133,12 +133,12 @@ class LatestMessagesActivity : AppCompatActivity() {
                 textViewChatHomeLatestContactDate.text = date
                 Picasso.get().load(user?.imagePath).into(imageViewChatHomeLatestContactImage)
 
-                this.setOnClickListener {
+                /*this.setOnClickListener {
 
                     val intent = Intent(this@LatestMessagesActivity, ChatMessagesActivity::class.java)
                     intent.putExtra(ContactsActivity.USER_KEY, user)
                     startActivity(intent)
-                }
+                }*/
             }
         }
 
