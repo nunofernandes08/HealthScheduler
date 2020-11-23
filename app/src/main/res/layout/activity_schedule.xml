@@ -31,11 +31,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/imageViewPhotoUser"
         android:layout_width="55dp"
         android:layout_height="55dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="15dp"
         app:layout_constraintEnd_toEndOf="@+id/imageViewFadeSchedule"
         app:layout_constraintHorizontal_bias="0.923"

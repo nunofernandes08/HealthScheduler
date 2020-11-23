@@ -10,10 +10,17 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
+import com.squareup.picasso.Picasso
 import healthscheduler.example.healthscheduler.models.ScheduleItem
+import healthscheduler.example.healthscheduler.models.UsersItem
+import kotlinx.android.synthetic.main.activity_schedule.*
+import kotlinx.android.synthetic.main.row_schedule.*
 import java.util.ArrayList
+import java.util.HashMap
 
 class Schedule : AppCompatActivity() {
+
+    private lateinit var currentUser2 : UsersItem
 
     var listSchedule: MutableList<ScheduleItem> = ArrayList()
     var scheduleAdapter: Schedule.ScheduleAdapter? = null
@@ -22,11 +29,15 @@ class Schedule : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
 
+    var listUser:           UsersItem? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_schedule)
 
         val listViewSchedule = findViewById<ListView>(R.id.listViewSchedule)
+
+        photoUser()
 
         // Initialize Firebase Auth
         auth = Firebase.auth
@@ -56,6 +67,31 @@ class Schedule : AppCompatActivity() {
                 }?: run{
                     Toast.makeText(this@Schedule, "De momento não tem consultas",
                             Toast.LENGTH_SHORT).show()
+                }
+        }
+    }
+
+    private fun photoUser(){
+        auth = Firebase.auth
+        val currentUser = auth.currentUser
+
+        currentUser!!.uid?.let {
+            db.collection("users").document(it)
+                .addSnapshotListener { querySnapshot, firebaseFirestoreException ->
+                    querySnapshot?.data?.let {
+                        listUser = UsersItem.fromHash(querySnapshot.data as HashMap<String, Any?>)
+                        listUser?.let { user ->
+                            if(user.imagePath != ""){
+                                Picasso.get().load(user.imagePath).into(imageViewPhotoUser)
+                            }else{
+                                Toast.makeText(this@Schedule, "Não tem foto de perfil",
+                                        Toast.LENGTH_SHORT).show()
+                            }
+                        }?: run{
+                            Toast.makeText(this@Schedule, "Sem sessão iniciada",
+                                    Toast.LENGTH_SHORT).show()
+                        }
+                    }
                 }
         }
     }

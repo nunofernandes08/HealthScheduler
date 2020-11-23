@@ -50,7 +50,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/fundobrancoperfil" />
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/imageViewUserPhotoHome"
         android:layout_width="82dp"
         android:layout_height="82dp"
