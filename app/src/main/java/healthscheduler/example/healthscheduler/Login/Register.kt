@@ -1,18 +1,24 @@
 package healthscheduler.example.healthscheduler.Login
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.google.firebase.FirebaseException
 import com.google.firebase.auth.*
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import healthscheduler.example.healthscheduler.Home
+import healthscheduler.example.healthscheduler.PasswordStrength
 import healthscheduler.example.healthscheduler.databinding.ActivityRegisterBinding
+import kotlinx.android.synthetic.main.activity_register.*
 import java.util.concurrent.TimeUnit
+import androidx.lifecycle.Observer
 
 
 class Register : AppCompatActivity() {
@@ -26,6 +32,7 @@ class Register : AppCompatActivity() {
     private var verificationInProgress = false
     private var storedVerificationId: String? = ""
 
+    var color: Int = Color.RED
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,6 +45,22 @@ class Register : AppCompatActivity() {
         binding.buttonContinueRegister.setOnClickListener {
             registerUser(binding)
         }
+
+        val passwordStrength = PasswordStrength()
+        editTextPasswordRegister.addTextChangedListener(passwordStrength)
+
+        passwordStrength.strengthLevel.observe(this, Observer{
+            strengthLevel -> displayStrengthLevel(strengthLevel)
+        })
+
+        passwordStrength.strengthColor.observe(this, Observer {
+            strengthColor -> color = strengthColor
+        })
+    }
+
+    private fun displayStrengthLevel(strengthLevel: String) {
+        textViewPasswordCalculator.text = strengthLevel
+        textViewPasswordCalculator.setTextColor(ContextCompat.getColor(this, color))
     }
 
     private fun registerUser(binding: ActivityRegisterBinding) {
@@ -77,12 +100,12 @@ class Register : AppCompatActivity() {
                     val callbacks = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
                         override fun onVerificationCompleted(credential: PhoneAuthCredential) {
                             signInWithPhoneAuthCredential(credential)
-                            binding.buttonContinueRegisterContinue.setOnClickListener {
+                            /*binding.buttonContinueRegisterContinue.setOnClickListener {
                                 val intent = Intent(this@Register, Home::class.java)
                                 intent.putExtra("codigoVerificacao", storedVerificationId)
                                 intent.putExtra("emailOrPhone", emailOrPhone)
                                 startActivity(intent)
-                            }
+                            }*/
                         }
 
                         override fun onVerificationFailed(e: FirebaseException) {
@@ -103,9 +126,9 @@ class Register : AppCompatActivity() {
 
                             binding.buttonContinueRegister.visibility = View.GONE
 
-                            binding.textViewCodeSent.visibility = View.VISIBLE
+                            /*binding.textViewCodeSent.visibility = View.VISIBLE
                             binding.editTextCodeSent.visibility = View.VISIBLE
-                            binding.buttonContinueRegisterContinue.visibility = View.VISIBLE
+                            binding.buttonContinueRegisterContinue.visibility = View.VISIBLE*/
                         }
                     }
 
@@ -148,7 +171,6 @@ class Register : AppCompatActivity() {
             }
     }
 }
-
 
 /* << --------------------------------------- COMENTÁRIOS --------------------------------------- >>
 
