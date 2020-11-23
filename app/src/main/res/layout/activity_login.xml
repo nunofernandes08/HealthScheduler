@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -11,24 +12,32 @@
         android:layout_width="200dp"
         android:layout_height="200dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/logo_login"
         tools:ignore="ContentDescription"/>
+
+    <TextView
+        android:id="@+id/textViewJaTemContaLogin"
+        android:layout_width="140dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto"
+        android:text="Ja tem alguma conta?"
+        android:textColor="#21736F"
+        android:textSize="32sp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageViewLogin"
+        app:layout_constraintEnd_toStartOf="@+id/imageViewLogin"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageViewLogin" />
 
     <ImageView
         android:id="@+id/imageViewFormLogin"
         android:layout_width="330dp"
         android:layout_height="330dp"
-        android:layout_marginTop="10dp"
         android:background="@drawable/formulariologin"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/buttonInfoLogin"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageViewLogin"
-        app:layout_constraintVertical_bias="0.125"
         tools:ignore="ContentDescription" />
 
     <TextView
@@ -44,6 +53,25 @@
         app:layout_constraintStart_toStartOf="@+id/imageViewFormLogin"
         app:layout_constraintTop_toTopOf="@+id/imageViewFormLogin" />
 
+    <EditText
+        android:id="@+id/editTextEmailLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#FFFFFF"
+        android:ems="13"
+        android:fontFamily="@font/roboto"
+        android:hint="@string/email_login"
+        android:importantForAutofill="no"
+        android:inputType="textEmailAddress"
+        android:labelFor="@id/textViewEmailLogin"
+        android:textColor="#FFFFFF"
+        android:textColorHighlight="#FFFFFF"
+        android:textColorHint="#36BFB8"
+        android:textColorLink="#FFFFFF"
+        app:layout_constraintStart_toStartOf="@+id/textViewEmailLogin"
+        app:layout_constraintTop_toBottomOf="@+id/textViewEmailLogin" />
+
+
     <TextView
         android:id="@+id/textViewPasswordLogin"
         android:layout_width="wrap_content"
@@ -58,31 +86,9 @@
         app:layout_constraintTop_toBottomOf="@+id/editTextEmailLogin" />
 
     <EditText
-        android:id="@+id/editTextEmailLogin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
-        android:backgroundTint="#FFFFFF"
-        android:ems="13"
-        android:fontFamily="@font/roboto"
-        android:hint="@string/email_login"
-        android:importantForAutofill="no"
-        android:inputType="textEmailAddress"
-        android:labelFor="@id/textViewEmailLogin"
-        android:textColor="#FFFFFF"
-        android:textColorHighlight="#FFFFFF"
-        android:textColorHint="#36BFB8"
-        android:textColorLink="#FFFFFF"
-        app:layout_constraintEnd_toEndOf="@+id/imageViewFormLogin"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/imageViewFormLogin"
-        app:layout_constraintTop_toBottomOf="@+id/textViewEmailLogin" />
-
-    <EditText
         android:id="@+id/editTextPasswordLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
         android:backgroundTint="#FFFFFF"
         android:ems="13"
         android:fontFamily="@font/roboto"
@@ -93,17 +99,25 @@
         android:textColorHighlight="#FFFFFF"
         android:textColorHint="#36BFB8"
         android:textColorLink="#FFFFFF"
-        app:layout_constraintEnd_toEndOf="@+id/imageViewFormLogin"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/imageViewFormLogin"
+        app:layout_constraintStart_toStartOf="@+id/textViewPasswordLogin"
         app:layout_constraintTop_toBottomOf="@+id/textViewPasswordLogin" />
+
+    <TextView
+        android:id="@+id/textViewRecoveryPasswordLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/roboto"
+        android:text="Esqueceu-se da palavra-passe?"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="@+id/editTextPasswordLogin"
+        app:layout_constraintTop_toBottomOf="@+id/editTextPasswordLogin" />
 
     <Button
         android:id="@+id/buttonLogin"
         android:layout_width="222dp"
         android:layout_height="56dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginBottom="24dp"
         android:background="@drawable/buttonwhite"
         android:fontFamily="@font/roboto"
         android:text="@string/entrar"
@@ -113,8 +127,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/imageViewFormLogin"
         app:layout_constraintEnd_toEndOf="@+id/imageViewFormLogin"
         app:layout_constraintStart_toStartOf="@+id/imageViewFormLogin"
-        app:layout_constraintTop_toBottomOf="@+id/textViewRecoveryPasswordLogin"
-        app:layout_constraintVertical_bias="0.851" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewRecoveryPasswordLogin" />
 
     <Button
         android:id="@+id/buttonInfoLogin"
@@ -125,36 +138,5 @@
         app:backgroundTintMode="multiply"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
-
-    <TextView
-        android:id="@+id/textViewJaTemContaLogin"
-        android:layout_width="140dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="46dp"
-        android:layout_marginEnd="16dp"
-        android:fontFamily="@font/roboto"
-        android:text="Ja tem alguma conta?"
-        android:textColor="#21736F"
-        android:textSize="32sp"
-        app:layout_constraintEnd_toStartOf="@+id/imageViewLogin"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textViewRecoveryPasswordLogin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/roboto"
-        android:text="Esqueceu-se da palavra-passe?"
-        android:textColor="@color/white"
-        android:textSize="15sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/editTextPasswordLogin"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/editTextPasswordLogin"
-        app:layout_constraintTop_toBottomOf="@+id/editTextPasswordLogin"
-        app:layout_constraintVertical_bias="0.028" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

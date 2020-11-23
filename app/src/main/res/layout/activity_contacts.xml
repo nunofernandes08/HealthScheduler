@@ -33,7 +33,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/imageViewFadeChatContacts" />
 
-    <ImageView
+    <!--<ImageView
         android:id="@+id/imageViewChatHomePhotoUser"
         android:layout_width="40dp"
         android:layout_height="40dp"
@@ -41,7 +41,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/imageViewFadeChatContacts"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/imageViewFadeChatContacts"
-        app:srcCompat="@drawable/ic_baseline_arrow_back_24" />
+        app:srcCompat="@drawable/ic_baseline_arrow_back_24" />-->
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewContacts"

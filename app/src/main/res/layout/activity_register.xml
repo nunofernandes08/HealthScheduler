@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -12,23 +13,31 @@
         android:layout_width="200dp"
         android:layout_height="200dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/logoregister"
         tools:ignore="ContentDescription" />
+
+    <TextView
+        android:id="@+id/textViewJaTemContaLogin"
+        android:layout_width="140dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto"
+        android:text="Primeiro passo connosco!"
+        android:textColor="#FFFFFF"
+        android:textSize="32sp"
+        app:layout_constraintBottom_toBottomOf="@+id/logoRegister"
+        app:layout_constraintEnd_toStartOf="@+id/logoRegister"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/logoRegister" />
 
     <ImageView
         android:id="@+id/formRegister"
         android:layout_width="338dp"
         android:layout_height="400dp"
-        android:layout_marginTop="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/logoRegister"
-        app:layout_constraintVertical_bias="0.225"
         app:srcCompat="@drawable/rectangleregistertwo"
         tools:ignore="ContentDescription" />
 
@@ -45,23 +54,10 @@
         app:layout_constraintStart_toStartOf="@+id/formRegister"
         app:layout_constraintTop_toTopOf="@+id/formRegister" />
 
-    <TextView
-        android:id="@+id/textViewPasswordCalculator"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:fontFamily="@font/roboto"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="@+id/editTextPasswordRegister"
-        app:layout_constraintHorizontal_bias="0.908"
-        app:layout_constraintStart_toStartOf="@+id/editTextPasswordRegister"
-        app:layout_constraintTop_toBottomOf="@+id/textViewPasswordRegister" />
-
     <EditText
         android:id="@+id/editTextEmailOrPhoneRegister"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="33dp"
         android:backgroundTint="#36BFB8"
         android:ems="13"
         android:fontFamily="@font/roboto"
@@ -71,9 +67,7 @@
         android:textColorHighlight="#36BFB8"
         android:textColorHint="#FFFFFF"
         android:textColorLink="#36BFB8"
-        app:layout_constraintEnd_toEndOf="@+id/formRegister"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/formRegister"
+        app:layout_constraintStart_toStartOf="@+id/textViewEmailRegister"
         app:layout_constraintTop_toBottomOf="@+id/textViewEmailRegister" />
 
     <TextView
@@ -94,7 +88,6 @@
         android:id="@+id/editTextPasswordRegister"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="33dp"
         android:backgroundTint="#36BFB8"
         android:ems="13"
         android:fontFamily="@font/roboto"
@@ -104,39 +97,20 @@
         android:textColorHighlight="#36BFB8"
         android:textColorHint="#FFFFFF"
         android:textColorLink="#36BFB8"
-        app:layout_constraintEnd_toEndOf="@+id/formRegister"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/formRegister"
+        app:layout_constraintStart_toStartOf="@+id/textViewPasswordRegister"
         app:layout_constraintTop_toBottomOf="@+id/textViewPasswordRegister" />
 
-    <Button
-        android:id="@+id/buttonContinueRegister"
-        android:layout_width="222dp"
-        android:layout_height="56dp"
-        android:layout_marginBottom="25dp"
-        android:background="@drawable/btlogin_login"
-        android:fontFamily="@font/roboto"
-        android:text="CONTINUAR"
-        android:textColor="#ffffff"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="@+id/formRegister"
-        app:layout_constraintEnd_toEndOf="@+id/formRegister"
-        app:layout_constraintStart_toStartOf="@+id/formRegister" />
-
     <TextView
-        android:id="@+id/textViewJaTemContaLogin"
-        android:layout_width="140dp"
+        android:id="@+id/textViewPasswordCalculator"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="46dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginTop="4dp"
         android:fontFamily="@font/roboto"
-        android:text="Primeiro passo connosco!"
-        android:textColor="#FFFFFF"
-        android:textSize="32sp"
-        app:layout_constraintEnd_toStartOf="@+id/logoRegister"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/editTextPasswordRegister"
+        app:layout_constraintHorizontal_bias="0.908"
+        app:layout_constraintStart_toStartOf="@+id/editTextPasswordRegister"
+        app:layout_constraintTop_toBottomOf="@+id/textViewPasswordRegister" />
 
     <TextView
         android:id="@+id/textViewConfirmPasswordRegister"
@@ -155,7 +129,6 @@
         android:id="@+id/editTextConfirmPasswordRegister"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="33dp"
         android:backgroundTint="#36BFB8"
         android:ems="13"
         android:fontFamily="@font/roboto"
@@ -165,10 +138,67 @@
         android:textColorHighlight="#36BFB8"
         android:textColorHint="#FFFFFF"
         android:textColorLink="#36BFB8"
-        app:layout_constraintEnd_toEndOf="@+id/formRegister"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/formRegister"
+        app:layout_constraintStart_toStartOf="@+id/textViewConfirmPasswordRegister"
         app:layout_constraintTop_toBottomOf="@+id/textViewConfirmPasswordRegister" />
 
+    <TextView
+        android:id="@+id/textViewCodeSent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="25dp"
+        android:fontFamily="@font/roboto"
+        android:text="Código enviado"
+        android:textColor="#36BFB8"
+        android:textSize="24sp"
+        android:visibility="invisible"
+        app:layout_constraintStart_toStartOf="@+id/formRegister"
+        app:layout_constraintTop_toBottomOf="@+id/editTextEmailOrPhoneRegister" />
+
+    <EditText
+        android:id="@+id/editTextCodeSent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#36BFB8"
+        android:ems="13"
+        android:fontFamily="@font/roboto"
+        android:importantForAutofill="no"
+        android:inputType="text"
+        android:textColor="#36BFB8"
+        android:textColorHighlight="#36BFB8"
+        android:textColorHint="#FFFFFF"
+        android:textColorLink="#36BFB8"
+        android:visibility="invisible"
+        app:layout_constraintStart_toStartOf="@+id/textViewCodeSent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewCodeSent" />
+
+    <Button
+        android:id="@+id/buttonContinueRegister"
+        android:layout_width="222dp"
+        android:layout_height="56dp"
+        android:background="@drawable/btlogin_login"
+        android:fontFamily="@font/roboto"
+        android:text="CONTINUAR"
+        android:textColor="#ffffff"
+        android:textSize="24sp"
+        app:layout_constraintTop_toBottomOf="@+id/editTextConfirmPasswordRegister"
+        app:layout_constraintBottom_toBottomOf="@+id/formRegister"
+        app:layout_constraintEnd_toEndOf="@+id/formRegister"
+        app:layout_constraintStart_toStartOf="@+id/formRegister" />
+
+    <Button
+        android:id="@+id/buttonContinueRegisterContinue"
+        android:layout_width="222dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="112dp"
+        android:background="@drawable/btlogin_login"
+        android:fontFamily="@font/roboto"
+        android:text="CONTINUAR"
+        android:visibility="invisible"
+        android:textColor="#ffffff"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="@+id/formRegister"
+        app:layout_constraintStart_toStartOf="@+id/formRegister"
+        app:layout_constraintTop_toBottomOf="@+id/editTextCodeSent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
