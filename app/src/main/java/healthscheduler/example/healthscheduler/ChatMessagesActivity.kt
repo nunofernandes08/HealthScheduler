@@ -57,74 +57,90 @@ class ChatMessagesActivity : AppCompatActivity() {
         binding.recyclerViewChatLog.itemAnimator = DefaultItemAnimator()
         binding.recyclerViewChatLog.adapter = mAdapter
 
-        refCurrentUser
-            .document(currentUid.toString())
-            .addSnapshotListener { snapshot, error ->
+        getCurrentUser()
 
-            if (snapshot != null && snapshot.exists()) {
-
-                currentUser = UsersItem.fromHash(snapshot.data as HashMap<String, Any?>)
-            }
-        }
-
-        refMessages
-            .document(currentUid.toString())
-            .collection(toUser?.userID!!)
-            .orderBy("timeStamp")
-            .addSnapshotListener { snapshot, error ->
-
-            messagesList.clear()
-            if (snapshot != null) {
-
-                for (doc in snapshot) {
-
-                    message = MessageItem.fromHash(doc.data as HashMap<String, Any?>)
-                    messagesList.add(message!!)
-                }
-            }
-                mAdapter?.notifyDataSetChanged()
-                binding.recyclerViewChatLog.scrollToPosition(
-                        (mAdapter as ChatMessagesAdapter).itemCount -1)
-        }
+        listenForMessages(binding.recyclerViewChatLog)
 
         binding.buttonChatMessageSendTextMessage.setOnClickListener {
 
-            val text = binding.editTextChatMessagesWriteMessage.text.toString()
+            val messageText = binding.editTextChatMessagesWriteMessage.text.toString()
 
-            val fromReference = refMessages
+            performSendTextMessage(messageText)
+
+            binding.editTextChatMessagesWriteMessage.text.clear()
+            binding.recyclerViewChatLog.scrollToPosition(
+                    (mAdapter as ChatMessagesAdapter).itemCount -1)
+        }
+    }
+
+    private fun getCurrentUser() {
+
+        refCurrentUser
+                .document(currentUid.toString())
+                .addSnapshotListener { snapshot, error ->
+
+                    if (snapshot != null && snapshot.exists()) {
+
+                        currentUser = UsersItem.fromHash(snapshot.data as HashMap<String, Any?>)
+                    }
+                }
+    }
+
+    private fun listenForMessages(recyclerView: RecyclerView) {
+
+        refMessages
+                .document(currentUid.toString())
+                .collection(toUser?.userID!!)
+                .orderBy("timeStamp")
+                .addSnapshotListener { snapshot, error ->
+
+                    messagesList.clear()
+                    if (snapshot != null) {
+
+                        for (doc in snapshot) {
+
+                            message = MessageItem.fromHash(doc.data as HashMap<String, Any?>)
+                            messagesList.add(message!!)
+                        }
+                    }
+                    mAdapter?.notifyDataSetChanged()
+                    recyclerView.scrollToPosition(
+                            (mAdapter as ChatMessagesAdapter).itemCount -1)
+                }
+    }
+
+    private fun performSendTextMessage(messageText : String) {
+
+        val fromReference = refMessages
                 .document(currentUser?.userID!!)
                 .collection(toUser?.userID!!)
 
-            val toReference = refMessages
+        val toReference = refMessages
                 .document(toUser?.userID!!)
                 .collection(currentUser?.userID!!)
 
-            message = MessageItem(text, currentUser?.userID!!, toUser?.userID!!,
-                    System.currentTimeMillis() / 1000,"text")
+        message = MessageItem(messageText, currentUser?.userID!!, toUser?.userID!!,
+                System.currentTimeMillis() / 1000,"text")
 
-            fromReference.add(message!!.toHashMap()).addOnSuccessListener {
+        fromReference.add(message!!.toHashMap()).addOnSuccessListener {
 
-                binding.editTextChatMessagesWriteMessage.text.clear()
-                binding.recyclerViewChatLog.scrollToPosition(
-                        (mAdapter as ChatMessagesAdapter).itemCount -1)
-            }
-
-            toReference.add(message!!.toHashMap())
-
-            val fromLatestReference = FirebaseFirestore.getInstance()
-                .collection("latest_messages")
-                .document(currentUser?.userID!!)
-                .collection("latest_message")
-                .document(toUser?.userID!!)
-            fromLatestReference.set(message!!.toHashMap())
-
-            val toLatestReference = FirebaseFirestore.getInstance()
-                .collection("latest_messages")
-                .document(toUser?.userID!!)
-                .collection("latest_message")
-                .document(currentUser?.userID!!)
-            toLatestReference.set(message!!.toHashMap())
         }
+
+        toReference.add(message!!.toHashMap())
+
+        val fromLatestReference = FirebaseFirestore.getInstance()
+                .collection("latest_messages")
+                .document(currentUser?.userID!!)
+                .collection("latest_message")
+                .document(toUser?.userID!!)
+        fromLatestReference.set(message!!.toHashMap())
+
+        val toLatestReference = FirebaseFirestore.getInstance()
+                .collection("latest_messages")
+                .document(toUser?.userID!!)
+                .collection("latest_message")
+                .document(currentUser?.userID!!)
+        toLatestReference.set(message!!.toHashMap())
     }
 
     inner class ChatMessagesAdapter : RecyclerView.Adapter<ChatMessagesAdapter.ViewHolder>() {
@@ -207,7 +223,7 @@ class ChatMessagesActivity : AppCompatActivity() {
 
                 "text" -> {
 
-                    if (messagesList[position].fromId == currentUser?.userID) {
+                    if (messagesList[position].fromId == currentUid) {
 
                         holder.v.apply {
 
@@ -225,9 +241,9 @@ class ChatMessagesActivity : AppCompatActivity() {
                             val date = sdf.format(netDate)
                             textViewChatMessageTimeStampFrom.text = date
 
-                            if (toUser?.imagePath != "") {
+                            if (currentUser?.imagePath != "") {
 
-                                Picasso.get().load(toUser?.imagePath).into(imageViewChatMessageContactPhotoFrom)
+                                Picasso.get().load(currentUser?.imagePath).into(imageViewChatMessageContactPhotoFrom)
                             }
                         }
                     }
@@ -249,9 +265,9 @@ class ChatMessagesActivity : AppCompatActivity() {
                             val date = sdf.format(netDate)
                             textViewChatMessageTimeStampTo.text = date
 
-                            if (currentUser?.imagePath != "") {
+                            if (toUser?.imagePath != "") {
 
-                                Picasso.get().load(currentUser?.imagePath).into(imageViewChatMessageContactPhotoTo)
+                                Picasso.get().load(toUser?.imagePath).into(imageViewChatMessageContactPhotoTo)
                             }
                         }
                     }
