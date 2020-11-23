@@ -19,6 +19,7 @@ import com.squareup.picasso.Picasso
 import healthscheduler.example.healthscheduler.databinding.ActivityLatestMessagesBinding
 import healthscheduler.example.healthscheduler.models.MessageItem
 import healthscheduler.example.healthscheduler.models.UsersItem
+import kotlinx.android.synthetic.main.activity_schedule.*
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.HashMap
@@ -43,6 +44,11 @@ class LatestMessagesActivity : AppCompatActivity() {
         val binding = ActivityLatestMessagesBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+
+        floatingActionButton.setOnClickListener{
+            val intent = Intent(this, Home::class.java)
+            startActivity(intent)
+        }
 
         currentUser = intent.getParcelableExtra<UsersItem>(ContactsActivity.USER_KEY)!!
         if (currentUser.imagePath != "") {

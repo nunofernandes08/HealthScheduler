@@ -55,6 +55,37 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewScheduleSchedule"
         app:layout_constraintVertical_bias="0.707">
-
     </ListView>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/coordinatorLayout"
+        android:layout_width="0dp"
+        android:layout_height="100dp"
+        android:foregroundGravity="bottom"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/floatingActionButton"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:foreground="@drawable/ic_logo"
+            android:foregroundGravity="center"
+            app:backgroundTint="#E80A0A"
+            app:fabCustomSize="50dp"
+            app:layout_anchor="@id/bottomBar" />
+
+        <com.google.android.material.bottomappbar.BottomAppBar
+            android:id="@+id/bottomBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:background="@drawable/fadehome"
+            app:backgroundTint="#36BFB8"
+            app:fabAlignmentMode="center"
+            app:fabCradleMargin="15dp" />
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

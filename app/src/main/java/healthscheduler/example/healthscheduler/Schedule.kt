@@ -1,5 +1,6 @@
 package healthscheduler.example.healthscheduler
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -38,6 +39,11 @@ class Schedule : AppCompatActivity() {
         val listViewSchedule = findViewById<ListView>(R.id.listViewSchedule)
 
         photoUser()
+
+        floatingActionButton.setOnClickListener{
+            val intent = Intent(this, Home::class.java)
+            startActivity(intent)
+        }
 
         // Initialize Firebase Auth
         auth = Firebase.auth
