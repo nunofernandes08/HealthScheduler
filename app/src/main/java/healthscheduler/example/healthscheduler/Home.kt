@@ -26,6 +26,7 @@ import com.squareup.picasso.Picasso
 import healthscheduler.example.healthscheduler.Login.MainActivity
 import healthscheduler.example.healthscheduler.databinding.ActivityHomeBinding
 import healthscheduler.example.healthscheduler.models.UsersItem
+import kotlinx.android.synthetic.main.activity_home.*
 import java.util.*
 
 class Home : AppCompatActivity() {
@@ -56,7 +57,11 @@ class Home : AppCompatActivity() {
             getPermissionToPhoneCall()
         }
 
-        // Initialize Firebase Auth
+        textViewUserNameHome.text = ""
+        textViewUserNumberPhoneHome.text = ""
+        textViewUserAddressHome.text = ""
+
+        //Inicializacao do FirebaseAuth
         auth = Firebase.auth
         val currentUser = auth.currentUser
 
