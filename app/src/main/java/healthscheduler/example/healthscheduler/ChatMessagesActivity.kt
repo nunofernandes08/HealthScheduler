@@ -236,7 +236,7 @@ class ChatMessagesActivity : AppCompatActivity() {
 
                             textViewChatMessageFrom.text = messagesList[position].message
 
-                            val sdf = SimpleDateFormat("dd/MM/yy hh:mm a", Locale.UK)
+                            val sdf = SimpleDateFormat("HH:mm a", Locale.UK)
                             val netDate = Date(messagesList[position].timeStamp?.times(1000)!!)
                             val date = sdf.format(netDate)
                             textViewChatMessageTimeStampFrom.text = date
@@ -260,7 +260,7 @@ class ChatMessagesActivity : AppCompatActivity() {
 
                             textViewChatMessageTo.text = messagesList[position].message
 
-                            val sdf = SimpleDateFormat("dd/MM/yy hh:mm a", Locale.UK)
+                            val sdf = SimpleDateFormat("HH:mm a", Locale.UK)
                             val netDate = Date(messagesList[position].timeStamp?.times(1000)!!)
                             val date = sdf.format(netDate)
                             textViewChatMessageTimeStampTo.text = date
