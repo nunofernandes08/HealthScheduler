@@ -61,7 +61,7 @@ class LatestMessagesActivity : AppCompatActivity() {
         mAdapter = LatestMessagesAdapter()
         binding.recyclerViewLatestMessages.itemAnimator = DefaultItemAnimator()
         binding.recyclerViewLatestMessages.setHasFixedSize(true)
-        binding.recyclerViewLatestMessages.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
+        //binding.recyclerViewLatestMessages.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
         binding.recyclerViewLatestMessages.adapter = mAdapter
 
         currentUser.let {
@@ -161,7 +161,7 @@ class LatestMessagesActivity : AppCompatActivity() {
 
                 textViewChatHomeLatestContactLatestMessage.text = latestMessages[position].message
                 textViewChatHomeLatestContactName.text = user?.username
-                val sdf = SimpleDateFormat("dd/MM/yy hh:mm a", Locale.UK)
+                val sdf = SimpleDateFormat("HH:mm a", Locale.UK)
                 val netDate = Date(latestMessages[position].timeStamp?.times(1000)!!)
                 val date = sdf.format(netDate)
                 textViewChatHomeLatestContactDate.text = date
