@@ -68,88 +68,96 @@ class Register : AppCompatActivity() {
         val emailOrPhone = binding.editTextEmailOrPhoneRegister.text.toString()
         val password = binding.editTextPasswordRegister.text.toString()
         val passwordConfirm = binding.editTextConfirmPasswordRegister.text.toString()
-        if(emailOrPhone == "" || password == "" || passwordConfirm == "") {
+        val textViewPasswordCalculator = binding.textViewPasswordCalculator.text.toString()
+        if(textViewPasswordCalculator == "FRACA" ) {
             Toast.makeText(
-                    this@Register, "Verifique o seu Email ou Palavra-passe",
+                    this@Register, "Palavra-passe fraca",
                     Toast.LENGTH_SHORT
             ).show()
-        } else {
-            if (emailOrPhone.contains("@") && emailOrPhone.contains(".") && (emailOrPhone.contains("com") || emailOrPhone.contains("pt"))) {
-                if (password == passwordConfirm) {
-                    auth.createUserWithEmailAndPassword(emailOrPhone, password)
-                            .addOnCompleteListener(this) { task ->
-                                if (task.isSuccessful) {
-                                    val user = auth.currentUser
-                                    val intent = Intent(this, Home::class.java)
-                                    intent.putExtra("emailOrPhone", emailOrPhone)
-                                    intent.flags =
-                                            Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
-                                    startActivity(intent)
-                                } else {
+        }else {
+            if (emailOrPhone == "" || password == "" || passwordConfirm == "") {
+                Toast.makeText(
+                        this@Register, "Verifique o seu Email ou Palavra-passe",
+                        Toast.LENGTH_SHORT
+                ).show()
+            } else {
+                if (emailOrPhone.contains("@") && emailOrPhone.contains(".") && (emailOrPhone.contains("com") || emailOrPhone.contains("pt"))) {
+                    if (password == passwordConfirm) {
+                        auth.createUserWithEmailAndPassword(emailOrPhone, password)
+                                .addOnCompleteListener(this) { task ->
+                                    if (task.isSuccessful) {
+                                        val user = auth.currentUser
+                                        val intent = Intent(this, Home::class.java)
+                                        intent.putExtra("emailOrPhone", emailOrPhone)
+                                        intent.flags =
+                                                Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+                                        startActivity(intent)
+                                    } else {
 
+                                    }
                                 }
-                            }
-                } else {
-                    Toast.makeText(
-                            this@Register, "Verifique o email ou palavra-passe!",
-                            Toast.LENGTH_SHORT
-                    ).show()
-                }
-            } else if (emailOrPhone.toInt() in 900000001..999999998) {
-                if (password == passwordConfirm) {
-                    val callbacks = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
-                        override fun onVerificationCompleted(credential: PhoneAuthCredential) {
-                            signInWithPhoneAuthCredential(credential)
-                            /*binding.buttonContinueRegisterContinue.setOnClickListener {
+                    } else {
+                        Toast.makeText(
+                                this@Register, "Verifique o email ou palavra-passe!",
+                                Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                } else if (emailOrPhone.toInt() in 900000001..999999998) {
+                    if (password == passwordConfirm) {
+                        val callbacks = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
+                            override fun onVerificationCompleted(credential: PhoneAuthCredential) {
+                                signInWithPhoneAuthCredential(credential)
+                                /*binding.buttonContinueRegisterContinue.setOnClickListener {
                                 val intent = Intent(this@Register, Home::class.java)
                                 intent.putExtra("codigoVerificacao", storedVerificationId)
                                 intent.putExtra("emailOrPhone", emailOrPhone)
                                 startActivity(intent)
                             }*/
-                        }
+                            }
 
-                        override fun onVerificationFailed(e: FirebaseException) {
-                            print(e.localizedMessage)
-                        }
+                            override fun onVerificationFailed(e: FirebaseException) {
+                                print(e.localizedMessage)
+                            }
 
-                        override fun onCodeSent(verificationId: String, token: PhoneAuthProvider.ForceResendingToken) {
-                            storedVerificationId = verificationId
-                            resendToken = token
+                            override fun onCodeSent(verificationId: String, token: PhoneAuthProvider.ForceResendingToken) {
+                                storedVerificationId = verificationId
+                                resendToken = token
 
-                            binding.textViewEmailRegister.visibility = View.GONE
-                            binding.textViewPasswordRegister.visibility = View.GONE
-                            binding.textViewConfirmPasswordRegister.visibility = View.GONE
+                                binding.textViewEmailRegister.visibility = View.GONE
+                                binding.textViewPasswordRegister.visibility = View.GONE
+                                binding.textViewConfirmPasswordRegister.visibility = View.GONE
 
-                            binding.editTextEmailOrPhoneRegister.visibility = View.GONE
-                            binding.editTextPasswordRegister.visibility = View.GONE
-                            binding.editTextConfirmPasswordRegister.visibility = View.GONE
+                                binding.editTextEmailOrPhoneRegister.visibility = View.GONE
+                                binding.editTextPasswordRegister.visibility = View.GONE
+                                binding.editTextConfirmPasswordRegister.visibility = View.GONE
 
-                            binding.buttonContinueRegister.visibility = View.GONE
+                                binding.buttonContinueRegister.visibility = View.GONE
 
-                            /*binding.textViewCodeSent.visibility = View.VISIBLE
+                                /*binding.textViewCodeSent.visibility = View.VISIBLE
                             binding.editTextCodeSent.visibility = View.VISIBLE
                             binding.buttonContinueRegisterContinue.visibility = View.VISIBLE*/
+                            }
                         }
-                    }
 
-                    val options = PhoneAuthOptions.newBuilder(auth)
-                            .setPhoneNumber("+351$emailOrPhone")
-                            .setTimeout(60L, TimeUnit.SECONDS)
-                            .setActivity(this)
-                            .setCallbacks(callbacks)
-                            .build()
-                    PhoneAuthProvider.verifyPhoneNumber(options)
+                        val options = PhoneAuthOptions.newBuilder(auth)
+                                .setPhoneNumber("+351$emailOrPhone")
+                                .setTimeout(60L, TimeUnit.SECONDS)
+                                .setActivity(this)
+                                .setCallbacks(callbacks)
+                                .build()
+                        PhoneAuthProvider.verifyPhoneNumber(options)
+                    } else {
+                        Toast.makeText(
+                                this, "Verifique o numero de telemovel ou palavra-passe!",
+                                Toast.LENGTH_SHORT
+                        ).show()
+                    }
                 } else {
                     Toast.makeText(
                             this, "Verifique o numero de telemovel ou palavra-passe!",
                             Toast.LENGTH_SHORT
                     ).show()
                 }
-            } else {
-                Toast.makeText(
-                        this, "Verifique o numero de telemovel ou palavra-passe!",
-                        Toast.LENGTH_SHORT
-                ).show()
             }
         }
     }

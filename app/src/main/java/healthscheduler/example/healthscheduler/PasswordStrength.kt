@@ -38,12 +38,14 @@ class PasswordStrength : TextWatcher {
             strengthLevel.value = "FRACA"
         }else if(password.length in 8..10){
             if(lowerCase.value == 1 || upperCase.value == 1 || digit.value == 1 || specialChar.value == 1){
-                strengthColor.value = R.color.medium
-                strengthLevel.value = "MÉDIA"
+                if(lowerCase.value == 1 && upperCase.value == 1) {
+                    strengthColor.value = R.color.medium
+                    strengthLevel.value = "MÉDIA"
+                }
             }
         }else if(password.length > 10){
             if(lowerCase.value == 1 || upperCase.value == 1 || digit.value == 1 || specialChar.value == 1){
-                if(lowerCase.value == 1 && lowerCase.value == 1){
+                if(lowerCase.value == 1 && upperCase.value == 1){
                     strengthColor.value = R.color.strong
                     strengthLevel.value = "FORTE"
                 }
