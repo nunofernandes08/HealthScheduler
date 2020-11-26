@@ -12,6 +12,7 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
@@ -27,6 +28,7 @@ import com.squareup.picasso.Picasso
 import healthscheduler.example.healthscheduler.Login.MainActivity
 import healthscheduler.example.healthscheduler.databinding.ActivityHomeBinding
 import healthscheduler.example.healthscheduler.models.MessageItem
+import healthscheduler.example.healthscheduler.models.ScheduleItem
 import healthscheduler.example.healthscheduler.models.UsersItem
 import kotlinx.android.synthetic.main.activity_home.*
 import java.util.*
@@ -47,6 +49,7 @@ class Home : AppCompatActivity() {
 
     private var refLatestMessages = db.collection("latest_messages")
     private var referenceUsers = db.collection("users")
+    private var referenceSchedule = db.collection("consultas")
     private var users : MutableList<UsersItem> = arrayListOf()
     private var latestMessages : MutableList<MessageItem> = arrayListOf()
     private var message : MessageItem? = null
@@ -153,8 +156,9 @@ class Home : AppCompatActivity() {
             }
         }
 
-        //Inicializacao da funcao para ir buscar a informacao do CURRENT USER
+        //Inicializações das funções
         getUser()
+        getCountNotification()
         //getAllUsers()
         //getLatestMessages()
 
@@ -271,6 +275,28 @@ class Home : AppCompatActivity() {
         }
     }
 
+    //Funcao para buscar quantas consultas tem o CURRENTUSER
+    private fun getCountNotification(){
+        currentUser?.let{
+            db.collection("consultas")
+            .whereEqualTo("userID", currentUser!!.uid)
+            .addSnapshotListener { snapshot, error ->
+                snapshot?.let {
+                    var count = snapshot?.count()
+                    if(count > 0){
+                        imageViewScheduleNotification.visibility = View.VISIBLE
+                        textViewScheduleNotification.visibility = View.VISIBLE
+                        textViewScheduleNotification.text = count.toString()
+                    }else{
+                        imageViewScheduleNotification.visibility = View.INVISIBLE
+                        textViewScheduleNotification.visibility = View.INVISIBLE
+                    }
+                }
+            }
+        }
+
+    }
+
     private fun getAllUsers() {
 
         currentUser.let {
@@ -313,24 +339,24 @@ class Home : AppCompatActivity() {
                 }
     }
 
-    //Funcao para ir buscar a informacao do CURRENT USER
+    //Funcao para ir buscar a informacao do CURRENTUSER
     private fun getUser() {
 
         db.collection("users").document(currentUser!!.uid)
-                .addSnapshotListener { querySnapshot, firebaseFirestoreException ->
-                    querySnapshot?.data?.let {
-                        listUser = UsersItem.fromHash(querySnapshot.data as HashMap<String, Any?>)
-                        listUser?.let { user ->
-                            currentUserName = user.username.toString()
-                            currentUserAddress = user.address.toString()
-                        }
-                    } ?: run {
-                        Toast.makeText(
-                                this@Home, "Sem utilizador",
-                                Toast.LENGTH_SHORT
-                        ).show()
+            .addSnapshotListener { querySnapshot, firebaseFirestoreException ->
+                querySnapshot?.data?.let {
+                    listUser = UsersItem.fromHash(querySnapshot.data as HashMap<String, Any?>)
+                    listUser?.let { user ->
+                        currentUserName = user.username.toString()
+                        currentUserAddress = user.address.toString()
                     }
+                } ?: run {
+                    Toast.makeText(
+                            this@Home, "Sem utilizador",
+                            Toast.LENGTH_SHORT
+                    ).show()
                 }
+            }
     }
 
     //Funcao para fazer upload da imagem para o FireStorage

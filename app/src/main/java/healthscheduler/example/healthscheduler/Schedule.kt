@@ -54,7 +54,7 @@ class Schedule : AppCompatActivity() {
 
         listSchedule.clear()
 
-        db.collection("consultas")
+        db.collection("consultas").orderBy("date")
             .whereEqualTo("userID", currentUser!!.uid)
             .addSnapshotListener { snapshot, error ->
                 snapshot?.let {
@@ -70,9 +70,6 @@ class Schedule : AppCompatActivity() {
                                 document.data.getValue("typeOfConsult").toString()))
                     }
                     scheduleAdapter?.notifyDataSetChanged()
-                }?: run{
-                    Toast.makeText(this@Schedule, "De momento não tem consultas",
-                            Toast.LENGTH_SHORT).show()
                 }
         }
     }

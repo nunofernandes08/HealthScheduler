@@ -263,5 +263,32 @@
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
+    <ImageView
+        android:id="@+id/imageViewScheduleNotification"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/buttonScheduleHome"
+        app:layout_constraintEnd_toEndOf="@+id/buttonScheduleHome"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/buttonScheduleHome"
+        app:layout_constraintTop_toTopOf="@+id/buttonScheduleHome"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/backgroundrownotificacaoconsulta" />
+
+    <TextView
+        android:id="@+id/textViewScheduleNotification"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto"
+        android:text=""
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/imageViewScheduleNotification"
+        app:layout_constraintEnd_toEndOf="@+id/imageViewScheduleNotification"
+        app:layout_constraintStart_toStartOf="@+id/imageViewScheduleNotification"
+        app:layout_constraintTop_toTopOf="@+id/imageViewScheduleNotification" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
