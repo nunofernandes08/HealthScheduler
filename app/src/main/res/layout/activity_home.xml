@@ -234,8 +234,8 @@
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/coordinatorLayout"
-        android:layout_width="0dp"
-        android:layout_height="100dp"
+        android:layout_width="410dp"
+        android:layout_height="67dp"
         android:foregroundGravity="bottom"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -243,18 +243,18 @@
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/floatingActionButton"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:foreground="@drawable/sos_fab_button"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
             android:foregroundGravity="center"
-            app:backgroundTint="#E80A0A"
+            android:foreground="@drawable/sosbutton"
             app:fabCustomSize="50dp"
-            app:layout_anchor="@id/bottomBar" />
+            app:layout_anchor="@+id/bottomBar"
+            app:layout_anchorGravity="top|center" />
 
         <com.google.android.material.bottomappbar.BottomAppBar
             android:id="@+id/bottomBar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="46dp"
             android:layout_gravity="bottom"
             android:background="@drawable/fadehome"
             app:backgroundTint="#36BFB8"
