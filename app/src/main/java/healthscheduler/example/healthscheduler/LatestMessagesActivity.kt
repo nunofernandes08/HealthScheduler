@@ -19,7 +19,6 @@ import com.squareup.picasso.Picasso
 import healthscheduler.example.healthscheduler.databinding.ActivityLatestMessagesBinding
 import healthscheduler.example.healthscheduler.models.MessageItem
 import healthscheduler.example.healthscheduler.models.UsersItem
-import kotlinx.android.synthetic.main.activity_schedule.*
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.HashMap
@@ -45,9 +44,11 @@ class LatestMessagesActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
-        floatingActionButton.setOnClickListener{
+        binding.floatingActionButton.setOnClickListener{
+
             val intent = Intent(this, Home::class.java)
             startActivity(intent)
+            finish()
         }
 
         currentUser = intent.getParcelableExtra<UsersItem>(ContactsActivity.USER_KEY)!!
@@ -61,7 +62,7 @@ class LatestMessagesActivity : AppCompatActivity() {
         mAdapter = LatestMessagesAdapter()
         binding.recyclerViewLatestMessages.itemAnimator = DefaultItemAnimator()
         binding.recyclerViewLatestMessages.setHasFixedSize(true)
-        //binding.recyclerViewLatestMessages.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
+        binding.recyclerViewLatestMessages.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
         binding.recyclerViewLatestMessages.adapter = mAdapter
 
         currentUser.let {
@@ -149,22 +150,25 @@ class LatestMessagesActivity : AppCompatActivity() {
                     }
                 }
 
-                /*//ver se esta a funcionar snapshotlistener
-                referenceUsers.document(toUserId).addSnapshotListener { snapshot, error ->
-
-                    if (snapshot?.data != null) {
-
-                        user = UsersItem.fromHash(snapshot.data as HashMap<String, Any?>)
-                    }
-                    users.add(user!!)
-                }*/
-
                 textViewChatHomeLatestContactLatestMessage.text = latestMessages[position].message
                 textViewChatHomeLatestContactName.text = user?.username
-                val sdf = SimpleDateFormat("HH:mm a", Locale.UK)
-                val netDate = Date(latestMessages[position].timeStamp?.times(1000)!!)
-                val date = sdf.format(netDate)
-                textViewChatHomeLatestContactDate.text = date
+
+                val sec = (System.currentTimeMillis() / 1000) - latestMessages[position].timeStamp!!
+                if (sec <= 86400) {
+
+                    val sdf = SimpleDateFormat("HH:mm", Locale.UK)
+                    val netDate = Date(latestMessages[position].timeStamp?.times(1000)!!)
+                    val date = sdf.format(netDate)
+                    textViewChatHomeLatestContactDate.text = date
+                }
+                else {
+
+                    val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.UK)
+                    val netDate = Date(latestMessages[position].timeStamp?.times(1000)!!)
+                    val date = sdf.format(netDate)
+                    textViewChatHomeLatestContactDate.text = date
+                }
+
                 Picasso.get().load(user?.imagePath).into(imageViewChatHomeLatestContactImage)
 
                 this.setOnClickListener {

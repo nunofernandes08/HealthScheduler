@@ -51,7 +51,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/coordinatorLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageViewFadeChatHome" />
@@ -61,17 +61,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="100dp"
         android:backgroundTint="@color/verde_claro"
         android:clickable="true"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/coordinatorLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/ic_baseline_message_24"
         app:tint="@android:color/white" />
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/coordinatorLayout"
-        android:layout_width="410dp"
+        android:layout_width="0dp"
         android:layout_height="67dp"
         android:foregroundGravity="bottom"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -82,8 +81,8 @@
             android:id="@+id/floatingActionButton"
             android:layout_width="wrap_content"
             android:layout_height="60dp"
-            android:foregroundGravity="center"
             android:foreground="@drawable/logonav"
+            android:foregroundGravity="center"
             app:fabCustomSize="50dp"
             app:layout_anchor="@+id/bottomBar"
             app:layout_anchorGravity="top|center" />

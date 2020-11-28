@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -44,7 +43,7 @@
         android:id="@+id/imageViewRetanguloHome"
         android:layout_width="336dp"
         android:layout_height="214dp"
-        android:layout_marginTop="75dp"
+        android:layout_marginTop="85dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -181,7 +180,9 @@
         android:id="@+id/imageViewNotificationHome"
         android:layout_width="336dp"
         android:layout_height="110dp"
+        app:layout_constraintBottom_toTopOf="@+id/buttonScheduleHome"
         app:layout_constraintEnd_toEndOf="@+id/imageViewRetanguloHome"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@+id/imageViewRetanguloHome"
         app:layout_constraintTop_toBottomOf="@+id/imageViewRetanguloHome"
         app:srcCompat="@drawable/fundonotificacao" />
@@ -190,9 +191,10 @@
         android:id="@+id/buttonScheduleHome"
         android:layout_width="114dp"
         android:layout_height="114dp"
-        android:layout_marginStart="20dp"
         app:layout_constraintBottom_toTopOf="@+id/coordinatorLayout"
-        app:layout_constraintStart_toStartOf="@+id/imageViewNotificationHome"
+        app:layout_constraintEnd_toStartOf="@+id/buttonChatHome"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageViewNotificationHome"
         app:srcCompat="@drawable/buttonschedulehome" />
 
@@ -200,10 +202,11 @@
         android:id="@+id/buttonChatHome"
         android:layout_width="114dp"
         android:layout_height="114dp"
-        android:layout_marginEnd="20dp"
-        app:layout_constraintBottom_toTopOf="@+id/coordinatorLayout"
-        app:layout_constraintEnd_toEndOf="@+id/imageViewNotificationHome"
-        app:layout_constraintTop_toBottomOf="@+id/imageViewNotificationHome"
+        app:layout_constraintBottom_toBottomOf="@+id/buttonScheduleHome"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/buttonScheduleHome"
+        app:layout_constraintTop_toTopOf="@+id/buttonScheduleHome"
         app:srcCompat="@drawable/buttonchathome" />
 
     <TextView
@@ -232,37 +235,6 @@
         app:layout_constraintStart_toStartOf="@+id/buttonChatHome"
         app:layout_constraintTop_toTopOf="@+id/buttonChatHome" />
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
-        android:id="@+id/coordinatorLayout"
-        android:layout_width="410dp"
-        android:layout_height="67dp"
-        android:foregroundGravity="bottom"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/floatingActionButton"
-            android:layout_width="wrap_content"
-            android:layout_height="60dp"
-            android:foregroundGravity="center"
-            android:foreground="@drawable/sosbutton"
-            app:fabCustomSize="50dp"
-            app:layout_anchor="@+id/bottomBar"
-            app:layout_anchorGravity="top|center" />
-
-        <com.google.android.material.bottomappbar.BottomAppBar
-            android:id="@+id/bottomBar"
-            android:layout_width="match_parent"
-            android:layout_height="46dp"
-            android:layout_gravity="bottom"
-            android:background="@drawable/fadehome"
-            app:backgroundTint="#36BFB8"
-            app:fabAlignmentMode="center"
-            app:fabCradleMargin="15dp" />
-
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
-
     <ImageView
         android:id="@+id/imageViewScheduleNotification"
         android:layout_width="wrap_content"
@@ -290,5 +262,36 @@
         app:layout_constraintStart_toStartOf="@+id/imageViewScheduleNotification"
         app:layout_constraintTop_toTopOf="@+id/imageViewScheduleNotification" />
 
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/coordinatorLayout"
+        android:layout_width="0dp"
+        android:layout_height="67dp"
+        android:foregroundGravity="bottom"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/floatingActionButton"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:foreground="@drawable/sosbutton"
+            android:foregroundGravity="center"
+            app:fabCustomSize="50dp"
+            app:layout_anchor="@+id/bottomBar"
+            app:layout_anchorGravity="top|center" />
+
+        <com.google.android.material.bottomappbar.BottomAppBar
+            android:id="@+id/bottomBar"
+            android:layout_width="match_parent"
+            android:layout_height="46dp"
+            android:layout_gravity="bottom"
+            android:background="@drawable/fadehome"
+            app:backgroundTint="#36BFB8"
+            app:fabAlignmentMode="center"
+            app:fabCradleMargin="15dp" />
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -15,7 +15,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.squareup.picasso.Picasso
-import healthscheduler.example.healthscheduler.Login.MainActivity
 import healthscheduler.example.healthscheduler.databinding.ActivityContactsBinding
 import healthscheduler.example.healthscheduler.models.UsersItem
 
@@ -45,6 +44,13 @@ class ContactsActivity : AppCompatActivity() {
         binding.recyclerViewContacts.setHasFixedSize(true)
         binding.recyclerViewContacts.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
         binding.recyclerViewContacts.adapter = mAdapter
+
+        binding.floatingActionButton.setOnClickListener{
+
+            val intent = Intent(this, Home::class.java)
+            startActivity(intent)
+            finish()
+        }
 
         currentUser.let {
 

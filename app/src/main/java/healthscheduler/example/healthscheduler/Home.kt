@@ -30,7 +30,6 @@ import healthscheduler.example.healthscheduler.databinding.ActivityHomeBinding
 import healthscheduler.example.healthscheduler.models.MessageItem
 import healthscheduler.example.healthscheduler.models.ScheduleItem
 import healthscheduler.example.healthscheduler.models.UsersItem
-import kotlinx.android.synthetic.main.activity_home.*
 import java.util.*
 
 class Home : AppCompatActivity() {
@@ -69,9 +68,9 @@ class Home : AppCompatActivity() {
             getPermissionToPhoneCall()
         }
 
-        textViewUserNameHome.text = ""
-        textViewUserNumberPhoneHome.text = ""
-        textViewUserAddressHome.text = ""
+        binding.textViewUserNameHome.text = ""
+        binding.textViewUserNumberPhoneHome.text = ""
+        binding.textViewUserAddressHome.text = ""
 
         //Ve se o user tem dados, se nao tiver faz com que insira
         currentUser?.uid.let {
@@ -277,6 +276,8 @@ class Home : AppCompatActivity() {
 
     //Funcao para buscar quantas consultas tem o CURRENTUSER
     private fun getCountNotification(){
+        val imageViewScheduleNotification = findViewById<ImageView>(R.id.imageViewScheduleNotification)
+        val textViewScheduleNotification = findViewById<TextView>(R.id.textViewScheduleNotification)
         currentUser?.let{
             db.collection("consultas")
             .whereEqualTo("userID", currentUser!!.uid)

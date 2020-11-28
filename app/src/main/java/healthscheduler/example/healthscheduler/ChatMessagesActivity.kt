@@ -65,11 +65,13 @@ class ChatMessagesActivity : AppCompatActivity() {
 
             val messageText = binding.editTextChatMessagesWriteMessage.text.toString()
 
-            performSendTextMessage(messageText)
+            if (messageText != "") {
 
-            binding.editTextChatMessagesWriteMessage.text.clear()
-            binding.recyclerViewChatLog.scrollToPosition(
-                    (mAdapter as ChatMessagesAdapter).itemCount -1)
+                performSendTextMessage(messageText)
+                binding.editTextChatMessagesWriteMessage.text.clear()
+                binding.recyclerViewChatLog.scrollToPosition(
+                        (mAdapter as ChatMessagesAdapter).itemCount -1)
+            }
         }
     }
 
@@ -236,10 +238,21 @@ class ChatMessagesActivity : AppCompatActivity() {
 
                             textViewChatMessageFrom.text = messagesList[position].message
 
-                            val sdf = SimpleDateFormat("HH:mm a", Locale.UK)
-                            val netDate = Date(messagesList[position].timeStamp?.times(1000)!!)
-                            val date = sdf.format(netDate)
-                            textViewChatMessageTimeStampFrom.text = date
+                            val sec = (System.currentTimeMillis() / 1000) - messagesList[position].timeStamp!!
+                            if (sec <= 86400) {
+
+                                val sdf = SimpleDateFormat("HH:mm", Locale.UK)
+                                val netDate = Date(messagesList[position].timeStamp?.times(1000)!!)
+                                val date = sdf.format(netDate)
+                                textViewChatMessageTimeStampFrom.text = date
+                            }
+                            else {
+
+                                val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.UK)
+                                val netDate = Date(messagesList[position].timeStamp?.times(1000)!!)
+                                val date = sdf.format(netDate)
+                                textViewChatMessageTimeStampFrom.text = date
+                            }
 
                             if (currentUser?.imagePath != "") {
 
@@ -260,10 +273,21 @@ class ChatMessagesActivity : AppCompatActivity() {
 
                             textViewChatMessageTo.text = messagesList[position].message
 
-                            val sdf = SimpleDateFormat("HH:mm a", Locale.UK)
-                            val netDate = Date(messagesList[position].timeStamp?.times(1000)!!)
-                            val date = sdf.format(netDate)
-                            textViewChatMessageTimeStampTo.text = date
+                            val sec = (System.currentTimeMillis() / 1000) - messagesList[position].timeStamp!!
+                            if (sec <= 86400) {
+
+                                val sdf = SimpleDateFormat("HH:mm", Locale.UK)
+                                val netDate = Date(messagesList[position].timeStamp?.times(1000)!!)
+                                val date = sdf.format(netDate)
+                                textViewChatMessageTimeStampTo.text = date
+                            }
+                            else {
+
+                                val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.UK)
+                                val netDate = Date(messagesList[position].timeStamp?.times(1000)!!)
+                                val date = sdf.format(netDate)
+                                textViewChatMessageTimeStampTo.text = date
+                            }
 
                             if (toUser?.imagePath != "") {
 
