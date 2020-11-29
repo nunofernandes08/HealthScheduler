@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ProfileActivity">
+
+    <ImageView
+        android:id="@+id/imageViewFadeProfile"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:cropToPadding="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/backgroundprofile" />
+
+    <TextView
+        android:id="@+id/textViewProfileProfile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/roboto"
+        android:text="Perfil"
+        android:textColor="@color/white"
+        android:textSize="30sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewUserNameProfile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/roboto"
+        android:text="Nuno Fernandes"
+        android:textColor="@color/white"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="@+id/imageViewUserPhotoProfile"
+        app:layout_constraintStart_toStartOf="@+id/imageViewUserPhotoProfile"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewUserPhotoProfile" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/imageViewUserPhotoProfile"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:background="@drawable/borderphotoprofile"
+        android:src="@drawable/imageviewfotoperfilhome"
+        app:layout_constraintEnd_toEndOf="@+id/imageViewFadeProfile"
+        app:layout_constraintStart_toStartOf="@+id/imageViewFadeProfile"
+        app:layout_constraintTop_toBottomOf="@+id/textViewProfileProfile" />
+
+    <Button
+        android:id="@+id/buttonLogoutProfile"
+        android:layout_width="250dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="45dp"
+        android:background="@drawable/buttonwhitelogout"
+        android:fontFamily="@font/roboto"
+        android:paddingLeft="50dp"
+        android:text="@string/logout"
+        android:textColor="#36BFB8"
+        android:textSize="24sp"
+        app:backgroundTint="#F6F6F6"
+        app:layout_constraintEnd_toEndOf="@+id/textViewUserNameProfile"
+        app:layout_constraintStart_toStartOf="@+id/textViewUserNameProfile"
+        app:layout_constraintTop_toBottomOf="@+id/textViewUserNameProfile" />
+
+    <ImageView
+        android:id="@+id/imageViewLogoutProfile"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="10dp"
+        android:elevation="5dp"
+        app:layout_constraintBottom_toBottomOf="@+id/buttonLogoutProfile"
+        app:layout_constraintStart_toStartOf="@+id/buttonLogoutProfile"
+        app:layout_constraintTop_toTopOf="@+id/buttonLogoutProfile"
+        app:srcCompat="@drawable/backprofile" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

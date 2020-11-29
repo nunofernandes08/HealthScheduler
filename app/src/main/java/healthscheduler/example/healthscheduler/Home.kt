@@ -41,7 +41,7 @@ class Home : AppCompatActivity() {
     var currentUserName:    String? = null
     var currentUserAddress: String? = null
     var downUrl:            String? = null
-    var user:           UsersItem? = null
+    var user:               UsersItem? = null
     var bitmap:             Bitmap? = null
     var curFile:            Uri? = null
 
@@ -71,7 +71,7 @@ class Home : AppCompatActivity() {
         }
 
         binding.imageViewUserPhotoHome.setOnClickListener {
-            val intent = Intent(this, Profile::class.java)
+            val intent = Intent(this, ProfileActivity::class.java)
             startActivity(intent)
         }
 
