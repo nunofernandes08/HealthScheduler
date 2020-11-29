@@ -96,11 +96,13 @@ class ContactsActivity : AppCompatActivity() {
 
                     Picasso.get().load(users[position].imagePath).into(imageViewUser)
                 }
+                else {
+                    imageViewUser.setBackgroundResource(R.drawable.imageviewfotofavorito1)
+                }
 
                 this.setOnClickListener {
 
                     val user = users[position]
-
                     val intent = Intent(this@ContactsActivity, ChatMessagesActivity::class.java)
                     intent.putExtra(USER_KEY, user)
                     startActivity(intent)

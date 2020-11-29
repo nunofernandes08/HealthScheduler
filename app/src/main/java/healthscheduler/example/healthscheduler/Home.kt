@@ -28,7 +28,6 @@ import com.squareup.picasso.Picasso
 import healthscheduler.example.healthscheduler.Login.MainActivity
 import healthscheduler.example.healthscheduler.databinding.ActivityHomeBinding
 import healthscheduler.example.healthscheduler.models.MessageItem
-import healthscheduler.example.healthscheduler.models.ScheduleItem
 import healthscheduler.example.healthscheduler.models.UsersItem
 import java.util.*
 
@@ -42,7 +41,7 @@ class Home : AppCompatActivity() {
     var currentUserName:    String? = null
     var currentUserAddress: String? = null
     var downUrl:            String? = null
-    var listUser:           UsersItem? = null
+    var user:           UsersItem? = null
     var bitmap:             Bitmap? = null
     var curFile:            Uri? = null
 
@@ -52,6 +51,9 @@ class Home : AppCompatActivity() {
     private var users : MutableList<UsersItem> = arrayListOf()
     private var latestMessages : MutableList<MessageItem> = arrayListOf()
     private var message : MessageItem? = null
+    private var user1 : UsersItem? = null
+    private var user2 : UsersItem? = null
+    private var user3 : UsersItem? = null
 
     private val auth = Firebase.auth
     private val currentUser = auth.currentUser
@@ -75,58 +77,90 @@ class Home : AppCompatActivity() {
         //Ve se o user tem dados, se nao tiver faz com que insira
         currentUser?.uid.let {
             if (it != null) {
-                db.collection("users").document(it)
-                        .addSnapshotListener { querySnapshot, firebaseFirestoreException ->
-                            querySnapshot?.data?.let {
-                                listUser = UsersItem.fromHash(querySnapshot.data as HashMap<String, Any?>)
-                                listUser?.let { user ->
-                                    if (user.imagePath == ""){
-                                        user.userID = querySnapshot.id
-                                        binding.textViewUserNameHome.text = user.username
-                                        binding.textViewUserNumberPhoneHome.text = user.phoneNumberEmail
-                                        binding.textViewUserAddressHome.text = user.address
-                                    }else{
-                                        user.userID = querySnapshot.id
-                                        binding.textViewUserNameHome.text = user.username
-                                        binding.textViewUserNumberPhoneHome.text = user.phoneNumberEmail
-                                        binding.textViewUserAddressHome.text = user.address
-                                        Picasso.get().load(user.imagePath).into(binding.imageViewUserPhotoHome)
-                                    }
-                                } ?: run {
-                                    myDialog = Dialog(this)
-                                    myDialog.setContentView(R.layout.popwindow_register_continue)
-                                    myDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT));
-
-                                    myDialog.findViewById<Button>(R.id.buttonRegisterContinuePopWindow).setOnClickListener {
-                                        val username = myDialog.findViewById<EditText>(R.id.editTextNomeRegisterContinuePopWindow)
-                                        val address = myDialog.findViewById<EditText>(R.id.editTextMoradaRegisterContinuePopWindow)
-                                        if (username.text.toString() == "" || address.text.toString() == "") {
-                                            Toast.makeText(
-                                                    this@Home, "Verifique o seu Nome ou Morada",
-                                                    Toast.LENGTH_SHORT
-                                            ).show()
-                                        } else {
-                                            val db = FirebaseFirestore.getInstance()
-                                            //Colocar "imageRef.name" no imagemPath me baixo
-                                            val user = UsersItem(username.text.toString(), currentUser?.email, address.text.toString(), "", currentUser?.uid)
-                                            db.collection("users").document(currentUser!!.uid)
-                                                    .set(user.toHashMap())
-                                                    .addOnSuccessListener {
-                                                        Log.d("writeBD", "DocumentSnapshot successfully written!")
-                                                        myDialog.dismiss()
+                db.collection("users")
+                    .addSnapshotListener { querySnapshot, firebaseFirestoreException ->
+                        if (querySnapshot != null) {
+                            users.clear()
+                            for (doc in querySnapshot) {
+                                if (doc.id == it) {
+                                    user = UsersItem.fromHash(doc.data as HashMap<String, Any?>)
+                                }
+                                else {
+                                    val listUser = UsersItem.fromHash(doc.data as HashMap<String, Any?>)
+                                    users.add(listUser)
+                                }
+                            }
+                            user?.let { item ->
+                                if (item.imagePath == "") {
+                                    item.userID = it
+                                    binding.textViewUserNameHome.text = item.username
+                                    binding.textViewUserNumberPhoneHome.text = item.phoneNumberEmail
+                                    binding.textViewUserAddressHome.text = item.address
+                                }
+                                else {
+                                    item.userID = it
+                                    binding.textViewUserNameHome.text = item.username
+                                    binding.textViewUserNumberPhoneHome.text = item.phoneNumberEmail
+                                    binding.textViewUserAddressHome.text = item.address
+                                    Picasso.get().load(item.imagePath).into(binding.imageViewUserPhotoHome)
+                                }
+                                refLatestMessages
+                                    .document(it)
+                                    .collection("latest_message")
+                                    .orderBy("timeStamp", Query.Direction.DESCENDING)
+                                    .addSnapshotListener { snapshot, error ->
+                                        latestMessages.clear()
+                                        if (snapshot != null) {
+                                            for (doc in snapshot) {
+                                                message = MessageItem.fromHash(doc.data as HashMap<String, Any?>)
+                                                latestMessages.add(message!!)
+                                            }
+                                            latestMessages.let {
+                                                for ((i, message) in latestMessages.withIndex()) {
+                                                    for (item1 in users) {
+                                                        if (message.fromId == item1.userID || message.toId == item1.userID) {
+                                                            when (i) {
+                                                                0 -> {
+                                                                    user1 = item1
+                                                                    binding.textViewFavoriteName1Home.text = item1.username
+                                                                    if (item1.imagePath != "") {
+                                                                        Picasso.get().load(item1.imagePath).into(binding.imageViewFavoriteUserPhoto1Home)
+                                                                    }
+                                                                    else {
+                                                                        binding.imageViewFavoriteUserPhoto1Home.setBackgroundResource(R.drawable.imageviewfotofavorito1)
+                                                                    }
+                                                                }
+                                                                1 -> {
+                                                                    user2 = item1
+                                                                    binding.textViewFavoriteName2Home.text = item1.username
+                                                                    if (item1.imagePath != "") {
+                                                                        Picasso.get().load(item1.imagePath).into(binding.imageViewFavoriteUserPhoto2Home)
+                                                                    }
+                                                                    else {
+                                                                        binding.imageViewFavoriteUserPhoto1Home.setBackgroundResource(R.drawable.imageviewfotofavorito1)
+                                                                    }
+                                                                }
+                                                                2 -> {
+                                                                    user3 = item1
+                                                                    binding.textViewFavoriteName3Home.text = item1.username
+                                                                    if (item1.imagePath != "") {
+                                                                        Picasso.get().load(item1.imagePath).into(binding.imageViewFavoriteUserPhoto3Home)
+                                                                    }
+                                                                    else {
+                                                                        binding.imageViewFavoriteUserPhoto1Home.setBackgroundResource(R.drawable.imageviewfotofavorito1)
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
                                                     }
-                                                    .addOnFailureListener { e ->
-                                                        Log.w("writeBD", "Error writing document", e)
-                                                    }
+                                                }
+                                            }
                                         }
                                     }
-                                    myDialog.show()
-                                }
                             } ?: run {
                                 myDialog = Dialog(this)
                                 myDialog.setContentView(R.layout.popwindow_register_continue)
-                                myDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT));
-
+                                myDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
                                 myDialog.findViewById<Button>(R.id.buttonRegisterContinuePopWindow).setOnClickListener {
                                     val username = myDialog.findViewById<EditText>(R.id.editTextNomeRegisterContinuePopWindow)
                                     val address = myDialog.findViewById<EditText>(R.id.editTextMoradaRegisterContinuePopWindow)
@@ -135,92 +169,32 @@ class Home : AppCompatActivity() {
                                                 this@Home, "Verifique o seu Nome ou Morada",
                                                 Toast.LENGTH_SHORT
                                         ).show()
-                                    } else {
+                                    }
+                                    else {
                                         val db = FirebaseFirestore.getInstance()
+                                        //Colocar "imageRef.name" no imagemPath me baixo
                                         val user = UsersItem(username.text.toString(), currentUser?.email, address.text.toString(), "", currentUser?.uid)
                                         db.collection("users").document(currentUser!!.uid)
-                                                .set(user.toHashMap())
-                                                .addOnSuccessListener {
-                                                    Log.d("writeBD", "DocumentSnapshot successfully written!")
-                                                    myDialog.dismiss()
-                                                }
-                                                .addOnFailureListener { e ->
-                                                    Log.w("writeBD", "Error writing document", e)
-                                                }
+                                            .set(user.toHashMap())
+                                            .addOnSuccessListener {
+                                                Log.d("writeBD", "DocumentSnapshot successfully written!")
+                                                myDialog.dismiss()
+                                            }
+                                            .addOnFailureListener { e ->
+                                                Log.w("writeBD", "Error writing document", e)
+                                            }
                                     }
                                 }
                                 myDialog.show()
                             }
                         }
+                    }
             }
         }
 
         //Inicializações das funções
         getUser()
         getCountNotification()
-        //getAllUsers()
-        //getLatestMessages()
-
-        /*listUser.let {
-
-            referenceUsers.addSnapshotListener { snapshot, error ->
-
-                users.clear()
-                if (snapshot != null) {
-
-                    for (doc in snapshot) {
-
-                        val user = UsersItem.fromHash(doc.data as HashMap<String, Any?>)
-                        if (user.userID != listUser?.userID) {
-
-                            users.add(user)
-                        }
-                    }
-                }
-            }
-
-            refLatestMessages
-                    .document(listUser?.userID.toString())
-                    .collection("latest_message")
-                    .orderBy("timeStamp", Query.Direction.DESCENDING)
-                    .addSnapshotListener { snapshot, error ->
-
-                        latestMessages.clear()
-                        if (snapshot != null) {
-
-                            for (doc in snapshot) {
-
-                                message = MessageItem.fromHash(doc.data as HashMap<String, Any?>)
-                                latestMessages.add(message!!)
-                            }
-                        }
-                    }
-        }*/
-
-        /*for ((i, message) in latestMessages.withIndex()) {
-
-            for (user in users) {
-
-                if (message.fromId == user.userID || message.toId == user.userID) {
-
-                    when (i) {
-
-                        0 -> {
-                            binding.textViewFavoriteName1Home.text = user.username
-                            Picasso.get().load(user.imagePath).into(binding.imageViewFavoriteUserPhoto1Home)
-                        }
-                        1 -> {
-                            binding.textViewFavoriteName2Home.text = user.username
-                            Picasso.get().load(user.imagePath).into(binding.imageViewFavoriteUserPhoto2Home)
-                        }
-                        2 -> {
-                            binding.textViewFavoriteName3Home.text = user.username
-                            Picasso.get().load(user.imagePath).into(binding.imageViewFavoriteUserPhoto3Home)
-                        }
-                    }
-                }
-            }
-        }*/
 
         //Botao LOGOUT
         binding.buttonLogoutHome.setOnClickListener {
@@ -235,7 +209,6 @@ class Home : AppCompatActivity() {
             val callIntent = Intent(Intent.ACTION_CALL)
             callIntent.data = Uri.parse("tel:914644996")
             startActivity(callIntent)
-
         }
 
         //Botao para ir as consultas
@@ -247,11 +220,44 @@ class Home : AppCompatActivity() {
         //Botao para ir ao Chat
         binding.buttonChatHome.setOnClickListener {
             val intent = Intent(this, LatestMessagesActivity::class.java)
-            intent.putExtra(ContactsActivity.USER_KEY, listUser)
+            intent.putExtra(ContactsActivity.USER_KEY, user)
             startActivity(intent)
         }
 
-        //Botap para editar
+        //Botao para ultimas mensagens User1
+        binding.imageViewFavoriteUserPhoto1Home.setOnClickListener {
+
+            if (user1 != null) {
+
+                val intent = Intent(this, ChatMessagesActivity::class.java)
+                intent.putExtra(ContactsActivity.USER_KEY, user1)
+                startActivity(intent)
+            }
+        }
+
+        //Botao para ultimas mensagens User2
+        binding.imageViewFavoriteUserPhoto2Home.setOnClickListener {
+
+            if (user2 != null) {
+
+                val intent = Intent(this, ChatMessagesActivity::class.java)
+                intent.putExtra(ContactsActivity.USER_KEY, user2)
+                startActivity(intent)
+            }
+        }
+
+        //Botao para ultimas mensagens User3
+        binding.imageViewFavoriteUserPhoto3Home.setOnClickListener {
+
+            if (user3 != null) {
+
+                val intent = Intent(this, ChatMessagesActivity::class.java)
+                intent.putExtra(ContactsActivity.USER_KEY, user3)
+                startActivity(intent)
+            }
+        }
+
+        //Botao para editar
         binding.buttonEditHome.setOnClickListener {
             myDialog = Dialog(this)
             myDialog.setContentView(R.layout.popwindow_edit)
@@ -346,8 +352,8 @@ class Home : AppCompatActivity() {
         db.collection("users").document(currentUser!!.uid)
             .addSnapshotListener { querySnapshot, firebaseFirestoreException ->
                 querySnapshot?.data?.let {
-                    listUser = UsersItem.fromHash(querySnapshot.data as HashMap<String, Any?>)
-                    listUser?.let { user ->
+                    user = UsersItem.fromHash(querySnapshot.data as HashMap<String, Any?>)
+                    user?.let { user ->
                         currentUserName = user.username.toString()
                         currentUserAddress = user.address.toString()
                     }

@@ -123,7 +123,6 @@ class LatestMessagesActivity : AppCompatActivity() {
             holder.v.apply {
 
                 var toUserId: String?
-                //var userLatest : UsersItem?
 
                 val textViewChatHomeLatestContactLatestMessage = findViewById<TextView>(R.id.textViewChatHomeLatestContactLatestMessage)
                 val textViewChatHomeLatestContactName = findViewById<TextView>(R.id.textViewChatHomeLatestContactName)
@@ -169,7 +168,13 @@ class LatestMessagesActivity : AppCompatActivity() {
                     textViewChatHomeLatestContactDate.text = date
                 }
 
-                Picasso.get().load(user?.imagePath).into(imageViewChatHomeLatestContactImage)
+                if (user?.imagePath != "") {
+
+                    Picasso.get().load(user?.imagePath).into(imageViewChatHomeLatestContactImage)
+                }
+                else {
+                    imageViewChatHomeLatestContactImage.setBackgroundResource(R.drawable.imageviewfotofavorito1)
+                }
 
                 this.setOnClickListener {
 

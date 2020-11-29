@@ -55,9 +55,9 @@
         android:layout_height="72dp"
         android:layout_marginStart="21dp"
         android:layout_marginTop="21dp"
+        android:src="@drawable/imageviewfotoperfilhome"
         app:layout_constraintStart_toStartOf="@+id/imageViewRetanguloHome"
-        app:layout_constraintTop_toTopOf="@+id/imageViewRetanguloHome"
-        app:srcCompat="@drawable/imageviewfotoperfilhome" />
+        app:layout_constraintTop_toTopOf="@+id/imageViewRetanguloHome" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -110,35 +110,35 @@
         app:layout_constraintStart_toEndOf="@+id/linearLayout"
         app:layout_constraintTop_toTopOf="@+id/linearLayout" />
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/imageViewFavoriteUserPhoto1Home"
         android:layout_width="54dp"
         android:layout_height="54dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintEnd_toStartOf="@+id/imageViewFavoriteUserPhoto2Home"
         app:layout_constraintStart_toStartOf="@+id/imageViewRetanguloHome"
         app:layout_constraintTop_toBottomOf="@+id/imageViewUserPhotoHome"
-        app:srcCompat="@drawable/imageviewfotofavorito1" />
+        android:src="@drawable/imageviewfotofavorito1" />
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/imageViewFavoriteUserPhoto2Home"
         android:layout_width="54dp"
         android:layout_height="54dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintEnd_toStartOf="@+id/imageViewFavoriteUserPhoto3Home"
         app:layout_constraintStart_toEndOf="@+id/imageViewFavoriteUserPhoto1Home"
         app:layout_constraintTop_toBottomOf="@+id/imageViewUserPhotoHome"
-        app:srcCompat="@drawable/imageviewfotofavorito1" />
+        android:src="@drawable/imageviewfotofavorito1" />
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/imageViewFavoriteUserPhoto3Home"
         android:layout_width="54dp"
         android:layout_height="54dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="@+id/imageViewRetanguloHome"
         app:layout_constraintStart_toEndOf="@+id/imageViewFavoriteUserPhoto2Home"
         app:layout_constraintTop_toBottomOf="@+id/imageViewUserPhotoHome"
-        app:srcCompat="@drawable/imageviewfotofavorito1" />
+        android:src="@drawable/imageviewfotofavorito1" />
 
     <TextView
         android:id="@+id/textViewFavoriteName1Home"
