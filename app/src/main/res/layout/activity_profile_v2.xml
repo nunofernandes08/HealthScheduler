@@ -11,7 +11,7 @@
     <ImageView
         android:id="@+id/imageViewFadeProfile"
         android:layout_width="0dp"
-        android:layout_height="280dp"
+        android:layout_height="240dp"
         android:adjustViewBounds="true"
         android:cropToPadding="false"
         android:scaleType="centerCrop"
@@ -20,28 +20,16 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/backgroundprofile" />
 
-    <TextView
-        android:id="@+id/textViewProfileProfile"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:fontFamily="@font/roboto"
-        android:text="Perfil"
-        android:textColor="@color/white"
-        android:textSize="30sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/imageViewUserPhotoProfile"
         android:layout_width="100dp"
         android:layout_height="100dp"
+        android:layout_marginTop="16dp"
         android:background="@drawable/borderphotoprofile"
         android:src="@drawable/imageviewfotoperfilhome"
         app:layout_constraintEnd_toEndOf="@+id/imageViewFadeProfile"
         app:layout_constraintStart_toStartOf="@+id/imageViewFadeProfile"
-        app:layout_constraintTop_toBottomOf="@+id/textViewProfileProfile" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textViewUserNameProfile"
@@ -138,8 +126,8 @@
         android:text="Nuno Alexandre Fernandes Azevedo"
         android:textColor="@color/verde_escuro"
         android:textSize="15sp"
-        app:layout_constraintStart_toStartOf="@+id/textViewUserNameNomeProfile"
-        app:layout_constraintTop_toBottomOf="@+id/textViewUserNameNomeProfile" />
+        app:layout_constraintBottom_toBottomOf="@+id/imageViewUserNameProfile"
+        app:layout_constraintStart_toStartOf="@+id/textViewUserNameNomeProfile" />
 
     <ImageView
         android:id="@+id/imageViewUserPhoneProfile"
@@ -171,8 +159,8 @@
         android:text="915039123"
         android:textColor="@color/verde_escuro"
         android:textSize="15sp"
-        app:layout_constraintStart_toStartOf="@+id/textViewUserPhoneProfile"
-        app:layout_constraintTop_toBottomOf="@+id/textViewUserPhoneProfile" />
+        app:layout_constraintBottom_toBottomOf="@+id/imageViewUserPhoneProfile"
+        app:layout_constraintStart_toStartOf="@+id/textViewUserPhoneProfile" />
 
     <ImageView
         android:id="@+id/imageViewUserPhoneProfile2"
@@ -204,8 +192,8 @@
         android:text="Travessa dos laborins"
         android:textColor="@color/verde_escuro"
         android:textSize="15sp"
-        app:layout_constraintStart_toStartOf="@+id/textViewUserAddressProfile"
-        app:layout_constraintTop_toBottomOf="@+id/textViewUserAddressProfile" />
+        app:layout_constraintBottom_toBottomOf="@+id/imageViewUserPhoneProfile2"
+        app:layout_constraintStart_toStartOf="@+id/textViewUserAddressProfile" />
 
     <ImageView
         android:id="@+id/imageViewUserPhoneProfile3"
@@ -237,8 +225,8 @@
         android:text="08/03/2001 (19 anos)"
         android:textColor="@color/verde_escuro"
         android:textSize="15sp"
-        app:layout_constraintStart_toStartOf="@+id/textViewUserBirthdayProfile"
-        app:layout_constraintTop_toBottomOf="@+id/textViewUserBirthdayProfile" />
+        app:layout_constraintBottom_toBottomOf="@+id/imageViewUserPhoneProfile3"
+        app:layout_constraintStart_toStartOf="@+id/textViewUserBirthdayProfile" />
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/coordinatorLayout"

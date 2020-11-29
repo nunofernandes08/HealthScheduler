@@ -19,6 +19,7 @@ import com.google.gson.TypeAdapterFactory
 import com.squareup.picasso.Picasso
 import healthscheduler.example.healthscheduler.databinding.ActivityHomeBinding
 import healthscheduler.example.healthscheduler.databinding.ActivityProfileBinding
+import healthscheduler.example.healthscheduler.databinding.ActivityProfileV2Binding
 import healthscheduler.example.healthscheduler.models.MessageItem
 import healthscheduler.example.healthscheduler.models.UsersItem
 import java.util.HashMap
@@ -35,14 +36,15 @@ class ProfileActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding = ActivityProfileBinding.inflate(layoutInflater)
+        //val binding = ActivityProfileV2Binding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
 
-        userInfomation(binding)
+        userInformation(binding)
         styleTextView(binding)
     }
 
-    private fun userInfomation(binding: ActivityProfileBinding){
+    private fun userInformation(binding: ActivityProfileBinding /*binding: ActivityProfileV2Binding*/){
         currentUser?.uid.let {
             if (it != null) {
                 db.collection("users").document(it)
@@ -66,7 +68,7 @@ class ProfileActivity : AppCompatActivity() {
         }
     }
 
-    private fun styleTextView (binding: ActivityProfileBinding){
+    private fun styleTextView (binding: ActivityProfileBinding /*binding: ActivityProfileV2Binding*/){
         binding.textViewInformacaoConta.setTypeface(null, Typeface.BOLD)
         binding.textViewUserNameNomeProfile.setTypeface(null, Typeface.BOLD)
         binding.textViewUserPhoneProfile.setTypeface(null, Typeface.BOLD)
