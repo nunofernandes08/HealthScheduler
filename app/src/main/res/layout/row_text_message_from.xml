@@ -23,11 +23,16 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:background="@color/verde_escuro"
-        android:maxWidth="200dp"
-        android:padding="4dp"
+        android:background="@drawable/rounded_rectangle_message_from"
+        android:maxWidth="220dp"
+        android:paddingStart="14dp"
+        android:paddingEnd="10dp"
+        android:paddingTop="6dp"
+        android:paddingBottom="6dp"
         android:text="This is my message"
-        android:textSize="15sp"
+        android:fontFamily="@font/roboto"
+        android:textColor="@color/white"
+        android:textSize="16sp"
         app:layout_constraintEnd_toStartOf="@+id/imageViewChatMessageContactPhotoFrom"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -40,4 +45,5 @@
         android:textSize="11sp"
         app:layout_constraintEnd_toEndOf="@+id/textViewChatMessageFrom"
         app:layout_constraintTop_toBottomOf="@+id/textViewChatMessageFrom" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

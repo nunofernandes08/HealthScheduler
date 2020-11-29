@@ -33,17 +33,17 @@ import java.util.*
 
 class Home : AppCompatActivity() {
 
-    val REQUEST_CODE =  0
-    val db =            FirebaseFirestore.getInstance()
-    val storageRef =    Firebase.storage.reference
-    val imagesRef =     storageRef.child("images/${UUID.randomUUID()}.jpg")
+    private val REQUEST_CODE =  0
+    private val db =            FirebaseFirestore.getInstance()
+    private val storageRef =    Firebase.storage.reference
+    private val imagesRef =     storageRef.child("images/${UUID.randomUUID()}.jpg")
 
-    var currentUserName:    String? = null
-    var currentUserAddress: String? = null
-    var downUrl:            String? = null
-    var user:               UsersItem? = null
-    var bitmap:             Bitmap? = null
-    var curFile:            Uri? = null
+    private var currentUserName:    String? = null
+    private var currentUserAddress: String? = null
+    private var downUrl:            String? = null
+    private var user:               UsersItem? = null
+    private var bitmap:             Bitmap? = null
+    private var curFile:            Uri? = null
 
     private var refLatestMessages = db.collection("latest_messages")
     private var referenceUsers = db.collection("users")

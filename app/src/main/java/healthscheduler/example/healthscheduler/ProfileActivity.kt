@@ -35,8 +35,8 @@ class ProfileActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val binding = ActivityProfileBinding.inflate(layoutInflater)
-        //val binding = ActivityProfileV2Binding.inflate(layoutInflater)
+        //val binding = ActivityProfileBinding.inflate(layoutInflater)
+        val binding = ActivityProfileV2Binding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
 
@@ -44,7 +44,7 @@ class ProfileActivity : AppCompatActivity() {
         styleTextView(binding)
     }
 
-    private fun userInformation(binding: ActivityProfileBinding /*binding: ActivityProfileV2Binding*/){
+    private fun userInformation(/*binding: ActivityProfileBinding*/ binding: ActivityProfileV2Binding){
         currentUser?.uid.let {
             if (it != null) {
                 db.collection("users").document(it)
@@ -68,7 +68,7 @@ class ProfileActivity : AppCompatActivity() {
         }
     }
 
-    private fun styleTextView (binding: ActivityProfileBinding /*binding: ActivityProfileV2Binding*/){
+    private fun styleTextView (/*binding: ActivityProfileBinding*/ binding: ActivityProfileV2Binding){
         binding.textViewInformacaoConta.setTypeface(null, Typeface.BOLD)
         binding.textViewUserNameNomeProfile.setTypeface(null, Typeface.BOLD)
         binding.textViewUserPhoneProfile.setTypeface(null, Typeface.BOLD)
