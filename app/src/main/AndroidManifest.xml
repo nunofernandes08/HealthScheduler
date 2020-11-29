@@ -12,7 +12,8 @@
         android:roundIcon="@mipmap/ic_logo"
         android:supportsRtl="true"
         android:theme="@style/Theme.HealthScheduler">
-        <activity android:name=".ChatMessagesActivity"></activity>
+        <activity android:name=".Profile"></activity>
+        <activity android:name=".ChatMessagesActivity" />
         <activity android:name=".ContactsActivity" />
         <activity android:name=".LatestMessagesActivity" />
         <activity android:name=".Login.CodeVerifyPhone" />

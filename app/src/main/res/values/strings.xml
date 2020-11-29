@@ -12,6 +12,7 @@
     <string name="register">Registar</string>
     <string name="enviar">Enviar</string>
     <string name="editar">Editar</string>
+    <string name="logout">Logout</string>
     <string name="infoapplication">
 
             <!-- \nA app HealthSchedule pretende ajudar todos os utentes do Hospital X a organizar a sua agenda.

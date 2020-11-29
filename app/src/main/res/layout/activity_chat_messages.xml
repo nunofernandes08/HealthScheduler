@@ -76,36 +76,17 @@
 
         <EditText
             android:id="@+id/editTextChatMessagesWriteMessage"
-            android:layout_width="250dp"
+            android:layout_width="300dp"
             android:layout_height="50dp"
             android:layout_weight="0"
             android:layout_gravity="center"
             android:layout_marginStart="4dp"
             android:hint="Enter Message"
+            android:paddingLeft="15dp"
             android:inputType="textPersonName"
-            android:textColor="@color/white"
-            android:textColorHint="@color/white"
-            android:backgroundTint="@color/white"/>
-
-        <ImageButton
-            android:id="@+id/buttonChatMessageSendAudio"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:layout_weight="1"
-            android:layout_gravity="center"
-            android:layout_marginStart="4dp"
-            android:background="@color/transparency"
-            app:srcCompat="@drawable/ic_baseline_keyboard_voice_24" />
-
-        <ImageButton
-            android:id="@+id/buttonChatMessageSendImage"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:layout_weight="1"
-            android:layout_gravity="center"
-            android:layout_marginStart="4dp"
-            android:background="@color/transparency"
-            app:srcCompat="@drawable/ic_baseline_image_24" />
+            android:textColor="@color/verde_escuro"
+            android:textColorHint="@color/verde_escuro"
+            android:background="@drawable/buttonwhite"/>
 
         <ImageButton
             android:id="@+id/buttonChatMessageSendTextMessage"
@@ -115,8 +96,8 @@
             android:layout_gravity="center"
             android:layout_marginStart="4dp"
             android:layout_marginEnd="4dp"
-            android:background="@color/transparency"
-            app:srcCompat="@drawable/ic_baseline_send_24" />
+            android:background="@drawable/buttonwhite"
+            app:srcCompat="@drawable/ic_baseline_send_24_darkgreen" />
 
     </LinearLayout>
 

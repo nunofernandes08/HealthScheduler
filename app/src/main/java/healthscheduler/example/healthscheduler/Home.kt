@@ -68,6 +68,11 @@ class Home : AppCompatActivity() {
             getPermissionToPhoneCall()
         }
 
+        binding.imageViewUserPhotoHome.setOnClickListener {
+            val intent = Intent(this, Profile::class.java)
+            startActivity(intent)
+        }
+
         binding.textViewUserNameHome.text = ""
         binding.textViewUserNumberPhoneHome.text = ""
         binding.textViewUserAddressHome.text = ""

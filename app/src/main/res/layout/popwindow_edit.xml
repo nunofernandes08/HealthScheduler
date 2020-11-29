@@ -34,7 +34,6 @@
         android:inputType="textEmailAddress"
         android:labelFor="@id/textViewEmailLogin"
         android:textColor="#FFFFFF"
-        android:textColorHighlight="#8A8A8A"
         android:textColorHint="#36BFB8"
         android:textColorLink="#FFFFFF"
         app:layout_constraintStart_toStartOf="@+id/textViewUserAddressEdit"
