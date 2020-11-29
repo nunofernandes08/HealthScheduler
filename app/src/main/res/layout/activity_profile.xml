@@ -157,6 +157,19 @@
         app:layout_constraintTop_toBottomOf="@+id/textViewUserNameNomeProfile" />
 
     <TextView
+        android:id="@+id/textViewUserEmailProfile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto"
+        android:text="nuno4562@gmail.com"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="@+id/textViewUserNameProfile"
+        app:layout_constraintHorizontal_bias="0.483"
+        app:layout_constraintStart_toStartOf="@+id/textViewUserNameProfile"
+        app:layout_constraintTop_toBottomOf="@+id/textViewUserNameProfile" />
+
+    <TextView
         android:id="@+id/textViewUserPhone2Profile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

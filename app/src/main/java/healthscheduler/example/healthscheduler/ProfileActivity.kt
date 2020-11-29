@@ -51,6 +51,12 @@ class ProfileActivity : AppCompatActivity() {
                             listUser = UsersItem.fromHash(querySnapshot.data as HashMap<String, Any?>)
                             listUser?.let { user ->
                                 if (user.imagePath != "") {
+                                    binding.textViewUserNameProfile.text = user.username
+                                    binding.textViewUserEmailProfile.text = user.phoneNumberEmail
+                                    binding.textViewUserName2Profile.text = user.username
+                                    //binding.textViewUserPhone2Profile.text = user.phoneNumberEmail
+                                    binding.textViewUserAddress2Profile.text = user.address
+                                    //binding.textViewUserBirthday2Profile.text = user.
                                     Picasso.get().load(user.imagePath).into(binding.imageViewUserPhotoProfile)
                                 }
                             }
