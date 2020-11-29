@@ -2,6 +2,7 @@ package healthscheduler.example.healthscheduler
 
 import android.app.Dialog
 import android.graphics.Color
+import android.graphics.Typeface
 import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -14,6 +15,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
+import com.google.gson.TypeAdapterFactory
 import com.squareup.picasso.Picasso
 import healthscheduler.example.healthscheduler.databinding.ActivityHomeBinding
 import healthscheduler.example.healthscheduler.databinding.ActivityProfileBinding
@@ -36,6 +38,11 @@ class ProfileActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
+        userInfomation(binding)
+        styleTextView(binding)
+    }
+
+    private fun userInfomation(binding: ActivityProfileBinding){
         currentUser?.uid.let {
             if (it != null) {
                 db.collection("users").document(it)
@@ -51,5 +58,13 @@ class ProfileActivity : AppCompatActivity() {
                     }
             }
         }
+    }
+
+    private fun styleTextView (binding: ActivityProfileBinding){
+        binding.textViewInformacaoConta.setTypeface(null, Typeface.BOLD)
+        binding.textViewUserNameNomeProfile.setTypeface(null, Typeface.BOLD)
+        binding.textViewUserPhoneProfile.setTypeface(null, Typeface.BOLD)
+        binding.textViewUserAddressProfile.setTypeface(null, Typeface.BOLD)
+        binding.textViewUserBirthdayProfile.setTypeface(null, Typeface.BOLD)
     }
 }

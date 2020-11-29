@@ -13,7 +13,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.HealthScheduler">
         <activity android:name=".ProfileActivity"></activity>
-        <activity android:name=".Profile" />
         <activity android:name=".ChatMessagesActivity" />
         <activity android:name=".ContactsActivity" />
         <activity android:name=".LatestMessagesActivity" />

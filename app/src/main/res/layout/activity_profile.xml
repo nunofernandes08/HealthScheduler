@@ -60,9 +60,8 @@
         android:layout_marginTop="45dp"
         android:background="@drawable/buttonwhitelogout"
         android:fontFamily="@font/roboto"
-        android:paddingLeft="50dp"
         android:text="@string/logout"
-        android:textColor="#36BFB8"
+        android:textColor="@color/verde_escuro"
         android:textSize="24sp"
         app:backgroundTint="#F6F6F6"
         app:layout_constraintEnd_toEndOf="@+id/textViewUserNameProfile"
@@ -79,5 +78,186 @@
         app:layout_constraintStart_toStartOf="@+id/buttonLogoutProfile"
         app:layout_constraintTop_toTopOf="@+id/buttonLogoutProfile"
         app:srcCompat="@drawable/backprofile" />
+
+    <TextView
+        android:id="@+id/textViewInformacaoConta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="24dp"
+        android:fontFamily="@font/roboto"
+        android:text="Informação da conta"
+        android:textColor="@color/verde_escuro"
+        android:textSize="25sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonLogoutProfile" />
+
+    <TextView
+        android:id="@+id/textViewUserNameNomeProfile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="15dp"
+        android:fontFamily="@font/roboto"
+        android:text="Nome"
+        android:textColor="@color/verde_escuro"
+        android:textSize="20sp"
+        app:layout_constraintStart_toEndOf="@+id/imageViewUserNameProfile"
+        app:layout_constraintTop_toBottomOf="@+id/textViewInformacaoConta" />
+
+    <TextView
+        android:id="@+id/textViewUserPhoneProfile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/roboto"
+        android:text="Telemóvel"
+        android:textColor="@color/verde_escuro"
+        android:textSize="20sp"
+        app:layout_constraintStart_toEndOf="@+id/imageViewUserPhoneProfile"
+        app:layout_constraintTop_toBottomOf="@+id/textViewUserName2Profile" />
+
+    <TextView
+        android:id="@+id/textViewUserAddressProfile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="24dp"
+        android:fontFamily="@font/roboto"
+        android:text="Morada"
+        android:textColor="@color/verde_escuro"
+        android:textSize="20sp"
+        app:layout_constraintStart_toEndOf="@+id/imageViewUserPhoneProfile2"
+        app:layout_constraintTop_toBottomOf="@+id/textViewUserPhone2Profile" />
+
+    <TextView
+        android:id="@+id/textViewUserBirthdayProfile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="24dp"
+        android:fontFamily="@font/roboto"
+        android:text="Data de nascimento"
+        android:textColor="@color/verde_escuro"
+        android:textSize="20sp"
+        app:layout_constraintStart_toEndOf="@+id/imageViewUserPhoneProfile3"
+        app:layout_constraintTop_toBottomOf="@+id/textViewUserAddress2Profile" />
+
+    <TextView
+        android:id="@+id/textViewUserName2Profile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:fontFamily="@font/roboto"
+        android:text="Nuno Alexandre Fernandes Azevedo"
+        android:textColor="@color/verde_escuro"
+        android:textSize="15sp"
+        app:layout_constraintStart_toStartOf="@+id/textViewUserNameNomeProfile"
+        app:layout_constraintTop_toBottomOf="@+id/textViewUserNameNomeProfile" />
+
+    <TextView
+        android:id="@+id/textViewUserPhone2Profile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:fontFamily="@font/roboto"
+        android:text="915039123"
+        android:textColor="@color/verde_escuro"
+        android:textSize="15sp"
+        app:layout_constraintStart_toStartOf="@+id/textViewUserPhoneProfile"
+        app:layout_constraintTop_toBottomOf="@+id/textViewUserPhoneProfile" />
+
+    <TextView
+        android:id="@+id/textViewUserAddress2Profile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:fontFamily="@font/roboto"
+        android:text="Travessa dos laborins"
+        android:textColor="@color/verde_escuro"
+        android:textSize="15sp"
+        app:layout_constraintStart_toStartOf="@+id/textViewUserAddressProfile"
+        app:layout_constraintTop_toBottomOf="@+id/textViewUserAddressProfile" />
+
+    <TextView
+        android:id="@+id/textViewUserBirthday2Profile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:fontFamily="@font/roboto"
+        android:text="08/03/2001 (19 anos)"
+        android:textColor="@color/verde_escuro"
+        android:textSize="15sp"
+        app:layout_constraintStart_toStartOf="@+id/textViewUserBirthdayProfile"
+        app:layout_constraintTop_toBottomOf="@+id/textViewUserBirthdayProfile" />
+
+    <ImageView
+        android:id="@+id/imageViewUserNameProfile"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="15dp"
+        app:layout_constraintStart_toStartOf="@+id/textViewInformacaoConta"
+        app:layout_constraintTop_toBottomOf="@+id/textViewInformacaoConta"
+        app:srcCompat="@drawable/imageviewusernameprofile" />
+
+    <ImageView
+        android:id="@+id/imageViewUserPhoneProfile"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toStartOf="@+id/imageViewUserNameProfile"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewUserNameProfile"
+        app:srcCompat="@drawable/imageviewuserphoneprofile" />
+
+    <ImageView
+        android:id="@+id/imageViewUserPhoneProfile2"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toStartOf="@+id/imageViewUserPhoneProfile"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewUserPhoneProfile"
+        app:srcCompat="@drawable/imageviewuseraddressprofile" />
+
+    <ImageView
+        android:id="@+id/imageViewUserPhoneProfile3"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toStartOf="@+id/imageViewUserPhoneProfile2"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewUserPhoneProfile2"
+        app:srcCompat="@drawable/imageviewuserbirthdayprofile" />
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/coordinatorLayout"
+        android:layout_width="0dp"
+        android:layout_height="67dp"
+        android:foregroundGravity="bottom"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/floatingActionButton"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:foreground="@drawable/logonav"
+            android:foregroundGravity="center"
+            app:fabCustomSize="50dp"
+            app:layout_anchor="@+id/bottomBar"
+            app:layout_anchorGravity="top|center" />
+
+        <com.google.android.material.bottomappbar.BottomAppBar
+            android:id="@+id/bottomBar"
+            android:layout_width="match_parent"
+            android:layout_height="46dp"
+            android:layout_gravity="bottom"
+            android:background="@drawable/fadehome"
+            app:backgroundTint="#36BFB8"
+            app:fabAlignmentMode="center"
+            app:fabCradleMargin="15dp" />
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
