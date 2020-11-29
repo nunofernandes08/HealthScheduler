@@ -258,6 +258,9 @@ class ChatMessagesActivity : AppCompatActivity() {
 
                                 Picasso.get().load(currentUser?.imagePath).into(imageViewChatMessageContactPhotoFrom)
                             }
+                            else {
+                                imageViewChatMessageContactPhotoFrom.setBackgroundResource(R.drawable.imageviewfotofavorito1)
+                            }
                         }
                     }
                     else {
@@ -292,6 +295,9 @@ class ChatMessagesActivity : AppCompatActivity() {
                             if (toUser?.imagePath != "") {
 
                                 Picasso.get().load(toUser?.imagePath).into(imageViewChatMessageContactPhotoTo)
+                            }
+                            else {
+                                imageViewChatMessageContactPhotoTo.setBackgroundResource(R.drawable.imageviewfotofavorito1)
                             }
                         }
                     }
