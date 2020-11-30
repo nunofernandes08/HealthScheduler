@@ -1,6 +1,7 @@
 package healthscheduler.example.healthscheduler
 
 import android.app.Dialog
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.Typeface
 import android.graphics.drawable.ColorDrawable
@@ -10,6 +11,7 @@ import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
@@ -17,6 +19,7 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import com.google.gson.TypeAdapterFactory
 import com.squareup.picasso.Picasso
+import healthscheduler.example.healthscheduler.Login.MainActivity
 import healthscheduler.example.healthscheduler.databinding.ActivityHomeBinding
 import healthscheduler.example.healthscheduler.databinding.ActivityProfileBinding
 import healthscheduler.example.healthscheduler.databinding.ActivityProfileV2Binding
@@ -26,11 +29,10 @@ import java.util.HashMap
 
 class ProfileActivity : AppCompatActivity() {
 
-    val db =            FirebaseFirestore.getInstance()
+    private var listUser    : UsersItem? = null
 
-    var listUser:           UsersItem? = null
-
-    private val auth = Firebase.auth
+    private val db          = FirebaseFirestore.getInstance()
+    private val auth        = Firebase.auth
     private val currentUser = auth.currentUser
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,6 +44,8 @@ class ProfileActivity : AppCompatActivity() {
 
         userInformation(binding)
         styleTextView(binding)
+        backToHome(binding)
+        logout(binding)
     }
 
     private fun userInformation(/*binding: ActivityProfileBinding*/ binding: ActivityProfileV2Binding){
@@ -74,5 +78,28 @@ class ProfileActivity : AppCompatActivity() {
         binding.textViewUserPhoneProfile.setTypeface(null, Typeface.BOLD)
         binding.textViewUserAddressProfile.setTypeface(null, Typeface.BOLD)
         binding.textViewUserBirthdayProfile.setTypeface(null, Typeface.BOLD)
+    }
+
+    private fun backToHome(binding: ActivityProfileV2Binding){
+        binding.floatingActionButton.setOnClickListener {
+            val intent = Intent(this, Home::class.java)
+            startActivity(intent)
+        }
+    }
+
+    private fun logout(binding: ActivityProfileV2Binding){
+        binding.buttonLogoutProfile.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+            FirebaseAuth.getInstance().signOut()
+            startActivity(intent)
+        }
+
+        binding.imageViewLogoutProfile.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+            FirebaseAuth.getInstance().signOut()
+            startActivity(intent)
+        }
     }
 }
