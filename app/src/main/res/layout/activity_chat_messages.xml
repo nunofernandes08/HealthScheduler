@@ -76,17 +76,28 @@
 
         <EditText
             android:id="@+id/editTextChatMessagesWriteMessage"
-            android:layout_width="300dp"
+            android:layout_width="260dp"
             android:layout_height="50dp"
             android:layout_weight="0"
             android:layout_gravity="center"
             android:layout_marginStart="4dp"
             android:hint="Enter Message"
-            android:paddingLeft="15dp"
+            android:paddingStart="15dp"
+            android:paddingEnd="5dp"
             android:inputType="textPersonName"
             android:textColor="@color/verde_escuro"
             android:textColorHint="@color/verde_escuro"
             android:background="@drawable/buttonwhite"/>
+
+        <ImageButton
+            android:id="@+id/buttonChatMessageSendImageMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:layout_marginStart="4dp"
+            android:background="@drawable/buttonwhite"
+            app:srcCompat="@drawable/ic_baseline_image_24" />
 
         <ImageButton
             android:id="@+id/buttonChatMessageSendTextMessage"

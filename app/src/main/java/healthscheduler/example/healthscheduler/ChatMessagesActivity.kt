@@ -1,13 +1,17 @@
 package healthscheduler.example.healthscheduler
 
+import android.opengl.Visibility
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.view.LayoutInflater
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -65,10 +69,33 @@ class ChatMessagesActivity : AppCompatActivity() {
 
     //Funcao com as acoes dos botoes
     private fun buttonsActions(binding: ActivityChatMessagesBinding){
+
+        binding.editTextChatMessagesWriteMessage.addTextChangedListener(object : TextWatcher {
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+                if (p0.isNullOrBlank()) {
+
+                    binding.buttonChatMessageSendImageMessage.visibility = View.VISIBLE
+                    binding.editTextChatMessagesWriteMessage.layoutParams.width = resources.displayMetrics.density.toInt() * 260
+                }
+                else {
+
+                    binding.buttonChatMessageSendImageMessage.visibility = View.GONE
+                    binding.editTextChatMessagesWriteMessage.layoutParams.width = resources.displayMetrics.density.toInt() * 306
+                }
+            }
+
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) { }
+            override fun afterTextChanged(p0: Editable?) { }
+        })
+
         binding.buttonChatMessageSendTextMessage.setOnClickListener {
+
             val messageText = binding.editTextChatMessagesWriteMessage.text.toString()
 
             if (messageText != "") {
+
                 performSendTextMessage(messageText)
                 binding.editTextChatMessagesWriteMessage.text.clear()
                 binding.recyclerViewChatLog.scrollToPosition(
