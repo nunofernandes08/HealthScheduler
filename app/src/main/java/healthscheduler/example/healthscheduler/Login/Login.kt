@@ -5,18 +5,19 @@ import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.text.method.PasswordTransformationMethod
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import healthscheduler.example.healthscheduler.Home
 import healthscheduler.example.healthscheduler.R
 import healthscheduler.example.healthscheduler.databinding.ActivityLoginBinding
-import kotlinx.android.synthetic.main.activity_home.*
+import kotlinx.android.synthetic.main.activity_login.*
+
 
 class Login : AppCompatActivity() {
 
@@ -53,6 +54,9 @@ class Login : AppCompatActivity() {
 
     //Funcao com as acoes das textViews
     private fun textViewActions(binding: ActivityLoginBinding){
+
+        var count = 0
+
         binding.textViewRecoveryPasswordLogin.setOnClickListener{
 
             myDialog = Dialog(this)
@@ -78,6 +82,21 @@ class Login : AppCompatActivity() {
 
             myDialog.show()
 
+        }
+
+        binding.imageViewHidePasswordLogin.setOnClickListener {
+
+            if(count === 1 ) {
+                editTextPasswordLogin.transformationMethod = PasswordTransformationMethod()
+            }
+
+            if(count === 0){
+                editTextPasswordLogin.transformationMethod = null
+                count = 1
+            }else if(count === 1){
+                editTextPasswordLogin.transformationMethod = PasswordTransformationMethod()
+                count = 0
+            }
         }
     }
 
