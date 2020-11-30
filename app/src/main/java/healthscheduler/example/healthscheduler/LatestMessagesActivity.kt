@@ -25,35 +25,28 @@ import kotlin.collections.HashMap
 
 class LatestMessagesActivity : AppCompatActivity() {
 
-    private lateinit var currentUser : UsersItem
-    private val db = FirebaseFirestore.getInstance()
-    private var referenceUsers = db.collection("users")
-    private var refLatestMessages = db.collection("latest_messages")
+    private val db                  = FirebaseFirestore.getInstance()
+    private var referenceUsers      = db.collection("users")
+    private var refLatestMessages   = db.collection("latest_messages")
 
-    private var message : MessageItem? = null
-    private var user : UsersItem? = null
-    private var latestMessages : MutableList<MessageItem> = arrayListOf()
-    private var users : MutableList<UsersItem> = arrayListOf()
-    private var mAdapter : RecyclerView.Adapter<*>? = null
-    private var mLayoutManager : LinearLayoutManager? = null
+    private lateinit var currentUser    : UsersItem
+    private var message                 : MessageItem? = null
+    private var user                    : UsersItem? = null
+    private var latestMessages          : MutableList<MessageItem> = arrayListOf()
+    private var users                   : MutableList<UsersItem> = arrayListOf()
+    private var mAdapter                : RecyclerView.Adapter<*>? = null
+    private var mLayoutManager          : LinearLayoutManager? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         val binding = ActivityLatestMessagesBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
 
-        binding.floatingActionButton.setOnClickListener{
-
-            val intent = Intent(this, Home::class.java)
-            startActivity(intent)
-            finish()
-        }
+        buttonsActions(binding)
 
         currentUser = intent.getParcelableExtra<UsersItem>(ContactsActivity.USER_KEY)!!
         if (currentUser.imagePath != "") {
-
             Picasso.get().load(currentUser.imagePath).into(binding.imageViewChatHomePhotoUser)
         }
 
@@ -66,17 +59,12 @@ class LatestMessagesActivity : AppCompatActivity() {
         binding.recyclerViewLatestMessages.adapter = mAdapter
 
         currentUser.let {
-
             referenceUsers.addSnapshotListener { snapshot, error ->
-
                 users.clear()
                 if (snapshot != null) {
-
                     for (doc in snapshot) {
-
                         val user = UsersItem.fromHash(doc.data as HashMap<String, Any?>)
                         if (user.userID != currentUser.userID) {
-
                             users.add(user)
                         }
                     }
@@ -86,27 +74,32 @@ class LatestMessagesActivity : AppCompatActivity() {
         }
 
         refLatestMessages.document(currentUser.userID.toString())
-                .collection("latest_message")
-                .orderBy("timeStamp", Query.Direction.DESCENDING)
-                .addSnapshotListener { snapshot, error ->
-
-                    latestMessages.clear()
-                    if (snapshot != null) {
-
-                        for (doc in snapshot) {
-
-                            message = MessageItem.fromHash(doc.data as HashMap<String, Any?>)
-                            latestMessages.add(message!!)
-                        }
+            .collection("latest_message")
+            .orderBy("timeStamp", Query.Direction.DESCENDING)
+            .addSnapshotListener { snapshot, error ->
+                latestMessages.clear()
+                if (snapshot != null) {
+                    for (doc in snapshot) {
+                        message = MessageItem.fromHash(doc.data as HashMap<String, Any?>)
+                        latestMessages.add(message!!)
                     }
-                    mAdapter?.notifyDataSetChanged()
                 }
+                mAdapter?.notifyDataSetChanged()
+            }
+    }
 
+    //Funcao com as acoes dos botoes
+    private fun buttonsActions(binding: ActivityLatestMessagesBinding){
         binding.floatingActionButtonSendNewMessage.setOnClickListener {
-
             val intent = Intent(this, ContactsActivity::class.java)
             intent.putExtra(ContactsActivity.USER_KEY, currentUser)
             startActivity(intent)
+        }
+
+        binding.floatingActionButton.setOnClickListener{
+            val intent = Intent(this, Home::class.java)
+            startActivity(intent)
+            finish()
         }
     }
 

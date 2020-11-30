@@ -12,6 +12,9 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 import com.squareup.picasso.Picasso
+import healthscheduler.example.healthscheduler.databinding.ActivityHomeBinding
+import healthscheduler.example.healthscheduler.databinding.ActivityProfileBinding
+import healthscheduler.example.healthscheduler.databinding.ActivityScheduleBinding
 import healthscheduler.example.healthscheduler.models.ScheduleItem
 import healthscheduler.example.healthscheduler.models.UsersItem
 import kotlinx.android.synthetic.main.activity_schedule.*
@@ -21,36 +24,30 @@ import java.util.HashMap
 
 class Schedule : AppCompatActivity() {
 
-    private lateinit var currentUser2 : UsersItem
+    private var listSchedule:       MutableList<ScheduleItem> = ArrayList()
+    private var scheduleAdapter:    Schedule.ScheduleAdapter? = null
 
-    var listSchedule: MutableList<ScheduleItem> = ArrayList()
-    var scheduleAdapter: Schedule.ScheduleAdapter? = null
+    private var listUser:           UsersItem? = null
 
-    private val db = FirebaseFirestore.getInstance()
-
-    private lateinit var auth: FirebaseAuth
-
-    var listUser:           UsersItem? = null
+    private val db          = FirebaseFirestore.getInstance()
+    private val auth        = Firebase.auth
+    private val currentUser = auth.currentUser
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_schedule)
-
-        val listViewSchedule = findViewById<ListView>(R.id.listViewSchedule)
+        val binding = ActivityScheduleBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
 
         photoUser()
+        buttonsActions(binding)
+        getUserData(binding)
+    }
 
-        floatingActionButton.setOnClickListener{
-            val intent = Intent(this, Home::class.java)
-            startActivity(intent)
-        }
-
-        // Initialize Firebase Auth
-        auth = Firebase.auth
-        val currentUser = auth.currentUser
-
+    //Funcao para ir buscar a informacao do CURRENTUSER
+    private fun getUserData(binding: ActivityScheduleBinding){
         scheduleAdapter = ScheduleAdapter()
-        listViewSchedule.adapter = scheduleAdapter
+        binding.listViewSchedule.adapter = scheduleAdapter
 
         listSchedule.clear()
 
@@ -71,13 +68,20 @@ class Schedule : AppCompatActivity() {
                     }
                     scheduleAdapter?.notifyDataSetChanged()
                 }
+            }
+    }
+
+    //Funcao com as acoes dos botoes
+    private fun buttonsActions(binding: ActivityScheduleBinding){
+
+        floatingActionButton.setOnClickListener{
+            val intent = Intent(this, Home::class.java)
+            startActivity(intent)
         }
     }
 
+    //Funcao que vai buscar a foto do CURRENTUSER
     private fun photoUser(){
-        auth = Firebase.auth
-        val currentUser = auth.currentUser
-
         currentUser!!.uid?.let {
             db.collection("users").document(it)
                 .addSnapshotListener { querySnapshot, firebaseFirestoreException ->
@@ -99,6 +103,7 @@ class Schedule : AppCompatActivity() {
         }
     }
 
+    //Adapter das consultas
     inner class ScheduleAdapter : BaseAdapter() {
         override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
             val rowView = layoutInflater.inflate(R.layout.row_schedule, parent, false)
@@ -130,4 +135,5 @@ class Schedule : AppCompatActivity() {
             return listSchedule.size
         }
     }
+
 }

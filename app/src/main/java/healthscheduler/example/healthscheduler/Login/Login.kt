@@ -16,13 +16,14 @@ import com.google.firebase.ktx.Firebase
 import healthscheduler.example.healthscheduler.Home
 import healthscheduler.example.healthscheduler.R
 import healthscheduler.example.healthscheduler.databinding.ActivityLoginBinding
+import kotlinx.android.synthetic.main.activity_home.*
 
 class Login : AppCompatActivity() {
 
-    private lateinit var auth: FirebaseAuth
+    private val auth        = Firebase.auth
+    private val currentUser = auth.currentUser
 
     private var mGoogleSignInClient: GoogleSignInClient? = null
-
     internal lateinit var myDialog : Dialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,45 +32,52 @@ class Login : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
-        auth = Firebase.auth
-        val currentUser = auth.currentUser
+        buttonActions(binding)
+        textViewActions(binding)
+    }
+
+    //Funcao com as acoes dos botoes
+    private fun buttonActions(binding: ActivityLoginBinding){
 
         binding.buttonLogin.setOnClickListener {
             signInWithEmailAndPassword(binding)
         }
 
+        binding.buttonInfoLogin.setOnClickListener {
+            myDialog = Dialog(this)
+            myDialog.setContentView(R.layout.popwindow_info)
+            myDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT));
+            myDialog.show()
+        }
+    }
+
+    //Funcao com as acoes das textViews
+    private fun textViewActions(binding: ActivityLoginBinding){
         binding.textViewRecoveryPasswordLogin.setOnClickListener{
 
             myDialog = Dialog(this)
-                myDialog.setContentView(R.layout.popwindow_recoverypassword)
-                myDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT));
+            myDialog.setContentView(R.layout.popwindow_recoverypassword)
+            myDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT));
 
-                myDialog.findViewById<Button>(R.id.buttonEnviarPop).setOnClickListener {
+            myDialog.findViewById<Button>(R.id.buttonEnviarPop).setOnClickListener {
 
-                    val emailAddress = myDialog.findViewById<TextView>(R.id.editTextRecoveryEmailPop).text.toString()
+                val emailAddress = myDialog.findViewById<TextView>(R.id.editTextRecoveryEmailPop).text.toString()
 
-                    Firebase.auth.sendPasswordResetEmail(emailAddress)
-                            .addOnCompleteListener { task ->
-                                if (task.isSuccessful) {
-                                    Toast.makeText(this@Login, "Email enviado com sucesso",
-                                            Toast.LENGTH_SHORT).show()
-                                    myDialog.dismiss()
-                                }else{
-                                    Toast.makeText(this@Login, "Falha ao enviar o email",
-                                            Toast.LENGTH_SHORT).show()
-                                }
+                Firebase.auth.sendPasswordResetEmail(emailAddress)
+                        .addOnCompleteListener { task ->
+                            if (task.isSuccessful) {
+                                Toast.makeText(this@Login, "Email enviado com sucesso",
+                                        Toast.LENGTH_SHORT).show()
+                                myDialog.dismiss()
+                            }else{
+                                Toast.makeText(this@Login, "Falha ao enviar o email",
+                                        Toast.LENGTH_SHORT).show()
                             }
-                }
+                        }
+            }
 
             myDialog.show()
 
-        }
-
-        binding.buttonInfoLogin.setOnClickListener {
-            myDialog = Dialog(this)
-                myDialog.setContentView(R.layout.popwindow_info)
-                myDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT));
-            myDialog.show()
         }
     }
 
@@ -102,9 +110,7 @@ class Login : AppCompatActivity() {
 /* << --------------------------------------- COMENTÁRIOS --------------------------------------- >>
 
 --> Esconder a barra de cima e as setas que estão em baixo
-
         window.decorView.apply {
             systemUiVisibility = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or View.SYSTEM_UI_FLAG_FULLSCREEN
         }
-
 */

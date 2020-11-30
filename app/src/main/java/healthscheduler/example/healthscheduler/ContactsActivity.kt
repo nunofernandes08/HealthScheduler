@@ -20,13 +20,13 @@ import healthscheduler.example.healthscheduler.models.UsersItem
 
 class ContactsActivity : AppCompatActivity() {
 
-    private lateinit var currentUser : UsersItem
     private val db = FirebaseFirestore.getInstance()
-    private var referenceUsers = db.collection("users")
 
-    private var mAdapter : RecyclerView.Adapter<*>? = null
-    private var mLayoutManager : LinearLayoutManager? = null
-    private var users : MutableList<UsersItem> = arrayListOf()
+    private lateinit var currentUser    : UsersItem
+    private var mAdapter                : RecyclerView.Adapter<*>? = null
+    private var mLayoutManager          : LinearLayoutManager? = null
+    private var users                   : MutableList<UsersItem> = arrayListOf()
+    private var referenceUsers          = db.collection("users")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,31 +45,30 @@ class ContactsActivity : AppCompatActivity() {
         binding.recyclerViewContacts.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
         binding.recyclerViewContacts.adapter = mAdapter
 
-        binding.floatingActionButton.setOnClickListener{
-
-            val intent = Intent(this, Home::class.java)
-            startActivity(intent)
-            finish()
-        }
+        buttonsActions(binding)
 
         currentUser.let {
-
             referenceUsers.addSnapshotListener { snapshot, error ->
-
                 users.clear()
                 if (snapshot != null) {
-
                     for (doc in snapshot) {
-
                         val user = UsersItem.fromHash(doc.data as HashMap<String, Any?>)
                         if (user.userID != currentUser.userID) {
-
                             users.add(user)
                         }
                     }
                 }
                 mAdapter?.notifyDataSetChanged()
             }
+        }
+    }
+
+    //Funcao com as acoes dos botoes
+    private fun buttonsActions(binding: ActivityContactsBinding){
+        binding.floatingActionButton.setOnClickListener{
+            val intent = Intent(this, Home::class.java)
+            startActivity(intent)
+            finish()
         }
     }
 

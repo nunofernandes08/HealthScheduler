@@ -15,13 +15,13 @@ import kotlinx.coroutines.*
 
 class Splash : AppCompatActivity() {
 
-    private lateinit var auth: FirebaseAuth
-    private val activityScope = CoroutineScope(Dispatchers.Main)
+    private val activityScope   = CoroutineScope(Dispatchers.Main)
+    private val auth            = Firebase.auth
+    private val currentUser     = auth.currentUser
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
-
 
         val rotation = AnimationUtils.loadAnimation(this, R.anim.rotation)
         val logo : ImageView = findViewById(R.id.imageViewLogo_Splash)
@@ -30,21 +30,6 @@ class Splash : AppCompatActivity() {
         window.decorView.apply {
             systemUiVisibility = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or View.SYSTEM_UI_FLAG_FULLSCREEN
         }
-
-        auth = Firebase.auth
-        val currentUser = auth.currentUser
-
-        /*Handler().postDelayed({
-             currentUser?.let {
-                 val intent = Intent(this, Home::class.java)
-                 startActivity(intent)
-                 finish()
-             }?:run{
-                 val intent = Intent(this, MainActivity::class.java)
-                 startActivity(intent)
-                 finish()
-             }
-         },2000) */
 
         activityScope.launch {
             delay(2000)

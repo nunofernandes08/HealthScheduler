@@ -23,16 +23,14 @@ import androidx.lifecycle.Observer
 
 class Register : AppCompatActivity() {
 
-    companion object {
-        const val TAG = "RegisterActivity"
-    }
+    private var verificationInProgress  = false
+    private lateinit var resendToken    : PhoneAuthProvider.ForceResendingToken
+    private var storedVerificationId    :String? = ""
+    var color                           :Int = Color.RED
 
-    private lateinit var auth: FirebaseAuth
-    private lateinit var resendToken: PhoneAuthProvider.ForceResendingToken
-    private var verificationInProgress = false
-    private var storedVerificationId: String? = ""
-
-    var color: Int = Color.RED
+    private val auth        = Firebase.auth
+    private val currentUser = auth.currentUser
+    private val passwordStrength    = PasswordStrength()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,13 +38,8 @@ class Register : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
-        auth = Firebase.auth
+        buttonsActions(binding)
 
-        binding.buttonContinueRegister.setOnClickListener {
-            registerUser(binding)
-        }
-
-        val passwordStrength = PasswordStrength()
         editTextPasswordRegister.addTextChangedListener(passwordStrength)
 
         passwordStrength.strengthLevel.observe(this, Observer{
@@ -56,6 +49,13 @@ class Register : AppCompatActivity() {
         passwordStrength.strengthColor.observe(this, Observer {
             strengthColor -> color = strengthColor
         })
+    }
+
+    //Funcao com as acoes dos botoes
+    private fun buttonsActions(binding: ActivityRegisterBinding){
+        binding.buttonContinueRegister.setOnClickListener {
+            registerUser(binding)
+        }
     }
 
     private fun displayStrengthLevel(strengthLevel: String) {
@@ -178,8 +178,9 @@ class Register : AppCompatActivity() {
                 }
             }
     }
+
+    companion object {
+        const val TAG = "RegisterActivity"
+    }
+
 }
-
-/* << --------------------------------------- COMENTÁRIOS --------------------------------------- >>
-
-*/

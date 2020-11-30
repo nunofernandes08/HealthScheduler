@@ -20,14 +20,9 @@ import healthscheduler.example.healthscheduler.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var auth: FirebaseAuth
+    private val auth        = Firebase.auth
+    private val currentUser = auth.currentUser
     private var mGoogleSignInClient: GoogleSignInClient? = null
-
-
-    companion object {
-        val TAG = "MainActivity"
-        private const val REQUEST_CODE_SIGN_IN = 9001
-    }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,9 +31,20 @@ class MainActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
-        auth = Firebase.auth
-        val currentUser = auth.currentUser
+        buttonsActions(binding)
+        imageViewActions(binding)
 
+        val options = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestEmail()
+                .build()
+
+        mGoogleSignInClient = GoogleSignIn.getClient(this, options)
+
+    }
+
+    //Funcao com as acoes dos botoes
+    private fun buttonsActions(binding: ActivityMainBinding){
         binding.buttonContinueWithEmailMain.setOnClickListener {
             val intent = Intent(this, Login::class.java)
             startActivity(intent)
@@ -48,14 +54,10 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, Register::class.java)
             startActivity(intent)
         }
+    }
 
-        val options = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.default_web_client_id))
-                .requestEmail()
-                .build()
-
-        mGoogleSignInClient = GoogleSignIn.getClient(this, options)
-
+    //Funcao com as acoes das imageViews
+    private fun imageViewActions(binding: ActivityMainBinding){
         binding.imageViewGoogleMain.setOnClickListener {
             signIn()
         }
@@ -68,7 +70,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        auth = Firebase.auth
         if (requestCode == REQUEST_CODE_SIGN_IN) {
             val task = GoogleSignIn.getSignedInAccountFromIntent(data)
             try {
@@ -100,8 +101,9 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
     }
+
+    companion object {
+        val TAG = "MainActivity"
+        private const val REQUEST_CODE_SIGN_IN = 9001
+    }
 }
-
-/* << --------------------------------------- COMENTÁRIOS --------------------------------------- >>
-
-*/

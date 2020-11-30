@@ -24,20 +24,19 @@ import kotlin.collections.HashMap
 class ChatMessagesActivity : AppCompatActivity() {
 
     private val currentUid = FirebaseAuth.getInstance().uid
-    private var currentUser : UsersItem? = null
-    private var toUser : UsersItem? = null
     private val db = FirebaseFirestore.getInstance()
-    private var refCurrentUser = db.collection("users")
-    private var refMessages = db.collection("chat_messages")
 
-    private var message : MessageItem? = null
-    private var mAdapter : RecyclerView.Adapter<*>? = null
-    private var mLayoutManager : LinearLayoutManager? = null
-    private var messagesList : MutableList<MessageItem> = arrayListOf()
+    private var refCurrentUser  = db.collection("users")
+    private var refMessages     = db.collection("chat_messages")
+    private var currentUser     : UsersItem? = null
+    private var toUser          : UsersItem? = null
+    private var message         : MessageItem? = null
+    private var mAdapter        : RecyclerView.Adapter<*>? = null
+    private var mLayoutManager  : LinearLayoutManager? = null
+    private var messagesList    : MutableList<MessageItem> = arrayListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         val binding = ActivityChatMessagesBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
@@ -61,12 +60,15 @@ class ChatMessagesActivity : AppCompatActivity() {
 
         listenForMessages(binding.recyclerViewChatLog)
 
-        binding.buttonChatMessageSendTextMessage.setOnClickListener {
+        buttonsActions(binding)
+    }
 
+    //Funcao com as acoes dos botoes
+    private fun buttonsActions(binding: ActivityChatMessagesBinding){
+        binding.buttonChatMessageSendTextMessage.setOnClickListener {
             val messageText = binding.editTextChatMessagesWriteMessage.text.toString()
 
             if (messageText != "") {
-
                 performSendTextMessage(messageText)
                 binding.editTextChatMessagesWriteMessage.text.clear()
                 binding.recyclerViewChatLog.scrollToPosition(

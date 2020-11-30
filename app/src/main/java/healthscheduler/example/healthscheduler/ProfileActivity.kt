@@ -30,8 +30,6 @@ import java.util.*
 
 class ProfileActivity : AppCompatActivity() {
 
-    private var listUser    : UsersItem? = null
-
     private val db          = FirebaseFirestore.getInstance()
     private val auth        = Firebase.auth
     private val currentUser = auth.currentUser
@@ -41,6 +39,7 @@ class ProfileActivity : AppCompatActivity() {
     private var downUrl:            String?         = null
     private var curFile:            Uri?            = null
     private var user:               UsersItem?      = null
+    private var listUser:           UsersItem? = null
 
     private lateinit var myDialog:  Dialog
 

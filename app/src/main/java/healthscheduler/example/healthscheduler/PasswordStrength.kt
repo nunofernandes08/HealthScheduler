@@ -10,7 +10,6 @@ class PasswordStrength : TextWatcher {
 
     var strengthLevel: MutableLiveData<String> = MutableLiveData()
     var strengthColor: MutableLiveData<Int> = MutableLiveData()
-
     var lowerCase:     MutableLiveData<Int> = MutableLiveData()
     var upperCase:     MutableLiveData<Int> = MutableLiveData()
     var digit:         MutableLiveData<Int> = MutableLiveData()
