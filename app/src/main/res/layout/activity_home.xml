@@ -96,6 +96,7 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:background="@drawable/buttonedit_foreground"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="@+id/imageViewRetanguloHome"
         app:layout_constraintStart_toEndOf="@+id/linearLayout"

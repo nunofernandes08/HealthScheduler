@@ -8,6 +8,16 @@
     android:layout_height="match_parent"
     tools:context=".ProfileActivity">
 
+    <Button
+        android:id="@+id/buttonEditProfile"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="40dp"
+        android:background="@drawable/editprofile"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textViewInformacaoConta" />
+
     <ImageView
         android:id="@+id/imageViewFadeProfile"
         android:layout_width="0dp"
