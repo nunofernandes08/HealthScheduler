@@ -10,10 +10,7 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.Toast
+import android.widget.*
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -87,6 +84,10 @@ class ProfileActivity : AppCompatActivity() {
             myDialog = Dialog(this)
             myDialog.setContentView(R.layout.popwindow_edit)
             myDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT));
+
+            val userAddress = myDialog.findViewById<TextView>(R.id.editTextUserAddressEdit)
+            userAddress.text = currentUserAddress.toString()
+
 
             //Botao para escolher foto
             myDialog.findViewById<ImageView>(R.id.imageViewUserPhotoEdit).setOnClickListener {
