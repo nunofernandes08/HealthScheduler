@@ -33,30 +33,30 @@ import java.util.*
 
 class Home : AppCompatActivity() {
 
-    private val REQUEST_CODE =  0
-    private val db =            FirebaseFirestore.getInstance()
-    private val storageRef =    Firebase.storage.reference
-    private val imagesRef =     storageRef.child("images/${UUID.randomUUID()}.jpg")
+    private val REQUEST_CODE    =  0
+    private val db              = FirebaseFirestore.getInstance()
+    private val storageRef      = Firebase.storage.reference
+    private val auth            = Firebase.auth
+    private val imagesRef       = storageRef.child("images/${UUID.randomUUID()}.jpg")
+    private val currentUser     = auth.currentUser
 
-    private var currentUserName:    String? = null
-    private var currentUserAddress: String? = null
-    private var downUrl:            String? = null
-    private var user:               UsersItem? = null
-    private var bitmap:             Bitmap? = null
-    private var curFile:            Uri? = null
+    private var currentUserName:    String?         = null
+    private var currentUserAddress: String?         = null
+    private var downUrl:            String?         = null
+    private var user:               UsersItem?      = null
+    private var curFile:            Uri?            = null
 
-    private var refLatestMessages = db.collection("latest_messages")
-    private var referenceUsers = db.collection("users")
-    private var referenceSchedule = db.collection("consultas")
-    private var users : MutableList<UsersItem> = arrayListOf()
-    private var latestMessages : MutableList<MessageItem> = arrayListOf()
-    private var message : MessageItem? = null
-    private var user1 : UsersItem? = null
-    private var user2 : UsersItem? = null
-    private var user3 : UsersItem? = null
+    private var message:            MessageItem?    = null
+    private var user1:              UsersItem?      = null
+    private var user2:              UsersItem?      = null
+    private var user3:              UsersItem?      = null
 
-    private val auth = Firebase.auth
-    private val currentUser = auth.currentUser
+    private var refLatestMessages   = db.collection("latest_messages")
+    private var referenceUsers      = db.collection("users")
+
+    private var users:          MutableList<UsersItem> = arrayListOf()
+    private var latestMessages: MutableList<MessageItem> = arrayListOf()
+
     private lateinit var myDialog:  Dialog
 
     @RequiresApi(Build.VERSION_CODES.M)
@@ -200,6 +200,7 @@ class Home : AppCompatActivity() {
         }
     }
 
+    //Funcao com as acoes das textViews
     private fun textViewActions(binding: ActivityHomeBinding){
 
         //ImageViewUserPhoto ao clicar vai para o perfil
