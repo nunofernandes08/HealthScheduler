@@ -1,8 +1,14 @@
 package healthscheduler.example.healthscheduler
 
+import android.app.Activity
+import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.ImageDecoder
+import android.net.Uri
 import android.opengl.Visibility
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.MediaStore
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
@@ -17,25 +23,35 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.storage.FirebaseStorage
 import com.squareup.picasso.Picasso
 import healthscheduler.example.healthscheduler.databinding.ActivityChatMessagesBinding
 import healthscheduler.example.healthscheduler.models.MessageItem
 import healthscheduler.example.healthscheduler.models.UsersItem
+import java.io.ByteArrayOutputStream
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.HashMap
 
 class ChatMessagesActivity : AppCompatActivity() {
 
+    companion object {
+        const val IMAGE_PICK = 0
+    }
+
     private val currentUid = FirebaseAuth.getInstance().uid
     private val db = FirebaseFirestore.getInstance()
 
-    private var refCurrentUser  = db.collection("users")
-    private var refMessages     = db.collection("chat_messages")
-    private var currentUser     : UsersItem? = null
-    private var toUser          : UsersItem? = null
-    private var message         : MessageItem? = null
-    private var mAdapter        : RecyclerView.Adapter<*>? = null
+    private val refCurrentUser = db.collection("users")
+    private val refMessages = db.collection("chat_messages")
+    private val ref = FirebaseStorage.getInstance()
+    private var currentUser : UsersItem? = null
+    private var toUser : UsersItem? = null
+    private var message : MessageItem? = null
+    private var mAdapter : RecyclerView.Adapter<*>? = null
+    private var selectedPhotoUri : Uri? = null
+
+
     private var mLayoutManager  : LinearLayoutManager? = null
     private var messagesList    : MutableList<MessageItem> = arrayListOf()
 
@@ -102,6 +118,46 @@ class ChatMessagesActivity : AppCompatActivity() {
                         (mAdapter as ChatMessagesAdapter).itemCount -1)
             }
         }
+
+        binding.buttonChatMessageSendImageMessage.setOnClickListener {
+
+            val intent = Intent(Intent.ACTION_PICK)
+            intent.type = "image/*"
+            startActivityForResult(intent, IMAGE_PICK)
+            binding.recyclerViewChatLog.scrollToPosition(
+                    (mAdapter as ChatMessagesAdapter).itemCount -1)
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == IMAGE_PICK && resultCode == Activity.RESULT_OK && data != null) {
+
+            selectedPhotoUri = data.data
+            uploadImageToFirebaseStorage()
+        }
+    }
+
+    private fun uploadImageToFirebaseStorage() {
+
+        val filename = UUID.randomUUID().toString()
+        val refUploadImage = ref.getReference("/images/$filename")
+        selectedPhotoUri?.let { uri ->
+
+            val bitmap = ImageDecoder.decodeBitmap(ImageDecoder.createSource(contentResolver, uri))
+            val baos = ByteArrayOutputStream()
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 25, baos)
+            val data = baos.toByteArray()
+
+            refUploadImage.putBytes(data).addOnSuccessListener {
+
+                refUploadImage.downloadUrl.addOnSuccessListener {
+
+                    performSendImageMessage(it.toString())
+                }
+            }
+        }
     }
 
     private fun getCurrentUser() {
@@ -153,10 +209,38 @@ class ChatMessagesActivity : AppCompatActivity() {
         message = MessageItem(messageText, currentUser?.userID!!, toUser?.userID!!,
                 System.currentTimeMillis() / 1000,"text")
 
-        fromReference.add(message!!.toHashMap()).addOnSuccessListener {
+        fromReference.add(message!!.toHashMap())
+        toReference.add(message!!.toHashMap())
 
-        }
+        val fromLatestReference = FirebaseFirestore.getInstance()
+                .collection("latest_messages")
+                .document(currentUser?.userID!!)
+                .collection("latest_message")
+                .document(toUser?.userID!!)
+        fromLatestReference.set(message!!.toHashMap())
 
+        val toLatestReference = FirebaseFirestore.getInstance()
+                .collection("latest_messages")
+                .document(toUser?.userID!!)
+                .collection("latest_message")
+                .document(currentUser?.userID!!)
+        toLatestReference.set(message!!.toHashMap())
+    }
+
+    private fun performSendImageMessage (imageURL : String) {
+
+        val fromReference = refMessages
+                .document(currentUser?.userID!!)
+                .collection(toUser?.userID!!)
+
+        val toReference = refMessages
+                .document(toUser?.userID!!)
+                .collection(currentUser?.userID!!)
+
+        message = MessageItem(imageURL, currentUser?.userID!!, toUser?.userID!!,
+                System.currentTimeMillis() / 1000,"image")
+
+        fromReference.add(message!!.toHashMap())
         toReference.add(message!!.toHashMap())
 
         val fromLatestReference = FirebaseFirestore.getInstance()
@@ -232,10 +316,10 @@ class ChatMessagesActivity : AppCompatActivity() {
                             .inflate(R.layout.row_text_message_to, parent, false))
                 }
                 3 -> {
-                    //return ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.row_image_message_from, parent, false))
+                    return ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.row_image_message_from, parent, false))
                 }
                 4 -> {
-                    //return ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.row_image_message_to, parent, false))
+                    return ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.row_image_message_to, parent, false))
                 }
                 5 -> {
                     //return ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.row_audio_message_from, parent, false))
@@ -335,11 +419,79 @@ class ChatMessagesActivity : AppCompatActivity() {
 
                     if (messagesList[position].fromId == currentUser?.userID) {
 
+                        holder.v.apply {
 
+                            val imageViewChatImageMessageFrom = findViewById<ImageView>(
+                                    R.id.imageViewChatImageMessageFrom)
+                            val imageViewChatImageMessageContactPhotoFrom = findViewById<ImageView>(
+                                    R.id.imageViewChatImageMessageContactPhotoFrom)
+                            val textViewChatImageMessageTimeStampFrom = findViewById<TextView>(
+                                    R.id.textViewChatImageMessageTimeStampFrom)
+
+                            Picasso.get().load(messagesList[position].message).into(imageViewChatImageMessageFrom)
+
+                            val sec = (System.currentTimeMillis() / 1000) - messagesList[position].timeStamp!!
+                            if (sec <= 86400) {
+
+                                val sdf = SimpleDateFormat("HH:mm", Locale.UK)
+                                val netDate = Date(messagesList[position].timeStamp?.times(1000)!!)
+                                val date = sdf.format(netDate)
+                                textViewChatImageMessageTimeStampFrom.text = date
+                            }
+                            else {
+
+                                val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.UK)
+                                val netDate = Date(messagesList[position].timeStamp?.times(1000)!!)
+                                val date = sdf.format(netDate)
+                                textViewChatImageMessageTimeStampFrom.text = date
+                            }
+
+                            if (currentUser?.imagePath != "") {
+
+                                Picasso.get().load(currentUser?.imagePath).into(imageViewChatImageMessageContactPhotoFrom)
+                            }
+                            else {
+                                imageViewChatImageMessageContactPhotoFrom.setBackgroundResource(R.drawable.imageviewfotofavorito1)
+                            }
+                        }
                     }
                     else {
 
+                        holder.v.apply {
 
+                            val imageViewChatImageMessageTo = findViewById<ImageView>(
+                                    R.id.imageViewChatImageMessageTo)
+                            val imageViewChatImageMessageContactPhotoTo = findViewById<ImageView>(
+                                    R.id.imageViewChatImageMessageContactPhotoTo)
+                            val textViewChatImageMessageTimeStampTo = findViewById<TextView>(
+                                    R.id.textViewChatImageMessageTimeStampTo)
+
+                            Picasso.get().load(messagesList[position].message).into(imageViewChatImageMessageTo)
+
+                            val sec = (System.currentTimeMillis() / 1000) - messagesList[position].timeStamp!!
+                            if (sec <= 86400) {
+
+                                val sdf = SimpleDateFormat("HH:mm", Locale.UK)
+                                val netDate = Date(messagesList[position].timeStamp?.times(1000)!!)
+                                val date = sdf.format(netDate)
+                                textViewChatImageMessageTimeStampTo.text = date
+                            }
+                            else {
+
+                                val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.UK)
+                                val netDate = Date(messagesList[position].timeStamp?.times(1000)!!)
+                                val date = sdf.format(netDate)
+                                textViewChatImageMessageTimeStampTo.text = date
+                            }
+
+                            if (toUser?.imagePath != "") {
+
+                                Picasso.get().load(toUser?.imagePath).into(imageViewChatImageMessageContactPhotoTo)
+                            }
+                            else {
+                                imageViewChatImageMessageContactPhotoTo.setBackgroundResource(R.drawable.imageviewfotofavorito1)
+                            }
+                        }
                     }
                 }
                 "audio" -> {
