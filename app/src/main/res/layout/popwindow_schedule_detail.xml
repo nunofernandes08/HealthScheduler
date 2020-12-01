@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="338dp"
-    android:layout_height="350dp"
+    android:layout_height="460dp"
     android:layout_gravity="center"
     android:background="@drawable/formulariologin"
     android:padding="5dp">
@@ -13,15 +12,85 @@
         android:id="@+id/textViewTypeOfConsultDetail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="20dp"
         android:fontFamily="@font/roboto"
         android:text="Tipo de consulta"
         android:textColor="@color/white"
         android:textSize="22sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageViewTypeOfConsultDetail"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewDoctorNameDetail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="12dp"
+        android:fontFamily="@font/roboto"
+        android:text="Nome do(a) doutor(a)"
+        android:textColor="@color/white"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/imageViewNameDoctorDetail"
+        app:layout_constraintTop_toBottomOf="@+id/textViewTypeOfConsultDetailV2" />
+
+    <TextView
+        android:id="@+id/textViewPavilionDetail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="12dp"
+        android:fontFamily="@font/roboto"
+        android:text="Pavilhão"
+        android:textColor="@color/white"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/imageViewPavilionDetail"
+        app:layout_constraintTop_toBottomOf="@+id/textViewDoctorNameDetailV2" />
+
+    <TextView
+        android:id="@+id/textViewFloorDetail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="12dp"
+        android:fontFamily="@font/roboto"
+        android:text="Piso"
+        android:textColor="@color/white"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/imageViewFloorDetail"
+        app:layout_constraintTop_toBottomOf="@+id/textViewPavilionDetailV2" />
+
+    <TextView
+        android:id="@+id/textViewDoorDetail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="12dp"
+        android:fontFamily="@font/roboto"
+        android:text="Porta"
+        android:textColor="@color/white"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/imageViewDoorDetail"
+        app:layout_constraintTop_toBottomOf="@+id/textViewFloorDetailV2" />
+
+    <TextView
+        android:id="@+id/textViewHourDetail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="12dp"
+        android:fontFamily="@font/roboto"
+        android:text="Hora"
+        android:textColor="@color/white"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/imageViewHourDetail"
+        app:layout_constraintTop_toBottomOf="@+id/textViewDoorDetailV2" />
 
     <TextView
         android:id="@+id/textViewTypeOfConsultDetailV2"
@@ -34,4 +103,130 @@
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="@+id/textViewTypeOfConsultDetail"
         app:layout_constraintTop_toBottomOf="@+id/textViewTypeOfConsultDetail" />
+
+    <TextView
+        android:id="@+id/textViewDoctorNameDetailV2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:fontFamily="@font/roboto"
+        android:text="Nuno"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@+id/textViewDoctorNameDetail"
+        app:layout_constraintTop_toBottomOf="@+id/textViewDoctorNameDetail" />
+
+    <TextView
+        android:id="@+id/textViewPavilionDetailV2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:fontFamily="@font/roboto"
+        android:text="C"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@+id/textViewPavilionDetail"
+        app:layout_constraintTop_toBottomOf="@+id/textViewPavilionDetail" />
+
+    <TextView
+        android:id="@+id/textViewFloorDetailV2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:fontFamily="@font/roboto"
+        android:text="2"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@+id/textViewFloorDetail"
+        app:layout_constraintTop_toBottomOf="@+id/textViewFloorDetail" />
+
+    <TextView
+        android:id="@+id/textViewDoorDetailV2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:fontFamily="@font/roboto"
+        android:text="23"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@+id/textViewDoorDetail"
+        app:layout_constraintTop_toBottomOf="@+id/textViewDoorDetail" />
+
+    <TextView
+        android:id="@+id/textViewHourDetailV2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:fontFamily="@font/roboto"
+        android:text="19:00"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@+id/textViewHourDetail"
+        app:layout_constraintTop_toBottomOf="@+id/textViewHourDetail" />
+
+    <TextView
+        android:id="@+id/textViewHourDetailV3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto"
+        android:text="h"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintStart_toEndOf="@+id/textViewHourDetailV2"
+        app:layout_constraintTop_toBottomOf="@+id/textViewHourDetail" />
+
+    <ImageView
+        android:id="@+id/imageViewTypeOfConsultDetail"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="30dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/typeofconsultpopwindow" />
+
+    <ImageView
+        android:id="@+id/imageViewNameDoctorDetail"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="30dp"
+        app:layout_constraintStart_toStartOf="@+id/imageViewTypeOfConsultDetail"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewTypeOfConsultDetail"
+        app:srcCompat="@drawable/doctorpopwindow" />
+
+    <ImageView
+        android:id="@+id/imageViewPavilionDetail"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="30dp"
+        app:layout_constraintStart_toStartOf="@+id/imageViewNameDoctorDetail"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewNameDoctorDetail"
+        app:srcCompat="@drawable/pavilionpopwindow" />
+
+    <ImageView
+        android:id="@+id/imageViewFloorDetail"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="30dp"
+        app:layout_constraintStart_toStartOf="@+id/imageViewPavilionDetail"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewPavilionDetail"
+        app:srcCompat="@drawable/floorpopwindow" />
+
+    <ImageView
+        android:id="@+id/imageViewDoorDetail"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="30dp"
+        app:layout_constraintStart_toStartOf="@+id/imageViewFloorDetail"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewFloorDetail"
+        app:srcCompat="@drawable/doorpopwindow" />
+
+    <ImageView
+        android:id="@+id/imageViewHourDetail"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="30dp"
+        app:layout_constraintStart_toStartOf="@+id/imageViewDoorDetail"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewDoorDetail"
+        app:srcCompat="@drawable/hourpopwindow" />
 </androidx.constraintlayout.widget.ConstraintLayout>

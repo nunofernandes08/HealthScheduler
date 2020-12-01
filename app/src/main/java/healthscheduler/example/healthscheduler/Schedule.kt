@@ -131,6 +131,11 @@ class Schedule : AppCompatActivity() {
                     myDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT));
 
                     myDialog.textViewTypeOfConsultDetailV2.text = listSchedule[position].typeOfConsult
+                    myDialog.textViewDoctorNameDetailV2.text = listSchedule[position].doctorName
+                    myDialog.textViewPavilionDetailV2.text = listSchedule[position].pavilion
+                    myDialog.textViewFloorDetailV2.text = listSchedule[position].floor
+                    myDialog.textViewDoorDetailV2.text = listSchedule[position].cabinet
+                    myDialog.textViewHourDetailV2.text = listSchedule[position].hour
 
                 myDialog.show()
             }
