@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/imageViewWhiteBackgroundSchedule"
+        android:layout_width="350dp"
+        android:layout_height="115dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="30dp"
+        android:background="@drawable/backgroundrowschedule"
+        android:elevation="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewLogin"
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        android:id="@+id/textViewTodaySchedule"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="8dp"
+        android:elevation="10dp"
+        android:fontFamily="@font/roboto"
+        android:text="Hora:"
+        android:textColor="#21736F"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@+id/imageViewWhiteBackgroundSchedule"
+        app:layout_constraintTop_toBottomOf="@+id/textViewMeetingWithSchedule" />
+
+    <TextView
+        android:id="@+id/textViewLocationSchedule"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="3dp"
+        android:layout_marginTop="8dp"
+        android:elevation="10dp"
+        android:fontFamily="@font/roboto"
+        android:text="Centro hospital de gaia"
+        android:textColor="#21736F"
+        android:textSize="14sp"
+        app:layout_constraintStart_toEndOf="@+id/imageViewLocationSchedule"
+        app:layout_constraintTop_toBottomOf="@+id/textViewDoctorNameSchedule" />
+
+    <TextView
+        android:id="@+id/textViewDateSchedule"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="24dp"
+        android:elevation="10dp"
+        android:fontFamily="@font/roboto"
+        android:text="30/03/2019"
+        android:textColor="#21736F"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="@+id/imageViewWhiteBackgroundSchedule"
+        app:layout_constraintTop_toTopOf="@+id/imageViewWhiteBackgroundSchedule" />
+
+    <TextView
+        android:id="@+id/textViewTypeOfConsultSchedule"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="15dp"
+        android:elevation="10dp"
+        android:fontFamily="@font/roboto"
+        android:text="Fisioterapia"
+        android:textColor="#21736F"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/imageViewWhiteBackgroundSchedule"
+        app:layout_constraintTop_toTopOf="@+id/imageViewWhiteBackgroundSchedule" />
+
+    <TextView
+        android:id="@+id/textViewHourSchedule"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="3dp"
+        android:layout_marginTop="8dp"
+        android:elevation="10dp"
+        android:fontFamily="@font/roboto"
+        android:text="15:00"
+        android:textColor="#21736F"
+        android:textSize="14sp"
+        app:layout_constraintStart_toEndOf="@+id/textViewTodaySchedule"
+        app:layout_constraintTop_toBottomOf="@+id/textViewDoctorNameSchedule" />
+
+    <TextView
+        android:id="@+id/textViewMeetingWithSchedule"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="8dp"
+        android:elevation="10dp"
+        android:fontFamily="@font/roboto"
+        android:text="Dr.(a)"
+        android:textColor="#21736F"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@+id/imageViewWhiteBackgroundSchedule"
+        app:layout_constraintTop_toBottomOf="@+id/textViewTypeOfConsultSchedule" />
+
+    <TextView
+        android:id="@+id/textViewDoctorNameSchedule"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:elevation="10dp"
+        android:fontFamily="@font/roboto"
+        android:text="Rui"
+        android:textColor="#21736F"
+        android:textSize="14sp"
+        app:layout_constraintStart_toEndOf="@+id/textViewMeetingWithSchedule"
+        app:layout_constraintTop_toTopOf="@+id/textViewMeetingWithSchedule" />
+
+    <ImageView
+        android:id="@+id/imageViewLocationSchedule"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="10dp"
+        android:elevation="10dp"
+        android:src="@drawable/piclocation"
+        app:layout_constraintStart_toEndOf="@+id/textViewHourSchedule"
+        app:layout_constraintTop_toBottomOf="@+id/textViewDoctorNameSchedule" />
+</androidx.constraintlayout.widget.ConstraintLayout>
