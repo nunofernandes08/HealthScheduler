@@ -158,7 +158,7 @@ class ChatMessagesActivity : AppCompatActivity() {
             }
 
             val baos = ByteArrayOutputStream()
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 25, baos)
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 20, baos)
             val data = baos.toByteArray()
 
             refUploadImage.putBytes(data).addOnSuccessListener {

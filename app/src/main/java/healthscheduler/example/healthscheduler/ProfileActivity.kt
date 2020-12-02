@@ -3,12 +3,16 @@ package healthscheduler.example.healthscheduler
 import android.app.Activity
 import android.app.Dialog
 import android.content.Intent
+import android.graphics.Bitmap
 import android.graphics.Color
+import android.graphics.ImageDecoder
 import android.graphics.Typeface
 import android.graphics.drawable.ColorDrawable
 import android.net.Uri
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.MediaStore
 import android.util.Log
 import android.widget.*
 import com.google.firebase.auth.FirebaseAuth
@@ -26,6 +30,7 @@ import healthscheduler.example.healthscheduler.databinding.ActivityProfileBindin
 import healthscheduler.example.healthscheduler.databinding.ActivityProfileV2Binding
 import healthscheduler.example.healthscheduler.models.MessageItem
 import healthscheduler.example.healthscheduler.models.UsersItem
+import java.io.ByteArrayOutputStream
 import java.util.*
 
 class ProfileActivity : AppCompatActivity() {
@@ -90,16 +95,15 @@ class ProfileActivity : AppCompatActivity() {
 
             //Botao para escolher foto
             myDialog.findViewById<ImageView>(R.id.imageViewUserPhotoEdit).setOnClickListener {
-                Intent(Intent.ACTION_GET_CONTENT).also {
-                    it.type = "image/*"
-                    startActivityForResult(it, Home.REQUEST_CODE_IMAGE_PICK)
-                }
+                val intent = Intent(Intent.ACTION_PICK)
+                intent.type = "image/*"
+                startActivityForResult(intent, Home.REQUEST_CODE_IMAGE_PICK)
             }
 
             //Botao para submeter a atualizacao
             myDialog.findViewById<Button>(R.id.buttonEditarEdit).setOnClickListener {
                 uploadImageToFirebaseStorage()
-                updateUser()
+                //updateUser()
             }
             myDialog.show()
         }
@@ -111,16 +115,29 @@ class ProfileActivity : AppCompatActivity() {
         val filename    = UUID.randomUUID().toString()
         val ref         = FirebaseStorage.getInstance().getReference("/images/$filename")
 
-        curFile?.let{
-            ref.putFile(curFile!!)
-                .addOnSuccessListener {
-                    ref.downloadUrl.addOnSuccessListener {
-                        downUrl = it.toString()
-                    }
-                }
-                .addOnFailureListener {
+        curFile?.let{ uri ->
+            val bitmap : Bitmap
+            if (Build.VERSION.SDK_INT < 28) {
 
+                bitmap = MediaStore.Images.Media.getBitmap(this.contentResolver, uri)
+            }
+            else {
+
+                bitmap = ImageDecoder.decodeBitmap(ImageDecoder.createSource(contentResolver, uri))
+            }
+
+            val baos = ByteArrayOutputStream()
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 20, baos)
+            val data = baos.toByteArray()
+
+            ref.putBytes(data).addOnSuccessListener {
+
+                ref.downloadUrl.addOnSuccessListener {
+
+                    downUrl = it.toString()
+                    updateUser()
                 }
+            }
         }
     }
 
@@ -129,28 +146,29 @@ class ProfileActivity : AppCompatActivity() {
 
         val address = myDialog.findViewById<EditText>(R.id.editTextUserAddressEdit)
 
-        if(address.text.toString() == "") {
+        if (address.text.toString() == "") {
             val user = UsersItem(currentUserName, currentUser!!.email, currentUserAddress, downUrl, currentUser.uid)
             db.collection("users").document(currentUser.uid)
-                    .set(user.toHashMap())
-                    .addOnSuccessListener {
-                        Log.d("writeBD", "DocumentSnapshot successfully written!")
-                        myDialog.dismiss()
-                    }
-                    .addOnFailureListener { e ->
-                        Log.w("writeBD", "Error writing document", e)
-                    }
-        } else {
+                .set(user.toHashMap())
+                .addOnSuccessListener {
+                    Log.d("writeBD", "DocumentSnapshot successfully written!")
+                    myDialog.dismiss()
+                }
+                .addOnFailureListener { e ->
+                    Log.w("writeBD", "Error writing document", e)
+                }
+        }
+        else {
             val user = UsersItem(currentUserName, currentUser!!.email, address.text.toString(), downUrl, currentUser.uid)
             db.collection("users").document(currentUser.uid)
-                    .set(user.toHashMap())
-                    .addOnSuccessListener {
-                        Log.d("writeBD", "DocumentSnapshot successfully written!")
-                        myDialog.dismiss()
-                    }
-                    .addOnFailureListener { e ->
-                        Log.w("writeBD", "Error writing document", e)
-                    }
+                .set(user.toHashMap())
+                .addOnSuccessListener {
+                    Log.d("writeBD", "DocumentSnapshot successfully written!")
+                    myDialog.dismiss()
+                }
+                .addOnFailureListener { e ->
+                    Log.w("writeBD", "Error writing document", e)
+                }
         }
     }
 
@@ -217,14 +235,15 @@ class ProfileActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        val imageViewUserPhotoEdit = findViewById<ImageView>(R.id.imageViewUserPhotoEdit)
+        val imageViewUserPhotoEdit = myDialog.findViewById<ImageView>(R.id.imageViewUserPhotoEdit)
 
         if (resultCode === Activity.RESULT_OK) {
             if (requestCode == Home.REQUEST_CODE_IMAGE_PICK) {
                 data?.data?.let {
 
                     curFile = it
-                    myDialog.findViewById<ImageView>(R.id.imageViewUserPhotoEdit).setImageURI(curFile)
+                    Picasso.get().load(it).into(imageViewUserPhotoEdit)
+                    //myDialog.findViewById<ImageView>(R.id.imageViewUserPhotoEdit).setImageURI(curFile)
                 }
             }
         }
