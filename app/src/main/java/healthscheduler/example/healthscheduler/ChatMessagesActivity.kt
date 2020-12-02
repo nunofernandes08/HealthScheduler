@@ -6,6 +6,7 @@ import android.graphics.Bitmap
 import android.graphics.ImageDecoder
 import android.net.Uri
 import android.opengl.Visibility
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
@@ -26,6 +27,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import com.squareup.picasso.Picasso
 import healthscheduler.example.healthscheduler.databinding.ActivityChatMessagesBinding
+import healthscheduler.example.healthscheduler.databinding.ActivityChatMessagesV2Binding
 import healthscheduler.example.healthscheduler.models.MessageItem
 import healthscheduler.example.healthscheduler.models.UsersItem
 import java.io.ByteArrayOutputStream
@@ -57,7 +59,7 @@ class ChatMessagesActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val binding = ActivityChatMessagesBinding.inflate(layoutInflater)
+        val binding = ActivityChatMessagesV2Binding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
 
@@ -84,7 +86,7 @@ class ChatMessagesActivity : AppCompatActivity() {
     }
 
     //Funcao com as acoes dos botoes
-    private fun buttonsActions(binding: ActivityChatMessagesBinding){
+    private fun buttonsActions(binding: ActivityChatMessagesV2Binding){
 
         binding.editTextChatMessagesWriteMessage.addTextChangedListener(object : TextWatcher {
 
@@ -145,7 +147,16 @@ class ChatMessagesActivity : AppCompatActivity() {
         val refUploadImage = ref.getReference("/images/$filename")
         selectedPhotoUri?.let { uri ->
 
-            val bitmap = ImageDecoder.decodeBitmap(ImageDecoder.createSource(contentResolver, uri))
+            val bitmap : Bitmap
+            if (Build.VERSION.SDK_INT < 28) {
+
+                bitmap = MediaStore.Images.Media.getBitmap(this.contentResolver, selectedPhotoUri)
+            }
+            else {
+
+                bitmap = ImageDecoder.decodeBitmap(ImageDecoder.createSource(contentResolver, uri))
+            }
+
             val baos = ByteArrayOutputStream()
             bitmap.compress(Bitmap.CompressFormat.JPEG, 25, baos)
             val data = baos.toByteArray()

@@ -142,7 +142,19 @@ class LatestMessagesActivity : AppCompatActivity() {
                     }
                 }
 
-                textViewChatHomeLatestContactLatestMessage.text = latestMessages[position].message
+                if (latestMessages[position].messageType == "text") {
+
+                    textViewChatHomeLatestContactLatestMessage.text = latestMessages[position].message
+                }
+                else if (latestMessages[position].messageType == "image") {
+
+                    textViewChatHomeLatestContactLatestMessage.text = "Image"
+                }
+                else {
+
+                    textViewChatHomeLatestContactLatestMessage.text = "Audio"
+                }
+
                 textViewChatHomeLatestContactName.text = user?.username
 
                 val sec = (System.currentTimeMillis() / 1000) - latestMessages[position].timeStamp!!
