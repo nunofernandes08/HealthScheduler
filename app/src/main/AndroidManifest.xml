@@ -12,7 +12,9 @@
         android:roundIcon="@mipmap/ic_logo"
         android:supportsRtl="true"
         android:theme="@style/Theme.HealthScheduler">
-        <activity android:name=".ProfileActivity"></activity>
+        <activity android:name=".ScheduleV3Activity"></activity>
+        <activity android:name=".ScheduleV2Activity" />
+        <activity android:name=".ProfileActivity" />
         <activity android:name=".ChatMessagesActivity" />
         <activity android:name=".ContactsActivity" />
         <activity android:name=".LatestMessagesActivity" />

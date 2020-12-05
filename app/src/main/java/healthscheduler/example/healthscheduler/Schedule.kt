@@ -41,6 +41,11 @@ class Schedule : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
+        binding.textViewViewPager.setOnClickListener {
+            val intent = Intent(this, ScheduleV3Activity::class.java)
+            startActivity(intent)
+        }
+
         photoUser()
         buttonsActions(binding)
         getUserData(binding)
