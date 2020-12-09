@@ -59,7 +59,7 @@
             android:id="@+id/floatingActionButton"
             android:layout_width="wrap_content"
             android:layout_height="60dp"
-            android:foreground="@drawable/logonav"
+            android:foreground="@drawable/logonavigation"
             android:foregroundGravity="center"
             app:fabCustomSize="50dp"
             app:layout_anchor="@+id/bottomBar"
