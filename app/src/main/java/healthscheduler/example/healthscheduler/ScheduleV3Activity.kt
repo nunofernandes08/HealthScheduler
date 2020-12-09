@@ -43,28 +43,23 @@ class ScheduleV3Activity : AppCompatActivity() {
 
         photoUser(binding)
         buttonsActions(binding)
+        imageViewActions(binding)
         //getAppointmentDates()
 
         db.collection("consultas").orderBy("date")
             .whereEqualTo("userID", currentUser!!.uid)
             .addSnapshotListener { snapshot, error ->
-
                 snapshot?.let {
-
                     listAppointDates.clear()
                     for (document in snapshot) {
-
                         val date = AppointDate(document.data.getValue("date").toString())
                         var exist = false
-
                         for (item in listAppointDates) {
                             if (date.date == item.date) {
                                 exist = true
                             }
                         }
-
                         if (!exist) {
-
                             listAppointDates.add(date)
                         }
                     }
@@ -119,6 +114,15 @@ class ScheduleV3Activity : AppCompatActivity() {
         binding.floatingActionButton.setOnClickListener{
 
             val intent = Intent(this, Home::class.java)
+            startActivity(intent)
+        }
+    }
+
+    //Funcao com as acoes das imageViews
+    private fun imageViewActions(binding: ActivityScheduleV3Binding){
+        //ImageViewUserPhoto ao clicar vai para o perfil
+        binding.imageViewPhotoUser.setOnClickListener {
+            val intent = Intent(this, ProfileActivity::class.java)
             startActivity(intent)
         }
     }

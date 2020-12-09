@@ -44,6 +44,7 @@ class LatestMessagesActivity : AppCompatActivity() {
         setContentView(view)
 
         buttonsActions(binding)
+        imageViewActions(binding)
 
         currentUser = intent.getParcelableExtra<UsersItem>(ContactsActivity.USER_KEY)!!
         if (currentUser.imagePath != "") {
@@ -100,6 +101,15 @@ class LatestMessagesActivity : AppCompatActivity() {
             val intent = Intent(this, Home::class.java)
             startActivity(intent)
             finish()
+        }
+    }
+
+    //Funcao com as acoes das imageViews
+    private fun imageViewActions(binding: ActivityLatestMessagesBinding){
+        //ImageViewUserPhoto ao clicar vai para o perfil
+        binding.imageViewChatHomePhotoUser.setOnClickListener {
+            val intent = Intent(this, ProfileActivity::class.java)
+            startActivity(intent)
         }
     }
 
