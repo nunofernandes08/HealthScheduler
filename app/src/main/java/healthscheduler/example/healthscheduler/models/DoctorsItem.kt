@@ -3,7 +3,6 @@ package healthscheduler.example.healthscheduler.models
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
-@Parcelize
 class DoctorsItem {
     var username : String? = null
     var phoneNumberEmail : String? = null
@@ -11,7 +10,6 @@ class DoctorsItem {
     var imagePath : String? = null
     var medicID : String? = null
 
-    //constructor() : this("", "", "", "", "")
 
     constructor(username : String?, phoneNumberEmail : String?, address : String?, imagePath : String?, medicID: String?){
         this.username = username
