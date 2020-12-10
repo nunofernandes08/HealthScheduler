@@ -14,6 +14,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import android.widget.*
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -30,6 +32,8 @@ import healthscheduler.example.healthscheduler.databinding.ActivityProfileBindin
 import healthscheduler.example.healthscheduler.databinding.ActivityProfileV2Binding
 import healthscheduler.example.healthscheduler.models.MessageItem
 import healthscheduler.example.healthscheduler.models.UsersItem
+import kotlinx.android.synthetic.main.activity_schedule_v3.*
+import kotlinx.android.synthetic.main.popwindow_edit.*
 import java.io.ByteArrayOutputStream
 import java.util.*
 
@@ -44,7 +48,8 @@ class ProfileActivity : AppCompatActivity() {
     private var downUrl:            String?         = null
     private var curFile:            Uri?            = null
     private var user:               UsersItem?      = null
-    private var listUser:           UsersItem? = null
+    private var listUser:           UsersItem?      = null
+
 
     private lateinit var myDialog:  Dialog
 
@@ -85,7 +90,8 @@ class ProfileActivity : AppCompatActivity() {
     //Funcao com as acoes dos botoes
     private fun buttonsActions(binding: ActivityProfileBinding){
         binding.buttonEditProfile.setOnClickListener {
-            myDialog = Dialog(this)
+            myDialog = Dialog(this, R.style.AnimateDialog)
+            //myDialog = Dialog(this)
             myDialog.setContentView(R.layout.popwindow_edit)
             myDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT));
 

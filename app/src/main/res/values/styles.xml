@@ -1,5 +1,4 @@
 <resources>
-
     <style name="Widget.Theme.HealthScheduler.ActionBar.Fullscreen" parent="Widget.AppCompat.ActionBar">
         <item name="android:background">@color/black_overlay</item>
     </style>
@@ -7,5 +6,14 @@
     <style name="Widget.Theme.HealthScheduler.ButtonBar.Fullscreen" parent="">
         <item name="android:background">@color/black_overlay</item>
         <item name="android:buttonBarStyle">?android:attr/buttonBarStyle</item>
+    </style>
+
+    <style name="AnimateDialog" parent="@android:style/Theme.Dialog">
+        <item name="android:windowAnimationStyle">@style/DialogAnimation</item>
+    </style>
+
+    <style name="DialogAnimation">
+        <item name="android:windowEnterAnimation">@anim/anim_slide_in_left</item>
+        <!--<item name="android:windowExitAnimation">@anim/anim_fadeout</item>-->
     </style>
 </resources>
