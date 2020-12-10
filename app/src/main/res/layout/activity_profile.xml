@@ -12,16 +12,16 @@
         android:id="@+id/buttonEditProfile"
         android:layout_width="25dp"
         android:layout_height="25dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="40dp"
         android:background="@drawable/editprofile"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewInformacaoConta"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textViewInformacaoConta"
         app:layout_constraintTop_toTopOf="@+id/textViewInformacaoConta" />
 
     <ImageView
         android:id="@+id/imageViewFadeProfile"
         android:layout_width="0dp"
-        android:layout_height="280dp"
+        android:layout_height="255dp"
         android:adjustViewBounds="true"
         android:cropToPadding="false"
         android:scaleType="centerCrop"
@@ -47,17 +47,18 @@
         android:id="@+id/imageViewUserPhotoProfile"
         android:layout_width="100dp"
         android:layout_height="100dp"
+        android:layout_marginTop="24dp"
         android:background="@drawable/borderphotoprofile"
         android:src="@drawable/imageviewfotoperfilhome"
         app:layout_constraintEnd_toEndOf="@+id/imageViewFadeProfile"
         app:layout_constraintStart_toStartOf="@+id/imageViewFadeProfile"
-        app:layout_constraintTop_toBottomOf="@+id/textViewProfileProfile" />
+        app:layout_constraintTop_toTopOf="@+id/textViewProfileProfile" />
 
     <TextView
         android:id="@+id/textViewUserNameProfile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="8dp"
         android:fontFamily="@font/roboto"
         android:text="Nuno Fernandes"
         android:textColor="@color/white"
@@ -82,7 +83,7 @@
         android:id="@+id/buttonLogoutProfile"
         android:layout_width="250dp"
         android:layout_height="56dp"
-        android:layout_marginTop="45dp"
+        android:layout_marginTop="40dp"
         android:background="@drawable/buttonwhitelogout"
         android:fontFamily="@font/roboto"
         android:text="@string/logout"
@@ -109,11 +110,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="24dp"
         android:fontFamily="@font/roboto"
         android:text="Informação da conta"
         android:textColor="@color/verde_escuro"
         android:textSize="25sp"
+        app:layout_constraintBottom_toTopOf="@+id/imageViewUserNameProfile"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonLogoutProfile" />
 
