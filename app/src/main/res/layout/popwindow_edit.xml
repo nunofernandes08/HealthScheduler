@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="338dp"
-    android:layout_height="350dp"
+    android:layout_height="430dp"
     android:layout_gravity="center"
     android:background="@drawable/formulariologin"
     android:padding="5dp">
@@ -14,20 +14,34 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="28dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="15dp"
         android:fontFamily="@font/roboto"
         android:text="Morada"
         android:textColor="@color/white"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/imageViewUserPhotoEdit" />
+
+    <TextView
+        android:id="@+id/textViewUserPhoneEdit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="15dp"
+        android:fontFamily="@font/roboto"
+        android:text="Telemóvel"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextUserAddressEdit" />
 
     <EditText
         android:id="@+id/editTextUserAddressEdit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="#FFFFFF"
+        android:backgroundTint="#00FFFFFF"
         android:ems="13"
         android:fontFamily="@font/roboto"
         android:hint="@string/email_login"
@@ -40,11 +54,25 @@
         app:layout_constraintStart_toStartOf="@+id/textViewUserAddressEdit"
         app:layout_constraintTop_toBottomOf="@+id/textViewUserAddressEdit" />
 
+    <EditText
+        android:id="@+id/editTextUserPhoneEdit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#00FFFFFF"
+        android:ems="13"
+        android:fontFamily="@font/roboto"
+        android:hint="@string/email_login"
+        android:importantForAutofill="no"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#36BFB8"
+        android:textColorLink="#FFFFFF"
+        app:layout_constraintStart_toStartOf="@+id/textViewUserPhoneEdit"
+        app:layout_constraintTop_toBottomOf="@+id/textViewUserPhoneEdit" />
+
     <Button
         android:id="@+id/buttonEditarEdit"
         android:layout_width="222dp"
         android:layout_height="56dp"
-        android:layout_marginBottom="16dp"
         android:background="@drawable/buttonwhite"
         android:fontFamily="@font/roboto"
         android:text="@string/editar"
@@ -54,20 +82,40 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageViewUserPhotoEdit"
-        app:layout_constraintVertical_bias="0.885" />
-
+        app:layout_constraintTop_toBottomOf="@+id/editTextUserPhoneEdit" />
 
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/imageViewUserPhotoEdit"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="20dp"
         android:scaleType="centerCrop"
-        android:src="@android:drawable/ic_menu_camera"
+        android:src="@drawable/ic_camera"
         app:civ_border_color="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageViewLineAddress"
+        android:layout_width="270dp"
+        android:layout_height="1dp"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/editTextUserAddressEdit"
         app:layout_constraintEnd_toEndOf="@+id/editTextUserAddressEdit"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/editTextUserAddressEdit"
-        app:layout_constraintTop_toBottomOf="@+id/editTextUserAddressEdit" />
+        app:srcCompat="@drawable/backgroundrowschedule" />
+
+    <ImageView
+        android:id="@+id/imageViewLinePhone"
+        android:layout_width="270dp"
+        android:layout_height="1dp"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/editTextUserPhoneEdit"
+        app:layout_constraintEnd_toEndOf="@+id/editTextUserPhoneEdit"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/editTextUserPhoneEdit"
+        app:srcCompat="@drawable/backgroundrowschedule" />
 </androidx.constraintlayout.widget.ConstraintLayout>

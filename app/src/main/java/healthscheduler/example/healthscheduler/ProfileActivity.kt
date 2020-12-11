@@ -45,6 +45,7 @@ class ProfileActivity : AppCompatActivity() {
 
     private var currentUserName:    String?         = null
     private var currentUserAddress: String?         = null
+    private var currentUserPhone:   String?         = null
     private var downUrl:            String?         = null
     private var curFile:            Uri?            = null
     private var user:               UsersItem?      = null
@@ -75,8 +76,9 @@ class ProfileActivity : AppCompatActivity() {
                 querySnapshot?.data?.let {
                     user = UsersItem.fromHash(querySnapshot.data as HashMap<String, Any?>)
                     user?.let { user ->
-                        currentUserName = user.username.toString()
-                        currentUserAddress = user.address.toString()
+                        currentUserName     = user.username.toString()
+                        currentUserAddress  = user.address.toString()
+                        currentUserPhone    = user.phoneNumber.toString()
                     }
                 } ?: run {
                     Toast.makeText(
@@ -97,6 +99,9 @@ class ProfileActivity : AppCompatActivity() {
 
             val userAddress = myDialog.findViewById<TextView>(R.id.editTextUserAddressEdit)
             userAddress.text = currentUserAddress.toString()
+
+            val userPhone = myDialog.findViewById<TextView>(R.id.editTextUserPhoneEdit)
+            userPhone.text = currentUserPhone.toString()
 
 
             //Botao para escolher foto
@@ -191,7 +196,7 @@ class ProfileActivity : AppCompatActivity() {
                                     binding.textViewUserNameProfile.text = user.username
                                     binding.textViewUserEmailProfile.text = user.phoneNumberEmail
                                     binding.textViewUserName2Profile.text = user.username
-                                    //binding.textViewUserPhone2Profile.text = user.phoneNumberEmail
+                                    binding.textViewUserPhone2Profile.text = user.phoneNumber
                                     binding.textViewUserAddress2Profile.text = user.address
                                     //binding.textViewUserBirthday2Profile.text = user.
                                     Picasso.get().load(user.imagePath).into(binding.imageViewUserPhotoProfile)

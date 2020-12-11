@@ -9,9 +9,10 @@ class UsersItem (
     var phoneNumberEmail : String? = null,
     var address : String? = null,
     var imagePath : String? = null,
-    var userID : String? = null): Parcelable {
+    var userID : String? = null,
+    var phoneNumber: String? = null): Parcelable {
 
-    constructor() : this("", "", "", "", "")
+    constructor() : this("", "", "", "", "", "")
 
     /*constructor(username : String?, phoneNumberEmail : String?, address : String?, imagePath : String?, userID: String?){
         this.username = username
@@ -28,6 +29,7 @@ class UsersItem (
         hashMap["address"] = address
         hashMap["imagePath"] = imagePath
         hashMap["userID"] = userID
+        hashMap["phoneNumber"] = phoneNumber
 
         return hashMap
     }
@@ -39,7 +41,8 @@ class UsersItem (
                 hashMap["phoneNumberEmail"].toString(),
                 hashMap["address"].toString(),
                 hashMap["imagePath"].toString(),
-                hashMap["userID"].toString()
+                hashMap["userID"].toString(),
+                        hashMap["phoneNumber"].toString()
             )
             return item
         }

@@ -14,6 +14,6 @@
 
     <style name="DialogAnimation">
         <item name="android:windowEnterAnimation">@anim/anim_slide_in_left</item>
-        <!--<item name="android:windowExitAnimation">@anim/anim_fadeout</item>-->
+        <item name="android:windowExitAnimation">@anim/anim_slide_in_right</item>
     </style>
 </resources>
