@@ -39,20 +39,21 @@ import java.util.*
 
 class ProfileActivity : AppCompatActivity() {
 
-    private val db          = FirebaseFirestore.getInstance()
-    private val auth        = Firebase.auth
+    private val db = FirebaseFirestore.getInstance()
+    private val auth = Firebase.auth
     private val currentUser = auth.currentUser
 
-    private var currentUserName:    String?         = null
-    private var currentUserAddress: String?         = null
-    private var currentUserPhone:   String?         = null
-    private var downUrl:            String?         = null
-    private var curFile:            Uri?            = null
-    private var user:               UsersItem?      = null
-    private var listUser:           UsersItem?      = null
+    private var currentUserName: String? = null
+    private var currentUserAddress: String? = null
+    private var currentUserPhone: String? = null
+    private var currentUserPhoto: String? = null
+    private var downUrl: String? = null
+    private var curFile: Uri? = null
+    private var user: UsersItem? = null
+    private var listUser: UsersItem? = null
 
 
-    private lateinit var myDialog:  Dialog
+    private lateinit var myDialog: Dialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -62,8 +63,8 @@ class ProfileActivity : AppCompatActivity() {
         setContentView(view)
 
         getUser()
-        buttonsActions(binding)
         userInformation(binding)
+        buttonsActions(binding)
         styleTextView(binding)
         backToHome(binding)
         logout(binding)
@@ -72,25 +73,26 @@ class ProfileActivity : AppCompatActivity() {
     //Funcao para ir buscar a informacao do CURRENTUSER
     private fun getUser() {
         db.collection("users").document(currentUser!!.uid)
-            .addSnapshotListener { querySnapshot, firebaseFirestoreException ->
-                querySnapshot?.data?.let {
-                    user = UsersItem.fromHash(querySnapshot.data as HashMap<String, Any?>)
-                    user?.let { user ->
-                        currentUserName     = user.username.toString()
-                        currentUserAddress  = user.address.toString()
-                        currentUserPhone    = user.phoneNumber.toString()
+                .addSnapshotListener { querySnapshot, firebaseFirestoreException ->
+                    querySnapshot?.data?.let {
+                        user = UsersItem.fromHash(querySnapshot.data as HashMap<String, Any?>)
+                        user?.let { user ->
+                            currentUserName = user.username.toString()
+                            currentUserAddress = user.address.toString()
+                            currentUserPhone = user.phoneNumber.toString()
+                            currentUserPhoto = user.imagePath.toString()
+                        }
+                    } ?: run {
+                        Toast.makeText(
+                                this, "Sem utilizador",
+                                Toast.LENGTH_SHORT
+                        ).show()
                     }
-                } ?: run {
-                    Toast.makeText(
-                            this, "Sem utilizador",
-                            Toast.LENGTH_SHORT
-                    ).show()
                 }
-            }
     }
 
     //Funcao com as acoes dos botoes
-    private fun buttonsActions(binding: ActivityProfileBinding){
+    private fun buttonsActions(binding: ActivityProfileBinding) {
         binding.buttonEditProfile.setOnClickListener {
             myDialog = Dialog(this, R.style.AnimateDialog)
             //myDialog = Dialog(this)
@@ -123,17 +125,14 @@ class ProfileActivity : AppCompatActivity() {
     //Funcao para fazer upload da imagem para o FireStorage
     private fun uploadImageToFirebaseStorage() {
 
-        val filename    = UUID.randomUUID().toString()
-        val ref         = FirebaseStorage.getInstance().getReference("/images/$filename")
+        val filename = UUID.randomUUID().toString()
+        val ref = FirebaseStorage.getInstance().getReference("/images/$filename")
 
-        curFile?.let{ uri ->
-            val bitmap : Bitmap
+        curFile?.let { uri ->
+            val bitmap: Bitmap
             if (Build.VERSION.SDK_INT < 28) {
-
                 bitmap = MediaStore.Images.Media.getBitmap(this.contentResolver, uri)
-            }
-            else {
-
+            } else {
                 bitmap = ImageDecoder.decodeBitmap(ImageDecoder.createSource(contentResolver, uri))
             }
 
@@ -142,13 +141,14 @@ class ProfileActivity : AppCompatActivity() {
             val data = baos.toByteArray()
 
             ref.putBytes(data).addOnSuccessListener {
-
                 ref.downloadUrl.addOnSuccessListener {
-
                     downUrl = it.toString()
                     updateUser()
                 }
             }
+        }?: run {
+            downUrl = currentUserPhoto
+            updateUser()
         }
     }
 
@@ -156,9 +156,10 @@ class ProfileActivity : AppCompatActivity() {
     private fun updateUser(){
 
         val address = myDialog.findViewById<EditText>(R.id.editTextUserAddressEdit)
+        val phone = myDialog.findViewById<EditText>(R.id.editTextUserPhoneEdit)
 
-        if (address.text.toString() == "") {
-            val user = UsersItem(currentUserName, currentUser!!.email, currentUserAddress, downUrl, currentUser.uid)
+        if (address.text.toString() == ""|| phone.text.toString() == "") {
+            val user = UsersItem(currentUserName, currentUser!!.email, currentUserAddress, downUrl, currentUser.uid, currentUserPhone)
             db.collection("users").document(currentUser.uid)
                 .set(user.toHashMap())
                 .addOnSuccessListener {
@@ -170,7 +171,7 @@ class ProfileActivity : AppCompatActivity() {
                 }
         }
         else {
-            val user = UsersItem(currentUserName, currentUser!!.email, address.text.toString(), downUrl, currentUser.uid)
+            val user = UsersItem(currentUserName, currentUser!!.email, address.text.toString(), downUrl, currentUser.uid, phone.text.toString())
             db.collection("users").document(currentUser.uid)
                 .set(user.toHashMap())
                 .addOnSuccessListener {
@@ -192,15 +193,13 @@ class ProfileActivity : AppCompatActivity() {
                         querySnapshot?.data?.let {
                             listUser = UsersItem.fromHash(querySnapshot.data as HashMap<String, Any?>)
                             listUser?.let { user ->
-                                if (user.imagePath != "") {
-                                    binding.textViewUserNameProfile.text = user.username
-                                    binding.textViewUserEmailProfile.text = user.phoneNumberEmail
-                                    binding.textViewUserName2Profile.text = user.username
-                                    binding.textViewUserPhone2Profile.text = user.phoneNumber
-                                    binding.textViewUserAddress2Profile.text = user.address
-                                    //binding.textViewUserBirthday2Profile.text = user.
-                                    Picasso.get().load(user.imagePath).into(binding.imageViewUserPhotoProfile)
-                                }
+                                binding.textViewUserNameProfile.text = user.username
+                                binding.textViewUserEmailProfile.text = user.phoneNumberEmail
+                                binding.textViewUserName2Profile.text = user.username
+                                binding.textViewUserPhone2Profile.text = user.phoneNumber
+                                binding.textViewUserAddress2Profile.text = user.address
+                                //binding.textViewUserBirthday2Profile.text = user.
+                                Picasso.get().load(user.imagePath).into(binding.imageViewUserPhotoProfile)
                             }
                         }
                     }

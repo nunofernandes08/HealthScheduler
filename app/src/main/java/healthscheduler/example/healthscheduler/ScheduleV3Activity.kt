@@ -1,6 +1,9 @@
 package healthscheduler.example.healthscheduler
 
+import android.app.Dialog
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -21,6 +24,7 @@ import healthscheduler.example.healthscheduler.models.AppointDate
 import healthscheduler.example.healthscheduler.models.ScheduleItem
 import healthscheduler.example.healthscheduler.models.UsersItem
 import kotlinx.android.synthetic.main.item_view_pager_schedule.view.*
+import kotlinx.android.synthetic.main.popwindow_schedule_detail.*
 import java.util.HashMap
 
 class ScheduleV3Activity : AppCompatActivity() {
@@ -34,6 +38,8 @@ class ScheduleV3Activity : AppCompatActivity() {
     private var datesAdapter : ScheduleV3Activity.ViewPagerAdapter? = null
 
     private var listUser : UsersItem? = null
+
+    private lateinit var myDialog: Dialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -202,19 +208,16 @@ class ScheduleV3Activity : AppCompatActivity() {
     }
 
     inner class ScheduleAdapterV3 : RecyclerView.Adapter<ScheduleAdapterV3.ViewHolder>() {
-
         inner class ViewHolder(val v : View) : RecyclerView.ViewHolder(v)
-
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-            return ViewHolder(LayoutInflater
-                .from(parent.context)
-                .inflate(R.layout.row_schedule_v2, parent, false))
-        }
 
+           return ViewHolder(LayoutInflater
+            .from(parent.context)
+                   .inflate(R.layout.row_schedule_v2, parent, false))
+        }
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
             holder.v.apply {
-
                 val textViewDoctorNameSchedule = this.findViewById<TextView>(R.id.textViewDoctorNameSchedule)
                 val textViewLocationSchedule = this.findViewById<TextView>(R.id.textViewLocationSchedule)
                 val textViewTypeOfConsultSchedule = this.findViewById<TextView>(R.id.textViewTypeOfConsultSchedule)
@@ -226,6 +229,21 @@ class ScheduleV3Activity : AppCompatActivity() {
                 textViewHourSchedule.text = listSchedule[position].hour
                 textViewLocationSchedule.text = listSchedule[position].local
                 textViewTypeOfConsultSchedule.text = listSchedule[position].typeOfConsult
+            }
+
+            holder.itemView.setOnClickListener {
+                myDialog = Dialog(this@ScheduleV3Activity, R.style.AnimateDialog)
+                    myDialog.setContentView(R.layout.popwindow_schedule_detail)
+                    myDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT));
+
+                    myDialog.textViewTypeOfConsultDetailV2.text = listSchedule[position].typeOfConsult
+                    myDialog.textViewDoctorNameDetailV2.text = listSchedule[position].doctorName
+                    myDialog.textViewPavilionDetailV2.text = listSchedule[position].pavilion
+                    myDialog.textViewFloorDetailV2.text = listSchedule[position].floor
+                    myDialog.textViewDoorDetailV2.text = listSchedule[position].cabinet
+                    myDialog.textViewHourDetailV2.text = listSchedule[position].hour
+
+                myDialog.show()
             }
         }
 

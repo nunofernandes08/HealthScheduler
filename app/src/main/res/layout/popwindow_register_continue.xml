@@ -4,10 +4,22 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="338dp"
-    android:layout_height="313dp"
+    android:layout_height="450dp"
     android:layout_gravity="center"
     android:background="@drawable/formulariologin"
     android:padding="5dp">
+
+    <TextView
+        android:id="@+id/textViewTelemovelRegisterContinuePopWindow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:fontFamily="@font/roboto"
+        android:text="Telemóvel"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="@+id/editTextMoradaRegisterContinuePopWindow"
+        app:layout_constraintTop_toBottomOf="@+id/editTextMoradaRegisterContinuePopWindow" />
 
     <TextView
         android:id="@+id/textViewNomeRegisterContinuePopWindow"
@@ -26,7 +38,7 @@
         android:id="@+id/editTextNomeRegisterContinuePopWindow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="#FFFFFF"
+        android:backgroundTint="@color/transparency"
         android:ems="13"
         android:fontFamily="@font/roboto"
         android:hint="@string/email_login"
@@ -42,27 +54,59 @@
         app:layout_constraintTop_toBottomOf="@+id/textViewNomeRegisterContinuePopWindow"
         app:layout_constraintVertical_bias="0.0" />
 
+    <ImageView
+        android:id="@+id/imageViewLineNomeCompletoRegisterContinuePopWindow"
+        android:layout_width="270dp"
+        android:layout_height="1dp"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/editTextNomeRegisterContinuePopWindow"
+        app:layout_constraintEnd_toEndOf="@+id/editTextNomeRegisterContinuePopWindow"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/editTextMoradaRegisterContinuePopWindow"
+        app:srcCompat="@drawable/backgroundrowschedule" />
+
+    <ImageView
+        android:id="@+id/imageViewLineMoradaRegisterContinuePopWindow"
+        android:layout_width="270dp"
+        android:layout_height="1dp"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/editTextMoradaRegisterContinuePopWindow"
+        app:layout_constraintEnd_toEndOf="@+id/editTextMoradaRegisterContinuePopWindow"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/editTextMoradaRegisterContinuePopWindow"
+        app:srcCompat="@drawable/backgroundrowschedule" />
+
+    <ImageView
+        android:id="@+id/imageViewLineTelemovelRegisterContinuePopWindow"
+        android:layout_width="270dp"
+        android:layout_height="1dp"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/editTextTelemovelRegisterContinuePopWindow"
+        app:layout_constraintEnd_toEndOf="@+id/editTextTelemovelRegisterContinuePopWindow"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/editTextTelemovelRegisterContinuePopWindow"
+        app:srcCompat="@drawable/backgroundrowschedule" />
+
     <TextView
         android:id="@+id/textViewMoradaRegisterContinuePopWindow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
         android:layout_marginTop="28dp"
         android:fontFamily="@font/roboto"
         android:text="Morada"
         android:textColor="@color/white"
         android:textSize="24sp"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/editTextNomeRegisterContinuePopWindow"
         app:layout_constraintTop_toBottomOf="@+id/editTextNomeRegisterContinuePopWindow" />
 
     <EditText
         android:id="@+id/editTextMoradaRegisterContinuePopWindow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="#FFFFFF"
+        android:backgroundTint="@color/transparency"
         android:ems="13"
         android:fontFamily="@font/roboto"
-        android:hint="@string/email_login"
+        android:hint="@string/morada"
         android:importantForAutofill="no"
         android:inputType="textEmailAddress"
         android:labelFor="@id/textViewEmailLogin"
@@ -72,6 +116,24 @@
         android:textColorLink="#FFFFFF"
         app:layout_constraintStart_toStartOf="@+id/textViewMoradaRegisterContinuePopWindow"
         app:layout_constraintTop_toBottomOf="@+id/textViewMoradaRegisterContinuePopWindow" />
+
+    <EditText
+        android:id="@+id/editTextTelemovelRegisterContinuePopWindow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/transparency"
+        android:ems="13"
+        android:fontFamily="@font/roboto"
+        android:hint="@string/phone"
+        android:importantForAutofill="no"
+        android:inputType="textEmailAddress"
+        android:labelFor="@id/textViewEmailLogin"
+        android:textColor="#FFFFFF"
+        android:textColorHighlight="#8A8A8A"
+        android:textColorHint="#36BFB8"
+        android:textColorLink="#FFFFFF"
+        app:layout_constraintStart_toStartOf="@+id/textViewTelemovelRegisterContinuePopWindow"
+        app:layout_constraintTop_toBottomOf="@+id/textViewTelemovelRegisterContinuePopWindow" />
 
     <Button
         android:id="@+id/buttonRegisterContinuePopWindow"
@@ -85,7 +147,6 @@
         app:backgroundTint="#F6F6F6"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/editTextMoradaRegisterContinuePopWindow"
-        app:layout_constraintHorizontal_bias="0.454"
         app:layout_constraintStart_toStartOf="@+id/editTextMoradaRegisterContinuePopWindow"
-        app:layout_constraintTop_toBottomOf="@+id/editTextMoradaRegisterContinuePopWindow" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextTelemovelRegisterContinuePopWindow" />
 </androidx.constraintlayout.widget.ConstraintLayout>

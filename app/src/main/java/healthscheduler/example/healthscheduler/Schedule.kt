@@ -131,7 +131,7 @@ class Schedule : AppCompatActivity() {
             textViewTypeOfConsultSchedule.text = listSchedule[position].typeOfConsult
 
             rowView.setOnClickListener {
-                myDialog = Dialog(this@Schedule)
+                myDialog = Dialog(this@Schedule, R.style.AnimateDialog)
                     myDialog.setContentView(R.layout.popwindow_schedule_detail)
                     myDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT));
 

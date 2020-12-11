@@ -165,13 +165,15 @@ class Home : AppCompatActivity() {
                                         }
                                     }
                             } ?: run {
-                                myDialog = Dialog(this)
+                                myDialog = Dialog(this, R.style.AnimateDialog)
                                 myDialog.setContentView(R.layout.popwindow_register_continue)
                                 myDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
                                 myDialog.findViewById<Button>(R.id.buttonRegisterContinuePopWindow).setOnClickListener {
                                     val username = myDialog.findViewById<EditText>(R.id.editTextNomeRegisterContinuePopWindow)
                                     val address = myDialog.findViewById<EditText>(R.id.editTextMoradaRegisterContinuePopWindow)
-                                    if (username.text.toString() == "" || address.text.toString() == "") {
+                                    val phone = myDialog.findViewById<EditText>(R.id.editTextTelemovelRegisterContinuePopWindow)
+                                    val image = "https://i.ibb.co/XD9cD4C/profile-user-1.png"
+                                    if (username.text.toString() == "" || address.text.toString() == "" || phone.text.toString() == "") {
                                         Toast.makeText(
                                                 this@Home, "Verifique o seu Nome ou Morada",
                                                 Toast.LENGTH_SHORT
@@ -180,16 +182,16 @@ class Home : AppCompatActivity() {
                                     else {
                                         val db = FirebaseFirestore.getInstance()
                                         //Colocar "imageRef.name" no imagemPath me baixo
-                                        val user = UsersItem(username.text.toString(), currentUser?.email, address.text.toString(), "", currentUser?.uid)
+                                        val user = UsersItem(username.text.toString(), currentUser?.email, address.text.toString(), image, currentUser?.uid, phone.text.toString())
                                         db.collection("users").document(currentUser!!.uid)
-                                                .set(user.toHashMap())
-                                                .addOnSuccessListener {
-                                                    Log.d("writeBD", "DocumentSnapshot successfully written!")
-                                                    myDialog.dismiss()
-                                                }
-                                                .addOnFailureListener { e ->
-                                                    Log.w("writeBD", "Error writing document", e)
-                                                }
+                                            .set(user.toHashMap())
+                                            .addOnSuccessListener {
+                                                Log.d("writeBD", "DocumentSnapshot successfully written!")
+                                                myDialog.dismiss()
+                                            }
+                                            .addOnFailureListener { e ->
+                                                Log.w("writeBD", "Error writing document", e)
+                                            }
                                     }
                                 }
                                 myDialog.show()
