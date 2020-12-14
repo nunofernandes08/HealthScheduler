@@ -26,7 +26,7 @@ class ContactsActivity : AppCompatActivity() {
     private var mAdapter                : RecyclerView.Adapter<*>? = null
     private var mLayoutManager          : LinearLayoutManager? = null
     private var users                   : MutableList<UsersItem> = arrayListOf()
-    private var referenceUsers          = db.collection("users")
+    private var referenceUsersMedic     = db.collection("users_medic")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,7 +48,7 @@ class ContactsActivity : AppCompatActivity() {
         buttonsActions(binding)
 
         currentUser.let {
-            referenceUsers.addSnapshotListener { snapshot, error ->
+            referenceUsersMedic.addSnapshotListener { snapshot, error ->
                 users.clear()
                 if (snapshot != null) {
                     for (doc in snapshot) {
