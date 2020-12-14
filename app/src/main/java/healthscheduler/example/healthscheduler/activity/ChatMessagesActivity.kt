@@ -1,24 +1,21 @@
-package healthscheduler.example.healthscheduler
+package healthscheduler.example.healthscheduler.activity
 
 import android.app.Activity
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.ImageDecoder
 import android.net.Uri
-import android.opengl.Visibility
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.view.LayoutInflater
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -26,7 +23,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import com.squareup.picasso.Picasso
-import healthscheduler.example.healthscheduler.databinding.ActivityChatMessagesBinding
+import healthscheduler.example.healthscheduler.R
 import healthscheduler.example.healthscheduler.databinding.ActivityChatMessagesV2Binding
 import healthscheduler.example.healthscheduler.models.MessageItem
 import healthscheduler.example.healthscheduler.models.UsersItem

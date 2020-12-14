@@ -1,4 +1,4 @@
-package healthscheduler.example.healthscheduler.Login
+package healthscheduler.example.healthscheduler.login
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity

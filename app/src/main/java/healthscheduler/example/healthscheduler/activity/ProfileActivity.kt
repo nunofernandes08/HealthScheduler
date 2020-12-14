@@ -1,4 +1,4 @@
-package healthscheduler.example.healthscheduler
+package healthscheduler.example.healthscheduler.activity
 
 import android.app.Activity
 import android.app.Dialog
@@ -14,26 +14,17 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
-import android.view.animation.Animation
-import android.view.animation.AnimationUtils
 import android.widget.*
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.Query
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
-import com.google.firebase.storage.ktx.storage
-import com.google.gson.TypeAdapterFactory
 import com.squareup.picasso.Picasso
-import healthscheduler.example.healthscheduler.Login.MainActivity
-import healthscheduler.example.healthscheduler.databinding.ActivityHomeBinding
+import healthscheduler.example.healthscheduler.login.MainActivity
+import healthscheduler.example.healthscheduler.R
 import healthscheduler.example.healthscheduler.databinding.ActivityProfileBinding
-import healthscheduler.example.healthscheduler.databinding.ActivityProfileV2Binding
-import healthscheduler.example.healthscheduler.models.MessageItem
 import healthscheduler.example.healthscheduler.models.UsersItem
-import kotlinx.android.synthetic.main.activity_schedule_v3.*
-import kotlinx.android.synthetic.main.popwindow_edit.*
 import java.io.ByteArrayOutputStream
 import java.util.*
 
@@ -115,7 +106,7 @@ class ProfileActivity : AppCompatActivity() {
             myDialog.findViewById<ImageView>(R.id.imageViewUserPhotoEdit).setOnClickListener {
                 val intent = Intent(Intent.ACTION_PICK)
                 intent.type = "image/*"
-                startActivityForResult(intent, Home.REQUEST_CODE_IMAGE_PICK)
+                startActivityForResult(intent, HomeActivity.REQUEST_CODE_IMAGE_PICK)
             }
 
             //Botao para submeter a atualizacao
@@ -224,7 +215,7 @@ class ProfileActivity : AppCompatActivity() {
     //Funcao que volta para o home
     private fun backToHome(binding: ActivityProfileBinding /*binding: ActivityProfileV2Binding*/){
         binding.floatingActionButton.setOnClickListener {
-            val intent = Intent(this, Home::class.java)
+            val intent = Intent(this, HomeActivity::class.java)
             startActivity(intent)
         }
     }
@@ -253,7 +244,7 @@ class ProfileActivity : AppCompatActivity() {
         val imageViewUserPhotoEdit = myDialog.findViewById<ImageView>(R.id.imageViewUserPhotoEdit)
 
         if (resultCode === Activity.RESULT_OK) {
-            if (requestCode == Home.REQUEST_CODE_IMAGE_PICK) {
+            if (requestCode == HomeActivity.REQUEST_CODE_IMAGE_PICK) {
                 data?.data?.let {
 
                     curFile = it

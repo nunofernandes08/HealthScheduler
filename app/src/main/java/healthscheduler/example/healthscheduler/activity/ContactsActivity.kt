@@ -1,4 +1,4 @@
-package healthscheduler.example.healthscheduler
+package healthscheduler.example.healthscheduler.activity
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -12,9 +12,9 @@ import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.squareup.picasso.Picasso
+import healthscheduler.example.healthscheduler.R
 import healthscheduler.example.healthscheduler.databinding.ActivityContactsBinding
 import healthscheduler.example.healthscheduler.models.UsersItem
 
@@ -66,7 +66,7 @@ class ContactsActivity : AppCompatActivity() {
     //Funcao com as acoes dos botoes
     private fun buttonsActions(binding: ActivityContactsBinding){
         binding.floatingActionButton.setOnClickListener{
-            val intent = Intent(this, Home::class.java)
+            val intent = Intent(this, HomeActivity::class.java)
             startActivity(intent)
             finish()
         }
@@ -80,7 +80,7 @@ class ContactsActivity : AppCompatActivity() {
             return ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.row_contact, parent, false))
         }
 
-        override fun onBindViewHolder(holder: ContactsAdapter.ViewHolder, position: Int) {
+        override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
             holder.v.apply {
 

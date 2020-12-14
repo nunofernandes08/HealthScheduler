@@ -1,9 +1,8 @@
-package healthscheduler.example.healthscheduler
+package healthscheduler.example.healthscheduler.activity
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import com.squareup.picasso.Picasso
+import healthscheduler.example.healthscheduler.R
 import healthscheduler.example.healthscheduler.databinding.ActivityLatestMessagesBinding
 import healthscheduler.example.healthscheduler.models.MessageItem
 import healthscheduler.example.healthscheduler.models.UsersItem
@@ -98,7 +98,7 @@ class LatestMessagesActivity : AppCompatActivity() {
         }
 
         binding.floatingActionButton.setOnClickListener{
-            val intent = Intent(this, Home::class.java)
+            val intent = Intent(this, HomeActivity::class.java)
             startActivity(intent)
             finish()
         }

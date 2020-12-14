@@ -1,4 +1,4 @@
-package healthscheduler.example.healthscheduler
+package healthscheduler.example.healthscheduler.activity
 
 import android.app.Dialog
 import android.content.Intent
@@ -14,6 +14,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 import com.squareup.picasso.Picasso
+import healthscheduler.example.healthscheduler.R
 import healthscheduler.example.healthscheduler.databinding.ActivityScheduleBinding
 import healthscheduler.example.healthscheduler.models.ScheduleItem
 import healthscheduler.example.healthscheduler.models.UsersItem
@@ -22,14 +23,14 @@ import kotlinx.android.synthetic.main.popwindow_schedule_detail.*
 import java.util.ArrayList
 import java.util.HashMap
 
-class Schedule : AppCompatActivity() {
+class ScheduleOld : AppCompatActivity() {
 
     private val db          = FirebaseFirestore.getInstance()
     private val auth        = Firebase.auth
     private val currentUser = auth.currentUser
 
     private var listSchedule:       MutableList<ScheduleItem> = ArrayList()
-    private var scheduleAdapter:    Schedule.ScheduleAdapter? = null
+    private var scheduleOldAdapter:    ScheduleAdapter? = null
 
     private var listUser:           UsersItem? = null
 
@@ -42,7 +43,7 @@ class Schedule : AppCompatActivity() {
         setContentView(view)
 
         binding.textViewViewPager.setOnClickListener {
-            val intent = Intent(this, ScheduleV3Activity::class.java)
+            val intent = Intent(this, ScheduleActivity::class.java)
             startActivity(intent)
         }
 
@@ -53,8 +54,8 @@ class Schedule : AppCompatActivity() {
 
     //Funcao para ir buscar a informacao do CURRENTUSER
     private fun getUserData(binding: ActivityScheduleBinding){
-        scheduleAdapter = ScheduleAdapter()
-        binding.listViewSchedule.adapter = scheduleAdapter
+        scheduleOldAdapter = ScheduleAdapter()
+        binding.listViewSchedule.adapter = scheduleOldAdapter
 
         listSchedule.clear()
 
@@ -76,7 +77,7 @@ class Schedule : AppCompatActivity() {
                                 document.data.getValue("cabinet").toString(),
                                 document.data.getValue("typeOfConsult").toString()))
                     }
-                    scheduleAdapter?.notifyDataSetChanged()
+                    scheduleOldAdapter?.notifyDataSetChanged()
                 }
             }
     }
@@ -85,7 +86,7 @@ class Schedule : AppCompatActivity() {
     private fun buttonsActions(binding: ActivityScheduleBinding){
 
         floatingActionButton.setOnClickListener{
-            val intent = Intent(this, Home::class.java)
+            val intent = Intent(this, HomeActivity::class.java)
             startActivity(intent)
         }
     }
@@ -101,11 +102,11 @@ class Schedule : AppCompatActivity() {
                             if(user.imagePath != ""){
                                 Picasso.get().load(user.imagePath).into(imageViewPhotoUser)
                             }else{
-                                Toast.makeText(this@Schedule, "Não tem foto de perfil",
+                                Toast.makeText(this@ScheduleOld, "Não tem foto de perfil",
                                         Toast.LENGTH_SHORT).show()
                             }
                         }?: run{
-                            Toast.makeText(this@Schedule, "Sem sessão iniciada",
+                            Toast.makeText(this@ScheduleOld, "Sem sessão iniciada",
                                     Toast.LENGTH_SHORT).show()
                         }
                     }
@@ -131,7 +132,7 @@ class Schedule : AppCompatActivity() {
             textViewTypeOfConsultSchedule.text = listSchedule[position].typeOfConsult
 
             rowView.setOnClickListener {
-                myDialog = Dialog(this@Schedule, R.style.AnimateDialog)
+                myDialog = Dialog(this@ScheduleOld, R.style.AnimateDialog)
                     myDialog.setContentView(R.layout.popwindow_schedule_detail)
                     myDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT));
 

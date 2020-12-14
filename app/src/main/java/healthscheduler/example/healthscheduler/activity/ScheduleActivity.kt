@@ -1,4 +1,4 @@
-package healthscheduler.example.healthscheduler
+package healthscheduler.example.healthscheduler.activity
 
 import android.app.Dialog
 import android.content.Intent
@@ -19,6 +19,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 import com.squareup.picasso.Picasso
+import healthscheduler.example.healthscheduler.R
 import healthscheduler.example.healthscheduler.databinding.ActivityScheduleV3Binding
 import healthscheduler.example.healthscheduler.models.AppointDate
 import healthscheduler.example.healthscheduler.models.ScheduleItem
@@ -27,7 +28,7 @@ import kotlinx.android.synthetic.main.item_view_pager_schedule.view.*
 import kotlinx.android.synthetic.main.popwindow_schedule_detail.*
 import java.util.HashMap
 
-class ScheduleV3Activity : AppCompatActivity() {
+class ScheduleActivity : AppCompatActivity() {
 
     private val db          = FirebaseFirestore.getInstance()
     private val auth        = Firebase.auth
@@ -35,7 +36,7 @@ class ScheduleV3Activity : AppCompatActivity() {
 
     private var listAppointDates    : MutableList<AppointDate> = arrayListOf()
     private val listSchedule        : MutableList<ScheduleItem> = arrayListOf()
-    private var datesAdapter        : ScheduleV3Activity.ViewPagerAdapter? = null
+    private var datesAdapter        : ViewPagerAdapter? = null
 
     private var listUser : UsersItem? = null
 
@@ -101,12 +102,12 @@ class ScheduleV3Activity : AppCompatActivity() {
                             }
                             else {
 
-                                Toast.makeText(this@ScheduleV3Activity, "Não tem foto de perfil",
+                                Toast.makeText(this@ScheduleActivity, "Não tem foto de perfil",
                                     Toast.LENGTH_SHORT).show()
                             }
                         } ?: run{
 
-                            Toast.makeText(this@ScheduleV3Activity, "Sem sessão iniciada",
+                            Toast.makeText(this@ScheduleActivity, "Sem sessão iniciada",
                                 Toast.LENGTH_SHORT).show()
                         }
                     }
@@ -119,7 +120,7 @@ class ScheduleV3Activity : AppCompatActivity() {
 
         binding.floatingActionButton.setOnClickListener{
 
-            val intent = Intent(this, Home::class.java)
+            val intent = Intent(this, HomeActivity::class.java)
             startActivity(intent)
         }
     }
@@ -159,14 +160,14 @@ class ScheduleV3Activity : AppCompatActivity() {
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewPagerViewHolder {
             return ViewPagerViewHolder(LayoutInflater
-                    .from(this@ScheduleV3Activity)
+                    .from(this@ScheduleActivity)
                     .inflate(R.layout.item_view_pager_schedule, parent, false))
         }
 
         override fun onBindViewHolder(holder: ViewPagerViewHolder, position: Int) {
 
             val scheduleAdapter = ScheduleAdapterV3()
-            val mLayoutManager = LinearLayoutManager(this@ScheduleV3Activity,
+            val mLayoutManager = LinearLayoutManager(this@ScheduleActivity,
                 LinearLayoutManager.VERTICAL,
                 false)
 
@@ -232,7 +233,7 @@ class ScheduleV3Activity : AppCompatActivity() {
             }
 
             holder.itemView.setOnClickListener {
-                myDialog = Dialog(this@ScheduleV3Activity, R.style.AnimateDialog)
+                myDialog = Dialog(this@ScheduleActivity, R.style.AnimateDialog)
                     myDialog.setContentView(R.layout.popwindow_schedule_detail)
                     myDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT));
 

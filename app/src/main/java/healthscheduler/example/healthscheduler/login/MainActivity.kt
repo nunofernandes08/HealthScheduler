@@ -1,6 +1,5 @@
-package healthscheduler.example.healthscheduler.Login
+package healthscheduler.example.healthscheduler.login
 
-import android.app.PendingIntent.getActivity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -10,7 +9,6 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase

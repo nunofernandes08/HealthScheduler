@@ -1,4 +1,4 @@
-package healthscheduler.example.healthscheduler.Login
+package healthscheduler.example.healthscheduler.login
 
 import android.app.Dialog
 import android.content.Intent
@@ -6,7 +6,6 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.text.method.PasswordTransformationMethod
-import android.util.Log
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
@@ -15,13 +14,11 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
-import com.squareup.picasso.Picasso
-import healthscheduler.example.healthscheduler.Home
+import healthscheduler.example.healthscheduler.activity.HomeActivity
 import healthscheduler.example.healthscheduler.R
 import healthscheduler.example.healthscheduler.databinding.ActivityLoginBinding
 import healthscheduler.example.healthscheduler.models.UsersItem
 import kotlinx.android.synthetic.main.activity_login.*
-import java.util.HashMap
 
 
 class Login : AppCompatActivity() {
@@ -134,7 +131,7 @@ class Login : AppCompatActivity() {
             auth.signInWithEmailAndPassword(binding.editTextEmailLogin.text.toString(), binding.editTextPasswordLogin.text.toString())
                     .addOnCompleteListener(this) { task ->
                         if (task.isSuccessful) {
-                            val intent = Intent(this, Home::class.java)
+                            val intent = Intent(this, HomeActivity::class.java)
                             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
                             startActivity(intent)
                         } else {

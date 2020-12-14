@@ -1,8 +1,9 @@
-package healthscheduler.example.healthscheduler
+package healthscheduler.example.healthscheduler.helpers
 
 import android.text.Editable
 import android.text.TextWatcher
 import androidx.lifecycle.MutableLiveData
+import healthscheduler.example.healthscheduler.R
 import java.util.regex.Matcher
 import java.util.regex.Pattern
 

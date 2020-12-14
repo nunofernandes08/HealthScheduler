@@ -1,4 +1,4 @@
-package healthscheduler.example.healthscheduler.Login
+package healthscheduler.example.healthscheduler.login
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -6,10 +6,9 @@ import android.os.Bundle
 import android.view.View
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-import healthscheduler.example.healthscheduler.Home
+import healthscheduler.example.healthscheduler.activity.HomeActivity
 import healthscheduler.example.healthscheduler.R
 import kotlinx.coroutines.*
 
@@ -35,7 +34,7 @@ class Splash : AppCompatActivity() {
             delay(2000)
 
             currentUser?.let {
-                val intent = Intent(this@Splash, Home::class.java)
+                val intent = Intent(this@Splash, HomeActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
                 startActivity(intent)
                 finish()

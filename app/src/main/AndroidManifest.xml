@@ -12,26 +12,26 @@
         android:roundIcon="@mipmap/ic_logo"
         android:supportsRtl="true"
         android:theme="@style/Theme.HealthScheduler">
-        <activity android:name=".ScheduleV3Activity"></activity>
+        <activity android:name=".activity.ScheduleActivity"></activity>
         <activity android:name=".ScheduleV2Activity" />
-        <activity android:name=".ProfileActivity" />
-        <activity android:name=".ChatMessagesActivity" />
-        <activity android:name=".ContactsActivity" />
-        <activity android:name=".LatestMessagesActivity" />
-        <activity android:name=".Login.CodeVerifyPhone" />
-        <activity android:name=".Login.RegisterContinue" />
-        <activity android:name=".Schedule" />
-        <activity android:name=".Home" />
-        <activity android:name=".Login.Splash">
+        <activity android:name=".activity.ProfileActivity" />
+        <activity android:name=".activity.ChatMessagesActivity" />
+        <activity android:name=".activity.ContactsActivity" />
+        <activity android:name=".activity.LatestMessagesActivity" />
+        <activity android:name=".login.CodeVerifyPhone" />
+        <activity android:name=".login.RegisterContinue" />
+        <activity android:name=".activity.ScheduleOld" />
+        <activity android:name=".activity.HomeActivity" />
+        <activity android:name=".login.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Login.Login" />
-        <activity android:name=".Login.MainActivity" />
-        <activity android:name=".Login.Register" />
+        <activity android:name=".login.Login" />
+        <activity android:name=".login.MainActivity" />
+        <activity android:name=".login.Register" />
     </application>
 
 </manifest>

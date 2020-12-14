@@ -1,4 +1,4 @@
-package healthscheduler.example.healthscheduler.Login
+package healthscheduler.example.healthscheduler.login
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -7,7 +7,7 @@ import android.util.Log
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import healthscheduler.example.healthscheduler.Home
+import healthscheduler.example.healthscheduler.activity.HomeActivity
 import healthscheduler.example.healthscheduler.databinding.ActivityRegisterContinueBinding
 import healthscheduler.example.healthscheduler.models.UsersItem
 
@@ -45,7 +45,7 @@ class RegisterContinue : AppCompatActivity() {
                         .set(user.toHashMap())
                         .addOnSuccessListener {
                             Log.d("writeBD", "DocumentSnapshot successfully written!")
-                            val intent = Intent(this@RegisterContinue, Home::class.java)
+                            val intent = Intent(this@RegisterContinue, HomeActivity::class.java)
                             startActivity(intent)
                         }
                         .addOnFailureListener {

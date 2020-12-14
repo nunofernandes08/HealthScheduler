@@ -1,11 +1,10 @@
-package healthscheduler.example.healthscheduler.Login
+package healthscheduler.example.healthscheduler.login
 
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -13,8 +12,8 @@ import com.google.firebase.FirebaseException
 import com.google.firebase.auth.*
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-import healthscheduler.example.healthscheduler.Home
-import healthscheduler.example.healthscheduler.PasswordStrength
+import healthscheduler.example.healthscheduler.activity.HomeActivity
+import healthscheduler.example.healthscheduler.helpers.PasswordStrength
 import healthscheduler.example.healthscheduler.databinding.ActivityRegisterBinding
 import kotlinx.android.synthetic.main.activity_register.*
 import java.util.concurrent.TimeUnit
@@ -87,7 +86,7 @@ class Register : AppCompatActivity() {
                                 .addOnCompleteListener(this) { task ->
                                     if (task.isSuccessful) {
                                         val user = auth.currentUser
-                                        val intent = Intent(this, Home::class.java)
+                                        val intent = Intent(this, HomeActivity::class.java)
                                         intent.putExtra("emailOrPhone", emailOrPhone)
                                         intent.flags =
                                                 Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)

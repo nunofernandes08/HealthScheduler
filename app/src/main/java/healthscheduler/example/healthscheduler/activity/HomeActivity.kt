@@ -1,11 +1,10 @@
-package healthscheduler.example.healthscheduler
+package healthscheduler.example.healthscheduler.activity
 
 import android.Manifest
 import android.app.Activity
 import android.app.Dialog
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.Bitmap
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.net.Uri
@@ -17,7 +16,6 @@ import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
@@ -25,13 +23,13 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.ktx.storage
 import com.squareup.picasso.Picasso
-import healthscheduler.example.healthscheduler.Login.MainActivity
+import healthscheduler.example.healthscheduler.R
 import healthscheduler.example.healthscheduler.databinding.ActivityHomeBinding
 import healthscheduler.example.healthscheduler.models.MessageItem
 import healthscheduler.example.healthscheduler.models.UsersItem
 import java.util.*
 
-class Home : AppCompatActivity() {
+class HomeActivity : AppCompatActivity() {
 
     private val REQUEST_CODE    =  0
     private val db              = FirebaseFirestore.getInstance()
@@ -179,7 +177,7 @@ class Home : AppCompatActivity() {
                                     val image = "https://i.ibb.co/XD9cD4C/profile-user-1.png"
                                     if (username.text.toString() == "" || address.text.toString() == "" || phone.text.toString() == ""|| birthday.text.toString() == ""|| hospitalNumber.text.toString() == "" || healthNumber.text.toString() == "") {
                                         Toast.makeText(
-                                                this@Home, "Verifique os seus dados",
+                                                this@HomeActivity, "Verifique os seus dados",
                                                 Toast.LENGTH_SHORT
                                         ).show()
                                     }
@@ -240,7 +238,7 @@ class Home : AppCompatActivity() {
 
         //Botao para ir as consultas
         binding.buttonScheduleHome.setOnClickListener {
-            val intent = Intent(this, ScheduleV3Activity::class.java)
+            val intent = Intent(this, ScheduleActivity::class.java)
             startActivity(intent)
         }
 
@@ -344,7 +342,7 @@ class Home : AppCompatActivity() {
                     }
                 } ?: run {
                     Toast.makeText(
-                            this@Home, "Sem utilizador",
+                            this@HomeActivity, "Sem utilizador",
                             Toast.LENGTH_SHORT
                     ).show()
                 }
