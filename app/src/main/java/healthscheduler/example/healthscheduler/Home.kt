@@ -172,17 +172,21 @@ class Home : AppCompatActivity() {
                                     val username = myDialog.findViewById<EditText>(R.id.editTextNomeRegisterContinuePopWindow)
                                     val address = myDialog.findViewById<EditText>(R.id.editTextMoradaRegisterContinuePopWindow)
                                     val phone = myDialog.findViewById<EditText>(R.id.editTextTelemovelRegisterContinuePopWindow)
+                                    val birthday = myDialog.findViewById<EditText>(R.id.editTextDataDeNascimentoContinuePopWindow)
+                                    val hospitalNumber = myDialog.findViewById<EditText>(R.id.editTextNProcessoHospitalarRegisterContinuePopWindow)
+                                    //Mudar para timestamp
+                                    val healthNumber = myDialog.findViewById<EditText>(R.id.editTextNDeSaudeRegisterContinuePopWindow)
                                     val image = "https://i.ibb.co/XD9cD4C/profile-user-1.png"
-                                    if (username.text.toString() == "" || address.text.toString() == "" || phone.text.toString() == "") {
+                                    if (username.text.toString() == "" || address.text.toString() == "" || phone.text.toString() == ""|| birthday.text.toString() == ""|| hospitalNumber.text.toString() == "" || healthNumber.text.toString() == "") {
                                         Toast.makeText(
-                                                this@Home, "Verifique o seu Nome ou Morada",
+                                                this@Home, "Verifique os seus dados",
                                                 Toast.LENGTH_SHORT
                                         ).show()
                                     }
                                     else {
                                         val db = FirebaseFirestore.getInstance()
                                         //Colocar "imageRef.name" no imagemPath me baixo
-                                        val user = UsersItem(username.text.toString(), currentUser?.email, address.text.toString(), image, currentUser?.uid, phone.text.toString())
+                                        val user = UsersItem(username.text.toString(), currentUser?.email, address.text.toString(), image, currentUser?.uid, phone.text.toString(), birthday.text.toString(), hospitalNumber.text.toString(), healthNumber.text.toString())
                                         db.collection("users").document(currentUser!!.uid)
                                             .set(user.toHashMap())
                                             .addOnSuccessListener {

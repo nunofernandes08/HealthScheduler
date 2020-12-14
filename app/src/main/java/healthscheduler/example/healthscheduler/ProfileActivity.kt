@@ -47,6 +47,9 @@ class ProfileActivity : AppCompatActivity() {
     private var currentUserAddress: String? = null
     private var currentUserPhone: String? = null
     private var currentUserPhoto: String? = null
+    private var currentUserBirthday: String? = null
+    private var currentUserHealthNumber: String? = null
+    private var currentUserHospitalNumber: String? = null
     private var downUrl: String? = null
     private var curFile: Uri? = null
     private var user: UsersItem? = null
@@ -81,6 +84,9 @@ class ProfileActivity : AppCompatActivity() {
                             currentUserAddress = user.address.toString()
                             currentUserPhone = user.phoneNumber.toString()
                             currentUserPhoto = user.imagePath.toString()
+                            currentUserBirthday = user.birthday.toString()
+                            currentUserHealthNumber = user.healthNumber.toString()
+                            currentUserHospitalNumber = user.hospitalNumber.toString()
                         }
                     } ?: run {
                         Toast.makeText(
@@ -104,7 +110,6 @@ class ProfileActivity : AppCompatActivity() {
 
             val userPhone = myDialog.findViewById<TextView>(R.id.editTextUserPhoneEdit)
             userPhone.text = currentUserPhone.toString()
-
 
             //Botao para escolher foto
             myDialog.findViewById<ImageView>(R.id.imageViewUserPhotoEdit).setOnClickListener {
@@ -171,7 +176,7 @@ class ProfileActivity : AppCompatActivity() {
                 }
         }
         else {
-            val user = UsersItem(currentUserName, currentUser!!.email, address.text.toString(), downUrl, currentUser.uid, phone.text.toString())
+            val user = UsersItem(currentUserName, currentUser!!.email, address.text.toString(), downUrl, currentUser.uid, phone.text.toString(), currentUserBirthday, currentUserHealthNumber, currentUserHospitalNumber)
             db.collection("users").document(currentUser.uid)
                 .set(user.toHashMap())
                 .addOnSuccessListener {
@@ -198,7 +203,7 @@ class ProfileActivity : AppCompatActivity() {
                                 binding.textViewUserName2Profile.text = user.username
                                 binding.textViewUserPhone2Profile.text = user.phoneNumber
                                 binding.textViewUserAddress2Profile.text = user.address
-                                //binding.textViewUserBirthday2Profile.text = user.
+                                binding.textViewUserBirthday2Profile.text = user.birthday
                                 Picasso.get().load(user.imagePath).into(binding.imageViewUserPhotoProfile)
                             }
                         }
