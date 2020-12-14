@@ -28,8 +28,8 @@ class Register : AppCompatActivity() {
     private var storedVerificationId    :String? = ""
     var color                           :Int = Color.RED
 
-    private val auth        = Firebase.auth
-    private val currentUser = auth.currentUser
+    private val auth                = Firebase.auth
+    private val currentUser         = auth.currentUser
     private val passwordStrength    = PasswordStrength()
 
     override fun onCreate(savedInstanceState: Bundle?) {

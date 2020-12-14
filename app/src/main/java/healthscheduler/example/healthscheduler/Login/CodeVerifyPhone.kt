@@ -14,9 +14,10 @@ import healthscheduler.example.healthscheduler.databinding.ActivityCodeVerifyPho
 
 class CodeVerifyPhone : AppCompatActivity() {
 
-    private lateinit var auth: FirebaseAuth
-    var emailOrPhone : String? = null
-    var codeVerify : Int? = null
+    private lateinit var auth   : FirebaseAuth
+    
+    var emailOrPhone            : String? = null
+    var codeVerify              : Int? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

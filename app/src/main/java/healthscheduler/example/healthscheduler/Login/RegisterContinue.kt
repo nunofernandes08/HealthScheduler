@@ -13,8 +13,8 @@ import healthscheduler.example.healthscheduler.models.UsersItem
 
 class RegisterContinue : AppCompatActivity() {
 
-    var emailOrPhone : String? = null
-    var users : UsersItem? = null
+    var emailOrPhone    : String? = null
+    var users           : UsersItem? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

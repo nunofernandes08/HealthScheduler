@@ -6,15 +6,15 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 class UsersItem (
-    var username : String? = null,
-    var phoneNumberEmail : String? = null,
-    var address : String? = null,
-    var imagePath : String? = null,
-    var userID : String? = null,
-    var phoneNumber: String? = null,
-    var birthday: String? = null,
-    var hospitalNumber: String? = null,
-    var healthNumber: String?= null): Parcelable {
+    var username            : String? = null,
+    var phoneNumberEmail    : String? = null,
+    var address             : String? = null,
+    var imagePath           : String? = null,
+    var userID              : String? = null,
+    var phoneNumber         : String? = null,
+    var birthday            : String? = null,
+    var hospitalNumber      : String? = null,
+    var healthNumber        : String?= null): Parcelable {
 
     constructor() : this("", "", "", "", "", "", "", "", "")
 
@@ -28,15 +28,15 @@ class UsersItem (
 
     fun toHashMap() : HashMap<String, Any?>{
         val hashMap = HashMap<String, Any?>()
-        hashMap["username"] = username
+        hashMap["username"]         = username
         hashMap["phoneNumberEmail"] = phoneNumberEmail
-        hashMap["address"] = address
-        hashMap["imagePath"] = imagePath
-        hashMap["userID"] = userID
-        hashMap["phoneNumber"] = phoneNumber
-        hashMap["birthday"] = birthday
-        hashMap["hospitalNumber"] = hospitalNumber
-        hashMap["healthNumber"] = healthNumber
+        hashMap["address"]          = address
+        hashMap["imagePath"]        = imagePath
+        hashMap["userID"]           = userID
+        hashMap["phoneNumber"]      = phoneNumber
+        hashMap["birthday"]         = birthday
+        hashMap["hospitalNumber"]   = hospitalNumber
+        hashMap["healthNumber"]     = healthNumber
 
         return hashMap
     }

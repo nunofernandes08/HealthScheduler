@@ -6,24 +6,32 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.text.method.PasswordTransformationMethod
+import android.util.Log
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
+import com.squareup.picasso.Picasso
 import healthscheduler.example.healthscheduler.Home
 import healthscheduler.example.healthscheduler.R
 import healthscheduler.example.healthscheduler.databinding.ActivityLoginBinding
+import healthscheduler.example.healthscheduler.models.UsersItem
 import kotlinx.android.synthetic.main.activity_login.*
+import java.util.HashMap
 
 
 class Login : AppCompatActivity() {
 
+    private val db          = FirebaseFirestore.getInstance()
     private val auth        = Firebase.auth
     private val currentUser = auth.currentUser
 
+    private var referenceUsers     = db.collection("users")
+    private var user               : UsersItem? = null
     private var mGoogleSignInClient: GoogleSignInClient? = null
     internal lateinit var myDialog : Dialog
 
@@ -41,7 +49,7 @@ class Login : AppCompatActivity() {
     private fun buttonActions(binding: ActivityLoginBinding){
 
         binding.buttonLogin.setOnClickListener {
-            signInWithEmailAndPassword(binding)
+            verifyUser(binding)
         }
 
         binding.buttonInfoLogin.setOnClickListener {
@@ -100,10 +108,22 @@ class Login : AppCompatActivity() {
         }
     }
 
+    private fun verifyUser(binding : ActivityLoginBinding){
+        referenceUsers.get()
+            .addOnSuccessListener { documents ->
+                for (document in documents) {
+                    if (document.data.getValue("phoneNumberEmail") == binding.editTextEmailLogin.text.toString()) {
+                        signInWithEmailAndPassword(binding)
+                    }
+                }
+            }
+    }
+
     private fun signInWithEmailAndPassword(binding : ActivityLoginBinding) {
 
         var userEmail = binding.editTextEmailLogin.text.toString()
         var userPassword = binding.editTextPasswordLogin.text.toString()
+        var email : String? = null
 
         if(userEmail == "" || userPassword == "") {
             Toast.makeText(

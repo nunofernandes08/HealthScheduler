@@ -20,9 +20,9 @@ import healthscheduler.example.healthscheduler.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
-    private val auth        = Firebase.auth
-    private val currentUser = auth.currentUser
     private var mGoogleSignInClient: GoogleSignInClient? = null
+    private val auth                                     = Firebase.auth
+    private val currentUser                              = auth.currentUser
 
 
     override fun onCreate(savedInstanceState: Bundle?) {

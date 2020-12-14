@@ -29,13 +29,13 @@ import java.util.HashMap
 
 class ScheduleV3Activity : AppCompatActivity() {
 
-    private val db = FirebaseFirestore.getInstance()
-    private val auth = Firebase.auth
+    private val db          = FirebaseFirestore.getInstance()
+    private val auth        = Firebase.auth
     private val currentUser = auth.currentUser
 
-    private var listAppointDates : MutableList<AppointDate> = arrayListOf()
-    private val listSchedule : MutableList<ScheduleItem> = arrayListOf()
-    private var datesAdapter : ScheduleV3Activity.ViewPagerAdapter? = null
+    private var listAppointDates    : MutableList<AppointDate> = arrayListOf()
+    private val listSchedule        : MutableList<ScheduleItem> = arrayListOf()
+    private var datesAdapter        : ScheduleV3Activity.ViewPagerAdapter? = null
 
     private var listUser : UsersItem? = null
 

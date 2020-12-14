@@ -4,259 +4,289 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="338dp"
-    android:layout_height="650dp"
+    android:layout_height="500dp"
     android:layout_gravity="center"
     android:background="@drawable/formulariologin"
     android:padding="5dp">
 
-    <TextView
-        android:id="@+id/textViewTelemovelRegisterContinuePopWindow"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:fontFamily="@font/roboto"
-        android:text="Telemóvel"
-        android:textColor="@color/white"
-        android:textSize="24sp"
-        app:layout_constraintStart_toStartOf="@+id/editTextMoradaRegisterContinuePopWindow"
-        app:layout_constraintTop_toBottomOf="@+id/editTextDataDeNascimentoContinuePopWindow" />
 
-    <TextView
-        android:id="@+id/textViewDataDeNascimentoContinuePopWindow"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:fontFamily="@font/roboto"
-        android:text="Data De Nascimento"
-        android:textColor="@color/white"
-        android:textSize="24sp"
-        app:layout_constraintStart_toStartOf="@+id/editTextMoradaRegisterContinuePopWindow"
-        app:layout_constraintTop_toBottomOf="@+id/editTextMoradaRegisterContinuePopWindow" />
-
-    <TextView
-        android:id="@+id/textViewNProcessoHospitalarRegisterContinuePopWindow"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:fontFamily="@font/roboto"
-        android:text="N. Processo Hospitalar"
-        android:textColor="@color/white"
-        android:textSize="24sp"
-        app:layout_constraintStart_toStartOf="@+id/imageViewLineTelemovelRegisterContinuePopWindow"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTelemovelRegisterContinuePopWindow" />
-
-    <TextView
-        android:id="@+id/textViewNDeSaudeRegisterContinuePopWindow"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:fontFamily="@font/roboto"
-        android:text="N. De Saúde"
-        android:textColor="@color/white"
-        android:textSize="24sp"
-        app:layout_constraintStart_toStartOf="@+id/editTextNProcessoHospitalarRegisterContinuePopWindow"
-        app:layout_constraintTop_toBottomOf="@+id/editTextNProcessoHospitalarRegisterContinuePopWindow" />
-
-    <TextView
-        android:id="@+id/textViewNomeRegisterContinuePopWindow"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="18dp"
-        android:fontFamily="@font/roboto"
-        android:text="Nome Completo"
-        android:textColor="@color/white"
-        android:textSize="24sp"
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="332dp"
+        android:layout_height="360dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.123">
 
-    <EditText
-        android:id="@+id/editTextNomeRegisterContinuePopWindow"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/transparency"
-        android:ems="13"
-        android:fontFamily="@font/roboto"
-        android:hint="@string/email_login"
-        android:importantForAutofill="no"
-        android:inputType="textEmailAddress"
-        android:labelFor="@id/textViewEmailLogin"
-        android:textColor="#FFFFFF"
-        android:textColorHighlight="#8A8A8A"
-        android:textColorHint="#36BFB8"
-        android:textColorLink="#FFFFFF"
-        app:layout_constraintBottom_toTopOf="@+id/textViewMoradaRegisterContinuePopWindow"
-        app:layout_constraintStart_toStartOf="@+id/textViewNomeRegisterContinuePopWindow"
-        app:layout_constraintTop_toBottomOf="@+id/textViewNomeRegisterContinuePopWindow"
-        app:layout_constraintVertical_bias="0.0" />
+        <RelativeLayout
+            android:layout_width="332dp"
+            android:layout_height="360dp">
 
-    <ImageView
-        android:id="@+id/imageViewLineNomeCompletoRegisterContinuePopWindow"
-        android:layout_width="270dp"
-        android:layout_height="1dp"
-        android:layout_marginBottom="10dp"
-        app:layout_constraintBottom_toBottomOf="@+id/editTextNomeRegisterContinuePopWindow"
-        app:layout_constraintEnd_toEndOf="@+id/editTextNomeRegisterContinuePopWindow"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/editTextNomeRegisterContinuePopWindow"
-        app:srcCompat="@drawable/backgroundrowschedule" />
+            <ImageView
+                android:id="@+id/imageViewLineNDeSaudeRegisterContinuePopWindow"
+                android:layout_width="270dp"
+                android:layout_height="1dp"
+                android:layout_alignStart="@+id/editTextNDeSaudeRegisterContinuePopWindow"
+                android:layout_alignBottom="@+id/editTextNDeSaudeRegisterContinuePopWindow"
+                android:layout_marginStart="8dp"
+                android:layout_marginBottom="10dp"
+                app:srcCompat="@drawable/backgroundrowschedule" />
 
-    <ImageView
-        android:id="@+id/imageViewLineMoradaRegisterContinuePopWindow"
-        android:layout_width="270dp"
-        android:layout_height="1dp"
-        android:layout_marginBottom="10dp"
-        app:layout_constraintBottom_toBottomOf="@+id/editTextMoradaRegisterContinuePopWindow"
-        app:layout_constraintEnd_toEndOf="@+id/editTextMoradaRegisterContinuePopWindow"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/editTextMoradaRegisterContinuePopWindow"
-        app:srcCompat="@drawable/backgroundrowschedule" />
+            <EditText
+                android:id="@+id/editTextNDeSaudeRegisterContinuePopWindow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textViewNDeSaudeRegisterContinuePopWindow"
+                android:layout_alignStart="@+id/textViewNDeSaudeRegisterContinuePopWindow"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="0dp"
+                android:backgroundTint="@color/transparency"
+                android:ems="13"
+                android:fontFamily="@font/roboto"
+                android:hint="@string/phone"
+                android:importantForAutofill="no"
+                android:inputType="textEmailAddress"
+                android:labelFor="@id/textViewEmailLogin"
+                android:textColor="#FFFFFF"
+                android:textColorHighlight="#8A8A8A"
+                android:textColorHint="#36BFB8"
+                android:textColorLink="#FFFFFF" />
 
-    <ImageView
-        android:id="@+id/imageViewLineTelemovelRegisterContinuePopWindow"
-        android:layout_width="270dp"
-        android:layout_height="1dp"
-        android:layout_marginBottom="10dp"
-        app:layout_constraintBottom_toBottomOf="@+id/editTextTelemovelRegisterContinuePopWindow"
-        app:layout_constraintEnd_toEndOf="@+id/editTextTelemovelRegisterContinuePopWindow"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/editTextTelemovelRegisterContinuePopWindow"
-        app:srcCompat="@drawable/backgroundrowschedule" />
+            <TextView
+                android:id="@+id/textViewNDeSaudeRegisterContinuePopWindow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/editTextNProcessoHospitalarRegisterContinuePopWindow"
+                android:layout_alignStart="@+id/editTextNProcessoHospitalarRegisterContinuePopWindow"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/roboto"
+                android:text="N. De Saúde"
+                android:textColor="@color/white"
+                android:textSize="24sp" />
 
-    <ImageView
-        android:id="@+id/imageViewLineNProcessoHospitalarRegisterContinuePopWindow"
-        android:layout_width="270dp"
-        android:layout_height="1dp"
-        android:layout_marginBottom="10dp"
-        app:layout_constraintBottom_toBottomOf="@+id/editTextNProcessoHospitalarRegisterContinuePopWindow"
-        app:layout_constraintEnd_toEndOf="@+id/editTextNProcessoHospitalarRegisterContinuePopWindow"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/editTextNProcessoHospitalarRegisterContinuePopWindow"
-        app:srcCompat="@drawable/backgroundrowschedule" />
+            <ImageView
+                android:id="@+id/imageViewLineNProcessoHospitalarRegisterContinuePopWindow"
+                android:layout_width="270dp"
+                android:layout_height="1dp"
+                android:layout_alignStart="@+id/editTextNProcessoHospitalarRegisterContinuePopWindow"
+                android:layout_alignBottom="@+id/editTextNProcessoHospitalarRegisterContinuePopWindow"
+                android:layout_marginStart="0dp"
+                android:layout_marginBottom="10dp"
+                app:srcCompat="@drawable/backgroundrowschedule" />
 
-    <ImageView
-        android:id="@+id/imageViewLineNDeSaudeRegisterContinuePopWindow"
-        android:layout_width="270dp"
-        android:layout_height="1dp"
-        android:layout_marginBottom="10dp"
-        app:layout_constraintBottom_toBottomOf="@+id/editTextNDeSaudeRegisterContinuePopWindow"
-        app:layout_constraintEnd_toEndOf="@+id/editTextNDeSaudeRegisterContinuePopWindow"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/editTextNDeSaudeRegisterContinuePopWindow"
-        app:srcCompat="@drawable/backgroundrowschedule" />
+            <EditText
+                android:id="@+id/editTextNProcessoHospitalarRegisterContinuePopWindow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textViewNProcessoHospitalarRegisterContinuePopWindow"
+                android:layout_alignStart="@+id/textViewNProcessoHospitalarRegisterContinuePopWindow"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="0dp"
+                android:backgroundTint="@color/transparency"
+                android:ems="13"
+                android:fontFamily="@font/roboto"
+                android:hint="@string/phone"
+                android:importantForAutofill="no"
+                android:inputType="textEmailAddress"
+                android:labelFor="@id/textViewEmailLogin"
+                android:textColor="#FFFFFF"
+                android:textColorHighlight="#8A8A8A"
+                android:textColorHint="#36BFB8"
+                android:textColorLink="#FFFFFF" />
 
-    <ImageView
-        android:id="@+id/imageViewLineDataDeNascimentoContinuePopWindow"
-        android:layout_width="270dp"
-        android:layout_height="1dp"
-        android:layout_marginBottom="10dp"
-        app:layout_constraintBottom_toBottomOf="@+id/editTextDataDeNascimentoContinuePopWindow"
-        app:layout_constraintEnd_toEndOf="@+id/editTextDataDeNascimentoContinuePopWindow"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/editTextDataDeNascimentoContinuePopWindow"
-        app:srcCompat="@drawable/backgroundrowschedule" />
+            <TextView
+                android:id="@+id/textViewNProcessoHospitalarRegisterContinuePopWindow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/editTextTelemovelRegisterContinuePopWindow"
+                android:layout_alignStart="@+id/editTextTelemovelRegisterContinuePopWindow"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/roboto"
+                android:text="N. Processo Hospitalar"
+                android:textColor="@color/white"
+                android:textSize="24sp" />
 
-    <TextView
-        android:id="@+id/textViewMoradaRegisterContinuePopWindow"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:fontFamily="@font/roboto"
-        android:text="Morada"
-        android:textColor="@color/white"
-        android:textSize="24sp"
-        app:layout_constraintStart_toStartOf="@+id/editTextNomeRegisterContinuePopWindow"
-        app:layout_constraintTop_toBottomOf="@+id/editTextNomeRegisterContinuePopWindow" />
+            <ImageView
+                android:id="@+id/imageViewLineTelemovelRegisterContinuePopWindow"
+                android:layout_width="270dp"
+                android:layout_height="1dp"
+                android:layout_alignStart="@+id/editTextTelemovelRegisterContinuePopWindow"
+                android:layout_alignBottom="@+id/editTextTelemovelRegisterContinuePopWindow"
+                android:layout_marginStart="0dp"
+                android:layout_marginBottom="10dp"
+                app:srcCompat="@drawable/backgroundrowschedule" />
 
-    <EditText
-        android:id="@+id/editTextMoradaRegisterContinuePopWindow"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/transparency"
-        android:ems="13"
-        android:fontFamily="@font/roboto"
-        android:hint="@string/morada"
-        android:importantForAutofill="no"
-        android:inputType="textEmailAddress"
-        android:labelFor="@id/textViewEmailLogin"
-        android:textColor="#FFFFFF"
-        android:textColorHighlight="#8A8A8A"
-        android:textColorHint="#36BFB8"
-        android:textColorLink="#FFFFFF"
-        app:layout_constraintStart_toStartOf="@+id/textViewMoradaRegisterContinuePopWindow"
-        app:layout_constraintTop_toBottomOf="@+id/textViewMoradaRegisterContinuePopWindow" />
+            <EditText
+                android:id="@+id/editTextTelemovelRegisterContinuePopWindow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textViewTelemovelRegisterContinuePopWindow"
+                android:layout_alignStart="@+id/textViewTelemovelRegisterContinuePopWindow"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="0dp"
+                android:backgroundTint="@color/transparency"
+                android:ems="13"
+                android:fontFamily="@font/roboto"
+                android:hint="@string/phone"
+                android:importantForAutofill="no"
+                android:inputType="textEmailAddress"
+                android:labelFor="@id/textViewEmailLogin"
+                android:textColor="#FFFFFF"
+                android:textColorHighlight="#8A8A8A"
+                android:textColorHint="#36BFB8"
+                android:textColorLink="#FFFFFF" />
 
-    <EditText
-        android:id="@+id/editTextDataDeNascimentoContinuePopWindow"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/transparency"
-        android:ems="13"
-        android:fontFamily="@font/roboto"
-        android:hint="@string/morada"
-        android:importantForAutofill="no"
-        android:inputType="textEmailAddress"
-        android:labelFor="@id/textViewEmailLogin"
-        android:textColor="#FFFFFF"
-        android:textColorHighlight="#8A8A8A"
-        android:textColorHint="#36BFB8"
-        android:textColorLink="#FFFFFF"
-        app:layout_constraintStart_toStartOf="@+id/textViewDataDeNascimentoContinuePopWindow"
-        app:layout_constraintTop_toBottomOf="@+id/textViewDataDeNascimentoContinuePopWindow" />
+            <ImageView
+                android:id="@+id/imageViewLineDataDeNascimentoContinuePopWindow"
+                android:layout_width="270dp"
+                android:layout_height="1dp"
+                android:layout_alignStart="@+id/editTextDataDeNascimentoContinuePopWindow"
+                android:layout_alignBottom="@+id/editTextDataDeNascimentoContinuePopWindow"
+                android:layout_marginStart="0dp"
+                android:layout_marginBottom="8dp"
+                app:srcCompat="@drawable/backgroundrowschedule" />
 
-    <EditText
-        android:id="@+id/editTextTelemovelRegisterContinuePopWindow"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/transparency"
-        android:ems="13"
-        android:fontFamily="@font/roboto"
-        android:hint="@string/phone"
-        android:importantForAutofill="no"
-        android:inputType="textEmailAddress"
-        android:labelFor="@id/textViewEmailLogin"
-        android:textColor="#FFFFFF"
-        android:textColorHighlight="#8A8A8A"
-        android:textColorHint="#36BFB8"
-        android:textColorLink="#FFFFFF"
-        app:layout_constraintStart_toStartOf="@+id/textViewTelemovelRegisterContinuePopWindow"
-        app:layout_constraintTop_toBottomOf="@+id/textViewTelemovelRegisterContinuePopWindow" />
+            <EditText
+                android:id="@+id/editTextDataDeNascimentoContinuePopWindow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textViewDataDeNascimentoContinuePopWindow"
+                android:layout_alignStart="@+id/textViewDataDeNascimentoContinuePopWindow"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="0dp"
+                android:backgroundTint="@color/transparency"
+                android:ems="13"
+                android:fontFamily="@font/roboto"
+                android:hint="@string/morada"
+                android:importantForAutofill="no"
+                android:inputType="textEmailAddress"
+                android:labelFor="@id/textViewEmailLogin"
+                android:textColor="#FFFFFF"
+                android:textColorHighlight="#8A8A8A"
+                android:textColorHint="#36BFB8"
+                android:textColorLink="#FFFFFF" />
 
-    <EditText
-        android:id="@+id/editTextNProcessoHospitalarRegisterContinuePopWindow"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/transparency"
-        android:ems="13"
-        android:fontFamily="@font/roboto"
-        android:hint="@string/phone"
-        android:importantForAutofill="no"
-        android:inputType="textEmailAddress"
-        android:labelFor="@id/textViewEmailLogin"
-        android:textColor="#FFFFFF"
-        android:textColorHighlight="#8A8A8A"
-        android:textColorHint="#36BFB8"
-        android:textColorLink="#FFFFFF"
-        app:layout_constraintStart_toStartOf="@+id/textViewNProcessoHospitalarRegisterContinuePopWindow"
-        app:layout_constraintTop_toBottomOf="@+id/textViewNProcessoHospitalarRegisterContinuePopWindow" />
+            <TextView
+                android:id="@+id/textViewDataDeNascimentoContinuePopWindow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/editTextMoradaRegisterContinuePopWindow"
+                android:layout_alignStart="@+id/editTextMoradaRegisterContinuePopWindow"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/roboto"
+                android:text="Data De Nascimento"
+                android:textColor="@color/white"
+                android:textSize="24sp" />
 
-    <EditText
-        android:id="@+id/editTextNDeSaudeRegisterContinuePopWindow"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/transparency"
-        android:ems="13"
-        android:fontFamily="@font/roboto"
-        android:hint="@string/phone"
-        android:importantForAutofill="no"
-        android:inputType="textEmailAddress"
-        android:labelFor="@id/textViewEmailLogin"
-        android:textColor="#FFFFFF"
-        android:textColorHighlight="#8A8A8A"
-        android:textColorHint="#36BFB8"
-        android:textColorLink="#FFFFFF"
-        app:layout_constraintStart_toStartOf="@+id/textViewNDeSaudeRegisterContinuePopWindow"
-        app:layout_constraintTop_toBottomOf="@+id/textViewNDeSaudeRegisterContinuePopWindow" />
+            <ImageView
+                android:id="@+id/imageViewLineMoradaRegisterContinuePopWindow"
+                android:layout_width="270dp"
+                android:layout_height="1dp"
+                android:layout_alignStart="@+id/editTextMoradaRegisterContinuePopWindow"
+                android:layout_alignBottom="@+id/editTextMoradaRegisterContinuePopWindow"
+                android:layout_marginStart="0dp"
+                android:layout_marginBottom="10dp"
+                app:srcCompat="@drawable/backgroundrowschedule" />
+
+            <EditText
+                android:id="@+id/editTextMoradaRegisterContinuePopWindow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textViewMoradaRegisterContinuePopWindow"
+                android:layout_alignStart="@+id/textViewMoradaRegisterContinuePopWindow"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="0dp"
+                android:backgroundTint="@color/transparency"
+                android:ems="13"
+                android:fontFamily="@font/roboto"
+                android:hint="@string/morada"
+                android:importantForAutofill="no"
+                android:inputType="textEmailAddress"
+                android:labelFor="@id/textViewEmailLogin"
+                android:textColor="#FFFFFF"
+                android:textColorHighlight="#8A8A8A"
+                android:textColorHint="#36BFB8"
+                android:textColorLink="#FFFFFF" />
+
+            <TextView
+                android:id="@+id/textViewMoradaRegisterContinuePopWindow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/editTextNomeRegisterContinuePopWindow"
+                android:layout_alignStart="@+id/editTextNomeRegisterContinuePopWindow"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/roboto"
+                android:text="Morada"
+                android:textColor="@color/white"
+                android:textSize="24sp" />
+
+            <ImageView
+                android:id="@+id/imageViewLineNomeCompletoRegisterContinuePopWindow"
+                android:layout_width="270dp"
+                android:layout_height="1dp"
+                android:layout_alignStart="@+id/editTextNomeRegisterContinuePopWindow"
+                android:layout_alignBottom="@+id/editTextNomeRegisterContinuePopWindow"
+                android:layout_marginStart="0dp"
+                android:layout_marginBottom="10dp"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:srcCompat="@drawable/backgroundrowschedule" />
+
+            <EditText
+                android:id="@+id/editTextNomeRegisterContinuePopWindow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textViewNomeRegisterContinuePopWindow"
+                android:layout_alignStart="@+id/textViewNomeRegisterContinuePopWindow"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="0dp"
+                android:backgroundTint="@color/transparency"
+                android:ems="13"
+                android:fontFamily="@font/roboto"
+                android:hint="@string/email_login"
+                android:importantForAutofill="no"
+                android:inputType="textEmailAddress"
+                android:labelFor="@id/textViewEmailLogin"
+                android:textColor="#FFFFFF"
+                android:textColorHighlight="#8A8A8A"
+                android:textColorHint="#36BFB8"
+                android:textColorLink="#FFFFFF" />
+
+            <TextView
+                android:id="@+id/textViewNomeRegisterContinuePopWindow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="28dp"
+                android:layout_marginTop="19dp"
+                android:fontFamily="@font/roboto"
+                android:text="Nome Completo"
+                android:textColor="@color/white"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/textViewTelemovelRegisterContinuePopWindow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/editTextDataDeNascimentoContinuePopWindow"
+                android:layout_alignStart="@+id/editTextDataDeNascimentoContinuePopWindow"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/roboto"
+                android:text="Telemóvel"
+                android:textColor="@color/white"
+                android:textSize="24sp" />
+        </RelativeLayout>
+
+    </ScrollView>
+
 
     <Button
         android:id="@+id/buttonRegisterContinuePopWindow"
@@ -269,7 +299,8 @@
         android:textSize="24sp"
         app:backgroundTint="#F6F6F6"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/editTextNDeSaudeRegisterContinuePopWindow"
-        app:layout_constraintStart_toStartOf="@+id/editTextNDeSaudeRegisterContinuePopWindow"
-        app:layout_constraintTop_toBottomOf="@+id/editTextNDeSaudeRegisterContinuePopWindow" />
+        app:layout_constraintEnd_toEndOf="@+id/scrollView"
+        app:layout_constraintStart_toStartOf="@+id/scrollView"
+        app:layout_constraintTop_toBottomOf="@+id/scrollView" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

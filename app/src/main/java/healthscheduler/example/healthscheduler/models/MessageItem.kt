@@ -6,21 +6,21 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 class MessageItem (
-    val message : String? = null,
-    val fromId : String? = null,
-    val toId : String? = null,
-    val timeStamp : Long? = null,
+    val message     : String? = null,
+    val fromId      : String? = null,
+    val toId        : String? = null,
+    val timeStamp   : Long? = null,
     val messageType : String? = null): Parcelable {
 
     constructor() : this("", "", "", -1, "")
 
     fun toHashMap() : HashMap<String, Any?>{
         val hashMap = HashMap<String, Any?>()
-        hashMap["message"] = message
-        hashMap["fromId"] = fromId
-        hashMap["toId"] = toId
-        hashMap["timeStamp"] = timeStamp
-        hashMap["messageType"] = messageType
+        hashMap["message"]      = message
+        hashMap["fromId"]       = fromId
+        hashMap["toId"]         = toId
+        hashMap["timeStamp"]    = timeStamp
+        hashMap["messageType"]  = messageType
 
         return hashMap
     }

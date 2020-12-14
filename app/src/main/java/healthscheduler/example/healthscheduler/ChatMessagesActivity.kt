@@ -41,17 +41,17 @@ class ChatMessagesActivity : AppCompatActivity() {
         const val IMAGE_PICK = 0
     }
 
-    private val currentUid = FirebaseAuth.getInstance().uid
-    private val db = FirebaseFirestore.getInstance()
+    private val currentUid  = FirebaseAuth.getInstance().uid
+    private val db          = FirebaseFirestore.getInstance()
 
-    private val refCurrentUser = db.collection("users")
-    private val refMessages = db.collection("chat_messages")
-    private val ref = FirebaseStorage.getInstance()
-    private var currentUser : UsersItem? = null
-    private var toUser : UsersItem? = null
-    private var message : MessageItem? = null
-    private var mAdapter : RecyclerView.Adapter<*>? = null
-    private var selectedPhotoUri : Uri? = null
+    private val refCurrentUser      = db.collection("users")
+    private val refMessages         = db.collection("chat_messages")
+    private val ref                 = FirebaseStorage.getInstance()
+    private var currentUser         : UsersItem? = null
+    private var toUser              : UsersItem? = null
+    private var message             : MessageItem? = null
+    private var mAdapter            : RecyclerView.Adapter<*>? = null
+    private var selectedPhotoUri    : Uri? = null
 
 
     private var mLayoutManager  : LinearLayoutManager? = null
