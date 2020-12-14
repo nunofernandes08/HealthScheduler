@@ -25,18 +25,19 @@ import com.google.firebase.storage.ktx.storage
 import com.squareup.picasso.Picasso
 import healthscheduler.example.healthscheduler.R
 import healthscheduler.example.healthscheduler.databinding.ActivityHomeBinding
+import healthscheduler.example.healthscheduler.models.DoctorsItem
 import healthscheduler.example.healthscheduler.models.MessageItem
 import healthscheduler.example.healthscheduler.models.UsersItem
 import java.util.*
 
 class HomeActivity : AppCompatActivity() {
 
-    private val REQUEST_CODE    =  0
-    private val db              = FirebaseFirestore.getInstance()
-    private val storageRef      = Firebase.storage.reference
-    private val auth            = Firebase.auth
-    private val imagesRef       = storageRef.child("images/${UUID.randomUUID()}.jpg")
-    private val currentUser     = auth.currentUser
+    private val REQUEST_CODE        =  0
+    private val db                  = FirebaseFirestore.getInstance()
+    private val storageRef          = Firebase.storage.reference
+    private val auth                = Firebase.auth
+    private val imagesRef           = storageRef.child("images/${UUID.randomUUID()}.jpg")
+    private val currentUser         = auth.currentUser
 
     private var currentUserName:    String?         = null
     private var currentUserAddress: String?         = null
@@ -45,14 +46,15 @@ class HomeActivity : AppCompatActivity() {
     private var curFile:            Uri?            = null
 
     private var message:            MessageItem?    = null
-    private var user1:              UsersItem?      = null
-    private var user2:              UsersItem?      = null
-    private var user3:              UsersItem?      = null
+    private var user1:              DoctorsItem?      = null
+    private var user2:              DoctorsItem?      = null
+    private var user3:              DoctorsItem?      = null
 
     private var refLatestMessages   = db.collection("latest_messages")
     private var referenceUsers      = db.collection("users")
+    private var referenceUsersMedic = db.collection("users_medic")
 
-    private var users:          MutableList<UsersItem> = arrayListOf()
+    private var users:          MutableList<DoctorsItem> = arrayListOf()
     private var latestMessages: MutableList<MessageItem> = arrayListOf()
 
     private lateinit var myDialog:  Dialog
@@ -73,9 +75,22 @@ class HomeActivity : AppCompatActivity() {
         textViewActions(binding)
         userData(binding)
         getUser()
+        getUsersDoctors()
         getCountNotification()
         buttonsActions(binding)
+    }
 
+    private fun getUsersDoctors() {
+
+        referenceUsersMedic.addSnapshotListener { snapshot, error ->
+            users.clear()
+            if (snapshot != null) {
+                for (doc in snapshot) {
+                    val user = DoctorsItem.fromHash(doc.data as HashMap<String, Any?>)
+                    users.add(user)
+                }
+            }
+        }
     }
 
     //Funcao que ve se o user tem dados, se nao tiver faz com que insira e os ultimos 3 users que falou
@@ -85,15 +100,15 @@ class HomeActivity : AppCompatActivity() {
                 db.collection("users")
                     .addSnapshotListener { querySnapshot, firebaseFirestoreException ->
                         if (querySnapshot != null) {
-                            users.clear()
+                            //users.clear()
                             for (doc in querySnapshot) {
                                 if (doc.id == it) {
                                     user = UsersItem.fromHash(doc.data as HashMap<String, Any?>)
                                 }
-                                else {
+                                /*else {
                                     val listUser = UsersItem.fromHash(doc.data as HashMap<String, Any?>)
                                     users.add(listUser)
-                                }
+                                }*/
                             }
                             user?.let { item ->
                                 if (item.imagePath == "") {
@@ -123,7 +138,7 @@ class HomeActivity : AppCompatActivity() {
                                             latestMessages.let {
                                                 for ((i, message) in latestMessages.withIndex()) {
                                                     for (item1 in users) {
-                                                        if (message.fromId == item1.userID || message.toId == item1.userID) {
+                                                        if (message.fromId == item1.medicID || message.toId == item1.medicID) {
                                                             when (i) {
                                                                 0 -> {
                                                                     user1 = item1

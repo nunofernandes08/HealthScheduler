@@ -17,6 +17,7 @@ import com.google.firebase.firestore.Query
 import com.squareup.picasso.Picasso
 import healthscheduler.example.healthscheduler.R
 import healthscheduler.example.healthscheduler.databinding.ActivityLatestMessagesBinding
+import healthscheduler.example.healthscheduler.models.DoctorsItem
 import healthscheduler.example.healthscheduler.models.MessageItem
 import healthscheduler.example.healthscheduler.models.UsersItem
 import java.text.SimpleDateFormat
@@ -25,20 +26,21 @@ import kotlin.collections.HashMap
 
 class LatestMessagesActivity : AppCompatActivity() {
 
-    private val db                  = FirebaseFirestore.getInstance()
-    private var referenceUsers      = db.collection("users")
-    private var refLatestMessages   = db.collection("latest_messages")
+    private val db                      = FirebaseFirestore.getInstance()
+    private var referenceUsersMedic     = db.collection("users_medic")
+    private var refLatestMessages       = db.collection("latest_messages")
 
     private lateinit var currentUser    : UsersItem
     private var message                 : MessageItem? = null
-    private var user                    : UsersItem? = null
+    private var toUser                  : DoctorsItem? = null
     private var latestMessages          : MutableList<MessageItem> = arrayListOf()
-    private var users                   : MutableList<UsersItem> = arrayListOf()
+    private var users                   : MutableList<DoctorsItem> = arrayListOf()
     private var mAdapter                : RecyclerView.Adapter<*>? = null
     private var mLayoutManager          : LinearLayoutManager? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         val binding = ActivityLatestMessagesBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
@@ -51,23 +53,26 @@ class LatestMessagesActivity : AppCompatActivity() {
             Picasso.get().load(currentUser.imagePath).into(binding.imageViewChatHomePhotoUser)
         }
 
-        mLayoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        mLayoutManager = LinearLayoutManager(
+                this,
+                LinearLayoutManager.VERTICAL,
+                false)
         binding.recyclerViewLatestMessages.layoutManager = mLayoutManager
         mAdapter = LatestMessagesAdapter()
         binding.recyclerViewLatestMessages.itemAnimator = DefaultItemAnimator()
         binding.recyclerViewLatestMessages.setHasFixedSize(true)
-        binding.recyclerViewLatestMessages.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
+        binding.recyclerViewLatestMessages.addItemDecoration(DividerItemDecoration(
+                this,
+                DividerItemDecoration.VERTICAL))
         binding.recyclerViewLatestMessages.adapter = mAdapter
 
         currentUser.let {
-            referenceUsers.addSnapshotListener { snapshot, error ->
+            referenceUsersMedic.addSnapshotListener { snapshot, error ->
                 users.clear()
                 if (snapshot != null) {
                     for (doc in snapshot) {
-                        val user = UsersItem.fromHash(doc.data as HashMap<String, Any?>)
-                        if (user.userID != currentUser.userID) {
-                            users.add(user)
-                        }
+                        val user = DoctorsItem.fromHash(doc.data as HashMap<String, Any?>)
+                        users.add(user)
                     }
                 }
                 mAdapter?.notifyDataSetChanged()
@@ -118,19 +123,24 @@ class LatestMessagesActivity : AppCompatActivity() {
         inner class ViewHolder(val v : View) : RecyclerView.ViewHolder(v)
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-            return ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.row_latest_messages, parent, false))
+            return ViewHolder(LayoutInflater.from(parent.context)
+                    .inflate(R.layout.row_latest_messages, parent, false))
         }
 
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
             holder.v.apply {
 
-                var toUserId: String?
+                val toUserId: String?
 
-                val textViewChatHomeLatestContactLatestMessage = findViewById<TextView>(R.id.textViewChatHomeLatestContactLatestMessage)
-                val textViewChatHomeLatestContactName = findViewById<TextView>(R.id.textViewChatHomeLatestContactName)
-                val textViewChatHomeLatestContactDate = findViewById<TextView>(R.id.textViewChatHomeLatestContactDate)
-                val imageViewChatHomeLatestContactImage = findViewById<ImageView>(R.id.imageViewChatHomeLatestContactImage)
+                val textViewChatHomeLatestContactLatestMessage = this.findViewById<TextView>(
+                        R.id.textViewChatHomeLatestContactLatestMessage)
+                val textViewChatHomeLatestContactName = this.findViewById<TextView>(
+                        R.id.textViewChatHomeLatestContactName)
+                val textViewChatHomeLatestContactDate = this.findViewById<TextView>(
+                        R.id.textViewChatHomeLatestContactDate)
+                val imageViewChatHomeLatestContactImage = this.findViewById<ImageView>(
+                        R.id.imageViewChatHomeLatestContactImage)
 
                 this.isClickable = true
                 this.tag = position
@@ -146,9 +156,9 @@ class LatestMessagesActivity : AppCompatActivity() {
 
                 for (item in users) {
 
-                    if (item.userID == toUserId) {
+                    if (item.medicID == toUserId) {
 
-                        user = item
+                        toUser = item
                     }
                 }
 
@@ -165,9 +175,10 @@ class LatestMessagesActivity : AppCompatActivity() {
                     textViewChatHomeLatestContactLatestMessage.text = "Audio"
                 }
 
-                textViewChatHomeLatestContactName.text = user?.username
+                textViewChatHomeLatestContactName.text = toUser?.username
 
-                val sec = (System.currentTimeMillis() / 1000) - latestMessages[position].timeStamp!!
+                val sec = (System.currentTimeMillis().div(1000))
+                        .minus(latestMessages[position].timeStamp!!)
                 if (sec <= 86400) {
 
                     val sdf = SimpleDateFormat("HH:mm", Locale.UK)
@@ -183,26 +194,29 @@ class LatestMessagesActivity : AppCompatActivity() {
                     textViewChatHomeLatestContactDate.text = date
                 }
 
-                if (user?.imagePath != "") {
+                if (toUser?.imagePath != "") {
 
-                    Picasso.get().load(user?.imagePath).into(imageViewChatHomeLatestContactImage)
+                    Picasso.get().load(toUser?.imagePath).into(imageViewChatHomeLatestContactImage)
                 }
                 else {
-                    imageViewChatHomeLatestContactImage.setBackgroundResource(R.drawable.imageviewfotofavorito1)
+                    imageViewChatHomeLatestContactImage
+                            .setBackgroundResource(R.drawable.imageviewfotofavorito1)
                 }
 
                 this.setOnClickListener {
 
-                    for (item in users) {
+                    /*for (item in users) {
 
-                        if (item.userID == latestMessages[position].toId || item.userID == latestMessages[position].fromId) {
+                        if (item.medicID == latestMessages[position].toId || item.medicID == latestMessages[position].fromId) {
 
-                            user = item
+                            toUser = item
                         }
-                    }
+                    }*/
 
-                    val intent = Intent(this@LatestMessagesActivity, ChatMessagesActivity::class.java)
-                    intent.putExtra(ContactsActivity.USER_KEY, user)
+                    val intent = Intent(
+                            this@LatestMessagesActivity,
+                            ChatMessagesActivity::class.java)
+                    intent.putExtra(ContactsActivity.USER_KEY, toUser)
                     startActivity(intent)
                 }
             }

@@ -19,7 +19,7 @@ class DoctorsItem(
             hashMap["phoneNumberEmail"] = phoneNumberEmail
             hashMap["address"] = address
             hashMap["imagePath"] = imagePath
-            hashMap["medicID"] = medicID
+            hashMap["uid"] = medicID
 
             return hashMap
         }
@@ -31,7 +31,7 @@ class DoctorsItem(
                     hashMap["phoneNumberEmail"].toString(),
                     hashMap["address"].toString(),
                     hashMap["imagePath"].toString(),
-                    hashMap["medicID"].toString()
+                    hashMap["uid"].toString()
             )
             return item
         }

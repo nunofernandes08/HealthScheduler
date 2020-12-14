@@ -16,6 +16,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.squareup.picasso.Picasso
 import healthscheduler.example.healthscheduler.R
 import healthscheduler.example.healthscheduler.databinding.ActivityContactsBinding
+import healthscheduler.example.healthscheduler.models.DoctorsItem
 import healthscheduler.example.healthscheduler.models.UsersItem
 
 class ContactsActivity : AppCompatActivity() {
@@ -25,7 +26,7 @@ class ContactsActivity : AppCompatActivity() {
     private lateinit var currentUser    : UsersItem
     private var mAdapter                : RecyclerView.Adapter<*>? = null
     private var mLayoutManager          : LinearLayoutManager? = null
-    private var users                   : MutableList<UsersItem> = arrayListOf()
+    private var users                   : MutableList<DoctorsItem> = arrayListOf()
     private var referenceUsersMedic     = db.collection("users_medic")
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,25 +38,28 @@ class ContactsActivity : AppCompatActivity() {
 
         currentUser = intent.getParcelableExtra<UsersItem>(USER_KEY)!!
 
-        mLayoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        //RecyclerView
+        mLayoutManager = LinearLayoutManager(
+                this, LinearLayoutManager.VERTICAL,false)
         binding.recyclerViewContacts.layoutManager = mLayoutManager
         mAdapter = ContactsAdapter()
         binding.recyclerViewContacts.itemAnimator = DefaultItemAnimator()
         binding.recyclerViewContacts.setHasFixedSize(true)
-        binding.recyclerViewContacts.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
+        binding.recyclerViewContacts.addItemDecoration(DividerItemDecoration(
+                this, DividerItemDecoration.VERTICAL))
         binding.recyclerViewContacts.adapter = mAdapter
 
         buttonsActions(binding)
 
+        //Lista de Contactos
         currentUser.let {
             referenceUsersMedic.addSnapshotListener { snapshot, error ->
                 users.clear()
                 if (snapshot != null) {
                     for (doc in snapshot) {
-                        val user = UsersItem.fromHash(doc.data as HashMap<String, Any?>)
-                        if (user.userID != currentUser.userID) {
-                            users.add(user)
-                        }
+                        val user = DoctorsItem.fromHash(doc.data as HashMap<String, Any?>)
+                        users.add(user)
+                        /*if (user.medicID != currentUser.userID) {}*/
                     }
                 }
                 mAdapter?.notifyDataSetChanged()
@@ -72,20 +76,22 @@ class ContactsActivity : AppCompatActivity() {
         }
     }
 
+    //Adapter da RecyclerView
     inner class ContactsAdapter : RecyclerView.Adapter<ContactsAdapter.ViewHolder>() {
 
         inner class ViewHolder(val v : View) : RecyclerView.ViewHolder(v)
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-            return ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.row_contact, parent, false))
+            return ViewHolder(LayoutInflater.from(parent.context)
+                    .inflate(R.layout.row_contact, parent, false))
         }
 
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
             holder.v.apply {
 
-                val imageViewUser = findViewById<ImageView>(R.id.imageViewChatContactsContactImage)
-                val textViewUser = findViewById<TextView>(R.id.textViewChatContactsContactName)
+                val imageViewUser = this.findViewById<ImageView>(R.id.imageViewChatContactsContactImage)
+                val textViewUser = this.findViewById<TextView>(R.id.textViewChatContactsContactName)
 
                 this.isClickable = true
                 this.tag = position
@@ -102,7 +108,9 @@ class ContactsActivity : AppCompatActivity() {
                 this.setOnClickListener {
 
                     val user = users[position]
-                    val intent = Intent(this@ContactsActivity, ChatMessagesActivity::class.java)
+                    val intent = Intent(
+                            this@ContactsActivity,
+                            ChatMessagesActivity::class.java)
                     intent.putExtra(USER_KEY, user)
                     startActivity(intent)
                     finish()
