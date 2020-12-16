@@ -1,7 +1,9 @@
 package healthscheduler.example.healthscheduler.login
 
+import android.app.Dialog
 import android.content.Intent
 import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -18,6 +20,7 @@ import healthscheduler.example.healthscheduler.databinding.ActivityRegisterBindi
 import kotlinx.android.synthetic.main.activity_register.*
 import java.util.concurrent.TimeUnit
 import androidx.lifecycle.Observer
+import healthscheduler.example.healthscheduler.R
 
 
 class Register : AppCompatActivity() {
@@ -26,6 +29,7 @@ class Register : AppCompatActivity() {
     private lateinit var resendToken    : PhoneAuthProvider.ForceResendingToken
     private var storedVerificationId    :String? = ""
     var color                           :Int = Color.RED
+    internal lateinit var myDialog      : Dialog
 
     private val auth                = Firebase.auth
     private val currentUser         = auth.currentUser
@@ -38,6 +42,7 @@ class Register : AppCompatActivity() {
         setContentView(view)
 
         buttonsActions(binding)
+        textViewAction(binding)
 
         editTextPasswordRegister.addTextChangedListener(passwordStrength)
 
@@ -48,6 +53,15 @@ class Register : AppCompatActivity() {
         passwordStrength.strengthColor.observe(this, Observer {
             strengthColor -> color = strengthColor
         })
+    }
+
+    private fun textViewAction(binding: ActivityRegisterBinding){
+        binding.textViewTermosDeUso.setOnClickListener {
+            myDialog = Dialog(this, R.style.AnimateDialog)
+                myDialog.setContentView(R.layout.popwindow_termsofuse)
+                myDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT));
+            myDialog.show()
+        }
     }
 
     //Funcao com as acoes dos botoes
@@ -68,12 +82,13 @@ class Register : AppCompatActivity() {
         val password = binding.editTextPasswordRegister.text.toString()
         val passwordConfirm = binding.editTextConfirmPasswordRegister.text.toString()
         val textViewPasswordCalculator = binding.textViewPasswordCalculator.text.toString()
-        if(textViewPasswordCalculator == "FRACA" ) {
+
+        if (textViewPasswordCalculator == "FRACA") {
             Toast.makeText(
                     this@Register, "Palavra-passe fraca",
                     Toast.LENGTH_SHORT
             ).show()
-        }else {
+        } else {
             if (emailOrPhone == "" || password == "" || passwordConfirm == "") {
                 Toast.makeText(
                         this@Register, "Verifique o seu Email ou Palavra-passe",
@@ -81,23 +96,30 @@ class Register : AppCompatActivity() {
                 ).show()
             } else {
                 if (emailOrPhone.contains("@") && emailOrPhone.contains(".") && (emailOrPhone.contains("com") || emailOrPhone.contains("pt"))) {
-                    if (password == passwordConfirm) {
-                        auth.createUserWithEmailAndPassword(emailOrPhone, password)
-                                .addOnCompleteListener(this) { task ->
-                                    if (task.isSuccessful) {
-                                        val user = auth.currentUser
-                                        val intent = Intent(this, HomeActivity::class.java)
-                                        intent.putExtra("emailOrPhone", emailOrPhone)
-                                        intent.flags =
-                                                Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
-                                        startActivity(intent)
-                                    } else {
+                    if(checkBoxTermosDeUso.isChecked) {
+                        if (password == passwordConfirm) {
+                            auth.createUserWithEmailAndPassword(emailOrPhone, password)
+                                    .addOnCompleteListener(this) { task ->
+                                        if (task.isSuccessful) {
+                                            val user = auth.currentUser
+                                            val intent = Intent(this, HomeActivity::class.java)
+                                            intent.putExtra("emailOrPhone", emailOrPhone)
+                                            intent.flags =
+                                                    Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+                                            startActivity(intent)
+                                        } else {
 
+                                        }
                                     }
-                                }
-                    } else {
+                        } else {
+                            Toast.makeText(
+                                    this@Register, "Verifique o email ou palavra-passe!",
+                                    Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                    }else {
                         Toast.makeText(
-                                this@Register, "Verifique o email ou palavra-passe!",
+                                this@Register, "Confirme os termos de uso.",
                                 Toast.LENGTH_SHORT
                         ).show()
                     }
@@ -131,10 +153,6 @@ class Register : AppCompatActivity() {
                                 binding.editTextConfirmPasswordRegister.visibility = View.GONE
 
                                 binding.buttonContinueRegister.visibility = View.GONE
-
-                                /*binding.textViewCodeSent.visibility = View.VISIBLE
-                            binding.editTextCodeSent.visibility = View.VISIBLE
-                            binding.buttonContinueRegisterContinue.visibility = View.VISIBLE*/
                             }
                         }
 
