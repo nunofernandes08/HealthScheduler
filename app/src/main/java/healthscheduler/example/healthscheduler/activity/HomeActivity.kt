@@ -45,7 +45,7 @@ class HomeActivity : AppCompatActivity() {
     private var user:               UsersItem?      = null
     private var curFile:            Uri?            = null
 
-    private var message:            MessageItem?    = null
+    private var message:            MessageItem?      = null
     private var user1:              DoctorsItem?      = null
     private var user2:              DoctorsItem?      = null
     private var user3:              DoctorsItem?      = null
@@ -178,6 +178,11 @@ class HomeActivity : AppCompatActivity() {
                                         }
                                     }
                             } ?: run {
+                                binding.imageViewUserPhotoHome.setOnClickListener(null)
+                                binding.buttonScheduleHome.setOnClickListener(null)
+                                binding.buttonChatHome.setOnClickListener(null)
+                                binding.floatingActionButton.setOnClickListener(null)
+
                                 myDialog = Dialog(this, R.style.AnimateDialog)
                                 myDialog.setContentView(R.layout.popwindow_register_continue)
                                 myDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))

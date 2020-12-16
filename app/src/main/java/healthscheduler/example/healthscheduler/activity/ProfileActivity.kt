@@ -34,17 +34,17 @@ class ProfileActivity : AppCompatActivity() {
     private val auth        = Firebase.auth
     private val currentUser = auth.currentUser
 
-    private var currentUserName             : String? = null
-    private var currentUserAddress          : String? = null
-    private var currentUserPhone            : String? = null
-    private var currentUserPhoto            : String? = null
-    private var currentUserBirthday         : String? = null
-    private var currentUserHealthNumber     : String? = null
-    private var currentUserHospitalNumber   : String? = null
-    private var downUrl                     : String? = null
-    private var curFile                     : Uri? = null
-    private var user                        : UsersItem? = null
-    private var listUser                    : UsersItem? = null
+    private var currentUserName             : String?       = null
+    private var currentUserAddress          : String?       = null
+    private var currentUserPhone            : String?       = null
+    private var currentUserPhoto            : String?       = null
+    private var currentUserBirthday         : String?       = null
+    private var currentUserHealthNumber     : String?       = null
+    private var currentUserHospitalNumber   : String?       = null
+    private var downUrl                     : String?       = null
+    private var curFile                     : Uri?          = null
+    private var user                        : UsersItem?    = null
+    private var listUser                    : UsersItem?    = null
 
 
     private lateinit var myDialog: Dialog
