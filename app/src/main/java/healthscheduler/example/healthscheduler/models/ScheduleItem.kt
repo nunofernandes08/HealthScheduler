@@ -11,6 +11,7 @@ class ScheduleItem {
     var pavilion        : String? = null
     var cabinet         : String? = null
     var typeOfConsult   : String? = null
+    var medicID         : String? = null
 
 
     constructor(
@@ -21,7 +22,8 @@ class ScheduleItem {
             floor           : String?,
             pavilion        : String?,
             cabinet         : String?,
-            typeOfConsult   : String?
+            typeOfConsult   : String?,
+            medicID         : String?
     ) {
         this.date           = date
         this.doctorName     = doctorName
@@ -31,5 +33,6 @@ class ScheduleItem {
         this.pavilion       = pavilion
         this.cabinet        = cabinet
         this.typeOfConsult  = typeOfConsult
+        this.medicID        = medicID
     }
 }

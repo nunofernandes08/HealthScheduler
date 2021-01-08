@@ -252,7 +252,7 @@ class HomeActivity : AppCompatActivity() {
         //Botao SOS
         binding.floatingActionButton.setOnClickListener {
             val callIntent = Intent(Intent.ACTION_CALL)
-            callIntent.data = Uri.parse("tel:914644996")
+            callIntent.data = Uri.parse("tel:808242424")
             startActivity(callIntent)
         }
 

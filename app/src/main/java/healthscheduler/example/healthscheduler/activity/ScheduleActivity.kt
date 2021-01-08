@@ -4,6 +4,8 @@ import android.app.Dialog
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.net.Uri
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -11,6 +13,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -22,11 +25,14 @@ import com.squareup.picasso.Picasso
 import healthscheduler.example.healthscheduler.R
 import healthscheduler.example.healthscheduler.databinding.ActivityScheduleV3Binding
 import healthscheduler.example.healthscheduler.models.AppointDate
+import healthscheduler.example.healthscheduler.models.DoctorsItem
 import healthscheduler.example.healthscheduler.models.ScheduleItem
 import healthscheduler.example.healthscheduler.models.UsersItem
 import kotlinx.android.synthetic.main.item_view_pager_schedule.view.*
 import kotlinx.android.synthetic.main.popwindow_schedule_detail.*
-import java.util.HashMap
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
+import java.util.*
 
 class ScheduleActivity : AppCompatActivity() {
 
@@ -39,9 +45,11 @@ class ScheduleActivity : AppCompatActivity() {
     private var datesAdapter        : ViewPagerAdapter? = null
 
     private var listUser : UsersItem? = null
+    private var toUser : DoctorsItem? = null
 
     private lateinit var myDialog: Dialog
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding = ActivityScheduleV3Binding.inflate(layoutInflater)
@@ -53,6 +61,10 @@ class ScheduleActivity : AppCompatActivity() {
         imageViewActions(binding)
         //getAppointmentDates()
 
+        datesAdapter = ViewPagerAdapter(listAppointDates)
+        binding.viewPager.adapter = datesAdapter
+
+        //Cria lista de datas para as tabs
         db.collection("consultas").orderBy("date")
             .whereEqualTo("userID", currentUser!!.uid)
             .addSnapshotListener { snapshot, error ->
@@ -74,12 +86,12 @@ class ScheduleActivity : AppCompatActivity() {
                 }
             }
 
-        datesAdapter = ViewPagerAdapter(listAppointDates)
-        binding.viewPager.adapter = datesAdapter
-
         TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
 
-            tab.text = listAppointDates[position].date.toString()
+            val local = Locale("pt", "PT")
+            val formatter = DateTimeFormatter.ofPattern("E dd LLLL", local)
+            val date = LocalDate.parse(listAppointDates[position].date.toString())
+            tab.text = date.format(formatter)
         }.attach()
     }
 
@@ -196,7 +208,8 @@ class ScheduleActivity : AppCompatActivity() {
                                 document.data.getValue("floor").toString(),
                                 document.data.getValue("pavilion").toString(),
                                 document.data.getValue("cabinet").toString(),
-                                document.data.getValue("typeOfConsult").toString()))
+                                document.data.getValue("typeOfConsult").toString(),
+                                document.data.getValue("medicID").toString()))
                         }
                         scheduleAdapter.notifyDataSetChanged()
                     }
@@ -219,30 +232,51 @@ class ScheduleActivity : AppCompatActivity() {
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
             holder.v.apply {
+
+                getUserMedic(listSchedule[position].medicID!!)
+
                 val textViewDoctorNameSchedule = this.findViewById<TextView>(R.id.textViewDoctorNameSchedule)
                 val textViewLocationSchedule = this.findViewById<TextView>(R.id.textViewLocationSchedule)
                 val textViewTypeOfConsultSchedule = this.findViewById<TextView>(R.id.textViewTypeOfConsultSchedule)
                 val textViewHourSchedule = this.findViewById<TextView>(R.id.textViewHourSchedule)
-                val textViewDateSchedule = this.findViewById<TextView>(R.id.textViewDateSchedule)
+                val textViewFloorSchedule = this.findViewById<TextView>(R.id.textViewFloorSchedule)
+                val textViewCabinetSchedule = this.findViewById<TextView>(R.id.textViewCabinetSchedule)
 
-                textViewDateSchedule.text = listSchedule[position].date
                 textViewDoctorNameSchedule.text = listSchedule[position].doctorName
                 textViewHourSchedule.text = listSchedule[position].hour
-                textViewLocationSchedule.text = listSchedule[position].local
+                //textViewLocationSchedule.text = listSchedule[position].local
                 textViewTypeOfConsultSchedule.text = listSchedule[position].typeOfConsult
+                textViewFloorSchedule.text = "Piso " + listSchedule[position].floor
+                textViewCabinetSchedule.text = "Gabinete " + listSchedule[position].cabinet
+
+                textViewLocationSchedule.setOnClickListener {
+
+                    val uri = String.format(Locale.UK, "geo:0,0?q=Centro+Hospitalar+de+Vila+Nova+de+Gaia+Unidade+1")
+                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(uri))
+                    startActivity(intent)
+                }
+
+                textViewDoctorNameSchedule.setOnClickListener {
+
+                    val intent = Intent(
+                            this@ScheduleActivity,
+                            ChatMessagesActivity::class.java)
+                    intent.putExtra(ContactsActivity.USER_KEY, toUser)
+                    startActivity(intent)
+                }
             }
 
             holder.itemView.setOnClickListener {
                 myDialog = Dialog(this@ScheduleActivity, R.style.AnimateDialog)
-                    myDialog.setContentView(R.layout.popwindow_schedule_detail)
-                    myDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT));
+                myDialog.setContentView(R.layout.popwindow_schedule_detail)
+                myDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT));
 
-                    myDialog.textViewTypeOfConsultDetailV2.text = listSchedule[position].typeOfConsult
-                    myDialog.textViewDoctorNameDetailV2.text = listSchedule[position].doctorName
-                    myDialog.textViewPavilionDetailV2.text = listSchedule[position].pavilion
-                    myDialog.textViewFloorDetailV2.text = listSchedule[position].floor
-                    myDialog.textViewDoorDetailV2.text = listSchedule[position].cabinet
-                    myDialog.textViewHourDetailV2.text = listSchedule[position].hour
+                myDialog.textViewTypeOfConsultDetailV2.text = listSchedule[position].typeOfConsult
+                myDialog.textViewDoctorNameDetailV2.text = listSchedule[position].doctorName
+                myDialog.textViewPavilionDetailV2.text = listSchedule[position].pavilion
+                myDialog.textViewFloorDetailV2.text = listSchedule[position].floor
+                myDialog.textViewDoorDetailV2.text = listSchedule[position].cabinet
+                myDialog.textViewHourDetailV2.text = listSchedule[position].hour
 
                 myDialog.show()
             }
@@ -251,5 +285,18 @@ class ScheduleActivity : AppCompatActivity() {
         override fun getItemCount(): Int {
             return listSchedule.size
         }
+    }
+
+    private fun getUserMedic(medicID : String) {
+
+        db.collection("users_medic").document(medicID)
+            .get()
+            .addOnSuccessListener { doc ->
+
+                if (doc != null) {
+
+                    toUser = DoctorsItem.fromHash(doc.data as HashMap<String, Any?>)
+                }
+            }
     }
 }

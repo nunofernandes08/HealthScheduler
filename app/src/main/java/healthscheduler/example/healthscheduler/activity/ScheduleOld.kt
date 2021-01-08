@@ -75,7 +75,8 @@ class ScheduleOld : AppCompatActivity() {
                                 document.data.getValue("floor").toString(),
                                 document.data.getValue("pavilion").toString(),
                                 document.data.getValue("cabinet").toString(),
-                                document.data.getValue("typeOfConsult").toString()))
+                                document.data.getValue("typeOfConsult").toString(),
+                                document.data.getValue("medicID").toString()))
                     }
                     scheduleOldAdapter?.notifyDataSetChanged()
                 }

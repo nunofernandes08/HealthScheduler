@@ -9,14 +9,12 @@
     <ImageView
         android:id="@+id/imageViewWhiteBackgroundSchedule"
         android:layout_width="350dp"
-        android:layout_height="115dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="30dp"
+        android:layout_height="130dp"
+        android:layout_marginBottom="24dp"
         android:background="@drawable/backgroundrowschedule"
         android:elevation="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageViewLogin"
         tools:ignore="ContentDescription" />
@@ -25,43 +23,29 @@
         android:id="@+id/textViewTodaySchedule"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginEnd="4dp"
         android:elevation="10dp"
         android:fontFamily="@font/roboto"
         android:text="Hora:"
         android:textColor="#21736F"
         android:textSize="14sp"
-        app:layout_constraintStart_toStartOf="@+id/imageViewWhiteBackgroundSchedule"
-        app:layout_constraintTop_toBottomOf="@+id/textViewMeetingWithSchedule" />
+        app:layout_constraintBottom_toBottomOf="@+id/textViewHourSchedule"
+        app:layout_constraintEnd_toStartOf="@+id/textViewHourSchedule"
+        app:layout_constraintTop_toTopOf="@+id/textViewHourSchedule" />
 
     <TextView
         android:id="@+id/textViewLocationSchedule"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="3dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="4dp"
         android:elevation="10dp"
         android:fontFamily="@font/roboto"
-        android:text="Centro hospital de gaia"
+        android:text="Centro Hospitalar de Vila Nova de Gaia"
         android:textColor="#21736F"
         android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageViewLocationSchedule"
         app:layout_constraintStart_toEndOf="@+id/imageViewLocationSchedule"
-        app:layout_constraintTop_toBottomOf="@+id/textViewDoctorNameSchedule" />
-
-    <TextView
-        android:id="@+id/textViewDateSchedule"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="24dp"
-        android:elevation="10dp"
-        android:fontFamily="@font/roboto"
-        android:text="30/03/2019"
-        android:textColor="#21736F"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="@+id/imageViewWhiteBackgroundSchedule"
-        app:layout_constraintTop_toTopOf="@+id/imageViewWhiteBackgroundSchedule" />
+        app:layout_constraintTop_toTopOf="@+id/imageViewLocationSchedule" />
 
     <TextView
         android:id="@+id/textViewTypeOfConsultSchedule"
@@ -82,40 +66,40 @@
         android:id="@+id/textViewHourSchedule"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="3dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginEnd="24dp"
         android:elevation="10dp"
         android:fontFamily="@font/roboto"
         android:text="15:00"
         android:textColor="#21736F"
         android:textSize="14sp"
-        app:layout_constraintStart_toEndOf="@+id/textViewTodaySchedule"
-        app:layout_constraintTop_toBottomOf="@+id/textViewDoctorNameSchedule" />
+        app:layout_constraintBottom_toBottomOf="@+id/textViewTypeOfConsultSchedule"
+        app:layout_constraintEnd_toEndOf="@+id/imageViewWhiteBackgroundSchedule"
+        app:layout_constraintTop_toTopOf="@+id/textViewTypeOfConsultSchedule" />
 
     <TextView
         android:id="@+id/textViewMeetingWithSchedule"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
         android:layout_marginTop="8dp"
         android:elevation="10dp"
         android:fontFamily="@font/roboto"
         android:text="Dr.(a)"
         android:textColor="#21736F"
         android:textSize="14sp"
-        app:layout_constraintStart_toStartOf="@+id/imageViewWhiteBackgroundSchedule"
+        app:layout_constraintStart_toStartOf="@+id/textViewTypeOfConsultSchedule"
         app:layout_constraintTop_toBottomOf="@+id/textViewTypeOfConsultSchedule" />
 
     <TextView
         android:id="@+id/textViewDoctorNameSchedule"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
+        android:layout_marginStart="4dp"
         android:elevation="10dp"
         android:fontFamily="@font/roboto"
         android:text="Rui"
         android:textColor="#21736F"
         android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewMeetingWithSchedule"
         app:layout_constraintStart_toEndOf="@+id/textViewMeetingWithSchedule"
         app:layout_constraintTop_toTopOf="@+id/textViewMeetingWithSchedule" />
 
@@ -123,10 +107,58 @@
         android:id="@+id/imageViewLocationSchedule"
         android:layout_width="15dp"
         android:layout_height="15dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="8dp"
         android:elevation="10dp"
         android:src="@drawable/piclocation"
-        app:layout_constraintStart_toEndOf="@+id/textViewHourSchedule"
-        app:layout_constraintTop_toBottomOf="@+id/textViewDoctorNameSchedule" />
+        app:layout_constraintStart_toStartOf="@+id/textViewMeetingWithSchedule"
+        app:layout_constraintTop_toBottomOf="@+id/textViewMeetingWithSchedule" />
+
+    <ImageView
+        android:id="@+id/imageViewFloorSchedule"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:layout_marginTop="8dp"
+        android:elevation="10dp"
+        android:src="@drawable/piclocation"
+        app:layout_constraintStart_toStartOf="@+id/imageViewLocationSchedule"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewLocationSchedule" />
+
+    <TextView
+        android:id="@+id/textViewFloorSchedule"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:elevation="10dp"
+        android:fontFamily="@font/roboto"
+        android:text="Piso 1"
+        android:textColor="#21736F"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageViewFloorSchedule"
+        app:layout_constraintStart_toEndOf="@+id/imageViewFloorSchedule"
+        app:layout_constraintTop_toTopOf="@+id/imageViewFloorSchedule" />
+
+    <ImageView
+        android:id="@+id/imageViewCabinetSchedule"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:layout_marginStart="16dp"
+        android:elevation="10dp"
+        android:src="@drawable/piclocation"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewFloorSchedule"
+        app:layout_constraintStart_toEndOf="@+id/textViewFloorSchedule"
+        app:layout_constraintTop_toTopOf="@+id/textViewFloorSchedule" />
+
+    <TextView
+        android:id="@+id/textViewCabinetSchedule"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:elevation="10dp"
+        android:fontFamily="@font/roboto"
+        android:text="Gabinete 1"
+        android:textColor="#21736F"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageViewCabinetSchedule"
+        app:layout_constraintStart_toEndOf="@+id/imageViewCabinetSchedule"
+        app:layout_constraintTop_toTopOf="@+id/imageViewCabinetSchedule" />
 </androidx.constraintlayout.widget.ConstraintLayout>

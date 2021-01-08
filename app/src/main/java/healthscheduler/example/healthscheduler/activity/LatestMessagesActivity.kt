@@ -205,13 +205,13 @@ class LatestMessagesActivity : AppCompatActivity() {
 
                 this.setOnClickListener {
 
-                    /*for (item in users) {
+                    for (item in users) {
 
                         if (item.medicID == latestMessages[position].toId || item.medicID == latestMessages[position].fromId) {
 
                             toUser = item
                         }
-                    }*/
+                    }
 
                     val intent = Intent(
                             this@LatestMessagesActivity,
