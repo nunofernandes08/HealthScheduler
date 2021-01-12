@@ -53,6 +53,8 @@ class LatestMessagesActivity : AppCompatActivity() {
             Picasso.get().load(currentUser.imagePath).into(binding.imageViewChatHomePhotoUser)
         }
 
+        getLatestMessages()
+
         mLayoutManager = LinearLayoutManager(
                 this,
                 LinearLayoutManager.VERTICAL,
@@ -65,18 +67,19 @@ class LatestMessagesActivity : AppCompatActivity() {
                 this,
                 DividerItemDecoration.VERTICAL))
         binding.recyclerViewLatestMessages.adapter = mAdapter
+    }
 
-        currentUser.let {
-            referenceUsersMedic.addSnapshotListener { snapshot, error ->
-                users.clear()
-                if (snapshot != null) {
-                    for (doc in snapshot) {
-                        val user = DoctorsItem.fromHash(doc.data as HashMap<String, Any?>)
-                        users.add(user)
-                    }
+    private fun getLatestMessages() {
+
+        referenceUsersMedic.addSnapshotListener { snapshot, error ->
+            users.clear()
+            if (snapshot != null) {
+                for (doc in snapshot) {
+                    val user = DoctorsItem.fromHash(doc.data as HashMap<String, Any?>)
+                    users.add(user)
                 }
-                mAdapter?.notifyDataSetChanged()
             }
+            mAdapter?.notifyDataSetChanged()
         }
 
         refLatestMessages.document(currentUser.userID.toString())
