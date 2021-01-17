@@ -25,7 +25,8 @@ class Splash : AppCompatActivity() {
         val rotation = AnimationUtils.loadAnimation(this, R.anim.rotation)
         val logo : ImageView = findViewById(R.id.imageViewLogo_Splash)
         logo.startAnimation(rotation)
-        
+
+        //esconde barra de açoes do android
         window.decorView.apply {
             systemUiVisibility = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or View.SYSTEM_UI_FLAG_FULLSCREEN
         }

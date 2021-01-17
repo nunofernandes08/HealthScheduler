@@ -11,6 +11,8 @@ import healthscheduler.example.healthscheduler.activity.HomeActivity
 import healthscheduler.example.healthscheduler.databinding.ActivityRegisterContinueBinding
 import healthscheduler.example.healthscheduler.models.UsersItem
 
+
+//nao esta a ser utilizado
 class RegisterContinue : AppCompatActivity() {
 
     var emailOrPhone    : String? = null

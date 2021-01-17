@@ -105,6 +105,7 @@ class Login : AppCompatActivity() {
         }
     }
 
+    //verifica se email introduzido é um utente e esta no firestore
     private fun verifyUser(binding : ActivityLoginBinding){
         referenceUsers.get()
             .addOnSuccessListener { documents ->
@@ -118,8 +119,8 @@ class Login : AppCompatActivity() {
 
     private fun signInWithEmailAndPassword(binding : ActivityLoginBinding) {
 
-        var userEmail = binding.editTextEmailLogin.text.toString()
-        var userPassword = binding.editTextPasswordLogin.text.toString()
+        val userEmail = binding.editTextEmailLogin.text.toString()
+        val userPassword = binding.editTextPasswordLogin.text.toString()
         var email : String? = null
 
         if(userEmail == "" || userPassword == "") {
@@ -128,7 +129,7 @@ class Login : AppCompatActivity() {
                     Toast.LENGTH_SHORT
             ).show()
         }else{
-            auth.signInWithEmailAndPassword(binding.editTextEmailLogin.text.toString(), binding.editTextPasswordLogin.text.toString())
+            auth.signInWithEmailAndPassword(userEmail, userPassword)
                     .addOnCompleteListener(this) { task ->
                         if (task.isSuccessful) {
                             val intent = Intent(this, HomeActivity::class.java)

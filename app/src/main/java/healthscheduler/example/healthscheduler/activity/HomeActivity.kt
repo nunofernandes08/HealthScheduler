@@ -39,11 +39,11 @@ class HomeActivity : AppCompatActivity() {
     private val imagesRef           = storageRef.child("images/${UUID.randomUUID()}.jpg")
     private val currentUser         = auth.currentUser
 
-    private var currentUserName:    String?         = null
-    private var currentUserAddress: String?         = null
-    private var downUrl:            String?         = null
-    private var user:               UsersItem?      = null
-    private var curFile:            Uri?            = null
+    private var currentUserName:    String?           = null
+    private var currentUserAddress: String?           = null
+    private var downUrl:            String?           = null
+    private var user:               UsersItem?        = null
+    private var curFile:            Uri?              = null
 
     private var message:            MessageItem?      = null
     private var user1:              DoctorsItem?      = null
@@ -208,6 +208,12 @@ class HomeActivity : AppCompatActivity() {
                                         db.collection("users").document(currentUser!!.uid)
                                             .set(user.toHashMap())
                                             .addOnSuccessListener {
+                                                textViewActions(binding)
+                                                userData(binding)
+                                                getUser()
+                                                getUsersDoctors()
+                                                getCountNotification()
+                                                buttonsActions(binding)
                                                 Log.d("writeBD", "DocumentSnapshot successfully written!")
                                                 myDialog.dismiss()
                                             }
@@ -302,27 +308,27 @@ class HomeActivity : AppCompatActivity() {
             }
         }
 
-        //Botao para editar
-        binding.buttonEditHome.setOnClickListener {
-            myDialog = Dialog(this)
-            myDialog.setContentView(R.layout.popwindow_edit)
-            myDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT));
-
-            //Botao para escolher foto
-            myDialog.findViewById<ImageView>(R.id.imageViewUserPhotoEdit).setOnClickListener {
-                Intent(Intent.ACTION_GET_CONTENT).also {
-                    it.type = "image/*"
-                    startActivityForResult(it, REQUEST_CODE_IMAGE_PICK)
-                }
-            }
-
-            //Botao para submeter a atualizacao
-            myDialog.findViewById<Button>(R.id.buttonEditarEdit).setOnClickListener {
-                uploadImageToFirebaseStorage()
-                updateUser()
-            }
-            myDialog.show()
-        }
+        //Botao para editar, ja nao existe.
+//        binding.buttonEditHome.setOnClickListener {
+//            myDialog = Dialog(this)
+//            myDialog.setContentView(R.layout.popwindow_edit)
+//            myDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT));
+//
+//            //Botao para escolher foto
+//            myDialog.findViewById<ImageView>(R.id.imageViewUserPhotoEdit).setOnClickListener {
+//                Intent(Intent.ACTION_GET_CONTENT).also {
+//                    it.type = "image/*"
+//                    startActivityForResult(it, REQUEST_CODE_IMAGE_PICK)
+//                }
+//            }
+//
+//            //Botao para submeter a atualizacao
+//            myDialog.findViewById<Button>(R.id.buttonEditarEdit).setOnClickListener {
+//                uploadImageToFirebaseStorage()
+//                updateUser()
+//            }
+//            myDialog.show()
+//        }
     }
 
     //Funcao para buscar quantas consultas tem o CURRENTUSER
@@ -370,7 +376,7 @@ class HomeActivity : AppCompatActivity() {
     }
 
     //Funcao para fazer upload da imagem para o FireStorage
-    private fun uploadImageToFirebaseStorage() {
+    /*private fun uploadImageToFirebaseStorage() {
 
         val filename = UUID.randomUUID().toString()
         val ref = FirebaseStorage.getInstance().getReference("/images/$filename")
@@ -386,10 +392,10 @@ class HomeActivity : AppCompatActivity() {
 
                 }
         }
-    }
+    }*/
 
     //Funcao para fazer update do utilizador
-    private fun updateUser(){
+    /*private fun updateUser(){
 
         val address = myDialog.findViewById<EditText>(R.id.editTextUserAddressEdit)
 
@@ -416,7 +422,7 @@ class HomeActivity : AppCompatActivity() {
                     Log.w("writeBD", "Error writing document", e)
                 }
         }
-    }
+    }*/
 
     //Funcao para buscar permissao para fazer chamada
     private fun getPermissionToPhoneCall() {
@@ -445,7 +451,7 @@ class HomeActivity : AppCompatActivity() {
      }
 
     //Abrir a janela para escolher a foto
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+    /*override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
         val imageViewUserPhotoEdit = findViewById<ImageView>(R.id.imageViewUserPhotoEdit)
@@ -459,7 +465,7 @@ class HomeActivity : AppCompatActivity() {
                 }
             }
         }
-    }
+    }*/
 
     companion object {
 

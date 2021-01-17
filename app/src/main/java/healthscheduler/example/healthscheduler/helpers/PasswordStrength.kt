@@ -22,6 +22,7 @@ class PasswordStrength : TextWatcher {
     override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
     }
 
+    //ao introduzir a palavra passe verifica cada carater e atribui um valor 1 se for verdadeiro e 0 se for falso
     override fun onTextChanged(char: CharSequence?, p1: Int, p2: Int, p3: Int) {
         if(char != null) {
             lowerCase.value     = if (char.hasLowerCase()) {1} else {0}
@@ -32,6 +33,7 @@ class PasswordStrength : TextWatcher {
         }
     }
 
+    //verifica a forca da palavra passe consoante os valores anteriores e o comprimento da palavra passe
     private fun calculateStrength(password: CharSequence){
         if(password.length in 0..7){
             strengthColor.value = R.color.weak

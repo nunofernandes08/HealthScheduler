@@ -32,7 +32,6 @@ class Register : AppCompatActivity() {
     internal lateinit var myDialog      : Dialog
 
     private val auth                = Firebase.auth
-    private val currentUser         = auth.currentUser
     private val passwordStrength    = PasswordStrength()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,7 +43,7 @@ class Register : AppCompatActivity() {
         buttonsActions(binding)
         textViewAction(binding)
 
-        editTextPasswordRegister.addTextChangedListener(passwordStrength)
+        binding.editTextPasswordRegister.addTextChangedListener(passwordStrength)
 
         passwordStrength.strengthLevel.observe(this, Observer{
             strengthLevel -> displayStrengthLevel(strengthLevel)
@@ -95,20 +94,17 @@ class Register : AppCompatActivity() {
                         Toast.LENGTH_SHORT
                 ).show()
             } else {
-                if (emailOrPhone.contains("@") && emailOrPhone.contains(".") && (emailOrPhone.contains("com") || emailOrPhone.contains("pt"))) {
+                if (emailOrPhone.contains("@") && emailOrPhone.contains(".")) {
                     if(checkBoxTermosDeUso.isChecked) {
                         if (password == passwordConfirm) {
                             auth.createUserWithEmailAndPassword(emailOrPhone, password)
                                     .addOnCompleteListener(this) { task ->
                                         if (task.isSuccessful) {
-                                            val user = auth.currentUser
                                             val intent = Intent(this, HomeActivity::class.java)
                                             intent.putExtra("emailOrPhone", emailOrPhone)
                                             intent.flags =
                                                     Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
                                             startActivity(intent)
-                                        } else {
-
                                         }
                                     }
                         } else {
@@ -117,23 +113,24 @@ class Register : AppCompatActivity() {
                                     Toast.LENGTH_SHORT
                             ).show()
                         }
-                    }else {
+                    } else {
                         Toast.makeText(
                                 this@Register, "Confirme os termos de uso.",
                                 Toast.LENGTH_SHORT
                         ).show()
                     }
-                } else if (emailOrPhone.toInt() in 900000001..999999998) {
+                }
+                /*else if (emailOrPhone.toInt() in 900000001..999999998) {
                     if (password == passwordConfirm) {
                         val callbacks = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
                             override fun onVerificationCompleted(credential: PhoneAuthCredential) {
                                 signInWithPhoneAuthCredential(credential)
-                                /*binding.buttonContinueRegisterContinue.setOnClickListener {
+                                *//*binding.buttonContinueRegisterContinue.setOnClickListener {
                                 val intent = Intent(this@Register, Home::class.java)
                                 intent.putExtra("codigoVerificacao", storedVerificationId)
                                 intent.putExtra("emailOrPhone", emailOrPhone)
                                 startActivity(intent)
-                            }*/
+                            }*//*
                             }
 
                             override fun onVerificationFailed(e: FirebaseException) {
@@ -174,12 +171,12 @@ class Register : AppCompatActivity() {
                             this, "Verifique o numero de telemovel ou palavra-passe!",
                             Toast.LENGTH_SHORT
                     ).show()
-                }
+                }*/
             }
         }
     }
 
-    private fun signInWithPhoneAuthCredential(credential: PhoneAuthCredential) {
+    /*private fun signInWithPhoneAuthCredential(credential: PhoneAuthCredential) {
         auth.signInWithCredential(credential)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
@@ -194,7 +191,7 @@ class Register : AppCompatActivity() {
                     }
                 }
             }
-    }
+    }*/
 
     companion object {
         const val TAG = "RegisterActivity"

@@ -12,6 +12,8 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import healthscheduler.example.healthscheduler.databinding.ActivityCodeVerifyPhoneBinding
 
+
+//nao esta a ser usado
 class CodeVerifyPhone : AppCompatActivity() {
 
     private lateinit var auth   : FirebaseAuth
