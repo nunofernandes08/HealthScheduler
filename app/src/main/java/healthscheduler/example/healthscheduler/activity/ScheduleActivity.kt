@@ -5,15 +5,14 @@ import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.net.Uri
-import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -30,6 +29,7 @@ import healthscheduler.example.healthscheduler.models.ScheduleItem
 import healthscheduler.example.healthscheduler.models.UsersItem
 import kotlinx.android.synthetic.main.item_view_pager_schedule.view.*
 import kotlinx.android.synthetic.main.popwindow_schedule_detail.*
+import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.util.*
@@ -49,7 +49,7 @@ class ScheduleActivity : AppCompatActivity() {
 
     private lateinit var myDialog: Dialog
 
-    @RequiresApi(Build.VERSION_CODES.O)
+    //@RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding = ActivityScheduleV3Binding.inflate(layoutInflater)
@@ -88,10 +88,21 @@ class ScheduleActivity : AppCompatActivity() {
 
         TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
 
-            val local = Locale("pt", "PT")
-            val formatter = DateTimeFormatter.ofPattern("E dd LLLL", local)
-            val date = LocalDate.parse(listAppointDates[position].date.toString())
-            tab.text = date.format(formatter)
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+
+                val local = Locale("pt", "PT")
+                val formatter = DateTimeFormatter.ofPattern("E dd LLLL", local)
+                val date = LocalDate.parse(listAppointDates[position].date.toString())
+                tab.text = date.format(formatter)
+            }
+            else {
+
+                val local = Locale("pt", "PT")
+                val parser = SimpleDateFormat("yyyy-MM-dd")
+                val formatter = SimpleDateFormat("E dd LLLL", local)
+                val output: String = formatter.format(parser.parse(listAppointDates[position].date.toString()))
+                tab.text = output
+            }
         }.attach()
     }
 
@@ -115,12 +126,12 @@ class ScheduleActivity : AppCompatActivity() {
                             else {
 
                                 Toast.makeText(this@ScheduleActivity, "Não tem foto de perfil",
-                                    Toast.LENGTH_SHORT).show()
+                                        Toast.LENGTH_SHORT).show()
                             }
                         } ?: run{
 
                             Toast.makeText(this@ScheduleActivity, "Sem sessão iniciada",
-                                Toast.LENGTH_SHORT).show()
+                                    Toast.LENGTH_SHORT).show()
                         }
                     }
                 }
@@ -159,16 +170,16 @@ class ScheduleActivity : AppCompatActivity() {
                     for (document in snapshot!!) {
 
                         listAppointDates.add(AppointDate(
-                            document.data.getValue("date").toString()))
+                                document.data.getValue("date").toString()))
                     }
                     datesAdapter?.notifyDataSetChanged()
                 }
             }
     }
 
-    inner class ViewPagerAdapter (private val dates : MutableList<AppointDate>) : RecyclerView.Adapter<ViewPagerAdapter.ViewPagerViewHolder>() {
+    inner class ViewPagerAdapter(private val dates: MutableList<AppointDate>) : RecyclerView.Adapter<ViewPagerAdapter.ViewPagerViewHolder>() {
 
-        inner class ViewPagerViewHolder (itemView : View) : RecyclerView.ViewHolder(itemView)
+        inner class ViewPagerViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewPagerViewHolder {
             return ViewPagerViewHolder(LayoutInflater
@@ -180,8 +191,8 @@ class ScheduleActivity : AppCompatActivity() {
 
             val scheduleAdapter = ScheduleAdapterV3()
             val mLayoutManager = LinearLayoutManager(this@ScheduleActivity,
-                LinearLayoutManager.VERTICAL,
-                false)
+                    LinearLayoutManager.VERTICAL,
+                    false)
 
             holder.itemView.recyclerViewViewPagerSchedule.layoutManager = mLayoutManager
             holder.itemView.recyclerViewViewPagerSchedule.itemAnimator = DefaultItemAnimator()
@@ -201,15 +212,15 @@ class ScheduleActivity : AppCompatActivity() {
                         for (document in snapshot) {
 
                             listSchedule.add(ScheduleItem(
-                                document.data.getValue("date").toString(),
-                                document.data.getValue("doctorName").toString(),
-                                document.data.getValue("hour").toString(),
-                                document.data.getValue("local").toString(),
-                                document.data.getValue("floor").toString(),
-                                document.data.getValue("pavilion").toString(),
-                                document.data.getValue("cabinet").toString(),
-                                document.data.getValue("typeOfConsult").toString(),
-                                document.data.getValue("medicID").toString()))
+                                    document.data.getValue("date").toString(),
+                                    document.data.getValue("doctorName").toString(),
+                                    document.data.getValue("hour").toString(),
+                                    document.data.getValue("local").toString(),
+                                    document.data.getValue("floor").toString(),
+                                    document.data.getValue("pavilion").toString(),
+                                    document.data.getValue("cabinet").toString(),
+                                    document.data.getValue("typeOfConsult").toString(),
+                                    document.data.getValue("medicID").toString()))
                         }
                         scheduleAdapter.notifyDataSetChanged()
                     }
@@ -222,11 +233,11 @@ class ScheduleActivity : AppCompatActivity() {
     }
 
     inner class ScheduleAdapterV3 : RecyclerView.Adapter<ScheduleAdapterV3.ViewHolder>() {
-        inner class ViewHolder(val v : View) : RecyclerView.ViewHolder(v)
+        inner class ViewHolder(val v: View) : RecyclerView.ViewHolder(v)
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 
            return ViewHolder(LayoutInflater
-            .from(parent.context)
+                   .from(parent.context)
                    .inflate(R.layout.row_schedule_v2, parent, false))
         }
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -287,7 +298,7 @@ class ScheduleActivity : AppCompatActivity() {
         }
     }
 
-    private fun getUserMedic(medicID : String) {
+    private fun getUserMedic(medicID: String) {
 
         db.collection("users_medic").document(medicID)
             .get()
