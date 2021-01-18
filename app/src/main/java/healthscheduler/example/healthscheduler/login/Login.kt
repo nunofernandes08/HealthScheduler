@@ -42,6 +42,21 @@ class Login : AppCompatActivity() {
         textViewActions(binding)
     }
 
+    private fun verifyEmail(){
+        currentUser?.let {
+            if(currentUser.isEmailVerified){
+                val intent = Intent(this, HomeActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+                startActivity(intent)
+            }else{
+                Toast.makeText(
+                        this@Login, "Valide o seu e-mail!",
+                        Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
+    }
+
     //Funcao com as acoes dos botoes
     private fun buttonActions(binding: ActivityLoginBinding){
 
@@ -132,9 +147,7 @@ class Login : AppCompatActivity() {
             auth.signInWithEmailAndPassword(userEmail, userPassword)
                     .addOnCompleteListener(this) { task ->
                         if (task.isSuccessful) {
-                            val intent = Intent(this, HomeActivity::class.java)
-                            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
-                            startActivity(intent)
+                            verifyEmail()
                         } else {
                             Toast.makeText(this@Login, "Falha ao entrar na conta.",
                                     Toast.LENGTH_SHORT).show()

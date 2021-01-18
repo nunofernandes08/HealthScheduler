@@ -33,6 +33,7 @@ class Register : AppCompatActivity() {
 
     private val auth                = Firebase.auth
     private val passwordStrength    = PasswordStrength()
+    private val user                = auth.currentUser
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -94,19 +95,28 @@ class Register : AppCompatActivity() {
                         Toast.LENGTH_SHORT
                 ).show()
             } else {
-                if (emailOrPhone.contains("@") && emailOrPhone.contains(".")) {
+                if (emailOrPhone.contains("@") && emailOrPhone.contains(".")){
                     if(checkBoxTermosDeUso.isChecked) {
                         if (password == passwordConfirm) {
                             auth.createUserWithEmailAndPassword(emailOrPhone, password)
-                                    .addOnCompleteListener(this) { task ->
-                                        if (task.isSuccessful) {
-                                            val intent = Intent(this, HomeActivity::class.java)
-                                            intent.putExtra("emailOrPhone", emailOrPhone)
-                                            intent.flags =
-                                                    Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
-                                            startActivity(intent)
-                                        }
+                                .addOnCompleteListener(this) { task ->
+                                    if (task.isSuccessful) {
+                                        auth.currentUser?.sendEmailVerification()
+                                            ?.addOnCompleteListener { task ->
+                                                if (task.isSuccessful) {
+                                                    Toast.makeText(
+                                                            this@Register, "Registo com sucesso, por favor valide o seu e-mail!",
+                                                            Toast.LENGTH_SHORT
+                                                    ).show()
+                                                    val intent = Intent(this, Login::class.java)
+                                                    intent.putExtra("emailOrPhone", emailOrPhone)
+                                                    intent.flags =
+                                                            Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+                                                    startActivity(intent)
+                                                }
+                                            }
                                     }
+                                }
                         } else {
                             Toast.makeText(
                                     this@Register, "Verifique o email ou palavra-passe!",
