@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="338dp"
+    android:layout_height="430dp"
+    android:layout_gravity="center"
+    android:background="@drawable/formulariologin"
+    android:padding="5dp">
+
+    <ImageView
+        android:id="@+id/imgSemWifiPopWindowAlert"
+        android:layout_width="220dp"
+        android:layout_height="220dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.076"
+        app:srcCompat="@drawable/ic_sem_wi_fi" />
+
+    <TextView
+        android:id="@+id/textViewSemInternetPopWindowAlert"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/roboto"
+        android:text="\t\tVerifique a sua \n conexão à internet"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/imgSemWifiPopWindowAlert"
+        app:layout_constraintHorizontal_bias="0.512"
+        app:layout_constraintStart_toStartOf="@+id/imgSemWifiPopWindowAlert"
+        app:layout_constraintTop_toBottomOf="@+id/imgSemWifiPopWindowAlert" />
+
+    <Button
+        android:id="@+id/buttonTryAgainPopWindowAlert"
+        android:layout_width="222dp"
+        android:layout_height="56dp"
+        android:background="@drawable/buttonwhite"
+        android:fontFamily="@font/roboto"
+        android:text="@string/tentarnovamente"
+        android:textColor="#36BFB8"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:backgroundTint="#F6F6F6"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/textViewSemInternetPopWindowAlert"
+        app:layout_constraintStart_toStartOf="@+id/textViewSemInternetPopWindowAlert"
+        app:layout_constraintTop_toBottomOf="@+id/textViewSemInternetPopWindowAlert" />
+</androidx.constraintlayout.widget.ConstraintLayout>

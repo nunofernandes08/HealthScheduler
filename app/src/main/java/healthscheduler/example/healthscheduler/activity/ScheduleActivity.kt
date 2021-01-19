@@ -1,14 +1,17 @@
 package healthscheduler.example.healthscheduler.activity
 
 import android.app.Dialog
+import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.net.ConnectivityManager
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
@@ -28,6 +31,7 @@ import healthscheduler.example.healthscheduler.models.DoctorsItem
 import healthscheduler.example.healthscheduler.models.ScheduleItem
 import healthscheduler.example.healthscheduler.models.UsersItem
 import kotlinx.android.synthetic.main.item_view_pager_schedule.view.*
+import kotlinx.android.synthetic.main.popwindow_alertinternet.*
 import kotlinx.android.synthetic.main.popwindow_schedule_detail.*
 import java.text.SimpleDateFormat
 import java.time.LocalDate
@@ -56,6 +60,7 @@ class ScheduleActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
+        checkConnection()
         photoUser(binding)
         buttonsActions(binding)
         imageViewActions(binding)
@@ -104,6 +109,31 @@ class ScheduleActivity : AppCompatActivity() {
                 tab.text = output
             }
         }.attach()
+    }
+
+    private fun checkConnection(){
+        val manager = applicationContext.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val networkInfo = manager.activeNetworkInfo
+
+        if(null != networkInfo){
+            if(networkInfo.type == ConnectivityManager.TYPE_WIFI){
+            }else if(networkInfo.type == ConnectivityManager.TYPE_MOBILE){
+                Toast.makeText(this, "Mobile Data Connected", Toast.LENGTH_SHORT).show()
+            }
+        }else{
+            val dialog = Dialog(this)
+            dialog.setContentView(R.layout.popwindow_alertinternet)
+            //USAR ISTO NOS OUTROS DIALOGS
+            dialog.setCanceledOnTouchOutside(false)
+            dialog.window!!.setLayout(WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT)
+            dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+            dialog.buttonTryAgainPopWindowAlert.setOnClickListener {
+                recreate()
+            }
+            dialog.show()
+
+        }
     }
 
     //Funcao que vai buscar a foto do CURRENTUSER

@@ -1,13 +1,20 @@
 package healthscheduler.example.healthscheduler.activity
 
+import android.app.Dialog
+import android.content.Context
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
+import android.net.ConnectivityManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
 import android.view.LayoutInflater
+import android.view.WindowManager
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -18,6 +25,7 @@ import healthscheduler.example.healthscheduler.R
 import healthscheduler.example.healthscheduler.databinding.ActivityContactsBinding
 import healthscheduler.example.healthscheduler.models.DoctorsItem
 import healthscheduler.example.healthscheduler.models.UsersItem
+import kotlinx.android.synthetic.main.popwindow_alertinternet.*
 
 class ContactsActivity : AppCompatActivity() {
 
@@ -49,6 +57,8 @@ class ContactsActivity : AppCompatActivity() {
                 this, DividerItemDecoration.VERTICAL))
         binding.recyclerViewContacts.adapter = mAdapter
 
+
+        checkConnection()
         buttonsActions(binding)
 
         //Lista de Contactos
@@ -63,6 +73,31 @@ class ContactsActivity : AppCompatActivity() {
                 }
                 mAdapter?.notifyDataSetChanged()
             }
+        }
+    }
+
+    private fun checkConnection(){
+        val manager = applicationContext.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val networkInfo = manager.activeNetworkInfo
+
+        if(null != networkInfo){
+            if(networkInfo.type == ConnectivityManager.TYPE_WIFI){
+            }else if(networkInfo.type == ConnectivityManager.TYPE_MOBILE){
+                Toast.makeText(this, "Mobile Data Connected", Toast.LENGTH_SHORT).show()
+            }
+        }else{
+            val dialog = Dialog(this)
+            dialog.setContentView(R.layout.popwindow_alertinternet)
+            //USAR ISTO NOS OUTROS DIALOGS
+            dialog.setCanceledOnTouchOutside(false)
+            dialog.window!!.setLayout(WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT)
+            dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+            dialog.buttonTryAgainPopWindowAlert.setOnClickListener {
+                recreate()
+            }
+            dialog.show()
+
         }
     }
 

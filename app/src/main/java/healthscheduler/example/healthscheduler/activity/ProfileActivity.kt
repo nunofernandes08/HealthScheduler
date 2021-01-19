@@ -2,18 +2,22 @@ package healthscheduler.example.healthscheduler.activity
 
 import android.app.Activity
 import android.app.Dialog
+import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Color
 import android.graphics.ImageDecoder
 import android.graphics.Typeface
 import android.graphics.drawable.ColorDrawable
+import android.net.ConnectivityManager
 import android.net.Uri
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
+import android.view.View
+import android.view.WindowManager
 import android.widget.*
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -25,6 +29,7 @@ import healthscheduler.example.healthscheduler.login.MainActivity
 import healthscheduler.example.healthscheduler.R
 import healthscheduler.example.healthscheduler.databinding.ActivityProfileBinding
 import healthscheduler.example.healthscheduler.models.UsersItem
+import kotlinx.android.synthetic.main.popwindow_alertinternet.*
 import java.io.ByteArrayOutputStream
 import java.util.*
 
@@ -56,12 +61,37 @@ class ProfileActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
+        checkConnection()
         getUser()
         userInformation(binding)
         buttonsActions(binding)
         styleTextView(binding)
         backToHome(binding)
         logout(binding)
+    }
+
+    private fun checkConnection(){
+        val manager = applicationContext.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val networkInfo = manager.activeNetworkInfo
+
+        if(null != networkInfo){
+            if(networkInfo.type == ConnectivityManager.TYPE_WIFI){
+            }else if(networkInfo.type == ConnectivityManager.TYPE_MOBILE){
+                Toast.makeText(this, "Mobile Data Connected", Toast.LENGTH_SHORT).show()
+            }
+        }else{
+            val dialog = Dialog(this)
+            dialog.setContentView(R.layout.popwindow_alertinternet)
+            //USAR ISTO NOS OUTROS DIALOGS
+            dialog.setCanceledOnTouchOutside(false)
+            dialog.window!!.setLayout(WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT)
+            dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            dialog.buttonTryAgainPopWindowAlert.setOnClickListener {
+                recreate()
+            }
+            dialog.show()
+
+        }
     }
 
     //Funcao para ir buscar a informacao do CURRENTUSER
@@ -95,6 +125,7 @@ class ProfileActivity : AppCompatActivity() {
             //myDialog = Dialog(this)
             myDialog.setContentView(R.layout.popwindow_edit)
             myDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT));
+            myDialog.setCanceledOnTouchOutside(false)
 
             val userAddress = myDialog.findViewById<TextView>(R.id.editTextUserAddressEdit)
             userAddress.text = currentUserAddress.toString()

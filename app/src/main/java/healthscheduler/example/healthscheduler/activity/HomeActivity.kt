@@ -3,15 +3,19 @@ package healthscheduler.example.healthscheduler.activity
 import android.Manifest
 import android.app.Activity
 import android.app.Dialog
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.net.ConnectivityManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.view.Window
+import android.view.WindowManager
 import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
@@ -30,6 +34,7 @@ import healthscheduler.example.healthscheduler.login.Register
 import healthscheduler.example.healthscheduler.models.DoctorsItem
 import healthscheduler.example.healthscheduler.models.MessageItem
 import healthscheduler.example.healthscheduler.models.UsersItem
+import kotlinx.android.synthetic.main.popwindow_alertinternet.*
 import java.util.*
 
 class HomeActivity : AppCompatActivity() {
@@ -73,6 +78,7 @@ class HomeActivity : AppCompatActivity() {
         }
 
         //Inicializações das funções
+        checkConnection()
         textViewStyle(binding)
         textViewActions(binding)
         userData(binding)
@@ -80,6 +86,31 @@ class HomeActivity : AppCompatActivity() {
         getUsersDoctors()
         getCountNotification()
         buttonsActions(binding)
+    }
+
+    private fun checkConnection(){
+        val manager = applicationContext.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val networkInfo = manager.activeNetworkInfo
+
+        if(null != networkInfo){
+            if(networkInfo.type == ConnectivityManager.TYPE_WIFI){
+            }else if(networkInfo.type == ConnectivityManager.TYPE_MOBILE){
+                Toast.makeText(this, "Mobile Data Connected", Toast.LENGTH_SHORT).show()
+            }
+        }else{
+            val dialog = Dialog(this)
+                dialog.setContentView(R.layout.popwindow_alertinternet)
+                //USAR ISTO NOS OUTROS DIALOGS
+                dialog.setCanceledOnTouchOutside(false)
+                dialog.window!!.setLayout(WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT)
+                dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+                dialog.buttonTryAgainPopWindowAlert.setOnClickListener {
+                    recreate()
+                }
+            dialog.show()
+
+        }
     }
 
     private fun getUsersDoctors() {
@@ -253,6 +284,7 @@ class HomeActivity : AppCompatActivity() {
                                 myDialog = Dialog(this, R.style.AnimateDialog)
                                 myDialog.setContentView(R.layout.popwindow_register_continue)
                                 myDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+                                myDialog.setCanceledOnTouchOutside(false)
                                 myDialog.findViewById<Button>(R.id.buttonRegisterContinuePopWindow).setOnClickListener {
                                     val username = myDialog.findViewById<EditText>(R.id.editTextNomeRegisterContinuePopWindow)
                                     val address = myDialog.findViewById<EditText>(R.id.editTextMoradaRegisterContinuePopWindow)
