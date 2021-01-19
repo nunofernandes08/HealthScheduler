@@ -139,42 +139,107 @@ class HomeActivity : AppCompatActivity() {
                                             }
                                             latestMessages.let {
                                                 for ((i, message) in latestMessages.withIndex()) {
-                                                    for (item1 in users) {
-                                                        if (message.fromId == item1.medicID || message.toId == item1.medicID) {
-                                                            when (i) {
-                                                                0 -> {
-                                                                    user1 = item1
-                                                                    binding.textViewFavoriteName1Home.text = item1.username
-                                                                    if (item1.imagePath != "") {
-                                                                        Picasso.get().load(item1.imagePath).into(binding.imageViewFavoriteUserPhoto1Home)
-                                                                    }
-                                                                    else {
-                                                                        binding.imageViewFavoriteUserPhoto1Home.setBackgroundResource(R.drawable.imageviewfotofavorito1)
-                                                                    }
-                                                                }
-                                                                1 -> {
-                                                                    user2 = item1
-                                                                    binding.textViewFavoriteName2Home.text = item1.username
-                                                                    if (item1.imagePath != "") {
-                                                                        Picasso.get().load(item1.imagePath).into(binding.imageViewFavoriteUserPhoto2Home)
-                                                                    }
-                                                                    else {
-                                                                        binding.imageViewFavoriteUserPhoto1Home.setBackgroundResource(R.drawable.imageviewfotofavorito1)
-                                                                    }
-                                                                }
-                                                                2 -> {
-                                                                    user3 = item1
-                                                                    binding.textViewFavoriteName3Home.text = item1.username
-                                                                    if (item1.imagePath != "") {
-                                                                        Picasso.get().load(item1.imagePath).into(binding.imageViewFavoriteUserPhoto3Home)
-                                                                    }
-                                                                    else {
-                                                                        binding.imageViewFavoriteUserPhoto1Home.setBackgroundResource(R.drawable.imageviewfotofavorito1)
+                                                    if (latestMessages.size == 0) {
+                                                        binding.imageViewFavoriteUserPhoto1Home.visibility = View.GONE
+                                                        binding.imageViewFavoriteUserPhoto2Home.visibility = View.GONE
+                                                        binding.imageViewFavoriteUserPhoto3Home.visibility = View.GONE
+
+                                                        binding.textViewFavoriteName1Home.visibility = View.GONE
+                                                        binding.textViewFavoriteName2Home.visibility = View.GONE
+                                                        binding.textViewFavoriteName3Home.visibility = View.GONE
+                                                    }
+                                                    else if (latestMessages.size == 1) {
+                                                        binding.imageViewFavoriteUserPhoto2Home.visibility = View.GONE
+                                                        binding.imageViewFavoriteUserPhoto3Home.visibility = View.GONE
+
+                                                        binding.textViewFavoriteName2Home.visibility = View.GONE
+                                                        binding.textViewFavoriteName3Home.visibility = View.GONE
+
+                                                        for (item1 in users) {
+                                                            if (message.fromId == item1.medicID || message.toId == item1.medicID) {
+                                                                when (i) {
+                                                                    0 -> {
+                                                                        user1 = item1
+                                                                        binding.textViewFavoriteName1Home.text = "Dr. " + item1.username
+                                                                        if (item1.imagePath != "") {
+                                                                            Picasso.get().load(item1.imagePath).into(binding.imageViewFavoriteUserPhoto1Home)
+                                                                        } else {
+                                                                            binding.imageViewFavoriteUserPhoto1Home.setBackgroundResource(R.drawable.imageviewfotofavorito1)
+                                                                        }
                                                                     }
                                                                 }
                                                             }
                                                         }
                                                     }
+                                                    else if (latestMessages.size == 2) {
+                                                        binding.imageViewFavoriteUserPhoto3Home.visibility = View.GONE
+
+                                                        binding.textViewFavoriteName3Home.visibility = View.GONE
+
+                                                        for (item1 in users) {
+                                                            if (message.fromId == item1.medicID || message.toId == item1.medicID) {
+                                                                when (i) {
+                                                                    0 -> {
+                                                                        user1 = item1
+                                                                        binding.textViewFavoriteName1Home.text = "Dr. " +  item1.username
+                                                                        if (item1.imagePath != "") {
+                                                                            Picasso.get().load(item1.imagePath).into(binding.imageViewFavoriteUserPhoto1Home)
+                                                                        } else {
+                                                                            binding.imageViewFavoriteUserPhoto1Home.setBackgroundResource(R.drawable.imageviewfotofavorito1)
+                                                                        }
+                                                                    }
+                                                                    1 -> {
+                                                                        user2 = item1
+                                                                        binding.textViewFavoriteName2Home.text = "Dr. " +  item1.username
+                                                                        if (item1.imagePath != "") {
+                                                                            Picasso.get().load(item1.imagePath).into(binding.imageViewFavoriteUserPhoto2Home)
+                                                                        } else {
+                                                                            binding.imageViewFavoriteUserPhoto1Home.setBackgroundResource(R.drawable.imageviewfotofavorito1)
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                    else if (latestMessages.size >= 3) {
+                                                        for (item1 in users) {
+                                                            if (message.fromId == item1.medicID || message.toId == item1.medicID) {
+                                                                when (i) {
+                                                                    0 -> {
+                                                                        user1 = item1
+                                                                        binding.textViewFavoriteName1Home.text = "Dr. " + item1.username
+                                                                        if (item1.imagePath != "") {
+                                                                            Picasso.get().load(item1.imagePath).into(binding.imageViewFavoriteUserPhoto1Home)
+                                                                        }
+                                                                        else {
+                                                                            binding.imageViewFavoriteUserPhoto1Home.setBackgroundResource(R.drawable.imageviewfotofavorito1)
+                                                                        }
+                                                                    }
+                                                                    1 -> {
+                                                                        user2 = item1
+                                                                        binding.textViewFavoriteName2Home.text = "Dr. " + item1.username
+                                                                        if (item1.imagePath != "") {
+                                                                            Picasso.get().load(item1.imagePath).into(binding.imageViewFavoriteUserPhoto2Home)
+                                                                        }
+                                                                        else {
+                                                                            binding.imageViewFavoriteUserPhoto1Home.setBackgroundResource(R.drawable.imageviewfotofavorito1)
+                                                                        }
+                                                                    }
+                                                                    2 -> {
+                                                                        user3 = item1
+                                                                        binding.textViewFavoriteName3Home.text = "Dr. " + item1.username
+                                                                        if (item1.imagePath != "") {
+                                                                            Picasso.get().load(item1.imagePath).into(binding.imageViewFavoriteUserPhoto3Home)
+                                                                        }
+                                                                        else {
+                                                                            binding.imageViewFavoriteUserPhoto1Home.setBackgroundResource(R.drawable.imageviewfotofavorito1)
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+
                                                 }
                                             }
                                         }

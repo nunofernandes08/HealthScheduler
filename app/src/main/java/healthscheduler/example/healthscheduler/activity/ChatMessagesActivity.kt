@@ -64,7 +64,7 @@ class ChatMessagesActivity : AppCompatActivity() {
 
         //Recebe User(medico) que selecionou no LatestMessages ou no Contacts
         toUser = intent.getParcelableExtra<DoctorsItem>(ContactsActivity.USER_KEY)
-        binding.textViewTitleChatMessagesContactName.text = toUser?.username.toString()
+        binding.textViewTitleChatMessagesContactName.text = "Dr " +  toUser?.username.toString()
         if (toUser?.imagePath != "") {
 
             Picasso.get().load(toUser?.imagePath).into(binding.imageViewChatMessagesContactPhoto)

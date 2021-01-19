@@ -53,13 +53,12 @@ class ContactsActivity : AppCompatActivity() {
 
         //Lista de Contactos
         currentUser.let {
-            referenceUsersMedic.addSnapshotListener { snapshot, error ->
+            referenceUsersMedic.whereEqualTo("typeOfAcc", "Medico").addSnapshotListener { snapshot, error ->
                 users.clear()
                 if (snapshot != null) {
                     for (doc in snapshot) {
                         val user = DoctorsItem.fromHash(doc.data as HashMap<String, Any?>)
                         users.add(user)
-                        /*if (user.medicID != currentUser.userID) {}*/
                     }
                 }
                 mAdapter?.notifyDataSetChanged()
@@ -92,10 +91,13 @@ class ContactsActivity : AppCompatActivity() {
 
                 val imageViewUser = this.findViewById<ImageView>(R.id.imageViewChatContactsContactImage)
                 val textViewUser = this.findViewById<TextView>(R.id.textViewChatContactsContactName)
+                val textViewChatContactsContactSpec = this.findViewById<TextView>(R.id.textViewChatContactsContactSpec)
 
                 this.isClickable = true
                 this.tag = position
-                textViewUser.text = users[position].username
+
+                textViewUser.text = "Dr. " +  users[position].username
+                textViewChatContactsContactSpec.text = users[position].typeOfMedic
 
                 if (users[position].imagePath != "") {
 

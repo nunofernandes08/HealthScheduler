@@ -259,6 +259,8 @@ class ScheduleActivity : AppCompatActivity() {
                 textViewTypeOfConsultSchedule.text = listSchedule[position].typeOfConsult
                 textViewFloorSchedule.text = "Piso " + listSchedule[position].floor
                 textViewCabinetSchedule.text = "Gabinete " + listSchedule[position].cabinet
+                val pavilion = listSchedule[position].pavilion.toString()
+
 
                 textViewLocationSchedule.setOnClickListener {
 
@@ -275,21 +277,21 @@ class ScheduleActivity : AppCompatActivity() {
                     intent.putExtra(ContactsActivity.USER_KEY, toUser)
                     startActivity(intent)
                 }
-            }
 
-            holder.itemView.setOnClickListener {
-                myDialog = Dialog(this@ScheduleActivity, R.style.AnimateDialog)
-                myDialog.setContentView(R.layout.popwindow_schedule_detail)
-                myDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT));
+                this.setOnClickListener {
+                    myDialog = Dialog(this@ScheduleActivity, R.style.AnimateDialog)
+                    myDialog.setContentView(R.layout.popwindow_schedule_detail)
+                    myDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT));
 
-                myDialog.textViewTypeOfConsultDetailV2.text = listSchedule[position].typeOfConsult
-                myDialog.textViewDoctorNameDetailV2.text = listSchedule[position].doctorName
-                myDialog.textViewPavilionDetailV2.text = listSchedule[position].pavilion
-                myDialog.textViewFloorDetailV2.text = listSchedule[position].floor
-                myDialog.textViewDoorDetailV2.text = listSchedule[position].cabinet
-                myDialog.textViewHourDetailV2.text = listSchedule[position].hour
+                    myDialog.textViewTypeOfConsultDetailV2.text = textViewTypeOfConsultSchedule.text
+                    myDialog.textViewDoctorNameDetailV2.text = textViewDoctorNameSchedule.text
+                    myDialog.textViewPavilionDetailV2.text = pavilion
+                    myDialog.textViewFloorDetailV2.text = textViewFloorSchedule.text
+                    myDialog.textViewDoorDetailV2.text = textViewCabinetSchedule.text
+                    myDialog.textViewHourDetailV2.text = textViewHourSchedule.text
 
-                myDialog.show()
+                    myDialog.show()
+                }
             }
         }
 

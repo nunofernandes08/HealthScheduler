@@ -9,9 +9,11 @@ class DoctorsItem(
     var phoneNumberEmail    : String? = null,
     var address             : String? = null,
     var imagePath           : String? = null,
-    var medicID             : String? = null): Parcelable{
+    var medicID             : String? = null,
+    var typeOfAccount       : String? = null,
+    var typeOfMedic         : String? = null): Parcelable{
 
-        constructor() : this("", "", "", "", "")
+        constructor() : this("", "", "", "", "", "", "")
 
         fun toHashMap(): HashMap<String, Any?> {
             val hashMap = HashMap<String, Any?>()
@@ -20,6 +22,8 @@ class DoctorsItem(
             hashMap["address"] = address
             hashMap["imagePath"] = imagePath
             hashMap["medicID"] = medicID
+            hashMap["typeOfAcc"] = typeOfAccount
+            hashMap["typeOfMedic"] = typeOfMedic
 
             return hashMap
         }
@@ -31,7 +35,9 @@ class DoctorsItem(
                     hashMap["phoneNumberEmail"].toString(),
                     hashMap["address"].toString(),
                     hashMap["imagePath"].toString(),
-                    hashMap["medicID"].toString()
+                    hashMap["medicID"].toString(),
+                    hashMap["typeOfAcc"].toString(),
+                    hashMap["typeOfMedic"].toString()
             )
             return item
         }

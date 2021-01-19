@@ -178,7 +178,7 @@ class LatestMessagesActivity : AppCompatActivity() {
                     textViewChatHomeLatestContactLatestMessage.text = "Audio"
                 }
 
-                textViewChatHomeLatestContactName.text = toUser?.username
+                textViewChatHomeLatestContactName.text = "Dr. " +  toUser?.username
 
                 val sec = (System.currentTimeMillis().div(1000))
                         .minus(latestMessages[position].timeStamp!!)
