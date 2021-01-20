@@ -107,30 +107,30 @@
         android:layout_width="54dp"
         android:layout_height="54dp"
         android:layout_marginTop="16dp"
+        android:src="@drawable/imageviewfotofavorito1"
         app:layout_constraintEnd_toStartOf="@+id/imageViewFavoriteUserPhoto2Home"
         app:layout_constraintStart_toStartOf="@+id/imageViewRetanguloHome"
-        app:layout_constraintTop_toBottomOf="@+id/imageViewUserPhotoHome"
-        android:src="@drawable/imageviewfotofavorito1" />
+        app:layout_constraintTop_toBottomOf="@+id/imageViewUserPhotoHome" />
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/imageViewFavoriteUserPhoto2Home"
         android:layout_width="54dp"
         android:layout_height="54dp"
         android:layout_marginTop="16dp"
+        android:src="@drawable/imageviewfotofavorito1"
         app:layout_constraintEnd_toStartOf="@+id/imageViewFavoriteUserPhoto3Home"
         app:layout_constraintStart_toEndOf="@+id/imageViewFavoriteUserPhoto1Home"
-        app:layout_constraintTop_toBottomOf="@+id/imageViewUserPhotoHome"
-        android:src="@drawable/imageviewfotofavorito1" />
+        app:layout_constraintTop_toBottomOf="@+id/imageViewUserPhotoHome" />
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/imageViewFavoriteUserPhoto3Home"
         android:layout_width="54dp"
         android:layout_height="54dp"
         android:layout_marginTop="16dp"
+        android:src="@drawable/imageviewfotofavorito1"
         app:layout_constraintEnd_toEndOf="@+id/imageViewRetanguloHome"
         app:layout_constraintStart_toEndOf="@+id/imageViewFavoriteUserPhoto2Home"
-        app:layout_constraintTop_toBottomOf="@+id/imageViewUserPhotoHome"
-        android:src="@drawable/imageviewfotofavorito1" />
+        app:layout_constraintTop_toBottomOf="@+id/imageViewUserPhotoHome" />
 
     <TextView
         android:id="@+id/textViewFavoriteName1Home"
@@ -177,6 +177,29 @@
         app:layout_constraintStart_toStartOf="@+id/imageViewRetanguloHome"
         app:layout_constraintTop_toBottomOf="@+id/imageViewRetanguloHome"
         app:srcCompat="@drawable/fundonotificacao" />
+
+    <ImageView
+        android:id="@+id/imageViewNotificationBell"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageViewNotificationHome"
+        app:layout_constraintEnd_toStartOf="@+id/textViewNotification"
+        app:layout_constraintStart_toStartOf="@+id/imageViewNotificationHome"
+        app:layout_constraintTop_toTopOf="@+id/imageViewNotificationHome"
+        app:srcCompat="@drawable/ic_baseline_notifications_none_24" />
+
+    <TextView
+        android:id="@+id/textViewNotification"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto"
+        android:text="Não tem novas Notificações"
+        android:textColor="#21736F"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageViewNotificationHome"
+        app:layout_constraintEnd_toEndOf="@+id/imageViewNotificationHome"
+        app:layout_constraintStart_toEndOf="@+id/imageViewNotificationBell"
+        app:layout_constraintTop_toTopOf="@+id/imageViewNotificationHome" />
 
     <ImageView
         android:id="@+id/buttonScheduleHome"

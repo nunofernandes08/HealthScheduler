@@ -8,6 +8,7 @@ import android.graphics.drawable.ColorDrawable
 import android.net.ConnectivityManager
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -61,10 +62,11 @@ class ScheduleActivity : AppCompatActivity() {
         setContentView(view)
 
         checkConnection()
+        //getAppointmentDates()
         photoUser(binding)
         buttonsActions(binding)
         imageViewActions(binding)
-        //getAppointmentDates()
+
 
         datesAdapter = ViewPagerAdapter(listAppointDates)
         binding.viewPager.adapter = datesAdapter
@@ -73,9 +75,8 @@ class ScheduleActivity : AppCompatActivity() {
         db.collection("consultas").orderBy("date")
             .whereEqualTo("userID", currentUser!!.uid)
             .addSnapshotListener { snapshot, error ->
-                snapshot?.let {
                     listAppointDates.clear()
-                    for (document in snapshot) {
+                    for (document in snapshot!!) {
                         val date = AppointDate(document.data.getValue("date").toString())
                         var exist = false
                         for (item in listAppointDates) {
@@ -88,7 +89,6 @@ class ScheduleActivity : AppCompatActivity() {
                         }
                     }
                     datesAdapter?.notifyDataSetChanged()
-                }
             }
 
         TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
@@ -115,9 +115,10 @@ class ScheduleActivity : AppCompatActivity() {
         val manager = applicationContext.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val networkInfo = manager.activeNetworkInfo
 
-        if(null != networkInfo){
+        if(networkInfo != null){
             if(networkInfo.type == ConnectivityManager.TYPE_WIFI){
-            }else if(networkInfo.type == ConnectivityManager.TYPE_MOBILE){
+            }
+            else if(networkInfo.type == ConnectivityManager.TYPE_MOBILE){
                 Toast.makeText(this, "Mobile Data Connected", Toast.LENGTH_SHORT).show()
             }
         }else{
@@ -198,9 +199,16 @@ class ScheduleActivity : AppCompatActivity() {
 
                     listAppointDates.clear()
                     for (document in snapshot!!) {
-
-                        listAppointDates.add(AppointDate(
-                                document.data.getValue("date").toString()))
+                        val date = AppointDate(document.data.getValue("date").toString())
+                        var exist = false
+                        for (item in listAppointDates) {
+                            if (date.date == item.date) {
+                                exist = true
+                            }
+                        }
+                        if (!exist) {
+                            listAppointDates.add(date)
+                        }
                     }
                     datesAdapter?.notifyDataSetChanged()
                 }

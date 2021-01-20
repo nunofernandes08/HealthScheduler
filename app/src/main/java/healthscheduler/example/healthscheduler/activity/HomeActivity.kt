@@ -1,7 +1,6 @@
 package healthscheduler.example.healthscheduler.activity
 
 import android.Manifest
-import android.app.Activity
 import android.app.Dialog
 import android.content.Context
 import android.content.Intent
@@ -14,7 +13,6 @@ import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.view.Window
 import android.view.WindowManager
 import android.widget.*
 import androidx.annotation.RequiresApi
@@ -24,17 +22,15 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import com.google.firebase.ktx.Firebase
-import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.ktx.storage
 import com.squareup.picasso.Picasso
 import healthscheduler.example.healthscheduler.R
 import healthscheduler.example.healthscheduler.databinding.ActivityHomeBinding
-import healthscheduler.example.healthscheduler.login.Login
-import healthscheduler.example.healthscheduler.login.Register
 import healthscheduler.example.healthscheduler.models.DoctorsItem
 import healthscheduler.example.healthscheduler.models.MessageItem
 import healthscheduler.example.healthscheduler.models.UsersItem
 import kotlinx.android.synthetic.main.popwindow_alertinternet.*
+import java.text.SimpleDateFormat
 import java.util.*
 
 class HomeActivity : AppCompatActivity() {
@@ -88,16 +84,17 @@ class HomeActivity : AppCompatActivity() {
         buttonsActions(binding)
     }
 
-    private fun checkConnection(){
+    private fun checkConnection() {
         val manager = applicationContext.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val networkInfo = manager.activeNetworkInfo
 
-        if(null != networkInfo){
-            if(networkInfo.type == ConnectivityManager.TYPE_WIFI){
-            }else if(networkInfo.type == ConnectivityManager.TYPE_MOBILE){
+        if (null != networkInfo){
+            if(networkInfo.type == ConnectivityManager.TYPE_WIFI) {
+            }else if(networkInfo.type == ConnectivityManager.TYPE_MOBILE) {
                 Toast.makeText(this, "Mobile Data Connected", Toast.LENGTH_SHORT).show()
             }
-        }else{
+        }
+        else {
             val dialog = Dialog(this)
                 dialog.setContentView(R.layout.popwindow_alertinternet)
                 //USAR ISTO NOS OUTROS DIALOGS
@@ -138,10 +135,6 @@ class HomeActivity : AppCompatActivity() {
                                 if (doc.id == it) {
                                     user = UsersItem.fromHash(doc.data as HashMap<String, Any?>)
                                 }
-                                /*else {
-                                    val listUser = UsersItem.fromHash(doc.data as HashMap<String, Any?>)
-                                    users.add(listUser)
-                                }*/
                             }
                             user?.let { item ->
                                 if (item.imagePath == "") {
@@ -212,7 +205,7 @@ class HomeActivity : AppCompatActivity() {
                                                                 when (i) {
                                                                     0 -> {
                                                                         user1 = item1
-                                                                        binding.textViewFavoriteName1Home.text = "Dr. " +  item1.username
+                                                                        binding.textViewFavoriteName1Home.text = "Dr. " + item1.username
                                                                         if (item1.imagePath != "") {
                                                                             Picasso.get().load(item1.imagePath).into(binding.imageViewFavoriteUserPhoto1Home)
                                                                         } else {
@@ -221,7 +214,7 @@ class HomeActivity : AppCompatActivity() {
                                                                     }
                                                                     1 -> {
                                                                         user2 = item1
-                                                                        binding.textViewFavoriteName2Home.text = "Dr. " +  item1.username
+                                                                        binding.textViewFavoriteName2Home.text = "Dr. " + item1.username
                                                                         if (item1.imagePath != "") {
                                                                             Picasso.get().load(item1.imagePath).into(binding.imageViewFavoriteUserPhoto2Home)
                                                                         } else {
@@ -241,8 +234,7 @@ class HomeActivity : AppCompatActivity() {
                                                                         binding.textViewFavoriteName1Home.text = "Dr. " + item1.username
                                                                         if (item1.imagePath != "") {
                                                                             Picasso.get().load(item1.imagePath).into(binding.imageViewFavoriteUserPhoto1Home)
-                                                                        }
-                                                                        else {
+                                                                        } else {
                                                                             binding.imageViewFavoriteUserPhoto1Home.setBackgroundResource(R.drawable.imageviewfotofavorito1)
                                                                         }
                                                                     }
@@ -251,8 +243,7 @@ class HomeActivity : AppCompatActivity() {
                                                                         binding.textViewFavoriteName2Home.text = "Dr. " + item1.username
                                                                         if (item1.imagePath != "") {
                                                                             Picasso.get().load(item1.imagePath).into(binding.imageViewFavoriteUserPhoto2Home)
-                                                                        }
-                                                                        else {
+                                                                        } else {
                                                                             binding.imageViewFavoriteUserPhoto1Home.setBackgroundResource(R.drawable.imageviewfotofavorito1)
                                                                         }
                                                                     }
@@ -261,8 +252,7 @@ class HomeActivity : AppCompatActivity() {
                                                                         binding.textViewFavoriteName3Home.text = "Dr. " + item1.username
                                                                         if (item1.imagePath != "") {
                                                                             Picasso.get().load(item1.imagePath).into(binding.imageViewFavoriteUserPhoto3Home)
-                                                                        }
-                                                                        else {
+                                                                        } else {
                                                                             binding.imageViewFavoriteUserPhoto1Home.setBackgroundResource(R.drawable.imageviewfotofavorito1)
                                                                         }
                                                                     }
@@ -431,23 +421,54 @@ class HomeActivity : AppCompatActivity() {
     }
 
     //Funcao para buscar quantas consultas tem o CURRENTUSER
-    private fun getCountNotification(){
+    private fun getCountNotification() {
         val imageViewScheduleNotification = findViewById<ImageView>(R.id.imageViewScheduleNotification)
         val textViewScheduleNotification = findViewById<TextView>(R.id.textViewScheduleNotification)
-        currentUser?.let{
+
+        /*val cal = Calendar.getInstance()
+        val year = cal.get(Calendar.YEAR)
+        val month = cal.get(Calendar.MONTH) + 1
+        val day = cal.get(Calendar.DAY_OF_MONTH)
+        val date : String
+
+        if (month >= 10 && day >= 10) {
+            date = "$year-$month-$day"
+        }
+        else if (month >= 10 && day < 10) {
+            date = "$year-$month-0$day"
+        }
+        else if (month < 10 && day >= 10) {
+            date = "$year-0$month-$day"
+        }
+        else {
+            date = "$year-0$month-0$day"
+        }*/
+
+        val sdf = SimpleDateFormat("yyyy-MM-dd")
+        val currentDate = sdf.format(Date())
+
+        currentUser?.let{ it ->
             db.collection("consultas")
-            .whereEqualTo("userID", currentUser!!.uid)
-            .addSnapshotListener { snapshot, error ->
-                snapshot?.let {
-                    var count = snapshot?.count()
-                    if(count > 0){
-                        imageViewScheduleNotification.visibility = View.VISIBLE
-                        textViewScheduleNotification.visibility = View.VISIBLE
-                        textViewScheduleNotification.text = count.toString()
-                    }else{
-                        imageViewScheduleNotification.visibility = View.INVISIBLE
-                        textViewScheduleNotification.visibility = View.INVISIBLE
-                    }
+                .whereEqualTo("userID", it.uid)
+                //.whereEqualTo("date", date)
+                .addSnapshotListener { snapshot, error ->
+                    snapshot?.let {
+                        var count = 0
+                        for (doc in snapshot) {
+                            if (doc.data.getValue("date") == currentDate) {
+                                count++
+                            }
+                        }
+
+                        if (count > 0) {
+                            imageViewScheduleNotification.visibility = View.VISIBLE
+                            textViewScheduleNotification.visibility = View.VISIBLE
+                            textViewScheduleNotification.text = count.toString()
+                        }
+                        else {
+                            imageViewScheduleNotification.visibility = View.INVISIBLE
+                            textViewScheduleNotification.visibility = View.INVISIBLE
+                        }
                 }
             }
         }
@@ -530,7 +551,7 @@ class HomeActivity : AppCompatActivity() {
 
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
                 requestPermissions(arrayOf(
-                        Manifest.permission.CALL_PHONE ), REQUEST_CODE)
+                        Manifest.permission.CALL_PHONE), REQUEST_CODE)
             }
         }
     }
