@@ -121,12 +121,11 @@ As seguintes ferramentas foram usadas na construção do projeto:
 
 <table>
   <tr>
-    <td align="center"><a href="https://rocketseat.com.br"><img style="border-radius: 50%;" src=https://i.ibb.co/0rXLYbR/user-silhouette.png" width="100px;" alt=""/><br /><sub><b>Diego Fernandes</b></sub></a><br /><a title="Rocketseat">🚀</a></td>
-    <td align="center"><a href="https://rocketseat.com.br"><img style="border-radius: 50%;" src="https://i.ibb.co/0rXLYbR/user-silhouette.png" width="100px;" alt=""/><br /><sub><b>Cleiton Souza</b></sub></a><br /><a title="Rocketseat">🚀</a></td>
-    <td align="center"><a href="https://rocketseat.com.br"><img style="border-radius: 50%;" src="https://i.ibb.co/0rXLYbR/user-silhouette.png" width="100px;" alt=""/><br /><sub><b>Robson Marques</b></sub></a><br /><a title="Rocketseat">🚀</a></td>
-    <td align="center"><a href="https://rocketseat.com.br"><img style="border-radius: 50%;" src="https://i.ibb.co/0rXLYbR/user-silhouette.png" width="100px;" alt=""/><br /><sub><b>Claudio Orlandi</b></sub></a><br /><a title="Rocketseat">🚀</a></td>
-    <td align="center"><a href="https://rocketseat.com.br"><img style="border-radius: 50%;" src="https://i.ibb.co/0rXLYbR/user-silhouette.png" width="100px;" alt=""/><br /><sub><b>Vinícios Fraga</b></sub></a><br /><a title="Rocketseat">🚀</a></td>
-    <td align="center"><a href="https://rocketseat.com.br"><img style="border-radius: 50%;" src="https://i.ibb.co/0rXLYbR/user-silhouette.png" width="100px;" alt=""/><br /><sub><b>Hugo Duarte</b></sub></a><br /><a title="Rocketseat">🚀</a> 
+    <td align="center"><a href="https://github.com/nunofernandes08"><img style="border-radius: 50%;" src=https://i.ibb.co/0rXLYbR/user-silhouette.png" width="100px;" alt=""/><br /><sub><b>Nuno Fernandes</b></sub></a><br /><a title="Rocketseat">🚀</a></td>
+    <td align="center"><a href="https://github.com/Pitrez15"><img style="border-radius: 50%;" src="https://i.ibb.co/0rXLYbR/user-silhouette.png" width="100px;" alt=""/><br /><sub><b>João Pitrez</b></sub></a><br /><a title="Rocketseat">🚀</a></td>
+    <td align="center"><a href="https://github.com/simplifyoppai"><img style="border-radius: 50%;" src="https://i.ibb.co/0rXLYbR/user-silhouette.png" width="100px;" alt=""/><br /><sub><b>David Moreira</b></sub></a><br /><a title="Rocketseat">🚀</a></td>
+    <td align="center"><a href="https://github.com/Saraiv"><img style="border-radius: 50%;" src="https://i.ibb.co/0rXLYbR/user-silhouette.png" width="100px;" alt=""/><br /><sub><b>João Saraiva</b></sub></a><br /><a title="Rocketseat">🚀</a></td>
+    <td align="center"><a href="https://github.com/macyuri94"><img style="border-radius: 50%;" src="https://i.ibb.co/0rXLYbR/user-silhouette.png" width="100px;" alt=""/><br /><sub><b>Yuri Machado</b></sub></a><br /><a title="Rocketseat">🚀</a></td>
     
   </tr>
 </table>
