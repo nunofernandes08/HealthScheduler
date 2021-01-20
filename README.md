@@ -24,6 +24,7 @@ Tabela de conteúdos
      * [Pré-requisitos](#pré-requisitos)
    * [Tecnologias](#-tecnologias)
      * [WebSite](#user-content-website--react----typescript)
+     * [Server](#user-content-server--react----typescript)
      * [Mobile](#user-content-mobile--react-native----typescript)
    * [Contribuidores](#-contribuidores)
 <!--te-->
