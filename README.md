@@ -24,11 +24,8 @@ Tabela de conteúdos
      * [Pré-requisitos](#pré-requisitos)
    * [Tecnologias](#-tecnologias)
      * [WebSite](#user-content-website--react----typescript)
-     * [Server](#user-content-server--nodejs----typescript)
      * [Mobile](#user-content-mobile--react-native----typescript)
    * [Contribuidores](#-contribuidores)
-   * [Autor](#-autor)
-   * [Licença](#user-content--licença)
 <!--te-->
 
 
@@ -116,8 +113,6 @@ As seguintes ferramentas foram usadas na construção do projeto:
 ---
 
 ## 👨‍💻 Contribuidores
-
-💜 Um super thanks 👏 para essa galera que fez esse produto sair do campo da ideia e entrar nas lojas de aplicativos :)
 
 <table>
   <tr>
