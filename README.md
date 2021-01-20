@@ -71,7 +71,7 @@ Projeto desenvolvido durante o **1 Semestre do 2 ano** do Curso Técnico Superio
 <p align="center" style="display: flex; align-items: flex-start; justify-content: center;">
   <img alt="NextLevelWeek" title="#NextLevelWeek" src="https://i.ibb.co/xG18Fzz/Capturar.png" width="400px">
 
-  <img alt="NextLevelWeek" title="#NextLevelWeek" src="" width="400px">
+  <img alt="NextLevelWeek" title="#NextLevelWeek" src="https://i.ibb.co/H4ptMS9/unknown.png" width="400px">
 </p>
 
 ---
@@ -82,35 +82,6 @@ Projeto desenvolvido durante o **1 Semestre do 2 ano** do Curso Técnico Superio
 
 Se for um untente, você vai precisar de instalar a nossa aplicação indo à Play Store.
 Se for um enfermeiro, médico ou um administrativo, você só tem que ir ao seu browser e meter o seguinte link: https://healthscheduler-am.web.app/
-
-#### 🎲 Rodando o Backend (servidor)
-
-```bash
-
-# Clone este repositório
-$ git clone git@github.com:tgmarinho/README-ecoleta.git
-
-# Acesse a pasta do projeto no terminal/cmd
-$ cd README-ecoleta
-
-# Vá para a pasta server
-$ cd server
-
-# Instale as dependências
-$ npm install
-
-# Execute a aplicação em modo de desenvolvimento
-$ npm run dev:server
-
-# O servidor inciará na porta:3333 - acesse http://localhost:3333 
-
-```
-<p align="center">
-  <a href="https://github.com/tgmarinho/README-ecoleta/blob/master/Insomnia_API_Ecoletajson.json" target="_blank"><img src="https://insomnia.rest/images/run.svg" alt="Run in Insomnia"></a>
-</p>
-
-
----
 
 ## 🛠 Tecnologias
 
