@@ -34,7 +34,7 @@ Tabela de conteúdos
 
 ## 💻 Sobre o projeto
 
-HealthScheduler - é uma forma de conectar os utentes do Centro Hospitalar Vila Nova de Gaia/Espinho
+HealthScheduler é uma forma de conectar os utentes do Centro Hospitalar Vila Nova de Gaia/Espinho.
 
 
 Projeto desenvolvido durante o **1 Semestre do 2 ano** do Curso Técnico Superior Profissional em Aplicações Móveis.
