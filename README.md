@@ -80,7 +80,8 @@ Projeto desenvolvido durante o **1 Semestre do 2 ano** do Curso Técnico Superio
 
 ### Pré-requisitos
 
-Se for um untente, você vai precisar de instalar a nossa aplicação indo à Play Store.
+Se for um utente, você vai precisar de instalar a nossa aplicação indo à Play Store.
+<br>
 Se for um enfermeiro, médico ou um administrativo, você só tem que ir ao seu browser e meter o seguinte link: https://healthscheduler-am.web.app/
 
 ## 🛠 Tecnologias
