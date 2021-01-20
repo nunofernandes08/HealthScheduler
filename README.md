@@ -52,6 +52,9 @@ Projeto desenvolvido durante o **1 Semestre do 2 ano** do Curso Técnico Superio
   - [x] consultar as consultas agendadas
   - [x] comunicar com os médicos
 
+- [x] Guia de utilização
+  - [x] https://pdfhost.io/v/AAE9bfqBX_Guia_de_utilizao_HealthScheduler.pdf
+
 ---
 
 ## 🎨 Layout
