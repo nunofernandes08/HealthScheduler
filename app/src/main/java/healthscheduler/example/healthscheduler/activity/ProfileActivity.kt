@@ -31,6 +31,9 @@ import healthscheduler.example.healthscheduler.databinding.ActivityProfileBindin
 import healthscheduler.example.healthscheduler.models.UsersItem
 import kotlinx.android.synthetic.main.popwindow_alertinternet.*
 import java.io.ByteArrayOutputStream
+import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 import java.util.*
 
 class ProfileActivity : AppCompatActivity() {
@@ -220,18 +223,54 @@ class ProfileActivity : AppCompatActivity() {
                         querySnapshot?.data?.let {
                             listUser = UsersItem.fromHash(querySnapshot.data as HashMap<String, Any?>)
                             listUser?.let { user ->
+                                val age = calculateAgeFromDob(user.birthday.toString(), "yyyy-MM-dd")
+
                                 binding.textViewUserNameProfile.text = user.username
                                 binding.textViewUserEmailProfile.text = user.phoneNumberEmail
                                 binding.textViewUserName2Profile.text = user.username
                                 binding.textViewUserPhone2Profile.text = user.phoneNumber
                                 binding.textViewUserAddress2Profile.text = user.address
-                                binding.textViewUserBirthday2Profile.text = user.birthday
+                                binding.textViewUserBirthday2Profile.text = user.birthday + " (" + age + " anos)"
                                 Picasso.get().load(user.imagePath).into(binding.imageViewUserPhotoProfile)
                             }
                         }
                     }
             }
         }
+    }
+
+    fun calculateAgeFromDob(birthDate: String, dateFormat:String): Int {
+
+        val sdf = SimpleDateFormat(dateFormat)
+        val dob = Calendar.getInstance()
+        dob.time = sdf.parse(birthDate)
+
+        val today = Calendar.getInstance()
+
+        val curYear = today.get(Calendar.YEAR)
+        val dobYear = dob.get(Calendar.YEAR)
+
+        var age = curYear - dobYear
+
+        try {
+            // if dob is month or day is behind today's month or day
+            // reduce age by 1
+            val curMonth = today.get(Calendar.MONTH+1)
+            val dobMonth = dob.get(Calendar.MONTH+1)
+            if (dobMonth >curMonth) { // this year can't be counted!
+                age--
+            } else if (dobMonth == curMonth) { // same month? check for day
+                val curDay = today.get(Calendar.DAY_OF_MONTH)
+                val dobDay = dob.get(Calendar.DAY_OF_MONTH)
+                if (dobDay > curDay) { // this year can't be counted!
+                    age--
+                }
+            }
+        } catch (ex: Exception) {
+            ex.printStackTrace()
+        }
+
+        return age
     }
 
     //Funcao com estilo das textViews

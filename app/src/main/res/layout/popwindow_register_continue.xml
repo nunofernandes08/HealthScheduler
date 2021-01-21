@@ -48,7 +48,7 @@
                 android:fontFamily="@font/roboto"
                 android:hint="@string/phone"
                 android:importantForAutofill="no"
-                android:inputType="textEmailAddress"
+                android:inputType="phone"
                 android:labelFor="@id/textViewEmailLogin"
                 android:textColor="#FFFFFF"
                 android:textColorHighlight="#8A8A8A"
@@ -91,7 +91,7 @@
                 android:fontFamily="@font/roboto"
                 android:hint="@string/phone"
                 android:importantForAutofill="no"
-                android:inputType="textEmailAddress"
+                android:inputType="phone"
                 android:labelFor="@id/textViewEmailLogin"
                 android:textColor="#FFFFFF"
                 android:textColorHighlight="#8A8A8A"
@@ -134,7 +134,7 @@
                 android:fontFamily="@font/roboto"
                 android:hint="@string/phone"
                 android:importantForAutofill="no"
-                android:inputType="textEmailAddress"
+                android:inputType="phone"
                 android:labelFor="@id/textViewEmailLogin"
                 android:textColor="#FFFFFF"
                 android:textColorHighlight="#8A8A8A"
@@ -151,7 +151,7 @@
                 android:layout_marginBottom="8dp"
                 app:srcCompat="@drawable/backgroundrowschedule" />
 
-            <EditText
+            <com.santalu.maskara.widget.MaskEditText
                 android:id="@+id/editTextDataDeNascimentoContinuePopWindow"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -162,14 +162,15 @@
                 android:backgroundTint="@color/transparency"
                 android:ems="13"
                 android:fontFamily="@font/roboto"
-                android:hint="@string/morada"
+                android:hint="2021-01-01"
                 android:importantForAutofill="no"
-                android:inputType="textEmailAddress"
+                android:inputType="phone"
                 android:labelFor="@id/textViewEmailLogin"
                 android:textColor="#FFFFFF"
                 android:textColorHighlight="#8A8A8A"
-                android:textColorHint="#36BFB8"
-                android:textColorLink="#FFFFFF" />
+                android:textColorHint="#E6E6E6"
+                android:textColorLink="#FFFFFF"
+                app:mask="####-##-##"/>
 
             <TextView
                 android:id="@+id/textViewDataDeNascimentoContinuePopWindow"

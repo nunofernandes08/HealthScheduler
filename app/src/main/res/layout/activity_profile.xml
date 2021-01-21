@@ -245,7 +245,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:fontFamily="@font/roboto"
-        android:text="08/03/2001 (19 anos)"
+        android:text="08/03/2001"
         android:textColor="@color/verde_escuro"
         android:textSize="15sp"
         app:layout_constraintStart_toStartOf="@+id/textViewUserBirthdayProfile"
