@@ -110,7 +110,7 @@ As seguintes ferramentas foram usadas na construção do projeto:
 
 -   Protótipo:  **[Figma](https://www.figma.com/)**
 -   Editor:  **[AndroidStudio](https://www.google.com/search?q=android+studio&rlz=1C1GCEA_enPT929PT929&oq=AndroidS&aqs=chrome.1.69i57j0i10j0j0i10j0l3j0i10i395.1912j1j7&sourceid=chrome&ie=UTF-8)**, **[VisualCode](https://code.visualstudio.com/)**
--   Ícones:  **[Flaticon](https://www.flaticon.com/)**
+-   Ícones:  **[Flaticon](https://www.flaticon.com/)**, **[Boxicons](https://boxicons.com/)**
 -   Fontes:  **[Roboto](https://fonts.google.com/specimen/Roboto)**
 
 
