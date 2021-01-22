@@ -14,26 +14,26 @@
         android:roundIcon="@mipmap/ic_logo"
         android:supportsRtl="true"
         android:theme="@style/Theme.HealthScheduler">
-        <activity android:name=".activity.ScheduleActivity"></activity>
-        <activity android:name=".ScheduleV2Activity" />
-        <activity android:name=".activity.ProfileActivity" />
-        <activity android:name=".activity.ChatMessagesActivity" />
-        <activity android:name=".activity.ContactsActivity" />
-        <activity android:name=".activity.LatestMessagesActivity" />
-        <activity android:name=".login.CodeVerifyPhone" />
-        <activity android:name=".login.RegisterContinue" />
-        <activity android:name=".activity.ScheduleOld" />
-        <activity android:name=".activity.HomeActivity" />
-        <activity android:name=".login.Splash">
+        <activity android:name=".activity.ScheduleActivity" android:screenOrientation="portrait" />
+        <activity android:name=".activity.ProfileActivity" android:screenOrientation="portrait" />
+        <activity android:name=".activity.ChatMessagesActivity" android:screenOrientation="portrait" />
+        <activity android:name=".activity.ContactsActivity" android:screenOrientation="portrait" />
+        <activity android:name=".activity.LatestMessagesActivity" android:screenOrientation="portrait" />
+        <activity android:name=".login.CodeVerifyPhone" android:screenOrientation="portrait" />
+        <activity android:name=".login.RegisterContinue" android:screenOrientation="portrait" />
+        <activity android:name=".activity.ScheduleOld" android:screenOrientation="portrait" />
+        <activity android:name=".activity.HomeActivity" android:screenOrientation="portrait" />
+        <activity android:name=".login.Splash" android:screenOrientation="portrait" >
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".login.Login" />
-        <activity android:name=".login.MainActivity" />
-        <activity android:name=".login.Register" />
+        <activity android:name=".login.Login" android:screenOrientation="portrait" />
+        <activity android:name=".login.MainActivity" android:screenOrientation="portrait" />
+        <activity android:name=".login.Register" android:screenOrientation="portrait" />
     </application>
 
 </manifest>

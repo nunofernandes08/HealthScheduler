@@ -28,7 +28,7 @@
         android:fontFamily="@font/roboto"
         android:text="Hora:"
         android:textColor="#21736F"
-        android:textSize="14sp"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@+id/textViewHourSchedule"
         app:layout_constraintEnd_toStartOf="@+id/textViewHourSchedule"
         app:layout_constraintTop_toTopOf="@+id/textViewHourSchedule" />
@@ -71,7 +71,7 @@
         android:fontFamily="@font/roboto"
         android:text="15:00"
         android:textColor="#21736F"
-        android:textSize="14sp"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@+id/textViewTypeOfConsultSchedule"
         app:layout_constraintEnd_toEndOf="@+id/imageViewWhiteBackgroundSchedule"
         app:layout_constraintTop_toTopOf="@+id/textViewTypeOfConsultSchedule" />
@@ -85,7 +85,7 @@
         android:fontFamily="@font/roboto"
         android:text="Dr."
         android:textColor="#21736F"
-        android:textSize="14sp"
+        android:textSize="16sp"
         app:layout_constraintStart_toStartOf="@+id/textViewTypeOfConsultSchedule"
         app:layout_constraintTop_toBottomOf="@+id/textViewTypeOfConsultSchedule" />
 
@@ -98,7 +98,7 @@
         android:fontFamily="@font/roboto"
         android:text="Rui"
         android:textColor="#21736F"
-        android:textSize="14sp"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@+id/textViewMeetingWithSchedule"
         app:layout_constraintStart_toEndOf="@+id/textViewMeetingWithSchedule"
         app:layout_constraintTop_toTopOf="@+id/textViewMeetingWithSchedule" />

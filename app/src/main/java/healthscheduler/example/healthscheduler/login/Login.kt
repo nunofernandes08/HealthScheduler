@@ -25,7 +25,6 @@ class Login : AppCompatActivity() {
 
     private val db          = FirebaseFirestore.getInstance()
     private val auth        = Firebase.auth
-    private val currentUser = auth.currentUser
 
     private var referenceUsers     = db.collection("users")
     private var user               : UsersItem? = null
@@ -42,13 +41,17 @@ class Login : AppCompatActivity() {
         textViewActions(binding)
     }
 
-    private fun verifyEmail(){
+    private fun verifyEmail() {
+
+        val currentUser = auth.currentUser
+
         currentUser?.let {
-            if(currentUser.isEmailVerified){
+            if (it.isEmailVerified) {
                 val intent = Intent(this, HomeActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
                 startActivity(intent)
-            }else{
+            }
+            else {
                 Toast.makeText(
                         this@Login, "Valide o seu e-mail!",
                         Toast.LENGTH_SHORT
@@ -73,11 +76,11 @@ class Login : AppCompatActivity() {
     }
 
     //Funcao com as acoes das textViews
-    private fun textViewActions(binding: ActivityLoginBinding){
+    private fun textViewActions(binding: ActivityLoginBinding) {
 
         var count = 0
 
-        binding.textViewRecoveryPasswordLogin.setOnClickListener{
+        binding.textViewRecoveryPasswordLogin.setOnClickListener {
 
             myDialog = Dialog(this, R.style.AnimateDialog)
             myDialog.setContentView(R.layout.popwindow_recoverypassword)
@@ -93,27 +96,27 @@ class Login : AppCompatActivity() {
                                 Toast.makeText(this@Login, "Email enviado com sucesso",
                                         Toast.LENGTH_SHORT).show()
                                 myDialog.dismiss()
-                            }else{
+                            }
+                            else {
                                 Toast.makeText(this@Login, "Falha ao enviar o email",
                                         Toast.LENGTH_SHORT).show()
                             }
                         }
             }
-
             myDialog.show()
 
         }
 
         binding.imageViewHidePasswordLogin.setOnClickListener {
 
-            if(count === 1 ) {
+            if (count === 1 ) {
                 editTextPasswordLogin.transformationMethod = PasswordTransformationMethod()
             }
-
-            if(count === 0){
+            if (count === 0) {
                 editTextPasswordLogin.transformationMethod = null
                 count = 1
-            }else if(count === 1){
+            }
+            else if (count === 1) {
                 editTextPasswordLogin.transformationMethod = PasswordTransformationMethod()
                 count = 0
             }
@@ -121,7 +124,7 @@ class Login : AppCompatActivity() {
     }
 
     //verifica se email introduzido é um utente e esta no firestore
-    private fun verifyUser(binding : ActivityLoginBinding){
+    private fun verifyUser(binding : ActivityLoginBinding) {
         referenceUsers.get()
             .addOnSuccessListener { documents ->
                 for (document in documents) {
@@ -138,17 +141,19 @@ class Login : AppCompatActivity() {
         val userPassword = binding.editTextPasswordLogin.text.toString()
         var email : String? = null
 
-        if(userEmail == "" || userPassword == "") {
+        if (userEmail == "" || userPassword == "") {
             Toast.makeText(
                     this@Login, "Verifique o seu Email ou Palavra-passe",
                     Toast.LENGTH_SHORT
             ).show()
-        }else{
+        }
+        else {
             auth.signInWithEmailAndPassword(userEmail, userPassword)
                     .addOnCompleteListener(this) { task ->
                         if (task.isSuccessful) {
                             verifyEmail()
-                        } else {
+                        }
+                        else {
                             Toast.makeText(this@Login, "Falha ao entrar na conta.",
                                     Toast.LENGTH_SHORT).show()
                         }

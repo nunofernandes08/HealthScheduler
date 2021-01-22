@@ -239,7 +239,7 @@ class ProfileActivity : AppCompatActivity() {
         }
     }
 
-    fun calculateAgeFromDob(birthDate: String, dateFormat:String): Int {
+    private fun calculateAgeFromDob (birthDate: String, dateFormat:String): Int {
 
         val sdf = SimpleDateFormat(dateFormat)
         val dob = Calendar.getInstance()
@@ -259,7 +259,8 @@ class ProfileActivity : AppCompatActivity() {
             val dobMonth = dob.get(Calendar.MONTH+1)
             if (dobMonth >curMonth) { // this year can't be counted!
                 age--
-            } else if (dobMonth == curMonth) { // same month? check for day
+            }
+            else if (dobMonth == curMonth) { // same month? check for day
                 val curDay = today.get(Calendar.DAY_OF_MONTH)
                 val dobDay = dob.get(Calendar.DAY_OF_MONTH)
                 if (dobDay > curDay) { // this year can't be counted!
@@ -269,7 +270,6 @@ class ProfileActivity : AppCompatActivity() {
         } catch (ex: Exception) {
             ex.printStackTrace()
         }
-
         return age
     }
 

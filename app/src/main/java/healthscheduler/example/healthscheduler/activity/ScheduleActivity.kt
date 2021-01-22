@@ -8,14 +8,12 @@ import android.graphics.drawable.ColorDrawable
 import android.net.ConnectivityManager
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.TextView
 import android.widget.Toast
-import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -62,7 +60,7 @@ class ScheduleActivity : AppCompatActivity() {
         setContentView(view)
 
         checkConnection()
-        //getAppointmentDates()
+        getAppointmentDates()
         photoUser(binding)
         buttonsActions(binding)
         imageViewActions(binding)
@@ -72,11 +70,17 @@ class ScheduleActivity : AppCompatActivity() {
         binding.viewPager.adapter = datesAdapter
 
         //Cria lista de datas para as tabs
-        db.collection("consultas").orderBy("date")
+        /*db.collection("consultas").orderBy("date")
             .whereEqualTo("userID", currentUser!!.uid)
             .addSnapshotListener { snapshot, error ->
+
+                if (error != null) {
+                    Log.d("ERROR", error.toString())
+                    return@addSnapshotListener
+                }
                     listAppointDates.clear()
-                    for (document in snapshot!!) {
+                if (snapshot != null) {
+                    for (document in snapshot) {
                         val date = AppointDate(document.data.getValue("date").toString())
                         var exist = false
                         for (item in listAppointDates) {
@@ -88,8 +92,9 @@ class ScheduleActivity : AppCompatActivity() {
                             listAppointDates.add(date)
                         }
                     }
-                    datesAdapter?.notifyDataSetChanged()
-            }
+                }
+                datesAdapter?.notifyDataSetChanged()
+            }*/
 
         TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
 
@@ -191,28 +196,48 @@ class ScheduleActivity : AppCompatActivity() {
     //Funcao para ir buscar datas das consultas
     private fun getAppointmentDates () {
 
+        val sdf = SimpleDateFormat("yyyy-MM-dd")
+        val today = Calendar.getInstance()
+
+        //Cria lista de datas para as tabs
         db.collection("consultas").orderBy("date")
-            .whereEqualTo("userID", currentUser!!.uid)
-            .addSnapshotListener { snapshot, error ->
-
-                snapshot?.let {
-
+                .whereEqualTo("userID", currentUser!!.uid)
+                .addSnapshotListener { snapshot, error ->
                     listAppointDates.clear()
-                    for (document in snapshot!!) {
-                        val date = AppointDate(document.data.getValue("date").toString())
-                        var exist = false
-                        for (item in listAppointDates) {
-                            if (date.date == item.date) {
-                                exist = true
+                    if (snapshot != null) {
+                        for (document in snapshot) {
+
+                            val date = AppointDate(document.data.getValue("date").toString())
+
+                            val dob = Calendar.getInstance()
+                            dob.time = sdf.parse(date.date)
+
+                            val dobYear = dob.get(Calendar.YEAR)
+                            val todayYear = today.get(Calendar.YEAR)
+                            val dobMonth = dob.get(Calendar.MONTH) + 1
+                            val todayMonth = today.get(Calendar.MONTH) + 1
+                            val dobDay = dob.get(Calendar.DAY_OF_YEAR)
+                            val todayDay = today.get(Calendar.DAY_OF_YEAR)
+
+                            if (dobYear >= todayYear && dobMonth >= todayMonth && dobDay >= todayDay) {
+
+                                var dateInList = false
+                                for (item in listAppointDates) {
+
+                                    if (date.date == item.date) {
+
+                                        dateInList = true
+                                    }
+                                }
+                                if (!dateInList) {
+
+                                    listAppointDates.add(date)
+                                }
                             }
-                        }
-                        if (!exist) {
-                            listAppointDates.add(date)
                         }
                     }
                     datesAdapter?.notifyDataSetChanged()
                 }
-            }
     }
 
     inner class ViewPagerAdapter(private val dates: MutableList<AppointDate>) : RecyclerView.Adapter<ViewPagerAdapter.ViewPagerViewHolder>() {
