@@ -229,7 +229,7 @@
         android:fontFamily="@font/roboto"
         android:text="@string/consultas"
         android:textColor="#21736F"
-        android:textSize="20sp"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="@+id/buttonScheduleHome"
         app:layout_constraintStart_toStartOf="@+id/buttonScheduleHome"
         app:layout_constraintTop_toTopOf="@+id/buttonScheduleHome" />
