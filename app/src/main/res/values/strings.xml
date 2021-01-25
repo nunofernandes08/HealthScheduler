@@ -69,5 +69,18 @@
     <string name="informacao_da_conta">Informação da Conta</string>
     <string name="nome">Nome</string>
     <string name="data_de_nascimento">Data de Nascimento</string>
+    <string name="primeiros_passos">Primeiros passos!</string>
+    <string name="confirmar_palavra_passe">Confirmar Palavra-passe</string>
+    <string name="eu_aceito_os_termos_de_uso">Eu aceito os Termos de Uso</string>
+    <string name="continuar">CONTINUAR</string>
+    <string name="nome_completo">Nome Completo</string>
+    <string name="conexao_internet">Verifique a sua conexão à internet</string>
+    <string name="recuperar_palavra_passe">Recuperar palavra-passe</string>
+    <string name="especializacao">Especialização</string>
+    <string name="nome_do_a_doutor_a">Nome do(a) Doutor(a)</string>
+    <string name="pavilhao">Pavilhão</string>
+    <string name="piso">Piso</string>
+    <string name="porta">Porta</string>
+    <string name="hora">Hora</string>
 
 </resources>

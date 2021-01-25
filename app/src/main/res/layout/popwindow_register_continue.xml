@@ -181,7 +181,7 @@
                 android:layout_marginStart="0dp"
                 android:layout_marginTop="8dp"
                 android:fontFamily="@font/roboto"
-                android:text="Data De Nascimento"
+                android:text="@string/data_de_nascimento"
                 android:textColor="@color/white"
                 android:textSize="24sp" />
 
@@ -224,7 +224,7 @@
                 android:layout_marginStart="0dp"
                 android:layout_marginTop="8dp"
                 android:fontFamily="@font/roboto"
-                android:text="Morada"
+                android:text="@string/morada"
                 android:textColor="@color/white"
                 android:textSize="24sp" />
 
@@ -268,7 +268,7 @@
                 android:layout_marginStart="28dp"
                 android:layout_marginTop="19dp"
                 android:fontFamily="@font/roboto"
-                android:text="Nome Completo"
+                android:text="@string/nome_completo"
                 android:textColor="@color/white"
                 android:textSize="24sp" />
 
@@ -281,7 +281,7 @@
                 android:layout_marginStart="0dp"
                 android:layout_marginTop="8dp"
                 android:fontFamily="@font/roboto"
-                android:text="Telemóvel"
+                android:text="@string/phone"
                 android:textColor="@color/white"
                 android:textSize="24sp" />
         </RelativeLayout>

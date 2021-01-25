@@ -2,9 +2,9 @@
 <resources>
     <string name="app_name">HealthScheduler</string>
     <string name="contactos">Contacts</string>
-    <string name="tentarnovamente">Try again</string>
+    <string name="tentarnovamente">TRY AGAIN</string>
     <string name="logout">Logout</string>
-    <string name="editar">Edit</string>
+    <string name="editar">EDIT</string>
     <string name="enviar">Send</string>
     <string name="register">Sign Up</string>
     <string name="entrar">Sign In</string>
@@ -25,4 +25,17 @@
     <string name="informacao_da_conta">Account Info</string>
     <string name="nome">Name</string>
     <string name="data_de_nascimento">Birthday</string>
+    <string name="primeiros_passos">First Steps!</string>
+    <string name="confirmar_palavra_passe">Confirm Password</string>
+    <string name="eu_aceito_os_termos_de_uso">I accept the Terms of Use</string>
+    <string name="continuar">CONTINUE</string>
+    <string name="conexao_internet">Check your internet connection</string>
+    <string name="nome_completo">Full Name</string>
+    <string name="recuperar_palavra_passe">Recover Password</string>
+    <string name="especializacao">Specialization</string>
+    <string name="nome_do_a_doutor_a">Doctor\'s Name</string>
+    <string name="pavilhao">Pavilion</string>
+    <string name="piso">Floor</string>
+    <string name="porta">Room</string>
+    <string name="hora">Hour</string>
 </resources>
