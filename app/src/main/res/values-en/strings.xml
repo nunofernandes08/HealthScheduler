@@ -2,4 +2,14 @@
 <resources>
     <string name="app_name">HealthScheduler</string>
     <string name="contactos">Contacts</string>
+    <string name="tentarnovamente">Try again</string>
+    <string name="logout">Logout</string>
+    <string name="editar">Edit</string>
+    <string name="enviar">Send</string>
+    <string name="register">Sign Up</string>
+    <string name="entrar">Sign In</string>
+    <string name="password_login">Password</string>
+    <string name="phone">Phone</string>
+    <string name="morada">Address</string>
+    <string name="email_login">Email</string>
 </resources>

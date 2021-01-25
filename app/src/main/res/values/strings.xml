@@ -1,11 +1,11 @@
 <resources>
     <string name="app_name">HealthScheduler</string>
-    <string name="title_activity_fullscreen_login">FullscreenActivity</string>
-    <string name="dummy_button">Dummy Button</string>
-    <string name="dummy_content">DUMMY\nCONTENT</string>
-    <string name="title_activity_splash">FullscreenActivity</string>
-    <string name="facebook_app_id">646156029431861</string>
-    <string name="fb_login_protocol_scheme">fb646156029431861</string>
+    <string name="title_activity_fullscreen_login" translatable="false">FullscreenActivity</string>
+    <string name="dummy_button" translatable="false">Dummy Button</string>
+    <string name="dummy_content" translatable="false">DUMMY\nCONTENT</string>
+    <string name="title_activity_splash" translatable="false">FullscreenActivity</string>
+    <string name="facebook_app_id" translatable="false">646156029431861</string>
+    <string name="fb_login_protocol_scheme" translatable="false">fb646156029431861</string>
     <string name="email_login">Email</string>
     <string name="morada">Morada</string>
     <string name="phone">Telemóvel</string>
@@ -16,7 +16,7 @@
     <string name="editar">Editar</string>
     <string name="logout">Logout</string>
     <string name="tentarnovamente">Tentar novamente</string>
-    <string name="termosecondicoes">
+    <string name="termosecondicoes" translatable="false">
         Cláusula 1.ª : Designação\n
         \n1. Os presentes termos e condições gerais são destinados a utilizadores que utilizem em ocasiões regulares o acesso e a utilização da aplicação HealthScheduler, criado pela empresa denominada HyperCodeum e prestado ao utilizador em serviço da empresa HyperCodeum.
         \n\nCláusula 2.ª : Descrição e funções da Aplicação\n
@@ -40,7 +40,7 @@
         \n\nCláusula 6.ª : Dados pessoais\n
         \n1.  A entidade HyperCodeum é responsável pelo tratamento de dados pessoais recolhidos e gerados pelos utilizadores no uso da aplicação SpaceSoccer , bem como o armazenamento dos mesmos.
     </string>
-    <string name="infoapplication">
+    <string name="infoapplication" translatable="false">
             HealthScheduler : Quem criou?\n
         \n1. A HealthScheduler foi uma aplicação criada por um grupo de estudantes universitários do Instituto Politécnico Do Cávado e do Ave, do curso de Aplicações Móveis do 2 ano (2020).
         \n\nHealthScheduler : Descrição e funções da aplicação\n
