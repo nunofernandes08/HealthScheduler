@@ -55,5 +55,6 @@
         \n1. A qualidade de utilização da aplicação HealthScheduler depende do equipamento Android utilizado para acesso da aplicação, compete ao utilizador verificar se o dispositivo está em estado adequado para a utilização da aplicação.
         \n2. O utilizador deverá reportar à HyperCodeum de quaisquer anomalias que sejam detetadas relativamente a aplicação HealthScheduler que possam interferir com a utilização básica da aplicação, também o utilizador deve reportar acerca de quaisquer aplicações fraudulentas feitas por terceiros que tenham com intenções de manipular o código da aplicação ou descobrir informações pessoais de acesso a aplicação tais como passwords.
     </string>
+    <string name="contactos">Contactos</string>
 
 </resources>

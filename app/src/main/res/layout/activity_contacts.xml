@@ -26,7 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
         android:fontFamily="@font/roboto"
-        android:text="Contactos"
+        android:text="@string/contactos"
         android:textColor="@color/white"
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="@+id/imageViewFadeChatContacts"
