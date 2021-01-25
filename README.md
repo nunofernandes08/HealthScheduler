@@ -53,7 +53,9 @@ Projeto desenvolvido durante o **1 Semestre do 2 ano** do Curso Técnico Superio
   - [x] comunicar com os médicos
 
 - [x] Guia de utilização
-  - [x] https://pdfhost.io/v/AAE9bfqBX_Guia_de_utilizao_HealthScheduler.pdf
+  - [x] Aplicação - https://pdfhost.io/v/AAE9bfqBX_Guia_de_utilizao_HealthScheduler.pdf
+  
+  - [x] Website - https://pdfhost.io/v/Q20wFSoIN_Guia_de_utilizao_HealthScheduler.pdf
 
 ---
 
