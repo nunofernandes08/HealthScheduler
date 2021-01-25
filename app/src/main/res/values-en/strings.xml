@@ -12,4 +12,17 @@
     <string name="phone">Phone</string>
     <string name="morada">Address</string>
     <string name="email_login">Email</string>
+    <string name="pagina_inicial">Home</string>
+    <string name="utilizador">Username</string>
+    <string name="consultas">Appointments</string>
+    <string name="chat">Chat</string>
+    <string name="nao_tem_novas_notifica_es">You have no new Notifications</string>
+    <string name="ja_tens_uma_conta">Do you have an account?</string>
+    <string name="esqueceu_se_da_palavra_passe">Forgot your password?</string>
+    <string name="entrar_na_conta">SIGN IN</string>
+    <string name="outros_metodos_de_login">Other Sign In methods</string>
+    <string name="perfil">Profile</string>
+    <string name="informacao_da_conta">Account Info</string>
+    <string name="nome">Name</string>
+    <string name="data_de_nascimento">Birthday</string>
 </resources>

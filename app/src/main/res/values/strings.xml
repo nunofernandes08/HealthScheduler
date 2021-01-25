@@ -56,5 +56,18 @@
         \n2. O utilizador deverá reportar à HyperCodeum de quaisquer anomalias que sejam detetadas relativamente a aplicação HealthScheduler que possam interferir com a utilização básica da aplicação, também o utilizador deve reportar acerca de quaisquer aplicações fraudulentas feitas por terceiros que tenham com intenções de manipular o código da aplicação ou descobrir informações pessoais de acesso a aplicação tais como passwords.
     </string>
     <string name="contactos">Contactos</string>
+    <string name="pagina_inicial">Página Inicial</string>
+    <string name="utilizador">Utilizador</string>
+    <string name="consultas">Consultas</string>
+    <string name="chat">Chat</string>
+    <string name="nao_tem_novas_notifica_es">Não tem novas Notificações</string>
+    <string name="ja_tens_uma_conta">Já tens uma conta?</string>
+    <string name="esqueceu_se_da_palavra_passe">Esqueceu-se da palavra-passe?</string>
+    <string name="entrar_na_conta">ENTRAR NA CONTA</string>
+    <string name="outros_metodos_de_login">Outros metodos de login</string>
+    <string name="perfil">Perfil</string>
+    <string name="informacao_da_conta">Informação da Conta</string>
+    <string name="nome">Nome</string>
+    <string name="data_de_nascimento">Data de Nascimento</string>
 
 </resources>

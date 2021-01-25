@@ -36,7 +36,7 @@
         android:background="@drawable/buttongreen"
         android:fontFamily="@font/roboto"
         android:gravity="center"
-        android:text="ENTRAR NA CONTA"
+        android:text="@string/entrar_na_conta"
         android:textColor="@color/white"
         android:textSize="17sp"
         app:layout_constraintEnd_toEndOf="@+id/imageViewHealthSchedulerMain"
@@ -67,7 +67,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/roboto"
-            android:text="Outros metodos login"
+            android:text="@string/outros_metodos_de_login"
             android:textColor="#21736F"
             android:textSize="18sp" />
 
