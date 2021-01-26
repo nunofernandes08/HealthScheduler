@@ -85,7 +85,7 @@ class LatestMessagesActivity : AppCompatActivity() {
         if(null != networkInfo){
             if(networkInfo.type == ConnectivityManager.TYPE_WIFI){
             }else if(networkInfo.type == ConnectivityManager.TYPE_MOBILE){
-                Toast.makeText(this, "Mobile Data Connected", Toast.LENGTH_SHORT).show()
+                //Toast.makeText(this, "Mobile Data Connected", Toast.LENGTH_SHORT).show()
             }
         }else{
             val dialog = Dialog(this)

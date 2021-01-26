@@ -16,7 +16,7 @@
     <string name="utilizador">Username</string>
     <string name="consultas">Appointments</string>
     <string name="chat">Chat</string>
-    <string name="nao_tem_novas_notifica_es">You have no new Notifications</string>
+    <string name="nao_tem_novas_notifica_es">You don\'t have new Notifications</string>
     <string name="ja_tens_uma_conta">Do you have an account?</string>
     <string name="esqueceu_se_da_palavra_passe">Forgot your password?</string>
     <string name="entrar_na_conta">SIGN IN</string>
