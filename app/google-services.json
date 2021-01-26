@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "1081449165079-bqgm1f14pbndsincve5fmtinnd9u6402.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "healthscheduler.example.healthscheduler",
+            "certificate_hash": "264deca9a2182bdd622a96be8452ad0db79b568d"
+          }
+        },
+        {
           "client_id": "1081449165079-cmqr2thh4t3dnghqrgcqp9m7jleinhsm.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
@@ -23,11 +31,11 @@
           }
         },
         {
-          "client_id": "1081449165079-bqgm1f14pbndsincve5fmtinnd9u6402.apps.googleusercontent.com",
+          "client_id": "1081449165079-hrkleub4nh3l0ta3ima4vq7q86ralcnl.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "healthscheduler.example.healthscheduler",
-            "certificate_hash": "264deca9a2182bdd622a96be8452ad0db79b568d"
+            "certificate_hash": "fa1098345bb216d6e9ce6c698872868fa2b5b402"
           }
         },
         {

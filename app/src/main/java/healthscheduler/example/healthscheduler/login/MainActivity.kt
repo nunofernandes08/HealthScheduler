@@ -13,6 +13,7 @@ import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import healthscheduler.example.healthscheduler.R
+import healthscheduler.example.healthscheduler.activity.HomeActivity
 import healthscheduler.example.healthscheduler.databinding.ActivityMainBinding
 
 
@@ -88,8 +89,8 @@ class MainActivity : AppCompatActivity() {
                     if (task.isSuccessful) {
                         Log.d("", "loginSuccess!")
                         val user = auth.currentUser
-                        val intent = Intent(this, RegisterContinue::class.java)
-                        intent.putExtra("emailOrPhone", user?.email)
+                        val intent = Intent(this, HomeActivity::class.java)
+                        //intent.putExtra("emailOrPhone", user?.email)
                         startActivity(intent)
                     } else {
                         Log.w("", "loginFailed! Info = ", task.exception)
