@@ -29,7 +29,7 @@ class Login : AppCompatActivity() {
     private var referenceUsers     = db.collection("users")
     private var user               : UsersItem? = null
     private var mGoogleSignInClient: GoogleSignInClient? = null
-    internal lateinit var myDialog : Dialog
+    private lateinit var myDialog : Dialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -90,7 +90,8 @@ class Login : AppCompatActivity() {
 
                 val emailAddress = myDialog.findViewById<TextView>(R.id.editTextRecoveryEmailPop).text.toString()
 
-                Firebase.auth.sendPasswordResetEmail(emailAddress)
+                if (emailAddress != "") {
+                    Firebase.auth.sendPasswordResetEmail(emailAddress)
                         .addOnCompleteListener { task ->
                             if (task.isSuccessful) {
                                 Toast.makeText(this@Login, "Email enviado com sucesso",
@@ -102,9 +103,13 @@ class Login : AppCompatActivity() {
                                         Toast.LENGTH_SHORT).show()
                             }
                         }
+                }
+                else {
+                    Toast.makeText(this@Login, "Inserir um e-mail valido",
+                            Toast.LENGTH_SHORT).show()
+                }
             }
             myDialog.show()
-
         }
 
         binding.imageViewHidePasswordLogin.setOnClickListener {
