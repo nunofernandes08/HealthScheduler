@@ -130,12 +130,16 @@ class Login : AppCompatActivity() {
 
     //verifica se email introduzido é um utente e esta no firestore
     private fun verifyUser(binding : ActivityLoginBinding) {
-        referenceUsers.get()
+        db.collection("users_medic").get()
             .addOnSuccessListener { documents ->
+                var exist = false
                 for (document in documents) {
                     if (document.data.getValue("phoneNumberEmail") == binding.editTextEmailLogin.text.toString()) {
-                        signInWithEmailAndPassword(binding)
+                        exist = true
                     }
+                }
+                if (!exist) {
+                    signInWithEmailAndPassword(binding)
                 }
             }
     }

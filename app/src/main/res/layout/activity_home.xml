@@ -108,6 +108,7 @@
         android:layout_height="54dp"
         android:layout_marginTop="16dp"
         android:src="@drawable/imageviewfotofavorito1"
+        android:visibility="gone"
         app:layout_constraintEnd_toStartOf="@+id/imageViewFavoriteUserPhoto2Home"
         app:layout_constraintStart_toStartOf="@+id/imageViewRetanguloHome"
         app:layout_constraintTop_toBottomOf="@+id/imageViewUserPhotoHome" />
@@ -118,6 +119,7 @@
         android:layout_height="54dp"
         android:layout_marginTop="16dp"
         android:src="@drawable/imageviewfotofavorito1"
+        android:visibility="gone"
         app:layout_constraintEnd_toStartOf="@+id/imageViewFavoriteUserPhoto3Home"
         app:layout_constraintStart_toEndOf="@+id/imageViewFavoriteUserPhoto1Home"
         app:layout_constraintTop_toBottomOf="@+id/imageViewUserPhotoHome" />
@@ -128,6 +130,7 @@
         android:layout_height="54dp"
         android:layout_marginTop="16dp"
         android:src="@drawable/imageviewfotofavorito1"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="@+id/imageViewRetanguloHome"
         app:layout_constraintStart_toEndOf="@+id/imageViewFavoriteUserPhoto2Home"
         app:layout_constraintTop_toBottomOf="@+id/imageViewUserPhotoHome" />
@@ -140,6 +143,7 @@
         android:text="@string/utilizador"
         android:textColor="#21736F"
         android:textSize="15sp"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="@+id/imageViewFavoriteUserPhoto1Home"
         app:layout_constraintStart_toStartOf="@+id/imageViewFavoriteUserPhoto1Home"
         app:layout_constraintTop_toBottomOf="@+id/imageViewFavoriteUserPhoto1Home" />
@@ -152,6 +156,7 @@
         android:text="@string/utilizador"
         android:textColor="#21736F"
         android:textSize="15sp"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="@+id/imageViewFavoriteUserPhoto2Home"
         app:layout_constraintStart_toStartOf="@+id/imageViewFavoriteUserPhoto2Home"
         app:layout_constraintTop_toBottomOf="@+id/imageViewFavoriteUserPhoto2Home" />
@@ -164,6 +169,7 @@
         android:text="@string/utilizador"
         android:textColor="#21736F"
         android:textSize="15sp"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="@+id/imageViewFavoriteUserPhoto3Home"
         app:layout_constraintStart_toStartOf="@+id/imageViewFavoriteUserPhoto3Home"
         app:layout_constraintTop_toBottomOf="@+id/imageViewFavoriteUserPhoto3Home" />

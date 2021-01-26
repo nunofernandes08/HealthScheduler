@@ -163,7 +163,7 @@ class HomeActivity : AppCompatActivity() {
                                             }
                                             latestMessages.let {
                                                 for ((i, message) in latestMessages.withIndex()) {
-                                                    if (latestMessages.size == 0) {
+                                                    /*if (latestMessages.size == 0) {
                                                         binding.imageViewFavoriteUserPhoto1Home.visibility = View.GONE
                                                         binding.imageViewFavoriteUserPhoto2Home.visibility = View.GONE
                                                         binding.imageViewFavoriteUserPhoto3Home.visibility = View.GONE
@@ -171,13 +171,15 @@ class HomeActivity : AppCompatActivity() {
                                                         binding.textViewFavoriteName1Home.visibility = View.GONE
                                                         binding.textViewFavoriteName2Home.visibility = View.GONE
                                                         binding.textViewFavoriteName3Home.visibility = View.GONE
-                                                    }
-                                                    else if (latestMessages.size == 1) {
-                                                        binding.imageViewFavoriteUserPhoto2Home.visibility = View.GONE
+                                                    }*/
+                                                    if (latestMessages.size == 1) {
+                                                        /*binding.imageViewFavoriteUserPhoto2Home.visibility = View.GONE
                                                         binding.imageViewFavoriteUserPhoto3Home.visibility = View.GONE
 
                                                         binding.textViewFavoriteName2Home.visibility = View.GONE
-                                                        binding.textViewFavoriteName3Home.visibility = View.GONE
+                                                        binding.textViewFavoriteName3Home.visibility = View.GONE*/
+                                                        binding.imageViewFavoriteUserPhoto1Home.visibility = View.VISIBLE
+                                                        binding.textViewFavoriteName1Home.visibility = View.VISIBLE
 
                                                         for (item1 in users) {
                                                             if (message.fromId == item1.medicID || message.toId == item1.medicID) {
@@ -196,9 +198,15 @@ class HomeActivity : AppCompatActivity() {
                                                         }
                                                     }
                                                     else if (latestMessages.size == 2) {
-                                                        binding.imageViewFavoriteUserPhoto3Home.visibility = View.GONE
 
-                                                        binding.textViewFavoriteName3Home.visibility = View.GONE
+                                                        binding.imageViewFavoriteUserPhoto1Home.visibility = View.VISIBLE
+                                                        binding.textViewFavoriteName1Home.visibility = View.VISIBLE
+
+                                                        binding.imageViewFavoriteUserPhoto2Home.visibility = View.VISIBLE
+                                                        binding.textViewFavoriteName2Home.visibility = View.VISIBLE
+                                                        /*binding.imageViewFavoriteUserPhoto3Home.visibility = View.GONE
+
+                                                        binding.textViewFavoriteName3Home.visibility = View.GONE*/
 
                                                         for (item1 in users) {
                                                             if (message.fromId == item1.medicID || message.toId == item1.medicID) {
@@ -226,6 +234,15 @@ class HomeActivity : AppCompatActivity() {
                                                         }
                                                     }
                                                     else if (latestMessages.size >= 3) {
+
+                                                        binding.imageViewFavoriteUserPhoto1Home.visibility = View.VISIBLE
+                                                        binding.imageViewFavoriteUserPhoto2Home.visibility = View.VISIBLE
+                                                        binding.imageViewFavoriteUserPhoto3Home.visibility = View.VISIBLE
+
+                                                        binding.textViewFavoriteName1Home.visibility = View.VISIBLE
+                                                        binding.textViewFavoriteName2Home.visibility = View.VISIBLE
+                                                        binding.textViewFavoriteName3Home.visibility = View.VISIBLE
+
                                                         for (item1 in users) {
                                                             if (message.fromId == item1.medicID || message.toId == item1.medicID) {
                                                                 when (i) {
